@@ -1,0 +1,25 @@
+import React from 'react';
+import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+const RouteWithLayout = (props) => {
+    const {component: Component, layout: Layout, ...rest} = props;
+    return (
+        <Route
+            {...rest}
+            render={({staticContext, ...restProps}) => (
+                <Layout>
+                    <Component {...restProps} />
+                </Layout>
+            )}
+        />
+    );
+};
+
+RouteWithLayout.propTypes = {
+    component: PropTypes.any.isRequired,
+    layout: PropTypes.any.isRequired,
+    path: PropTypes.string,
+};
+
+export default RouteWithLayout;

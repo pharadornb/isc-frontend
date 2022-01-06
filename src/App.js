@@ -1,28 +1,21 @@
-// import logo from './logo.svg';
+import React from 'react';
+import {Router} from 'react-router-dom';
+import Routes from './Routes';
+import {createBrowserHistory} from 'history';
 import './App.css';
 
 function App() {
-  return (
-      <>
-        <h1>Hello!</h1>
-      </>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-  );
+    const browserHistory = createBrowserHistory({
+        /* pass a configuration object here if needed */
+    });
+
+    return (
+        <Router history={browserHistory}>
+            <React.Fragment>
+                <Routes />
+            </React.Fragment>
+        </Router>
+    );
 }
 
 export default App;

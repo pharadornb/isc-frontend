@@ -43,6 +43,9 @@ export default function Login() {
             <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
                 <div className="mb-3">
                     <Link to="/">home</Link>
+                    <p><b>admin role </b>username: a, password: a <br/>
+                        <b>user role </b>username: u, password: u <br/>
+                        <b>company role </b>username: c, password: c</p>
                 </div>
                 <div className="row">
                     <div className="col-md-2"/>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
+import {Link} from "react-router-dom";
 
 export default function Login() {
 
@@ -27,7 +28,7 @@ export default function Login() {
                     'เข้าสู่ระบบสำเร็จ',
                     'ยินดีต้อนรับสู่บริการสะสมคลังทักษะไอที',
                     'success'
-                ).then(function() {
+                ).then(function () {
                     window.location = '/dashboard'
                 });
 
@@ -41,7 +42,7 @@ export default function Login() {
         <div className="col-lg-6 col-md-6 form-container">
             <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
                 <div className="mb-3">
-                    <a href="/">กลับหน้าหลัก</a>
+                    <Link to="/">home</Link>
                 </div>
                 <div className="row">
                     <div className="col-md-2"/>
@@ -51,10 +52,10 @@ export default function Login() {
                                 <div className="col-md-12">
                                     <input type="email" className={'form-control'}
                                            onChange={e => setEmail(e.target.value)} placeholder={'Username'}
-                                    ></input>
+                                    />
                                     <input type="password" className={'form-control mt-3'}
                                            onChange={e => setPassword(e.target.value)} placeholder={'Password'}
-                                    ></input>
+                                    />
                                 </div>
                                 <div className="col-md-12 d-flex justify-content-end">
                                     <div className="text-left mb-3 mt-4">

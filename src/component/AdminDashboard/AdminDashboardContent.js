@@ -1,4 +1,4 @@
-import { selectOptions } from "@testing-library/user-event/dist/select-options";
+
 import React from "react";
 import Select from 'react-select'
 
@@ -7,7 +7,6 @@ import '../../css/AdminDashboard/AdminDashboardContent.css';
 import logo from '../../img/Tecnau-green-web1.png';
 
 import Box from './AdminDashboardBox'
-import Grid from './AdminDashboardGrid'
 import Tables from './AdminDashboardTable'
 
 export default function AdminDashboardContent (){

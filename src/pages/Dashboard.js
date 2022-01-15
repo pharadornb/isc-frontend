@@ -5,6 +5,11 @@ import UserDashboard from "../../src/component/UserDashboard"
 import AdminDashboard from "../../src/component/AdminDashboard"
 import CompanyDashboard from "../../src/component/CompanyDashboard"
 
+import AdminDashboardContent from "../../src/component/AdminDashboard/AdminDashboardContent"
+import CompanyDashboardContent from "../component/CompanyDashboard/CompanyDashboardContent"
+
+import '../css/Dashboard.css';
+
 export default function Dashboard() {
 
     const [role, setRole] = useState('');
@@ -35,14 +40,27 @@ export default function Dashboard() {
             }
             {role === 'company' &&
                 <>
-                    <CompanyDashboard />
-                    <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                    <div>
+                        <CompanyDashboard />
+                        <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                    </div>
+                    <div>
+                        <CompanyDashboardContent/>
+                    </div>
+
                 </>
             }
             {role === 'admin' &&
                 <>
-                    <AdminDashboard />
-                    <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                    <div class="box_Dashboard">
+                        <div class="b_left">
+                            <AdminDashboard />
+                            <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                        </div>
+                        <div class="b_right"> 
+                            <AdminDashboardContent />
+                        </div>
+                    </div>
                 </>
             }
         </>

@@ -18,6 +18,4 @@ COPY . ./
 
 EXPOSE 80
 
-ENV PORT 80
-
 CMD ["yarn", "start"]

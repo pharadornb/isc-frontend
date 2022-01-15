@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import iscLogo from '../../assets/logo/isc-logo.png';
+import {Link} from "react-router-dom";
 import './HomeComponentStyle.css'
 
 const pages = ['หน้าหลัก', 'เกี่ยวกับระบบ', 'แนะนำระบบ', 'ลงทะเบียน'];
@@ -49,21 +50,23 @@ export default function Navbar() {
                             ))}
                         </Menu>
                     </Box>
-                    <Box sx={{flexGrow: 1}}></Box>
+                    <Box sx={{flexGrow: 1}} />
                     <Typography variant="h6" noWrap component="div"
                                 sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <img src={iscLogo} alt={'logo'} width={'100px'}/>
                     </Typography>
-                    <Box sx={{flexGrow: 1}}></Box>
+                    <Box sx={{flexGrow: 1}} />
                     <Box sx={{flexGrow: 0, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
                             <Button style={{fontSize: "16px"}} key={page} onClick={handleCloseNavMenu}
                                     sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>{page}</Button>
                         ))}
                     </Box>
+                    <Link to="/login" style={{textDecoration: "none"}}>
                     <Button sx={{ml: 2}}
-                            style={{borderRadius: 10, borderColor: "#fff", fontSize: "16px", color: "#fff"}}
-                            variant="outlined">เข้าสู่ระบบ</Button>
+                            style={{borderRadius: 10, borderColor: "#fff", fontSize: "16px", color: "#fff", textDecoration: "none"}}
+                            variant="outlined" >เข้าสู่ระบบ</Button>
+                    </Link>
                 </Toolbar>
             </Container>
         </AppBar>

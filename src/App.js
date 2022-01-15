@@ -1,8 +1,8 @@
-import './App.css';
-import React from 'react';
-import Swal from 'sweetalert2';
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import './App.css'
+import React from 'react'
+import Swal from 'sweetalert2'
+import Button from "@mui/material/Button"
+import { Link } from "react-router-dom"
 
 export default function App() {
 

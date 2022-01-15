@@ -5,7 +5,7 @@ import '../../css/CompanyDashboard.css';
 import ListIcon from "../../img/list-icon.PNG"
 import MoneyIcon from "../../img/money.PNG"
 import PustIcon from "../../img/pust-icon.PNG"
-import logo from '../../img/Tecnau-green-web1.png';
+import logo from '../../img/Thailand-company-registration.jpg';
 import ThinkIcon from '../../img/think-icon.PNG';
 import Moneys from '../../img/money2.PNG';
 import ListIcon2 from '../../img/list-icon2.PNG';
@@ -13,6 +13,8 @@ import ListIcon2 from '../../img/list-icon2.PNG';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import BoxSklil from '../CompanyDashboard/CompanyDashboardBoxSklil';
+import LatestEstablishmentTable from '../CompanyDashboard/CompanyDashboardEstablishmentTable';
+
 
 export default function CompanyDashboardContent(){
     return (
@@ -31,10 +33,10 @@ export default function CompanyDashboardContent(){
         </div>
         <div className="row2">
             <div className="row row2-2">
-                <div className="col-md-10">
-                    <img class="img_design" src={logo} alt="Logo" />
+                <div className="col-md-9">
+                    <img className="img_design" src={logo} alt="Logo" />
                 </div>
-                <div className="col-md-2">
+                <div className="col-lg-3">
                     <div className="side-view">
                         {/* Slider */}
                     </div>
@@ -43,7 +45,7 @@ export default function CompanyDashboardContent(){
             <div className="row">
                 <div className="col-md-4">
                     <div className="box-design">
-                        <img class="img-think-icon" src={ThinkIcon} alt="Logo" />
+                        <img className="img-think-icon" src={ThinkIcon} alt="Logo" />
                         <label className="txt-to-icon">คลังสะสมทักษะ</label>
                         <div className="row2-border">
                             <p className="row2-txt1">52</p>
@@ -53,7 +55,7 @@ export default function CompanyDashboardContent(){
                 </div>
                 <div className="col-md-4 ">
                     <div className="box-design">
-                        <img class="img-think-icon" src={Moneys} alt="Logo" />
+                        <img className="img-think-icon" src={Moneys} alt="Logo" />
                         <label className="txt-to-icon">กระเป๋าเงิน</label>
                         <div className="row2-border">
                             <p className="row2-txt1">200</p>
@@ -63,7 +65,7 @@ export default function CompanyDashboardContent(){
                 </div>
                 <div className="col-md-4">
                     <div className="box-design">
-                        <img class="img-think-icon" src={ListIcon2} alt="Logo" />
+                        <img className="img-think-icon" src={ListIcon2} alt="Logo" />
                         <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>
                         <div className="row2-border">
                             <p className="row2-txt1">9</p>
@@ -85,7 +87,13 @@ export default function CompanyDashboardContent(){
                     <h2>สถานประกอบการล่าสุด</h2>
                     <div className="box-latest-establishment">
                         {/*----- Table -----*/}
-
+                        <table className="table-establishment">
+                            <th>สถานประกอบการ</th>
+                            <th>ตำแหน่งงาน</th>
+                            <th></th>
+                            <LatestEstablishmentTable/>
+                        </table>
+                        
                         {/*-----------------*/}
                     </div>
                 </div>

@@ -7,11 +7,11 @@ import StarIcon from '../../img/star.PNG';
 export default function CompanyDashboardBoxSklil() {
 
     const DataArrays = [
-        {img: JavaIcon, name: "<b>Java</b>  : Language Programing",star: 5, persen: "94%"},
-        {img: JavaIcon, name: "<b>Java</b> : Language Programing",star: 5, persen: "42%"},
-        {img: JavaIcon, name: "<b>Java</b>  : Language Programing",star: 5, persen: "56%"},
-        {img: JavaIcon, name: "<b>Java</b>  : Language Programing",star: 5, persen: "82%"},
-    ]
+        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "94%"},
+        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "42%"},
+        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "56%"},
+        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "82%"},
+    ];
  
     const [datas, setData] = useState(DataArrays);
 

@@ -24,6 +24,8 @@
     margin-left: 5px;
 }
 
+/*--------------------------*/
+
 .row2 {
     background-color: #D7D1D1;
     width: 100%;
@@ -44,18 +46,20 @@
 
 .side-view {
     background-color: aliceblue;
-    width: 300px;
+    width: 100%;
     height: 312px;
     border-radius: 20px;
 }
 
+/*--------------------------------*/
 .box-design {
-    width: 630px;
-    height: 280px;
+    width: 100%;
+    height: auto;
     background-color: #FFFFFF;
     padding: 60px;
     border-radius: 20px;
     margin: 10px;
+    padding-bottom: 140px;
 }
 
 .img-think-icon {
@@ -93,18 +97,26 @@
 }
 
 .box-skills-library, .box-latest-establishment {
-    background-color: #FFFFFF;
-    width: 800px;
+    width: 100%;
     height: 600px;
+    min-width: 600px;
     margin: auto;
     border-radius: 20px;
-    padding: 10px;
+    padding: 15px;
     clear: both;
 }
 
+.box-skills-library {
+    background-color: #FFFFFF;
+}
+
+.box-latest-establishment {
+    background-color: #F7F7F8;
+}
+
 .box-skills {
-    width: 250px;
-    height: 260px;
+    width: 220px;
+    height: 240px;
     margin: 5px;
     padding: 10px;
     background-color: #F7F7F8;
@@ -115,7 +127,7 @@
 
 
 .box-skills-in-img {
-    width: 150px;
+    width: 120px;
 }
 
 
@@ -131,6 +143,10 @@
 h2 {
     font-weight: 900;
     margin-left: 90px;
+}
+
+.table-establishment {
+    width: 100%;
 }
 
 .box-skills-in-btn {

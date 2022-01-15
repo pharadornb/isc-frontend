@@ -31,7 +31,6 @@ export default function Login() {
                 ).then(function () {
                     window.location = '/dashboard'
                 });
-
             }
         }).catch(err =>
             console.log(err)

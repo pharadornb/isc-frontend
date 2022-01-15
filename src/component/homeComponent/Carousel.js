@@ -40,9 +40,9 @@ export default function Carousel() {
                 showBullets={true}
                 useGPURender={true}
                 loop={true}
-                // autoPlay={true}
+                autoPlay={true}
                 slideDuration={2.5}
-                autoPlayDelay={5}
+                autoPlayDelay={3.5}
             />
         </div>
     )

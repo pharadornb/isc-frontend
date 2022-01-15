@@ -1,0 +1,55 @@
+
+/*--------------box---------------------*/
+.box{
+    padding: 10px 5px 10px 25px;
+    width: 100%;
+    height: 150px;
+    border-radius: 20px;
+    margin: 10px;
+    clear: both;
+  }
+  
+  .inbox_left{
+    float: left;
+    width: 150px;
+    padding: 15px;
+  }
+  
+  .textbox_style1{
+    font-size: 16px;
+    width: 150px;
+    color: white;
+  }
+  
+  .textbox_style2{
+    font-size: 35px;
+    color: white;
+  }
+  
+  .inbox_right{
+    float: right;
+    width: 80px;
+    color: white;
+  }
+  
+  .textbox_style3{
+    font-size: 28px;
+    
+  }
+  
+  .b1 {
+    background-image: linear-gradient(to right, #F39034 , #FF2727);;
+  }
+
+  .b2 {
+    background-image: linear-gradient(to right, #0097EC , #003AD2);;
+  }
+
+  .b3 {
+    background-image: linear-gradient(to right, #1FD071 , #00A843);;
+  }
+
+  .b4 {
+    background-image: linear-gradient(to right, #9852F0 , #5900C9);;
+  }
+  /*----------------------------*/

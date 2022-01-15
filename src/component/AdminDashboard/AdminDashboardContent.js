@@ -33,10 +33,8 @@ export default function AdminDashboardContent (){
                             <div class="col-md-8"></div>
                             <div class="col-md-4"><Select options={options} /></div>
                         </div>
-                        <div class="box_row3">
-                            <Grid>
-                                <Box/>
-                            </Grid>
+                        <div class="row box_row3">
+                            <Box/>
                         </div>
                         <div class="row box_row4">
                             <Tables/>

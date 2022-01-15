@@ -53,10 +53,10 @@ export default function Login() {
                             <div className="row">
                                 <div className="col-md-12">
                                     <input type="email" className={'form-control'}
-                                           onChange={e => setEmail(e.target.value)} placeholder={'Username'}
+                                        onChange={e => setEmail(e.target.value)} placeholder={'Username'}
                                     />
                                     <input type="password" className={'form-control mt-3'}
-                                           onChange={e => setPassword(e.target.value)} placeholder={'Password'}
+                                        onChange={e => setPassword(e.target.value)} placeholder={'Password'}
                                     />
                                 </div>
                                 <div className="col-md-12 d-flex justify-content-end">

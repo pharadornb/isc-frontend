@@ -42,7 +42,7 @@ function AdminDashboardCheckOpenSkillTable() {
     return(
         <>
         <div class="row tb">
-            <label class="col-md-8"><b>ตรวจสอบการเปิดทักษะ</b></label>
+            <label class="col-md-8"><b class="bm">ตรวจสอบการเปิดทักษะ</b></label>
             <div class="col-md-4">
                 <SearchBar
                         value={searched}

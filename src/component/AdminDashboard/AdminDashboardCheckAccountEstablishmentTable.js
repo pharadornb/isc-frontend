@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "material-ui-search-bar";
-import { SettingsBrightness } from "@mui/icons-material";
 
 const useStyles = makeStyles({
     table: {
@@ -12,7 +11,6 @@ const useStyles = makeStyles({
 
 function AdminDashboardCheckAccountEstablishmentTable() {
     const classes = useStyles();
-    const [btns, setBtns] = useState('');
 
     const originalRows1 = [
       { registration_number: "219534875446", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รอตรวจสอบ" },

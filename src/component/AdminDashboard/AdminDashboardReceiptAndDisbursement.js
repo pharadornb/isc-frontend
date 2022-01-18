@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "material-ui-search-bar";
 
-import './AdminDashboardContent';
-
 const useStyles = makeStyles({
     table: {
       minWidth: 650

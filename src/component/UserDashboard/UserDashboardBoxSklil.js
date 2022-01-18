@@ -1,4 +1,3 @@
-import { DataArray } from '@mui/icons-material';
 import React, { useState } from 'react';
 
 import JavaIcon from '../../img/JavaIcon.png';

@@ -1,0 +1,189 @@
+.row1 {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 50px;
+    clear: both;
+}
+
+.colume-right1, .colume-right2 {
+    float: right;
+}
+
+.colume-right1-1 {
+    font-weight: 900;
+}
+
+.img1 {
+    width: 47px;
+    height: 41px;
+}
+
+.img-pust {
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+}
+
+/*--------------------------*/
+
+.row2 {
+    background-color: #D7D1D1;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+}
+
+.row2-2 {
+    margin-top: 20px;
+    margin-bottom: 20PX;
+}
+
+.img_design {
+    position: relative;
+    width: 100%;
+    height: 312px;
+    object-fit: cover;
+}
+
+.side-view {
+    background-color: aliceblue;
+    width: 100%;
+    height: 312px;
+    border-radius: 20px;
+}
+
+/*--------------------------------*/
+.box-design {
+    width: 100%;
+    height: auto;
+    background-color: #FFFFFF;
+    padding: 60px;
+    border-radius: 20px;
+    margin: 10px;
+    padding-bottom: 140px;
+}
+
+.img-think-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.txt-to-icon {
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.row2-txt1 {
+    float: left;
+    font-size: 60px;
+    font-weight: 900;
+    margin-top: 25px;
+}
+
+.row2-a {
+    float: right;
+    margin-top: 35px;
+    border: 0px;
+}
+
+.row2-border {
+    clear: both;
+}
+
+/*box-skills-library*/
+.cs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.box-skills-library, .box-latest-establishment {
+    width: 100%;
+    height: 600px;
+    min-width: 600px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 15px;
+    clear: both;
+}
+
+.box-skills-library {
+    background-color: #FFFFFF;
+}
+
+.box-latest-establishment {
+    background-color: #F7F7F8;
+}
+
+.box-skills {
+    width: 220px;
+    height: 240px;
+    margin: 5px;
+    padding: 10px;
+    background-color: #F7F7F8;
+    border-radius: 20px;
+    text-align: center;
+    float: left;
+}
+
+
+.box-skills-in-img {
+    width: 120px;
+}
+
+
+
+.box-skills-in-imgstar {
+    width: 25px;
+}
+
+.box-skills-in-2, .box-skills-in-txt {
+    font-weight: 900;
+}
+
+h2 {
+    font-weight: 900;
+    margin-left: 90px;
+}
+
+.table-establishment {
+    width: 100%;
+}
+
+.box-skills-in-btn {
+    width: 100px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #14D72B;
+}
+
+th {
+    height: 50;
+}
+
+tr {
+    height:50px;
+}
+
+.box-txt-top {
+    position: absolute;
+    top: 230px;
+    margin-left: 80px;
+}
+
+.seHi, .nameUser, .commentTxt {
+    color: #FFFFFF;
+    text-shadow: 0px 0px 6px #0a46b4;
+}
+
+.seHi {
+    font-size: 30px;
+}
+
+.nameUser {
+    font-size: 50px;
+}
+
+.commentTxt {
+    font-size: 24px;
+}

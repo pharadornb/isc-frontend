@@ -13,6 +13,11 @@ import TimeIcon2 from '../../img/Time2.png';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+
+
+import CompanySelectionCriteria from './CompanySelectionCriteria';
+import ServiceResult from './CompanyServiceResult';
+
 export default function CompanyDashboardContent(){
     return(
         <>
@@ -64,9 +69,22 @@ export default function CompanyDashboardContent(){
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="boxC-03">
-                
+                <div className="boxC-03">
+                    <div className="row">
+                        <div className="col-md-5">
+                            <p className="boxC03_htxt">ผ่านเกณฑ์คัดเลือก</p>
+                            <div className="row boxC03_inbox">
+                                <CompanySelectionCriteria/>
+                            </div>
+                        </div>
+                        <div className="col-md-7">
+                            <p className="boxC03_htxt">ผลการรับบริการ</p>
+                            <div className="rw">
+                                <ServiceResult/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

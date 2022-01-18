@@ -15,8 +15,9 @@ function AdminDashboardCheckAccountEstablishmentTable() {
     const [btns, setBtns] = useState('');
 
     const originalRows1 = [
-      { registration_number: "219534875446", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รอตรวสอบ" },
-      { registration_number: "219534875447", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รอตรวสอบ" },
+      { registration_number: "219534875446", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รอตรวจสอบ" },
+      { registration_number: "219534875447", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ไม่ผ่าน", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รายละเอียด" },
+      {registration_number: "219534875447", establishment_name: "บริษัท เอสเอสเอส กัดจำ", status: "ผ่าน", address: "267/17, ไพรบึง, ศรีสะเกษ", account_opening_date: "03/03/12 22:43", manage_account: "รายละเอียด" },
     ];
 
     const [rows1, setRows1] = useState(originalRows1);
@@ -35,7 +36,31 @@ function AdminDashboardCheckAccountEstablishmentTable() {
       requestSearch(searched);
     };
 
-    
+    const OnCheckStatus = (props) => {
+        const status = props.status;
+
+        if(status === 'ผ่าน' || status === 'ผ่านการรับเงิน'){
+            return <label class="btn btn-success lb"><b>ผ่าน</b></label>;
+        }else if(status === 'ไม่ผ่าน'){
+            return <label class="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
+        }else if(status === 'ตรวจสอบ'){
+            return <label class="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>
+        }
+    }
+
+    const OnCheckAccount = (props) => {
+        const value = props.value;
+
+        if(value === 'รอตรวจสอบ'){
+            return <button class="btn btn-outline-success lb" variant="warning">อนุมัติ</button>;
+        }else if(value === 'รายละเอียด'){
+            return <button class="btn btn-outline-primary lb" variant="warning">รายละเอียด</button>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>;
+        }
+    }
 
     return (
         <>
@@ -62,20 +87,16 @@ function AdminDashboardCheckAccountEstablishmentTable() {
                         {rows1.map((row) => (
                             <tr key={row.registration_number}>
                                 <td ><label>{row.registration_number}</label></td>
-                                <td align="center"><label>{row.status}</label></td>
+                                <td align="center">
+                                    <OnCheckStatus status={row.status} />
+                                </td>
                                 <td align="right">
                                     <label class="design_td2"><label>{row.establishment_name}</label></label>
                                 </td>
                                 <td align="right"><label>{row.address}</label></td>
                                 <td align="right"><label>{row.account_opening_date}</label></td>
-                                <td align="center" onLoad={onCheck(row.manage_account)}>                  
-                                   
-                                    {
-                                        row.manage_account === 'อนุมัติ' && 
-                                        <>
-                                            <button class="btn btn-outline-success" variant="warning">{row.manage_account}</button>
-                                        </>
-                                    }
+                                <td align="center" >
+                                    <OnCheckAccount value={row.manage_account} />
                                 </td>
                             </tr>
                         ))}

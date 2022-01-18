@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import SearchBar from "material-ui-search-bar";
+
+import './AdminDashboardContent';
 
 const useStyles = makeStyles({
     table: {
@@ -19,8 +14,8 @@ function AdminDashboardReceiptAndDisbursement(){
     const classes = useStyles();
 
     const originalRows3 = [
-        { types: "219534875446", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", amount_money: "1000", transaction_date: "03/03/12 22:43", disbursement_status: "รอตรวสอบ" },
-        { types: "219534875447", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", amount_money: "200", transaction_date: "03/03/12 22:43", disbursement_status: "รอตรวสอบ" },
+        { types: "219534875446", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", amount_money: "1000", transaction_date: "03/03/12 22:43", disbursement_status: "รอตรวจสอบ" },
+        { types: "219534875447", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ผ่านการรับเงิน", amount_money: "200", transaction_date: "03/03/12 22:43", disbursement_status: "รายละเอียด" },
     ];
 
     const [rows3, setRows3] = useState(originalRows3);
@@ -37,6 +32,32 @@ function AdminDashboardReceiptAndDisbursement(){
       setSearched("");
       requestSearch(searched);
     };
+    
+    const OnCheckStatus = (props) => {
+        const status = props.status;
+
+        if(status === 'ผ่าน' || status === 'ผ่านการรับเงิน'){
+            return <label class="btn btn-success lb"><b>ผ่านการรับเงิน</b></label>;
+        }else if(status === 'ไม่ผ่าน'){
+            return <label class="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
+        }else if(status === 'ตรวจสอบ'){
+            return <label class="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>
+        }
+    }
+
+    const OnCheckAccount = (props) => {
+        const value = props.value;
+
+        if(value === 'รอตรวจสอบ'){
+            return <button class="btn btn-outline-success lb" variant="warning">อนุมัติ</button>;
+        }else if(value === 'รายละเอียด'){
+            return <button class="btn btn-outline-primary lb" variant="warning">รายละเอียด</button>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>;
+        }
+    }
 
     return(
         <>
@@ -51,36 +72,30 @@ function AdminDashboardReceiptAndDisbursement(){
                 </div>  
             </div>
             <div class="row tb">
-                <TableContainer>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                        <TableRow>
-                            <TableCell align="center"><label><b>ประเภท</b></label></TableCell>
-                            <TableCell align="center"><label><b>สถานะ</b></label></TableCell>
-                            <TableCell align="center"><label><b>จาก</b></label></TableCell>
-                            <TableCell align="center"><label><b>จำนวนยอดเงิน</b></label></TableCell>
-                            <TableCell align="center"><label><b>วันที่ทำรายการ</b></label></TableCell>
-                            <TableCell align="center"><label><b>สถานะเบิกจ่าย</b></label></TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
+                    <table className={classes.table} aria-label="simple table">
+                        <tr>
+                            <td align="center"><label><b>ประเภท</b></label></td>
+                            <td align="center"><label><b>สถานะ</b></label></td>
+                            <td align="center"><label><b>จาก</b></label></td>
+                            <td align="center"><label><b>จำนวนยอดเงิน</b></label></td>
+                            <td align="center"><label><b>วันที่ทำรายการ</b></label></td>
+                            <td align="center"><label><b>สถานะเบิกจ่าย</b></label></td>
+                        </tr>
                         {rows3.map((row) => (
-                            <TableRow key={row.types}> 
-                                <TableCell ><label>{row.types}</label></TableCell>
-                                <TableCell align="center"><label>{row.status}</label></TableCell>
-                                <TableCell align="right">
+                            <tr key={row.types}> 
+                                <td ><label>{row.types}</label></td>
+                                <td align="center"><OnCheckStatus status={row.status} /></td>
+                                <td align="right">
                                     <label class="design_td2"><label>{row.froms}</label></label>
-                                </TableCell>
-                                <TableCell align="right"><label>{row.amount_money}</label></TableCell>
-                                <TableCell align="center"><label>{row.transaction_date}</label></TableCell>
-                                <TableCell align="right">
-                                    <Button variant="warning">{row.disbursement_status}</Button>{' '}
-                                </TableCell>
-                            </TableRow>
+                                </td>
+                                <td align="right"><label>{row.amount_money}</label></td>
+                                <td align="center"><label>{row.transaction_date}</label></td>
+                                <td align="right">
+                                    <OnCheckAccount value={row.disbursement_status} />
+                                </td>
+                            </tr>
                         ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                    </table>
             </div>
         </>
     )

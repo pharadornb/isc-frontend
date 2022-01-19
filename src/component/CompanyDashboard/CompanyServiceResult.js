@@ -4,11 +4,11 @@ import SearchBar from "material-ui-search-bar";
 export default function CompanyServiceResult() {
     const datas = [
         { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
-        { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
-        { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
-        { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
-        { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
-        { date_service: '09:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
+        { date_service: '10:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
+        { date_service: '11:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
+        { date_service: '12:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
+        { date_service: '13:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
+        { date_service: '15:23 22 มกราคม 2564',service_skill_name: 'Java',recipient_information: 'ภราดร บุญร่วม', count: 1, score: 20 },
     ];
 
     const [rows, setRows] = useState(datas);
@@ -17,8 +17,8 @@ export default function CompanyServiceResult() {
 
     const requestSearch = (searchedVal) => {
         /* Search Table 1 */
-            const filteredRows = datas.filter((row) => {
-                return row.registration_number.toLowerCase().includes(searchedVal.toLowerCase());
+            const filteredRows = datas.filter((data) => {
+                return data.date_service.toLowerCase().includes(searchedVal.toLowerCase());
               });
             setRows(filteredRows); 
     };
@@ -48,7 +48,7 @@ export default function CompanyServiceResult() {
                 <th>ครั้งที่</th>
                 <th>คะแนน</th>
                 {rows.map((data) => (
-                <tr>
+                <tr key={data.date_service}>
                     <td>{data.date_service}</td>
                     <td>{data.service_skill_name}</td>
                     <td>{data.recipient_information}</td>

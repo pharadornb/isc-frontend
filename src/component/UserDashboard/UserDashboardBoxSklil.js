@@ -12,17 +12,17 @@ export default function CompanyDashboardBoxSklil() {
         {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "82%"},
     ];
  
-    const [datas, setData] = useState(DataArrays);
+    const [datas] = useState(DataArrays);
 
     return(
         <>
         {datas.map((data) => (
         <div className="box-skills">
             <div className="box-skills-in">
-                <img src={data.img} className="box-skills-in-img"></img>
+                <img src={data.img} className="box-skills-in-img" alt="Trulli"></img>
                 <label className="box-skills-in-txt">{data.name}</label>
                 <p className="box-skills-in-2">
-                    <img src={StarIcon} className="box-skills-in-imgstar"></img>
+                    <img src={StarIcon} className="box-skills-in-imgstar" alt="Trulli"></img>
                     {data.persen}
                 </p>
                 <button className="box-skills-in-btn">รายละเอียด</button>

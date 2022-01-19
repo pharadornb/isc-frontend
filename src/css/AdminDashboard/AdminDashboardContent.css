@@ -121,3 +121,17 @@ td {
   width: 120px;
 }
 
+/*----------EstablishmentTable-----------*/
+
+.imgLogoStyle {
+  width: 150px;
+  height: 150px;
+}
+
+.setImg {
+  text-align: center;
+}
+
+.et_box2 {
+  margin-top: 10px;
+}

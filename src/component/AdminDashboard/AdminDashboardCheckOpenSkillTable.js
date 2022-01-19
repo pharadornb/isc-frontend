@@ -50,9 +50,9 @@ function AdminDashboardCheckOpenSkilltable() {
         const value = props.value;
 
         if(value === 'รอตรวจสอบ'){
-            return <button class="btn btn-outline-success lb" variant="warning">อนุมัติ</button>;
+            return <button class="btn btn-outline-success lb" variant="warning"><i class="far fa-check-circle"></i> อนุมัติ</button>;
         }else if(value === 'รายละเอียด'){
-            return <button class="btn btn-outline-primary lb" variant="warning">รายละเอียด</button>;
+            return <button class="btn btn-outline-primary lb" variant="warning"><i class="fas fa-info-circle"></i> รายละเอียด</button>;
         }else{
             return <b>ไม่มีข้อมูล</b>;
         }

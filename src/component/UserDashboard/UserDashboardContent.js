@@ -21,14 +21,14 @@ export default function UserDashboardContent(){
         <>
         <div className="row1">
             <div className="colume-right1">
-                <img src={MoneyIcon} className="img1"></img>
+                <img src={MoneyIcon} className="img1" alt="Trulli"></img>
                 <label className="colume-right1-1">5</label>
-                <a href="#"><img src={PustIcon} className="img-pust"></img></a>
+                <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
             </div>
             <div className="colume-right2">
-                <img src={ListIcon} className="img1"></img>
+                <img src={ListIcon} className="img1" alt="Trulli"></img>
                 <label className="colume-right1-1">200</label>
-                <a href="#"><img src={PustIcon} className="img-pust"></img></a>
+                <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
             </div>
         </div>
         <div className="row2">
@@ -54,7 +54,7 @@ export default function UserDashboardContent(){
                         <label className="txt-to-icon">คลังสะสมทักษะ</label>
                         <div className="row2-border">
                             <p className="row2-txt1">52</p>
-                            <a href="#" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
+                            <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ export default function UserDashboardContent(){
                         <label className="txt-to-icon">กระเป๋าเงิน</label>
                         <div className="row2-border">
                             <p className="row2-txt1">200</p>
-                            <a href="#" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
+                            <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@ export default function UserDashboardContent(){
                         <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>
                         <div className="row2-border">
                             <p className="row2-txt1">9</p>
-                            <a href="#" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
+                            <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
                 </div>

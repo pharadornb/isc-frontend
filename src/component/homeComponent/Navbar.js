@@ -9,12 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import iscLogo from '../../assets/logo/isc-logo.png';
+import iscLogo from '../../img/isc-logo.png';
 import './HomeComponentStyle.css'
 import {Modal} from 'react-bootstrap';
 import LoginDialog from "./LoginDialog";
-
-const pages = ['หน้าหลัก', 'เกี่ยวกับระบบ', 'แนะนำระบบ', 'ลงทะเบียน'];
+import {Link} from "react-router-dom";
 
 export default function Navbar() {
 
@@ -49,11 +48,26 @@ export default function Navbar() {
                               anchorOrigin={{vertical: 'bottom', horizontal: 'left',}} keepMounted
                               transformOrigin={{vertical: 'top', horizontal: 'left',}} open={Boolean(anchorElNav)}
                               onClose={handleCloseNavMenu} sx={{display: {xs: 'block', md: 'none'},}}>
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            <Link style={{textDecoration: 'none'}} to={'/'}>
+                                <MenuItem>
+                                    <Typography textAlign="center">หน้าหลัก</Typography>
                                 </MenuItem>
-                            ))}
+                            </Link>
+                            <Link style={{textDecoration: 'none'}} to={'/'}>
+                                <MenuItem>
+                                    <Typography textAlign="center">เกี่ยวกับระบบ</Typography>
+                                </MenuItem>
+                            </Link>
+                            <Link style={{textDecoration: 'none'}} to={'/'}>
+                                <MenuItem>
+                                    <Typography textAlign="center">แนะนำระบบ</Typography>
+                                </MenuItem>
+                            </Link>
+                            <Link style={{textDecoration: 'none'}} to={'/register'}>
+                                <MenuItem>
+                                    <Typography textAlign="center">ลงทะเบียน</Typography>
+                                </MenuItem>
+                            </Link>
                         </Menu>
                     </Box>
                     <Box sx={{flexGrow: 1}}/>
@@ -63,10 +77,22 @@ export default function Navbar() {
                     </Typography>
                     <Box sx={{flexGrow: 1}}/>
                     <Box sx={{flexGrow: 0, display: {xs: 'none', md: 'flex'}}}>
-                        {pages.map((page) => (
-                            <Button style={{fontSize: "16px"}} key={page} onClick={handleCloseNavMenu}
-                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>{page}</Button>
-                        ))}
+                        <Link style={{textDecoration: 'none'}} to={'/'}>
+                            <Button style={{fontSize: "16px"}}
+                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>หน้าหลัก</Button>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to={'/'}>
+                            <Button style={{fontSize: "16px"}}
+                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>เกี่ยวกับระบบ</Button>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to={'/'}>
+                            <Button style={{fontSize: "16px"}}
+                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>แนะนำระบบ</Button>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to={'/register'}>
+                            <Button style={{fontSize: "16px"}}
+                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>ลงทะเบียน</Button>
+                        </Link>
                     </Box>
                     <Button sx={{ml: 2}}
                             style={{

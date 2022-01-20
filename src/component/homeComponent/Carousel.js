@@ -1,5 +1,5 @@
 import React from "react"
-import test from '../../assets/images/triangles-1430105__480.png'
+import test from '../../img/triangles-1430105__480.png'
 import SimpleImageSlider from "react-simple-image-slider"
 
 export default function Carousel() {

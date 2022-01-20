@@ -6,24 +6,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import test from '../../assets/images/triangles-1430105__480.png'
+import test from '../../img/triangles-1430105__480.png'
 
 export default function HomePage() {
     return(
         <>
-            {/*<div className="container">*/}
-            {/*    <div className="row">*/}
-            {/*        <div className="col-md-4" style={{backgroundColor: 'pink'}}>*/}
-            {/*            5555555555555555555555555555555555555555*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4" style={{backgroundColor: 'green'}}>*/}
-            {/*            5555555555555555555555555555555555555555*/}
-            {/*        </div>*/}
-            {/*        <div className="col-md-4" style={{backgroundColor: 'yellow'}}>*/}
-            {/*            5555555555555555555555555555555555555555*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <Navbar />
             <Carousel />
             <div className="container">

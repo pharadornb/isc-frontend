@@ -27,7 +27,7 @@ function AdminDashboardReceiptAndDisbursement(){
 
     const originalRows3 = [
         { types: "219534875446", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", amount_money: "1000", transaction_date: "03/03/12 22:43", disbursement_status: "รอตรวจสอบ" },
-        { types: "219534875447", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ผ่านการรับเงิน", amount_money: "200", transaction_date: "03/03/12 22:43", disbursement_status: "รายละเอียด" },
+        { types: "219534875447", froms: "บริษัท Six กัดจำ", status: "ผ่านการรับเงิน", amount_money: "200", transaction_date: "03/03/12 22:43", disbursement_status: "รายละเอียด" },
     ];
 
     const [rows3, setRows3] = useState(originalRows3);
@@ -35,7 +35,7 @@ function AdminDashboardReceiptAndDisbursement(){
     
     const requestSearch = (searchedVal) => {
             const filteredRows3 = originalRows3.filter((row) => {
-                return row.skillName.toLowerCase().includes(searchedVal.toLowerCase());
+                return row.froms.toLowerCase().includes(searchedVal.toLowerCase());
               });
             setRows3(filteredRows3);
     };
@@ -86,15 +86,15 @@ function AdminDashboardReceiptAndDisbursement(){
             <div class="row tb">
                     <table className={classes.table} aria-label="simple table">
                         <tr>
-                            <td align="center"><label><b>ประเภท</b></label></td>
-                            <td align="center"><label><b>สถานะ</b></label></td>
-                            <td align="center"><label><b>จาก</b></label></td>
-                            <td align="center"><label><b>จำนวนยอดเงิน</b></label></td>
-                            <td align="center"><label><b>วันที่ทำรายการ</b></label></td>
-                            <td align="center"><label><b>สถานะเบิกจ่าย</b></label></td>
+                            <th align="center"><label><b>ประเภท</b></label></th>
+                            <th align="center"><label><b>สถานะ</b></label></th>
+                            <th align="center"><label><b>จาก</b></label></th>
+                            <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
+                            <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
+                            <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
                         </tr>
                         {rows3.map((row) => (
-                            <tr key={row.types}> 
+                            <tr key={row.froms}> 
                                 <td ><label>{row.types}</label></td>
                                 <td align="center"><OnCheckStatus status={row.status} /></td>
                                 <td align="right">
@@ -157,9 +157,9 @@ function AdminDashboardReceiptAndDisbursement(){
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="btn btn-danger" onClick={handleClose1}>
-                    <i class="fas fa-times-circle"></i> ปิด
-                </Button>
+                    <Button variant="btn btn-danger" onClick={handleClose1}>
+                        <i class="fas fa-times-circle"></i> ปิด
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>

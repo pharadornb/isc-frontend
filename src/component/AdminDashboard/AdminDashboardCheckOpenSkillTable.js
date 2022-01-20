@@ -13,7 +13,7 @@ function AdminDashboardCheckOpenSkilltable() {
     
     const originalRows2 = [
         { skillName: "219534875446", by: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รอตรวจสอบ" },
-        { skillName: "219534875447", by: "บริษัท เอสเอสเอส กัดจำ", status: "ผ่าน", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รายละเอียด" },
+        { skillName: "219534875447", by: "บริษัท HomePro กัดจำ", status: "ผ่าน", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รายละเอียด" },
       ];
 
     const [rows2, setRows2] = useState(originalRows2);
@@ -22,7 +22,7 @@ function AdminDashboardCheckOpenSkilltable() {
     const requestSearch = (no, searchedVal) => {
          /* Search table 2 */
             const filteredRows2 = originalRows2.filter((row) => {
-                return row.skillName.toLowerCase().includes(searchedVal.toLowerCase());
+                return row.by.toLowerCase().includes(searchedVal.toLowerCase());
               });
             setRows2(filteredRows2);    
     };
@@ -74,16 +74,16 @@ function AdminDashboardCheckOpenSkilltable() {
             <div class="row tb">
                 <table className={classes.table} aria-label="simple table">
                     <tr>
-                        <td align="center"><label><b>ชื่อทักษะ</b></label></td>
-                        <td align="center"><label><b>สถานะ</b></label></td>
-                        <td align="center"><label><b>โดย</b></label></td>
-                        <td align="center"><label><b>จำนวนข้อวัดผล</b></label></td>
-                        <td align="center"><label><b>วันที่เปิดทักษะ</b></label></td>
-                        <td align="center"><label><b>จัดการทักษะ</b></label></td>
+                        <th align="center"><label><b>ชื่อทักษะ</b></label></th>
+                        <th align="center"><label><b>สถานะ</b></label></th>
+                        <th align="center"><label><b>โดย</b></label></th>
+                        <th align="center"><label><b>จำนวนข้อวัดผล</b></label></th>
+                        <th align="center"><label><b>วันที่เปิดทักษะ</b></label></th>
+                        <th align="center"><label><b>จัดการทักษะ</b></label></th>
                     </tr>
 
                     {rows2.map((row) => (
-                        <tr key={row.skillName}>
+                        <tr key={row.by}>
                             <td ><label>{row.skillName}</label></td>
                             <td align="center">
                                 <OnCheckStatus status={row.status} />

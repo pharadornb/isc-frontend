@@ -26,7 +26,7 @@ export default function Login() {
                 sessionStorage.setItem('token', res.data.token)
                 Swal.fire(
                     'เข้าสู่ระบบสำเร็จ',
-                    'ยินดีต้อนรับสู่บริการสะสมคลังทักษะไอที',
+                    'ยินดีต้อนรับสู่บริการสะสมคลังทักษะIT',
                     'success'
                 ).then(function () {
                     window.location = '/dashboard'

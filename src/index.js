@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from "./pages/Dashboard";
 import HomePage from './pages/homePage/HomePage'
+import ResetPage from "./pages/secretPage/ResetPage";
 
 axios.defaults.baseURL = process.env.REACT_APP_SECRET_NAME
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`
@@ -33,6 +34,7 @@ ReactDOM.render(
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/register" element={<Register/>}></Route>
                 <Route path="/dashboard" element={<Dashboard/>}></Route>
+                <Route path="/reset/:userEmail" element={<ResetPage/>}></Route>
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

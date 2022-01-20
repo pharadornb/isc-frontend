@@ -7,6 +7,7 @@ import CompanyDashboard from "../../src/component/CompanyDashboard"
 
 import AdminDashboardContent from "../../src/component/AdminDashboard/AdminDashboardContent"
 import CompanyDashboardContent from "../component/CompanyDashboard/CompanyDashboardContent"
+import UserDashboardContent from "../component/UserDashboard/UserDashboardContent"
 
 import '../css/Dashboard.css';
 
@@ -34,8 +35,13 @@ export default function Dashboard() {
         <>
             {role === 'user' &&
                 <>
-                    <UserDashboard />
-                    <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                    <div>
+                        <UserDashboard />
+                        <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                    </div>
+                    <div>
+                        <UserDashboardContent />
+                    </div>
                 </>
             }
             {role === 'company' &&

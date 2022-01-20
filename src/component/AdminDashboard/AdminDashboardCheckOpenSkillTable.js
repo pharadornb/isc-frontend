@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import SearchBar from "material-ui-search-bar";
 
 const useStyles = makeStyles({
@@ -15,21 +8,21 @@ const useStyles = makeStyles({
     }
   });
 
-function AdminDashboardCheckOpenSkillTable() {
+function AdminDashboardCheckOpenSkilltable() {
     const classes = useStyles();
     
     const originalRows2 = [
-        { skillName: "219534875446", by: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รอตรวสอบ" },
-        { skillName: "219534875447", by: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รอตรวสอบ" },
+        { skillName: "219534875446", by: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รอตรวจสอบ" },
+        { skillName: "219534875447", by: "บริษัท HomePro กัดจำ", status: "ผ่าน", number_measurements: "267/17, ไพรบึง, ศรีสะเกษ", skill_opening_date: "03/03/12 22:43", manage_skill: "รายละเอียด" },
       ];
 
     const [rows2, setRows2] = useState(originalRows2);
     const [searched, setSearched] = useState("");
     
     const requestSearch = (no, searchedVal) => {
-         /* Search Table 2 */
+         /* Search table 2 */
             const filteredRows2 = originalRows2.filter((row) => {
-                return row.skillName.toLowerCase().includes(searchedVal.toLowerCase());
+                return row.by.toLowerCase().includes(searchedVal.toLowerCase());
               });
             setRows2(filteredRows2);    
     };
@@ -39,52 +32,76 @@ function AdminDashboardCheckOpenSkillTable() {
       requestSearch(searched);
     };
 
+    const OnCheckStatus = (props) => {
+        const status = props.status;
+
+        if(status === 'ผ่าน' || status === 'ผ่านการรับเงิน'){
+            return <label class="btn btn-success lb"><b>ผ่าน</b></label>;
+        }else if(status === 'ไม่ผ่าน'){
+            return <label class="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
+        }else if(status === 'ตรวจสอบ'){
+            return <label class="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>
+        }
+    }
+
+    const OnCheckAccount = (props) => {
+        const value = props.value;
+
+        if(value === 'รอตรวจสอบ'){
+            return <button class="btn btn-outline-success lb" variant="warning"><i class="far fa-check-circle"></i> อนุมัติ</button>;
+        }else if(value === 'รายละเอียด'){
+            return <button class="btn btn-outline-primary lb" variant="warning"><i class="fas fa-info-circle"></i> รายละเอียด</button>;
+        }else{
+            return <b>ไม่มีข้อมูล</b>;
+        }
+    }
+
+
     return(
         <>
-        <div class="row tb">
-            <label class="col-md-8"><b>ตรวจสอบการเปิดทักษะ</b></label>
-            <div class="col-md-4">
-                <SearchBar
-                        value={searched}
-                        onChange={(searchVal) => requestSearch(2, searchVal)}
-                        onCancelSearch={() => cancelSearch()}
-                    /> 
-            </div>  
-        </div>
-        <div class="row tb">
-            <TableContainer>
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                    <TableRow>
-                        <TableCell align="center"><label><b>ชื่อทักษะ</b></label></TableCell>
-                        <TableCell align="center"><label><b>สถานะ</b></label></TableCell>
-                        <TableCell align="center"><label><b>โดย</b></label></TableCell>
-                        <TableCell align="center"><label><b>จำนวนข้อวัดผล</b></label></TableCell>
-                        <TableCell align="center"><label><b>วันที่เปิดทักษะ</b></label></TableCell>
-                        <TableCell align="center"><label><b>จัดการทักษะ</b></label></TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
+            <div class="row tb">
+                <label class="col-md-8"><b class="bm">ตรวจสอบการเปิดทักษะ</b></label>
+                <div class="col-md-4">
+                    <SearchBar
+                            value={searched}
+                            onChange={(searchVal) => requestSearch(2, searchVal)}
+                            onCancelSearch={() => cancelSearch()}
+                        /> 
+                </div>  
+            </div>
+            <div class="row tb">
+                <table className={classes.table} aria-label="simple table">
+                    <tr>
+                        <th align="center"><label><b>ชื่อทักษะ</b></label></th>
+                        <th align="center"><label><b>สถานะ</b></label></th>
+                        <th align="center"><label><b>โดย</b></label></th>
+                        <th align="center"><label><b>จำนวนข้อวัดผล</b></label></th>
+                        <th align="center"><label><b>วันที่เปิดทักษะ</b></label></th>
+                        <th align="center"><label><b>จัดการทักษะ</b></label></th>
+                    </tr>
+
                     {rows2.map((row) => (
-                        <TableRow key={row.skillName}>
-                            <TableCell ><label>{row.skillName}</label></TableCell>
-                            <TableCell align="center"><label>{row.status}</label></TableCell>
-                            <TableCell align="right">
+                        <tr key={row.by}>
+                            <td ><label>{row.skillName}</label></td>
+                            <td align="center">
+                                <OnCheckStatus status={row.status} />
+                            </td>
+                            <td align="right">
                                 <label class="design_td2"><label>{row.by}</label></label>
-                            </TableCell>
-                            <TableCell align="right"><label>{row.number_measurements}</label></TableCell>
-                            <TableCell align="center"><label>{row.skill_opening_date}</label></TableCell>
-                            <TableCell align="right">
-                                <Button variant="warning">{row.manage_skill}</Button>{' '}
-                            </TableCell>
-                        </TableRow>
+                            </td>
+                            <td align="right"><label>{row.number_measurements}</label></td>
+                            <td align="center"><label>{row.skill_opening_date}</label></td>
+                            <td align="right">
+                                <OnCheckAccount value={row.manage_skill} />
+                            </td>
+                        </tr>
                     ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                </table>
+            </div>
         </>
     )
 }
 
-export default AdminDashboardCheckOpenSkillTable;
+export default AdminDashboardCheckOpenSkilltable;

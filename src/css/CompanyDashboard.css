@@ -1,157 +1,137 @@
-.row1 {
-    background-color: rgb(255, 255, 255);
+.boxC-01 {
+    text-align: right;
+    height: 55px;
+}
+
+.boxC-02 {
+    text-align: center;
     width: 100%;
-    height: 50px;
-    clear: both;
-}
-
-.colume-right1, .colume-right2 {
-    float: right;
-}
-
-.colume-right1-1 {
-    font-weight: 900;
-}
-
-.img1 {
-    width: 47px;
-    height: 41px;
-}
-
-.img-pust {
-    width: 25px;
-    height: 25px;
-    margin-left: 5px;
-}
-
-/*--------------------------*/
-
-.row2 {
+    height: 100%;
+    padding: 40px;
     background-color: #D7D1D1;
-    width: 100%;
-    margin: 0;
-    padding: 20px;
 }
 
-.row2-2 {
-    margin-top: 20px;
-    margin-bottom: 20PX;
+.boxC-02-00 {
+    padding: static;
 }
 
-.img_design {
-    width: 100%;
-    height: 312px;
+.boxC-02-01-00 {
+    position: absolute;
+    text-align: left;
+    top: 240px;
+    left: 100px;
+    color: #FFFFFF;
+}
+
+.boxC-02-01-txt1, .boxC-02-01-txt2, .boxC-02-01-txt3 {
+    text-shadow: 1px 0 20px hsl(216, 98%, 43%);
+}
+
+.boxC-02-01-txt1 {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.boxC-02-01-txt2 {
+    font-size: 34px;
+    font-weight: 900;
+}
+
+.boxC-02-01-txt3 {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.boxC-02-01 {
     object-fit: cover;
-}
-
-.side-view {
-    background-color: aliceblue;
     width: 100%;
-    height: 312px;
+    height: 235px;
     border-radius: 20px;
-}
-
-/*--------------------------------*/
-.box-design {
-    width: 100%;
-    height: auto;
-    background-color: #FFFFFF;
-    padding: 60px;
-    border-radius: 20px;
-    margin: 10px;
-    padding-bottom: 140px;
-}
-
-.img-think-icon {
-    width: 80px;
-    height: 80px;
-}
-
-.txt-to-icon {
-    margin-left: 20px;
-    font-size: 25px;
-    font-weight: 900;
-}
-
-.row2-txt1 {
-    float: left;
-    font-size: 60px;
-    font-weight: 900;
-    margin-top: 25px;
-}
-
-.row2-a {
-    float: right;
-    margin-top: 35px;
-    border: 0px;
-}
-
-.row2-border {
-    clear: both;
-}
-
-/*box-skills-library*/
-.cs {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.box-skills-library, .box-latest-establishment {
-    width: 100%;
-    height: 600px;
-    min-width: 600px;
-    margin: auto;
-    border-radius: 20px;
-    padding: 15px;
-    clear: both;
+.inBoxC102 {
+    margin-left: 10px;
 }
 
-.box-skills-library {
+
+.inBoxC101 {
+    width: 60px;
+}
+
+.inBoxC {
     background-color: #FFFFFF;
-}
-
-.box-latest-establishment {
-    background-color: #F7F7F8;
-}
-
-.box-skills {
-    width: 220px;
-    height: 240px;
-    margin: 5px;
-    padding: 10px;
-    background-color: #F7F7F8;
     border-radius: 20px;
-    text-align: center;
-    float: left;
+    text-align: left;
+    padding: 40px;
 }
 
-
-.box-skills-in-img {
-    width: 120px;
+.inBoxC2 {
+    margin-top: 20px;
 }
 
-
-
-.box-skills-in-imgstar {
-    width: 25px;
+.inBoxC201 {
+    font-size: 40px;
 }
 
-.box-skills-in-2, .box-skills-in-txt {
+.inBoxC202 {
+    text-align: right;
+}
+
+.ld {
+    padding: 5px;
+}
+
+.boxC-03 {
+    margin-top: 20px;
+}
+
+.boxC03_htxt {
+    text-align: left;
+    font-size: 20px;
     font-weight: 900;
+    margin-bottom: 20px;
 }
 
-h2 {
-    font-weight: 900;
-    margin-left: 90px;
-}
-
-.table-establishment {
+.boxC03_inbox {
     width: 100%;
+    height: 650px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding: 10px;
 }
 
-.box-skills-in-btn {
-    width: 100px;
-    border: 0px;
-    border-radius: 5px;
-    background-color: #14D72B;
+.boxC03_inbox_box1 {
+    margin-top: 10px;
+    background-color: #F7F7F8;
+    height: 250px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.boxC03_inbox_box1_img {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+}
+
+.btn-style {
+    margin: 10px;
+}
+
+
+/*------------------------------------*/
+
+.tables {
+    width: 98%;
+    margin: 10px;
+}
+
+.rw {
+    padding: 10px;
+    height: 650px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+
 }

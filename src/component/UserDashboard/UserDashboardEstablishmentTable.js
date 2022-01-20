@@ -8,14 +8,14 @@ export default function CompanyDashboardEstablishmentTable(){
         {imgs: "#", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
     ];
 
-    const [rows, setRows] = useState(dataTables);
-    
+    const [rows] = useState(dataTables);
+
     return(
         <>
             {rows.map((data) => (
                 <tr>
                     <td>
-                        <img src=""></img>
+                        <img src="##" alt="Trulli"></img>
                         {data.compaName}
                     </td>
                     <td>

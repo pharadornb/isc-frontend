@@ -98,6 +98,10 @@ td {
   margin-bottom: 20px;
 }
 
+.bm {
+  margin-bottom: 10px;
+}
+
 .box_row4_left_in {
   width: 285px;
   height: 360px;
@@ -113,3 +117,21 @@ td {
   margin-bottom: 25px;
 }
 
+.lb {
+  width: 120px;
+}
+
+/*----------EstablishmentTable-----------*/
+
+.imgLogoStyle {
+  width: 150px;
+  height: 150px;
+}
+
+.setImg {
+  text-align: center;
+}
+
+.et_box2 {
+  margin-top: 10px;
+}

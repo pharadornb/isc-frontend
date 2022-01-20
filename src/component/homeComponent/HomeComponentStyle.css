@@ -5,3 +5,14 @@
 .custom-toggler {
     border-color: #FFFFFF;
 }
+
+.my-modal .modal-content {
+    background-color: #2E2E48;
+    color: #FFFFFF;
+    border-radius: 15px !important;
+}
+
+i {
+    font-size: 18px;
+    cursor: pointer;
+}

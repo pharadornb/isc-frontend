@@ -3,9 +3,9 @@ import { useState } from "react";
 export default function CompanyDashboardEstablishmentTable(){
 
     const dataTables = [
-        {imgs: "#", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
-        {imgs: "#", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
-        {imgs: "#", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
+        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
+        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
+        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
     ];
 
     const [rows] = useState(dataTables);

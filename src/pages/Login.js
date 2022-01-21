@@ -8,6 +8,7 @@ export default function Login() {
 
     const [user_email, setEmail] = useState('');
     const [user_password, setPassword] = useState('');
+    const [systems, setSystems] = useState([]);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -37,6 +38,26 @@ export default function Login() {
         )
     }
 
+    const handleSubmit2 = async e => {
+
+        axios.post('account/company', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                console.log(res.data.user)
+                setSystems(res.data.user)
+            }
+        }).catch(err =>
+            console.log(err)
+        )
+    }
+
+    const handleClick = (a) => {
+        alert(a)
+    }
+
     return (
         <div className="col-lg-6 col-md-6 form-container">
             <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
@@ -45,6 +66,15 @@ export default function Login() {
                     <p><b>admin role </b>username: a, password: a <br/>
                         <b>user role </b>username: u, password: u <br/>
                         <b>company role </b>username: c, password: c</p>
+                    <button onClick={() => handleSubmit2() }>55555555</button>
+                    {systems.map((sys) => (
+                        <div className="mb-4 col-xl-4 col-md-6 col-12 text-center" key={sys.user_email}>
+                            {sys.user_email}
+                            <button key={sys.user_email} onClick={() => handleClick(sys.user_email)}>{sys.user_email}</button>
+                            {/*<SystemCard id={sys.systemId} sign={sys.systemCode} name={sys.systemName} createDate={sys.createdDate}*/}
+                            {/*            createBy={sys.createdBy}/>*/}
+                        </div>
+                    ))}
                 </div>
                 <div className="row">
                     <div className="col-md-2"/>

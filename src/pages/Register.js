@@ -8,6 +8,8 @@ import Navbar from "../component/homeComponent/Navbar";
 import {Dropdown} from "react-bootstrap";
 import RegisterCompany from "../component/registerComponet/RegisterCompany";
 import RegisterUser from "../component/registerComponet/RegisterUser";
+// import axios from "axios";
+// import Swal from "sweetalert2";
 
 const steps = ['บัญชี', 'ข้อมูลเบื้องต้น', 'ที่อยู่'];
 

@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 import '../../css/CompanyDashboard.css';
 
 import AddIcon from '../../img/Add.png';
@@ -13,17 +15,16 @@ import TimeIcon2 from '../../img/Time2.png';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-
-
 import CompanySelectionCriteria from './CompanySelectionCriteria';
 import ServiceResult from './CompanyServiceResult';
 
 export default function CompanyDashboardContent(){
+
     return(
         <>
             <div className="boxC-01">
                 <img src={TimeIcon} alt="Trulli"></img>
-                <label className="txt1-1"><p>22:22:30</p></label>
+                <label className="txt1-1"><p>22:22:3</p></label>
                 <img src={AddIcon} alt="Trulli"></img>
                 <img src={BugIcon} alt="Trulli"></img>
                 <label className="txt1-1"><p>200</p></label>

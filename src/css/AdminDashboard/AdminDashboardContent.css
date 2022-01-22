@@ -107,9 +107,9 @@ td {
   height: 360px;
   border-radius: 15px;
   background-color: rgb(255, 255, 255);
-  margin: 22px;
   padding: 5px;
-  box-shadow: 0px 0px 5px black;
+  box-shadow: 0px 0px 5px rgb(131, 130, 130);
+  margin-top: 20px;
 }
 
 .box_row4_left_text_in{
@@ -134,4 +134,15 @@ td {
 
 .et_box2 {
   margin-top: 10px;
+}
+
+.th4 {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.td4 {
+  text-align: left;
 }

@@ -15,3 +15,7 @@ code {
 * {
   font-family: 'Kanit', sans-serif;
 }
+
+.loader {
+  height: 100vh;
+}

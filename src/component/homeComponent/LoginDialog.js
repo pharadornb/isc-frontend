@@ -3,6 +3,7 @@ import Button from "@mui/material/Button"
 import axios from "axios"
 import Swal from "sweetalert2"
 import {Link} from "react-router-dom"
+import Loader from "../configComponent/Loader";
 
 export default function LoginDialog() {
 
@@ -73,6 +74,7 @@ export default function LoginDialog() {
         <>
             {swap === 'login' &&
                 <>
+                    <Loader />
                     <form noValidate onSubmit={handleSubmit}>
                         <div className="col-md-12 mt-4">
                             <input type="email" className={'form-control'} placeholder={'Email'}

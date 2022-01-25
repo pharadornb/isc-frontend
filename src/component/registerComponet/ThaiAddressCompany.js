@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
-import PuffLoader from "react-spinners/PuffLoader";
-import LoadingOverlay from 'react-loading-overlay';
 
 const thai = require('thai-data')
 
-export default function ThaiAddress(props) {
-
-    const [showLoading, setShowLoading] = useState(false)
+export default function ThaiAddressCompany(props) {
 
     const [zipCode, setZipCode] = useState('')
     const [subDistrict, setSubDistrict] = useState(Array)
@@ -133,7 +129,6 @@ export default function ThaiAddress(props) {
             }
         });
 
-        setShowLoading(true)
         axios.post('auth/register', params, {
             headers: {
                 'Content-Type': 'application/json',
@@ -146,7 +141,6 @@ export default function ThaiAddress(props) {
                     }
                 }).then(res => {
                     if (res.status === 200) {
-                        setShowLoading(false)
                         Swal.fire(
                             'ลงทะเบียนผู้ใช้สำเร็จ',
                             'ยืนยันตัวตนที่อีเมล์ของคุณ',
@@ -181,96 +175,92 @@ export default function ThaiAddress(props) {
     }
 
     return (
-        <LoadingOverlay className="loader" active={showLoading}
-                        spinner={<PuffLoader color={'#4A90E2'}/>}>
-            <div className="row">
-                <div className="col-md-12 mt-4">
-                    <input type="text" className="form-control" placeholder="ที่อยู่ปัจจุบัน"
-                           onChange={e => setUserAddress(e.target.value)}/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={zipCode} onChange={e => {
-                        onSetZipCode(e.target.value);
-                        setUserPostcode(e.target.value)
-                    }} className="form-control"
-                           id="zipCode" type="text" placeholder="กรอกรหัสไปรษณีย์ที่อยู่"/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <select onChange={e => {
-                        onSetDistrict(e.target.value);
-                        setUserSubdistrict(e.target.value)
-                    }} value={subDistrictSelect}
-                            disabled={zipCode.length === 5 ? false : true}
-                            className={`form-select ${!isDisabledSubDistrictSelect ? 'text-gray-700' : 'bg-gray-200 text-gray-500'}`}
-                            id="subDistrict" placeholder="">
-                        <option value="" disabled={!isDisabledSubDistrictSelect ? true : false}>เลือกตำบล/แขวง</option>
-                        {!isDisabledSubDistrictSelect &&
-                            subDistrict.map((item, index) => <option key={index}>{item}</option>)
-                        }
-                    </select>
-                    {!isDisabledSubDistrictSelect &&
-                        <div
-                            className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        </div>
-                    }
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={district} id="district" type="text" placeholder="อำเภอ/เขต" className="form-control"
-                           disabled/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={province} id="district" type="text" placeholder="จังหวัด" className="form-control"
-                           disabled/>
-                </div>
-
-                <div className="col-md-12 mt-4">
-                    <input type="text" className="form-control" placeholder="ภูมิลำเนา"
-                           onChange={e => setUsComAddress(e.target.value)}/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={zipCodeOriginal} onChange={e => {
-                        onSetZipCodeOriginal(e.target.value);
-                        setUsComPostcode(e.target.value)
-                    }}
-                           className="form-control"
-                           id="zipCode" type="text" placeholder="กรอกรหัสไปรษณีย์ภูมิลำเนา"/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <select onChange={e => {
-                        onSetDistrictOriginal(e.target.value);
-                        setUsComSubdistrict(e.target.value)
-                    }} value={subDistrictSelectOriginal}
-                            disabled={zipCodeOriginal.length === 5 ? false : true}
-                            className={`form-select ${!isDisabledSubDistrictSelect ? 'text-gray-700' : 'bg-gray-200 text-gray-500'}`}
-                            id="subDistrict" placeholder="">
-                        <option value="" disabled={!isDisabledSubDistrictSelectOriginal ? true : false}>เลือกตำบล/แขวง
-                        </option>
-                        {!isDisabledSubDistrictSelectOriginal &&
-                            subDistrictOriginal.map((item, index) => <option key={index}>{item}</option>)
-                        }
-                    </select>
-                    {!isDisabledSubDistrictSelectOriginal &&
-                        <div
-                            className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        </div>
-                    }
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={districtOriginal} id="district" type="text" placeholder="อำเภอ/เขต"
-                           className="form-control"
-                           disabled/>
-                </div>
-                <div className="col-md-6 mt-4">
-                    <input value={provinceOriginal} id="district" type="text" placeholder="จังหวัด"
-                           className="form-control"
-                           disabled/>
-                </div>
-                <div className="col-md-12 mt-4">
-                    <button type="button" className="btn btn-success" onClick={() => handleClick()}><i
-                        className="fas fa-save"/> ลงทะเบียน
-                    </button>
-                </div>
+        <div className="row">
+            <div className="col-md-12 mt-4">
+                <input type="text" className="form-control" placeholder="ที่อยู่ปัจจุบัน"
+                       onChange={e => setUserAddress(e.target.value)}/>
             </div>
-        </LoadingOverlay>
+            <div className="col-md-6 mt-4">
+                <input value={zipCode} onChange={e => {
+                    onSetZipCode(e.target.value);
+                    setUserPostcode(e.target.value)
+                }} className="form-control"
+                       id="zipCode" type="text" placeholder="กรอกรหัสไปรษณีย์ที่อยู่"/>
+            </div>
+            <div className="col-md-6 mt-4">
+                <select onChange={e => {
+                    onSetDistrict(e.target.value);
+                    setUserSubdistrict(e.target.value)
+                }} value={subDistrictSelect}
+                        disabled={zipCode.length === 5 ? false : true}
+                        className={`form-select ${!isDisabledSubDistrictSelect ? 'text-gray-700' : 'bg-gray-200 text-gray-500'}`}
+                        id="subDistrict" placeholder="">
+                    <option value="" disabled={!isDisabledSubDistrictSelect ? true : false}>เลือกตำบล/แขวง</option>
+                    {!isDisabledSubDistrictSelect &&
+                        subDistrict.map((item, index) => <option key={index}>{item}</option>)
+                    }
+                </select>
+                {!isDisabledSubDistrictSelect &&
+                    <div
+                        className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    </div>
+                }
+            </div>
+            <div className="col-md-6 mt-4">
+                <input value={district} id="district" type="text" placeholder="อำเภอ/เขต" className="form-control"
+                       disabled/>
+            </div>
+            <div className="col-md-6 mt-4">
+                <input value={province} id="district" type="text" placeholder="จังหวัด" className="form-control"
+                       disabled/>
+            </div>
+
+            <div className="col-md-12 mt-4">
+                <input type="text" className="form-control" placeholder="ภูมิลำเนา"
+                       onChange={e => setUsComAddress(e.target.value)}/>
+            </div>
+            <div className="col-md-6 mt-4">
+                <input value={zipCodeOriginal} onChange={e => {
+                    onSetZipCodeOriginal(e.target.value);
+                    setUsComPostcode(e.target.value)
+                }}
+                       className="form-control"
+                       id="zipCode" type="text" placeholder="กรอกรหัสไปรษณีย์ภูมิลำเนา"/>
+            </div>
+            <div className="col-md-6 mt-4">
+                <select onChange={e => {
+                    onSetDistrictOriginal(e.target.value);
+                    setUsComSubdistrict(e.target.value)
+                }} value={subDistrictSelectOriginal}
+                        disabled={zipCodeOriginal.length === 5 ? false : true}
+                        className={`form-select ${!isDisabledSubDistrictSelect ? 'text-gray-700' : 'bg-gray-200 text-gray-500'}`}
+                        id="subDistrict" placeholder="">
+                    <option value="" disabled={!isDisabledSubDistrictSelectOriginal ? true : false}>เลือกตำบล/แขวง
+                    </option>
+                    {!isDisabledSubDistrictSelectOriginal &&
+                        subDistrictOriginal.map((item, index) => <option key={index}>{item}</option>)
+                    }
+                </select>
+                {!isDisabledSubDistrictSelectOriginal &&
+                    <div
+                        className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    </div>
+                }
+            </div>
+            <div className="col-md-6 mt-4">
+                <input value={districtOriginal} id="district" type="text" placeholder="อำเภอ/เขต"
+                       className="form-control"
+                       disabled/>
+            </div>
+            <div className="col-md-6 mt-4">
+                <input value={provinceOriginal} id="district" type="text" placeholder="จังหวัด" className="form-control"
+                       disabled/>
+            </div>
+            <div className="col-md-12 mt-4">
+                <button type="button" className="btn btn-success" onClick={() => handleClick()}><i
+                    className="fas fa-save"/> ลงทะเบียน
+                </button>
+            </div>
+        </div>
     );
 }

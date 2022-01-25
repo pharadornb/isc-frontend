@@ -13,6 +13,9 @@ import Register from './pages/Register'
 import Dashboard from "./pages/Dashboard";
 import HomePage from './pages/homePage/HomePage'
 import ResetPage from "./pages/secretPage/ResetPage";
+import VerifyPage from "./pages/secretPage/VerifyPage";
+import CompanyResume from "./pages/resumePage/CompanyResume";
+import UserResume from "./pages/resumePage/UserResume";
 
 axios.defaults.baseURL = process.env.REACT_APP_SECRET_NAME
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`
@@ -35,6 +38,11 @@ ReactDOM.render(
                 <Route path="/register" element={<Register/>}></Route>
                 <Route path="/dashboard" element={<Dashboard/>}></Route>
                 <Route path="/reset/:userEmail" element={<ResetPage/>}></Route>
+                <Route path="/verify/:userEmail" element={<VerifyPage/>}></Route>
+                <Route path="/resume/user" element={<UserResume/>}></Route>
+                <Route path="/resume/user/:userEmail" element={<UserResume/>}></Route>
+                <Route path="/resume/company" element={<CompanyResume/>}></Route>
+                <Route path="/resume/company/:userEmail" element={<CompanyResume/>}></Route>
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

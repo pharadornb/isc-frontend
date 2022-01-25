@@ -79,18 +79,24 @@ export default function Register() {
                                         <RegisterUser step={activeStep + 1}/>
                                     }
                                     {user === 'ในนามบริษัท' &&
-                                        <RegisterCompany/>
+                                        <RegisterCompany step={activeStep + 1}/>
                                     }
-                                    <Box sx={{display: 'flex', flexDirection: 'row', pt: 2, justifyContent: 'center'}}>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        pt: 2,
+                                        pl: 1.5,
+                                        justifyContent: 'center'
+                                    }}>
                                         {activeStep > 0 &&
                                             <button className="btn btn-warning"
                                                     onClick={handleBack}
-                                                    sx={{mr: 1}}><i className="fas fa-arrow-circle-left"/> ย้อนกลับ
+                                                    sx={{mr: 1}}><i className="fas fa-arrow-circle-left"/>&nbsp;ย้อนกลับ
                                             </button>
                                         }
                                         &nbsp;&nbsp;&nbsp;
                                         {activeStep !== steps.length - 1 &&
-                                            <button className="btn btn-primary" onClick={handleNext}>&nbsp;ถัดไป <i
+                                            <button className="btn btn-primary" onClick={handleNext}> ถัดไป <i
                                                 className="fas fa-arrow-circle-right"/></button>}
                                     </Box>
                                 </React.Fragment>

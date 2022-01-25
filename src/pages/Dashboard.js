@@ -22,7 +22,7 @@ export default function Dashboard() {
         }).then(res => {
             setRole(res.data.decoded.user_role)
         }).catch(() => {
-            window.location = '/login'
+            window.location = '/'
         })
     }, []);
 

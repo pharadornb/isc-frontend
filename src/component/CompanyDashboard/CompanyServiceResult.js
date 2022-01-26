@@ -42,12 +42,18 @@ export default function CompanyServiceResult() {
         </div>
         <div className="row">
             <table className="tables">
-                <th>วันที่เข้ารับบริการ</th>
-                <th>ชื่อทักษะบริการ</th>
-                <th>ข้อมูลผู้รับบริการ</th>
-                <th>ครั้งที่</th>
-                <th>คะแนน</th>
+                <thead>
+                    <tr>
+                        <th>วันที่เข้ารับบริการ</th>
+                        <th>ชื่อทักษะบริการ</th>
+                        <th>ข้อมูลผู้รับบริการ</th>
+                        <th>ครั้งที่</th>
+                        <th>คะแนน</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {rows.map((data) => (
+                
                 <tr key={data.date_service}>
                     <td>{data.date_service}</td>
                     <td>{data.service_skill_name}</td>
@@ -56,6 +62,7 @@ export default function CompanyServiceResult() {
                     <td>{data.score}</td>
                 </tr>
                 ))}
+                </tbody>
             </table>
         </div>
     </>

@@ -6,10 +6,10 @@ import StarIcon from '../../img/star.PNG';
 export default function CompanyDashboardBoxSklil() {
 
     const DataArrays = [
-        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "94%"},
-        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "42%"},
-        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "56%"},
-        {img: JavaIcon, name: "Java : Language Programing",star: 5, persen: "82%"},
+        {img: JavaIcon, name: "Java : Language Programing1",star: 5, persen: "94%"},
+        {img: JavaIcon, name: "Java : Language Programing2",star: 5, persen: "42%"},
+        {img: JavaIcon, name: "Java : Language Programing3",star: 5, persen: "56%"},
+        {img: JavaIcon, name: "Java : Language Programing4",star: 5, persen: "82%"},
     ];
  
     const [datas] = useState(DataArrays);
@@ -17,7 +17,7 @@ export default function CompanyDashboardBoxSklil() {
     return(
         <>
         {datas.map((data) => (
-        <div className="box-skills">
+        <div className="box-skills" key={data.name}>
             <div className="box-skills-in">
                 <img src={data.img} className="box-skills-in-img" alt="Trulli"></img>
                 <label className="box-skills-in-txt">{data.name}</label>

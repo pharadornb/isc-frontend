@@ -4,9 +4,9 @@ import Popular from '../../img/Ellipse_212.png';
 
 export default function CompanySelectionCriteria() {
     const box = [
-        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer'},
-        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer'},
-        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer'},
+        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer1'},
+        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer2'},
+        {user: 'นาย ภราดร บุญร่วม', criteria: 'ผ่านเกณฑ์: System designer, Programer3'},
         {user: 'นาย ภราดร บุญร่วม', criteria: 'System designer, Programer'},
     ];
 
@@ -15,7 +15,7 @@ export default function CompanySelectionCriteria() {
     return(
         <>
         {listBox.map((cols) => (
-            <div className="col-6 boxC03_inbox_box">
+            <div className="col-6 boxC03_inbox_box" key={cols.criteria}>
                 <div className="boxC03_inbox_box1">
                     <img className="boxC03_inbox_box1_img" src={Popular} alt="Trulli"></img>
                     <p><b>{cols.user}</b></p>

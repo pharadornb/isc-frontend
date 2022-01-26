@@ -36,11 +36,11 @@ function AdminDashboardCheckOpenSkilltable() {
         const status = props.status;
 
         if(status === 'ผ่าน' || status === 'ผ่านการรับเงิน'){
-            return <label class="btn btn-success lb"><b>ผ่าน</b></label>;
+            return <label className="btn btn-success lb"><b>ผ่าน</b></label>;
         }else if(status === 'ไม่ผ่าน'){
-            return <label class="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
+            return <label className="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
         }else if(status === 'ตรวจสอบ'){
-            return <label class="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+            return <label className="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
         }else{
             return <b>ไม่มีข้อมูล</b>
         }
@@ -50,9 +50,9 @@ function AdminDashboardCheckOpenSkilltable() {
         const value = props.value;
 
         if(value === 'รอตรวจสอบ'){
-            return <button class="btn btn-outline-success lb" variant="warning"><i class="far fa-check-circle"></i> อนุมัติ</button>;
+            return <button className="btn btn-outline-success lb" variant="warning"><i className="far fa-check-circle"></i> อนุมัติ</button>;
         }else if(value === 'รายละเอียด'){
-            return <button class="btn btn-outline-primary lb" variant="warning"><i class="fas fa-info-circle"></i> รายละเอียด</button>;
+            return <button className="btn btn-outline-primary lb" variant="warning"><i className="fas fa-info-circle"></i> รายละเอียด</button>;
         }else{
             return <b>ไม่มีข้อมูล</b>;
         }
@@ -61,9 +61,9 @@ function AdminDashboardCheckOpenSkilltable() {
 
     return(
         <>
-            <div class="row tb">
-                <label class="col-md-8"><b class="bm">ตรวจสอบการเปิดทักษะ</b></label>
-                <div class="col-md-4">
+            <div className="row tb">
+                <label className="col-md-8"><b className="bm">ตรวจสอบการเปิดทักษะ</b></label>
+                <div className="col-md-4">
                     <SearchBar
                             value={searched}
                             onChange={(searchVal) => requestSearch(2, searchVal)}
@@ -71,17 +71,19 @@ function AdminDashboardCheckOpenSkilltable() {
                         /> 
                 </div>  
             </div>
-            <div class="row tb">
+            <div className="row tb">
                 <table className={classes.table} aria-label="simple table">
-                    <tr>
-                        <th align="center"><label><b>ชื่อทักษะ</b></label></th>
-                        <th align="center"><label><b>สถานะ</b></label></th>
-                        <th align="center"><label><b>โดย</b></label></th>
-                        <th align="center"><label><b>จำนวนข้อวัดผล</b></label></th>
-                        <th align="center"><label><b>วันที่เปิดทักษะ</b></label></th>
-                        <th align="center"><label><b>จัดการทักษะ</b></label></th>
-                    </tr>
-
+                    <thead>
+                        <tr>
+                            <th align="center"><label><b>ชื่อทักษะ</b></label></th>
+                            <th align="center"><label><b>สถานะ</b></label></th>
+                            <th align="center"><label><b>โดย</b></label></th>
+                            <th align="center"><label><b>จำนวนข้อวัดผล</b></label></th>
+                            <th align="center"><label><b>วันที่เปิดทักษะ</b></label></th>
+                            <th align="center"><label><b>จัดการทักษะ</b></label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {rows2.map((row) => (
                         <tr key={row.by}>
                             <td ><label>{row.skillName}</label></td>
@@ -89,7 +91,7 @@ function AdminDashboardCheckOpenSkilltable() {
                                 <OnCheckStatus status={row.status} />
                             </td>
                             <td align="right">
-                                <label class="design_td2"><label>{row.by}</label></label>
+                                <label className="design_td2"><label>{row.by}</label></label>
                             </td>
                             <td align="right"><label>{row.number_measurements}</label></td>
                             <td align="center"><label>{row.skill_opening_date}</label></td>
@@ -98,6 +100,7 @@ function AdminDashboardCheckOpenSkilltable() {
                             </td>
                         </tr>
                     ))}
+                    </tbody>
                 </table>
             </div>
         </>

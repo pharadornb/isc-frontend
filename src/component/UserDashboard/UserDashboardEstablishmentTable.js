@@ -4,16 +4,16 @@ export default function CompanyDashboardEstablishmentTable(){
 
     const dataTables = [
         {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
-        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
-        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด", skills: "java, backend"},
+        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด2", skills: "java, backend2"},
+        {imgs: "##", compaName: "บริษัท ซิสเต็ม วัน จำกัด3", skills: "java, backend3"},
     ];
 
     const [rows] = useState(dataTables);
 
     return(
-        <>
+        <tbody>
             {rows.map((data) => (
-                <tr>
+                <tr key={data.compaName}>
                     <td>
                         <img src="##" alt="Trulli"></img>
                         {data.compaName}
@@ -26,6 +26,6 @@ export default function CompanyDashboardEstablishmentTable(){
                     </td>
                 </tr>
             ))}
-        </>
+        </tbody>
     )
 }

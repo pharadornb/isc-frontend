@@ -126,19 +126,19 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
     if (status === "yes") {
       return (
-        <label class="btn btn-success lb">
+        <label className="btn btn-success lb">
           <b>ผ่าน</b>
         </label>
       );
     } else if (status === "no") {
       return (
-        <label class="btn btn-danger lb">
+        <label className="btn btn-danger lb">
           <b>ไม่ผ่าน</b>
         </label>
       );
     } else if (status === "wait") {
       return (
-        <label class="btn btn-warning lb">
+        <label className="btn btn-warning lb">
           <b>รอตรวจสอบ</b>
         </label>
       );
@@ -154,21 +154,21 @@ function AdminDashboardCheckAccountEstablishmentTable() {
     if (value === "wait") {
       return (
         <button
-          class="btn btn-outline-success lb"
+          className="btn btn-outline-success lb"
           variant="warning"
           onClick={() => handleShow(user_id)}
         >
-          <i class="far fa-check-circle"></i> อนุมัติ
+          <i className="far fa-check-circle"></i> อนุมัติ
         </button>
       );
     } else if (value === "no" || value === "yes") {
       return (
         <button
-          class="btn btn-outline-primary lb"
+          className="btn btn-outline-primary lb"
           variant="warning"
           onClick={() => handleShow1(user_id)}
         >
-          <i class="fas fa-info-circle"></i> รายละเอียด
+          <i className="fas fa-info-circle"></i> รายละเอียด
         </button>
       );
     } else {
@@ -211,11 +211,11 @@ function AdminDashboardCheckAccountEstablishmentTable() {
   return (
     <>
       
-      <div class="row tb">
-        <label class="col-md-8">
-          <b class="bm">ตรวจสอบบัญชีสถานประกอบการ</b>
+      <div className="row tb">
+        <label className="col-md-8">
+          <b className="bm">ตรวจสอบบัญชีสถานประกอบการ</b>
         </label>
-        <div class="col-md-4">
+        <div className="col-md-4">
           <SearchBar
             value={searched}
             onChange={(searchVal) => requestSearch(searchVal)}
@@ -223,43 +223,45 @@ function AdminDashboardCheckAccountEstablishmentTable() {
           />
         </div>
       </div>
-      <div class="row tb">
+      <div className="row tb">
         <table className={classes.table} aria-label="simple table">
-          <tr>
-            <th align="center" className="th1">
-              <label>
-                <b>เลขจดทะเบียน</b>
-              </label>
-            </th>
-            <th align="center" className="th2">
-              <label>
-                <b>สถานะ</b>
-              </label>
-            </th>
-            <th align="center" className="th3">
-              <label>
-                <b>ชื่อสถานประกอบการ</b>
-              </label>
-            </th>
-            <th align="center" className="th4">
-              <label>
-                <b>ที่อยู่</b>
-              </label>
-            </th>
-            <th align="center" className="th5">
-              <label>
-                <b>วันที่เปิดบัญชี</b>
-              </label>
-            </th>
-            <th align="center" className="th6">
-              <label>
-                <b>จัดการบัญชี</b>
-              </label>
-            </th>
-          </tr>
-          
+          <thead>
+            <tr>
+              <th align="center" className="th1">
+                <label>
+                  <b>เลขจดทะเบียน</b>
+                </label>
+              </th>
+              <th align="center" className="th2">
+                <label>
+                  <b>สถานะ</b>
+                </label>
+              </th>
+              <th align="center" className="th3">
+                <label>
+                  <b>ชื่อสถานประกอบการ</b>
+                </label>
+              </th>
+              <th align="center" className="th4">
+                <label>
+                  <b>ที่อยู่</b>
+                </label>
+              </th>
+              <th align="center" className="th5">
+                <label>
+                  <b>วันที่เปิดบัญชี</b>
+                </label>
+              </th>
+              <th align="center" className="th6">
+                <label>
+                  <b>จัดการบัญชี</b>
+                </label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
           {rows1.map((row) => (
-            <tr key={row.uc_name}>
+            <tr key={row.uc_create}>
               <td>
               
                 <label>{row.uc_register}</label>
@@ -268,7 +270,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
                 <OnCheckStatus status={row.uc_allow} />
               </td>
               <td align="right">
-                <label class="design_td2">
+                <label className="design_td2">
                   <label>{row.uc_name}</label>
                 </label>
               </td>
@@ -284,6 +286,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
               </td>
             </tr>
           ))}
+          </tbody>
         </table>
         {/* <Pagination postsPerPage={postsPerPage} totalPosts={rows1.length} /> */}
 
@@ -293,7 +296,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
         <Modal show={show} onHide={handleClose} size="lg">
           {datas.map((rows) => (
-          <>
+          <div key={rows.uc_register}>
           <Modal.Header closeButton>
             <Modal.Title>
               <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
@@ -362,13 +365,13 @@ function AdminDashboardCheckAccountEstablishmentTable() {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="btn btn-success" onClick={() => SetAllow(userId, 'yes')}>
-              <i class="fas fa-check-circle"></i> อนุมัติบัญชี
+              <i className="fas fa-check-circle"></i> อนุมัติบัญชี
             </Button>
             <Button variant="btn btn-danger" onClick={() => SetAllow(userId, 'no')}>
-              <i class="fas fa-times-circle"></i> ไม่อนุมัติบัญชี
+              <i className="fas fa-times-circle"></i> ไม่อนุมัติบัญชี
             </Button>
           </Modal.Footer>
-           </>
+           </div>
           ))}
         </Modal>
 
@@ -376,7 +379,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
         <Modal show={show1} onHide={handleClose1} size="lg">
         {datas.map((rows) => ( 
-          <>
+          <div key={rows.uc_register}>
           <Modal.Header closeButton>
             <Modal.Title>
               <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
@@ -444,10 +447,10 @@ function AdminDashboardCheckAccountEstablishmentTable() {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="btn btn-danger" onClick={handleClose1}>
-              <i class="fas fa-times-circle"></i> ปิด
+              <i className="fas fa-times-circle"></i> ปิด
             </Button>
           </Modal.Footer>
-          </>
+          </div>
           ))}
         </Modal>
       </div>

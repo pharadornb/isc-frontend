@@ -132,16 +132,18 @@ export default function ServiceRecipientsTable() {
             </div>
             <div className="row tb">
                     <table className="" aria-label="simple table">
-                        <tr>
-                            <th align="center"><label><b>สถานะ</b></label></th>
-                            <th align="center"><label><b>จาก</b></label></th>
-                            <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
-                            <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
-                            <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
-                        </tr>
-
+                        <thead>
+                            <tr>
+                                <th align="center"><label><b>สถานะ</b></label></th>
+                                <th align="center"><label><b>จาก</b></label></th>
+                                <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
+                                <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
+                                <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {data.map((row) => (
-                            <tr key={row.uc_name}> 
+                            <tr key={row.statement_create}> 
                                 <td align="center"><CheckStatus status={row.statement_issuccess} /></td>
                                 <td align="right">
                                     <label className="design_td2"><label>{row.uc_name}</label></label>
@@ -153,12 +155,13 @@ export default function ServiceRecipientsTable() {
                                 </td>
                             </tr>
                         ))}
+                        </tbody>
                     </table>
             </div>
 
             <Modal show={show1} onHide={handleClose1} animation={false} size="lg">
                 {rows.map((row) => (
-                    <>
+                    <div key={row.statement_id}>
                     <Modal.Header closeButton>
                         <Modal.Title> <CheckAccuracys sid={row.statement_issuccess} /> {row.uc_name}</Modal.Title>
                     </Modal.Header>
@@ -174,7 +177,7 @@ export default function ServiceRecipientsTable() {
                             <i className="fas fa-times-circle"></i> ปิด
                         </Button>
                     </Modal.Footer>
-                    </>
+                    </div>
                 ))}
             </Modal>
         </>

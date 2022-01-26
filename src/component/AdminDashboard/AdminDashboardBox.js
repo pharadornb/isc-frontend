@@ -42,53 +42,53 @@ function AdminDashboardBox(){
     return(
         <>
  
-        <div class="col-md-3">
-            <div class='box b1'>
-                <div class="inbox_left">
-                    <label class="textbox_style1"><b>ยอดผู้รับบริการ</b></label>
-                    <label class="textbox_style2">{countUser.map((s) => (<>{s.users_service_count}</>))}</label>
-                    <label class="textbox_style1">คน</label>
+        <div className="col-md-3">
+            <div className='box b1'>
+                <div className="inbox_left">
+                    <label className="textbox_style1"><b>ยอดผู้รับบริการ</b></label>
+                    <label className="textbox_style2">{countUser.map((s) => (<div key={s.users_service_count}>{ s.users_service_count}</div>))}</label>
+                    <label className="textbox_style1">คน</label>
                 </div>
-                <div class="inbox_right">
+                <div className="inbox_right">
                     <AccountCircleIcon style={{fontSize: 60}} />
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class='box b2'>
-                <div class="inbox_left">
-                    <label class="textbox_style1"><b>ยอดสถานประกอบการ</b></label>
-                    <label class="textbox_style2">{countCo.map((s) => (<>{s.users_company_count}</>))}</label>
-                    <label class="textbox_style1">แห่ง</label>
+        <div className="col-md-3">
+            <div className='box b2'>
+                <div className="inbox_left">
+                    <label className="textbox_style1"><b>ยอดสถานประกอบการ</b></label>
+                    <label className="textbox_style2">{countCo.map((s) => (<div key={s.users_company_count}>{s.users_company_count}</div>))}</label>
+                    <label className="textbox_style1">แห่ง</label>
                 </div>
-                <div class="inbox_right">
+                <div className="inbox_right">
                     <BusinessIcon style={{fontSize: 60}} />
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3">
-            <div class='box b3'>
-                <div class="inbox_left">
-                    <label class="textbox_style1"><b>ยอดคลังทักษะ</b></label>
-                    <label class="textbox_style2">{countSkill.map((ss) => (<>{ss.skill_count}</>))}</label>
-                    <label class="textbox_style1">ทักษะ</label>
+        <div className="col-md-3">
+            <div className='box b3'>
+                <div className="inbox_left">
+                    <label className="textbox_style1"><b>ยอดคลังทักษะ</b></label>
+                    <label className="textbox_style2">{countSkill.map((ss) => (<div key={ss.skill_count}>{ss.skill_count}</div>))}</label>
+                    <label className="textbox_style1">ทักษะ</label>
                 </div>
-                <div class="inbox_right">
+                <div className="inbox_right">
                     <MessageIcon style={{fontSize: 60}} />
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3">
-            <div class='box b4'>
-                <div class="inbox_left">
-                    <label class="textbox_style1"><b>ยอดรายรับบริการ</b></label>
-                    <label class="textbox_style2">{countStatement.map((sss) => (<>{sss.statement_price}</>))}</label>
-                    <label class="textbox_style1">บาท</label>
+        <div className="col-md-3">
+            <div className='box b4'>
+                <div className="inbox_left">
+                    <label className="textbox_style1"><b>ยอดรายรับบริการ</b></label>
+                    <label className="textbox_style2">{countStatement.map((sss) => (<div key={sss.statement_price}>{sss.statement_price}</div>))}</label>
+                    <label className="textbox_style1">บาท</label>
                 </div>
-                <div class="inbox_right">
+                <div className="inbox_right">
                     <AccountBalanceWalletIcon style={{fontSize: 60}} />
                 </div>
             </div>    

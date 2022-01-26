@@ -213,16 +213,18 @@ function AdminDashboardReceiptAndDisbursement(){
             </div>
             <div className="row tb">
                     <table className={clases.table} aria-label="simple table">
-                        <tr>
-                            <th align="center"><label><b>สถานะ</b></label></th>
-                            <th align="center"><label><b>ให้</b></label></th>
-                            <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
-                            <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
-                            <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
-                        </tr>
-
+                        <thead>
+                            <tr>
+                                <th align="center"><label><b>สถานะ</b></label></th>
+                                <th align="center"><label><b>ให้</b></label></th>
+                                <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
+                                <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
+                                <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {rows3.map((row) => (
-                            <tr key={row.uc_name}> 
+                            <tr key={row.ucrt_create}> 
                                 <td align="center"><CheckStatus status={row.ucrt_status} /></td>
                                 <td align="right">
                                     <label className="design_td2"><label>{row.uc_name}</label></label>
@@ -234,11 +236,12 @@ function AdminDashboardReceiptAndDisbursement(){
                                 </td>
                             </tr>
                         ))}
+                        </tbody>
                     </table>
             </div>
             <Modal show={show} onHide={handleClose} animation={false} size="lg">
             {dataShow.map((row) => (
-                <>
+                <div key={row.uc_bank_no}>
                 <Modal.Header closeButton>
                 <Modal.Title><img src={PayImg} alt="logo"></img><b> รายการเบิกจ่ายให้:</b> {row.uc_name}</Modal.Title>
                 </Modal.Header>
@@ -263,7 +266,7 @@ function AdminDashboardReceiptAndDisbursement(){
                     <i className="fas fa-check-circle"></i> เปลี่ยนสถานะ
                 </Button>
                 </Modal.Footer>
-                 </>
+                 </div>
                 ))}
             </Modal>
 

@@ -58,12 +58,12 @@ export default function Dashboard() {
             }
             {role === 'admin' &&
                 <>
-                    <div class="box_Dashboard">
-                        <div class="b_left">
+                    <div className="box_Dashboard">
+                        <div className="b_left">
                             <AdminDashboard />
                             <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
                         </div>
-                        <div class="b_right"> 
+                        <div className="b_right"> 
                             <AdminDashboardContent />
                         </div>
                     </div>

@@ -27,17 +27,17 @@ export default function CompanyDashboardContent(){
     const UpdateCount = () => {
         try{
             axios
-            .post("summarize_user/count", {
+            .post("summarize_company/count", {
               headers: {
                 "Content-Type": "application/json",
               },
             })
             .then(res => {
               if (res.status === 200) {
-                console.log(res.data.skill_all);
-                setDatacount1(res.data.skill_all);
-                setDatacount2(res.data.your_skill_sum);
-                setDatacount3(res.data.your_wallet_sum);
+                // console.log(res.data);
+                setDatacount1(res.data.skill_data[0].skill);
+                setDatacount2(res.data.your_skill_data[0].your_skill);
+                setDatacount3(res.data.your_wallet_data[0].your_wallet);
               }
             });
             // setLoading(true);
@@ -80,7 +80,7 @@ export default function CompanyDashboardContent(){
                                 <label className="inBoxC102"><b>คลังทักษะสร้าง</b></label>
                             </div>
                             <div className="row inBoxC2">
-                                <label className="col-6 inBoxC201"><b>{datacount1.map((row)=>(row.skill))}</b></label>
+                                <label className="col-6 inBoxC201"><b>{datacount1}</b></label>
                                 <a href="##" className="col-6 inBoxC202"><ArrowForwardIosIcon style={{fontSize: 50}}  /></a>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ export default function CompanyDashboardContent(){
                                 <label className="inBoxC102"><b>คลังสะสมทักษะของคุณ</b></label>
                             </div>
                             <div className="row inBoxC2">
-                                <label className="col-6 inBoxC201"><b>{datacount2.map((row)=>(row.your_skill))}</b></label>
+                                <label className="col-6 inBoxC201"><b>{datacount2}</b></label>
                                 <a href="##" className="col-6 inBoxC202"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ export default function CompanyDashboardContent(){
                                 <label className="inBoxC102"><b>กระเป๋าเงิน</b></label>
                             </div>
                             <div className="row inBoxC2">
-                                <label className="col-6 inBoxC201"><b>{datacount3.map((row)=>(row.your_wallet))}</b></label>
+                                <label className="col-6 inBoxC201"><b>{datacount3}</b></label>
                                 <a href="##" className="col-6 inBoxC202"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                             </div>
                         </div>

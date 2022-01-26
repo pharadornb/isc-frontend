@@ -20,24 +20,24 @@ export default function AdminDashboardContent (){
     return(
         <section>    
             <article>
-                <div class="top_bg"></div>
-                <div class="mid_bg">
-                    <div class="box_img_content">
-                        <img class="img_design" src={logo} alt="Logo" width={"100%"} height={230} />
-                        <div class="boxTxt">
-                            <p class="txt1">สวัสดีตอนเช้า</p>
-                            <p class="txt2">ผู้ดูแลระบบ iSC01</p>
-                            <p class="txt3">iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</p>
+                <div className="top_bg"></div>
+                <div className="mid_bg">
+                    <div className="box_img_content">
+                        <img className="img_design" src={logo} alt="Logo" width={"100%"} height={230} />
+                        <div className="boxTxt">
+                            <p className="txt1">สวัสดีตอนเช้า</p>
+                            <p className="txt2">ผู้ดูแลระบบ iSC01</p>
+                            <p className="txt3">iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</p>
                         </div>
                     </div>
-                    <div class="row box_row2">
-                        <div class="col-md-8"></div>
-                        <div class="col-md-4"><Select options={options} /></div>
+                    <div className="row box_row2">
+                        <div className="col-md-8"></div>
+                        <div className="col-md-4"><Select options={options} /></div>
                     </div>
-                    <div class="row box_row3">
+                    <div className="row box_row3">
                         <Box/>
                     </div>
-                    <div class="row box_row4">
+                    <div className="row box_row4">
                         <Tables/>
                     </div>
                 </div>

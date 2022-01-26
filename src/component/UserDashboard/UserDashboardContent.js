@@ -86,7 +86,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={ThinkIcon} alt="Logo" />
                         <label className="txt-to-icon">คลังสะสมทักษะ</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">{datacount1.map((row)=>(row.skill))}</p>
+                            {datacount1.map((row)=>(<p className="row2-txt1" key={row.skill}>{row.skill}</p>))}
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={Moneys} alt="Logo" />
                         <label className="txt-to-icon">กระเป๋าเงิน</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">{datacount3.map((row)=>(row.your_wallet))}</p>
+                            {datacount3.map((row)=>(<p className="row2-txt1" key={row.your_wallet}>{row.your_wallet}</p>))}
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={ListIcon2} alt="Logo" />
                         <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">{datacount2.map((row)=>(row.your_skill))}</p>
+                            {datacount2.map((row)=>(<p className="row2-txt1" key={row.your_skill}>{row.your_skill}</p>))}
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
@@ -126,9 +126,13 @@ export default function UserDashboardContent(){
                     <div className="box-latest-establishment">
                         {/*----- Table -----*/}
                         <table className="table-establishment">
-                            <th>สถานประกอบการ</th>
-                            <th>ตำแหน่งงาน</th>
-                            <th></th>
+                            <thead>
+                                <tr>
+                                    <th>สถานประกอบการ</th>
+                                    <th>ตำแหน่งงาน</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
                             <LatestEstablishmentTable/>
                         </table>
                         

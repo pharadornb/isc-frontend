@@ -57,7 +57,7 @@ export default function ReceiptsCompanyTable() {
             })
             .then(res => {
               if (res.status === 200) {
-                console.log(res.data);
+                // console.log(res.data);
                 setData(res.data);
               }
             });
@@ -94,22 +94,22 @@ export default function ReceiptsCompanyTable() {
     requestSearch(searched);
     };
 
-    const CheckAccuracys = (props) => {
-        // console.log(props.sid + 5555);
-        if(props.sid === 'yes'){
+    const CheckAccuracys = (prop) => {
+        // console.log(prop.sid);
+        if(prop.sid === 'yes'){
             return(
                 <>
                     <img src={CoinWalletImg} alt="logo"></img><b> ได้รายรับจาก:</b> 
                 </>
             );
-        }else if (props.sid === 'no'){
+        }else if (prop.sid === 'no'){
             return(
                 <>
                     <img src={NoCoinWalletImg} alt="logo"></img><b> ไม่มีรายรับจาก:</b> 
                 </>
-            )
+            );
         }else{
-            return('No data!!!')
+            return('No data!!!');
         }
         
     };
@@ -128,17 +128,19 @@ export default function ReceiptsCompanyTable() {
                 </div>  
             </div>
             <div className="row tb">
-                    <table className="" aria-label="simple table">
-                        <tr>
-                            <th align="center"><label><b>สถานะ</b></label></th>
-                            <th align="center"><label><b>จาก</b></label></th>
-                            <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
-                            <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
-                            <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
-                        </tr>
-
+                    <table className="" aria-label="simple table" >
+                        <thead>
+                            <tr>
+                                <th align="center"><label><b>สถานะ</b></label></th>
+                                <th align="center"><label><b>จาก</b></label></th>
+                                <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
+                                <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
+                                <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {data.map((row) => (
-                            <tr key={row.name}> 
+                            <tr key={row.statement_create}> 
                                 <td align="center"><CheckStatus status={row.statement_issuccess} /></td>
                                 <td align="right">
                                     <label className="design_td2"><label>{row.name}</label></label>
@@ -150,14 +152,16 @@ export default function ReceiptsCompanyTable() {
                                 </td>
                             </tr>
                         ))}
+                        </tbody>
                     </table>
             </div>
 
             <Modal show={show1} onHide={handleClose1} animation={false} size="lg">
                 {rows.map((row) => (
-                    <>
+                    <div key={row.statement_code}>
                     <Modal.Header closeButton>
-                        <Modal.Title><CheckAccuracys sid={row.statement_issuccess} />{row.name}</Modal.Title>
+                        {/* <Modal.Title>{row.statement_issuccess}</Modal.Title> */}
+                        <Modal.Title><CheckAccuracys sid={row.statement_issuccess} /> {row.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="row">
@@ -172,7 +176,7 @@ export default function ReceiptsCompanyTable() {
                             <i className="fas fa-times-circle"></i> ปิด
                         </Button>
                     </Modal.Footer>
-                    </>
+                    </div>
                 ))}
             </Modal>
         </>

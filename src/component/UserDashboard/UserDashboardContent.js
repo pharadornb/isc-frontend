@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import '../../css/UserDashboard.css';
 
-import ListIcon from "../../img/list-icon.PNG"
+// import ListIcon from "../../img/list-icon.PNG"
 import MoneyIcon from "../../img/money.PNG"
 import PustIcon from "../../img/pust-icon.PNG"
 import logo from '../../img/Thailand-company-registration.jpg';
@@ -17,19 +18,51 @@ import LatestEstablishmentTable from '../UserDashboard/UserDashboardEstablishmen
 
 
 export default function UserDashboardContent(){
+    const [datacount1, setDatacount1] = useState([]);
+    const [datacount2, setDatacount2] = useState([]);
+    const [datacount3, setDatacount3] = useState([]);
+
+    const UpdateCount = () => {
+        try{
+            axios
+            .post("summarize_user/count", {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then(res => {
+              if (res.status === 200) {
+                // console.log(res.data.skill_all);
+                setDatacount1(res.data.skill_all);
+                setDatacount2(res.data.your_skill_sum);
+                setDatacount3(res.data.your_wallet_sum);
+              }
+            });
+            // setLoading(true);
+        }catch (err){
+            
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        UpdateCount();
+      },[]);
+    
+
     return (
         <>
         <div className="row1">
             <div className="colume-right1">
                 <img src={MoneyIcon} className="img1" alt="Trulli"></img>
-                <label className="colume-right1-1">5</label>
+                <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>
                 <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
             </div>
-            <div className="colume-right2">
+            {/* <div className="colume-right2">
                 <img src={ListIcon} className="img1" alt="Trulli"></img>
-                <label className="colume-right1-1">200</label>
+                <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>
                 <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
-            </div>
+            </div> */}
         </div>
         <div className="row2">
             <div className="row row2-2">
@@ -53,7 +86,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={ThinkIcon} alt="Logo" />
                         <label className="txt-to-icon">คลังสะสมทักษะ</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">52</p>
+                            <p className="row2-txt1">{datacount1.map((row)=>(row.skill))}</p>
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
@@ -63,7 +96,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={Moneys} alt="Logo" />
                         <label className="txt-to-icon">กระเป๋าเงิน</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">200</p>
+                            <p className="row2-txt1">{datacount3.map((row)=>(row.your_wallet))}</p>
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>
@@ -73,7 +106,7 @@ export default function UserDashboardContent(){
                         <img className="img-think-icon" src={ListIcon2} alt="Logo" />
                         <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>
                         <div className="row2-border">
-                            <p className="row2-txt1">9</p>
+                            <p className="row2-txt1">{datacount2.map((row)=>(row.your_skill))}</p>
                             <a href="##" className="row2-a"><ArrowForwardIosIcon style={{fontSize: 50}} /></a>
                         </div>
                     </div>

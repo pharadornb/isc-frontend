@@ -42,7 +42,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
       })
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data.user);
+          //console.log(res.data.user);
           setRows1(res.data.user);
         }
       });
@@ -54,7 +54,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
   useEffect(() => {
     onSelectList();
-  });
+  },[]);
 
 
   // const indexOfLastPost = currentPage * postsPerPage;
@@ -72,7 +72,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
         }
       }).then(res => {
           if (res.status === 200) {
-              console.log(res.data.user)
+              // console.log(res.data.user)
               setDatas(res.data.user);
           }
       }).catch(err =>
@@ -94,7 +94,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
         }
     }).then(res => {
         if (res.status === 200) {
-            console.log(res.data.user)
+            // console.log(res.data.user)
             setDatas(res.data.user);
         }
     }).catch(err =>
@@ -103,10 +103,6 @@ function AdminDashboardCheckAccountEstablishmentTable() {
     setShow1(true);
 
 };
-
-
-
-  
 
   const [searched, setSearched] = useState("");
 

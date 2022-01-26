@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "material-ui-search-bar";
 import Button from 'react-bootstrap/Button';
 import { Modal } from "react-bootstrap";
+import axios from "axios";
+import moment from "moment";
 
 import PayImg from '../../img/Pay.png';
-import CoinWalletImg from '../../img/Coin Wallet.png';
+// import CoinWalletImg from '../../img/Coin Wallet.png';
 
 const useStyles = makeStyles({
     table: {
@@ -14,28 +16,103 @@ const useStyles = makeStyles({
   });
 
 function AdminDashboardReceiptAndDisbursement(){
-    const classes = useStyles();
+    const clases = useStyles();
+
+    const [rows3, setRows3] = useState([]);
+    const [dataShow, setDataShow] = useState([]);
+    const [searched, setSearched] = useState("");
+
 
     const [show, setShow] = useState(false);
-    const [show1, setShow1] = useState(false);
+    // const [show1, setShow1] = useState(false);
+    const [ucrtid, setUcrtid] = useState('');
+    const [selects, setSelect] = useState('');
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const onListCount = async () => {
+        try{
+          await axios
+          .post("summarize_admin/payCompany", {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(res => {
+            if (res.status === 200) {
+            //   console.log(res.data);
+              setRows3(res.data);
+            }
+          });
+          }catch (err){
+            console.log(err);
+          }
+      }
+    
+    useEffect(() => {
+    onListCount();
+    },[]);
 
-    const handleClose1 = () => setShow1(false);
-    const handleShow1 = () => setShow1(true);
+    const handleClose = () => {
+        setShow(false)
+    }
+    const changestatus = () =>{ 
+        // console.log(selects + "5555" + ucrtid);
+        const ucrt_status = selects;
+        const ucrt_id = ucrtid;
+        //เปลี่ยนสถานะ
+       if(selects !== '' && ucrtid !== ''){
+            const params = JSON.stringify({
+                ucrt_status,
+                ucrt_id
+            });
+        
+            axios.post('summarize_admin/payCompanyUpdateStatus', params, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    // console.log(res.data);
+                }
+            }).catch(err =>
+                console.log(err)
+            )
+       }
+        setSelect('');
+        onListCount();
 
-    const originalRows3 = [
-        { types: "219534875446", froms: "บริษัท เอสเอสเอส กัดจำ", status: "ตรวจสอบ", amount_money: "1000", transaction_date: "03/03/12 22:43", disbursement_status: "รอตรวจสอบ" },
-        { types: "219534875447", froms: "บริษัท Six กัดจำ", status: "ผ่านการรับเงิน", amount_money: "200", transaction_date: "03/03/12 22:43", disbursement_status: "รายละเอียด" },
-    ];
+        setShow(false);
+    
+    };
+    const handleShow = (ucrt_id) => {
+        
+        const params = JSON.stringify({
+            ucrt_id
+        });
+    
+        axios.post('summarize_admin/payCompanyById', params, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+          }).then(res => {
+              if (res.status === 200) {
+                //   console.log(res.data);
+                  setDataShow(res.data);
+              }
+          }).catch(err =>
+              console.log(err)
+          )
+        setUcrtid(ucrt_id);
+        
+        setShow(true)
+    };
 
-    const [rows3, setRows3] = useState(originalRows3);
-    const [searched, setSearched] = useState("");
+    // const handleClose1 = () => setShow1(false);
+    // const handleShow1 = () => setShow1(true);
+
     
     const requestSearch = (searchedVal) => {
-            const filteredRows3 = originalRows3.filter((row) => {
-                return row.froms.toLowerCase().includes(searchedVal.toLowerCase());
+            const filteredRows3 = rows3.filter((row) => {
+                return row.uc_name.toLowerCase().includes(searchedVal.toLowerCase());
               });
             setRows3(filteredRows3);
     };
@@ -45,37 +122,88 @@ function AdminDashboardReceiptAndDisbursement(){
       requestSearch(searched);
     };
     
-    const OnCheckStatus = (props) => {
+    const CheckStatus = (props) => {
         const status = props.status;
 
-        if(status === 'ผ่าน' || status === 'ผ่านการรับเงิน'){
-            return <label class="btn btn-success lb"><b>ผ่านการรับเงิน</b></label>;
-        }else if(status === 'ไม่ผ่าน'){
-            return <label class="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
-        }else if(status === 'ตรวจสอบ'){
-            return <label class="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+        if(status === 'success'){
+            return <label className="btn btn-success lb"><b>เบิกจ่ายสำเร็จ</b></label>;
+        }else if(status === 'reject'){
+            return <label className="btn btn-danger lb"><b>ไม่ผ่าน</b></label>;
+        }else if(status === 'send'){
+            return <label className="btn btn-warning lb"><b>รอตรวจสอบ</b></label>;
+        }else if(status === 'accept'){
+            return <label className="btn btn-info lb"><b>ผ่าน</b></label>;
         }else{
             return <b>ไม่มีข้อมูล</b>
         }
     }
 
-    const OnCheckAccount = (props) => {
-        const value = props.value;
+    
 
-        if(value === 'รอตรวจสอบ'){
-            return <button class="btn btn-outline-success lb" variant="warning" onClick={handleShow}><i class="far fa-check-circle"></i> อนุมัติ</button>;
-        }else if(value === 'รายละเอียด'){
-            return <button class="btn btn-outline-primary lb" variant="warning" onClick={handleShow1}><i class="fas fa-info-circle"></i> รายละเอียด</button>;
-        }else{
-            return <b>ไม่มีข้อมูล</b>;
+    const onClickSelect = val => {
+        // console.log(val);
+        setSelect(val);
+        //console.log(selects + "3333");
+    }
+
+    // CheclSelection
+    const CheckSelects = (props) => {
+        const checks = props.status;
+        //setSelect(checks);
+
+        if(checks === "accept") {
+            return(
+                <select name="listvalue" onChange={(e) => onClickSelect(e.target.value)}>
+                    <option value={"accept"}>ผ่านการตรวจสอบ</option>
+                    <option value={"send"} >รอตรวจสอบ</option>
+                    <option value={"reject"} >ไม่ผ่านการตรวจสอบ</option>
+                    <option value={"success"} >เบิกจ่ายสำเร็จ</option>
+                </select>
+            );
+        }else if(checks === "send") {
+            return(
+            <select name="listvalue" onChange={(e) => onClickSelect(e.target.value)}>
+                <option value={"send"} >รอตรวจสอบ</option>
+                <option value={"accept"} >ผ่านการตรวจสอบ</option>
+                <option value={"reject"}>ไม่ผ่านการตรวจสอบ</option>
+                <option value={"success"} >เบิกจ่ายสำเร็จ</option>
+            </select>
+            );
+        }
+        else if(checks === "reject") {
+            return(
+            <select name="listvalue" onChange={(e) => onClickSelect(e.target.value)}>
+                <option value={"reject"} >ไม่ผ่านการตรวจสอบ</option>
+                <option value={"accept"} >ผ่านการตรวจสอบ</option>
+                <option value={"send"} >รอตรวจสอบ</option>
+                <option value={"success"} >เบิกจ่ายสำเร็จ</option>
+            </select>
+            );
+        }
+        else if(checks === "success") {
+            return(
+            <select name="listvalue" onChange={(e) => onClickSelect(e.target.value)}>
+                <option value={"success"} >เบิกจ่ายสำเร็จ</option>
+                <option value={"accept"} >ผ่านการตรวจสอบ</option>
+                <option value={"send"} >รอตรวจสอบ</option>
+                <option value={"reject"} >ไม่ผ่านการตรวจสอบ</option>
+            </select>
+            );
+        }else {
+            return("error");
         }
     }
 
+    const FormatTDate = (props) => {
+        const datetimes = moment(props.data).format('DD/MM/YYYY HH:mm:ss');;
+        return datetimes;
+      }
+
     return(
         <>
-            <div class="row tb">
-                <label class="col-md-8"><b class="bm">รายการรับและเบิกจ่าย</b></label>
-                <div class="col-md-4">
+            <div className="row tb">
+                <label className="col-md-8"><b className="bm">รายการรับและเบิกจ่าย</b></label>
+                <div className="col-md-4">
                     <SearchBar
                             value={searched}
                             onChange={(searchVal) => requestSearch(searchVal)}
@@ -83,66 +211,63 @@ function AdminDashboardReceiptAndDisbursement(){
                         /> 
                 </div>  
             </div>
-            <div class="row tb">
-                    <table className={classes.table} aria-label="simple table">
+            <div className="row tb">
+                    <table className={clases.table} aria-label="simple table">
                         <tr>
-                            <th align="center"><label><b>ประเภท</b></label></th>
                             <th align="center"><label><b>สถานะ</b></label></th>
-                            <th align="center"><label><b>จาก</b></label></th>
+                            <th align="center"><label><b>ให้</b></label></th>
                             <th align="center"><label><b>จำนวนยอดเงิน</b></label></th>
                             <th align="center"><label><b>วันที่ทำรายการ</b></label></th>
                             <th align="center"><label><b>สถานะเบิกจ่าย</b></label></th>
                         </tr>
+
                         {rows3.map((row) => (
-                            <tr key={row.froms}> 
-                                <td ><label>{row.types}</label></td>
-                                <td align="center"><OnCheckStatus status={row.status} /></td>
+                            <tr key={row.uc_name}> 
+                                <td align="center"><CheckStatus status={row.ucrt_status} /></td>
                                 <td align="right">
-                                    <label class="design_td2"><label>{row.froms}</label></label>
+                                    <label className="design_td2"><label>{row.uc_name}</label></label>
                                 </td>
-                                <td align="right"><label>{row.amount_money}</label></td>
-                                <td align="center"><label>{row.transaction_date}</label></td>
+                                <td align="right"><label>{row.ucrt_money}</label></td>
+                                <td align="center"><label><FormatTDate data={row.ucrt_create}/></label></td>
                                 <td align="right">
-                                    <OnCheckAccount value={row.disbursement_status} />
+                                    <button className="btn btn-outline-success" variant="warning" onClick={() => handleShow(row.ucrt_id)}><i className="far fa-check-circle"></i> เปลี่ยนสถานะ</button>
                                 </td>
                             </tr>
                         ))}
                     </table>
             </div>
             <Modal show={show} onHide={handleClose} animation={false} size="lg">
+            {dataShow.map((row) => (
+                <>
                 <Modal.Header closeButton>
-                <Modal.Title><img src={PayImg} alt="logo"></img><b> รายการเบิกจ่ายให้:</b> บริษัท เอสเอสเอส กำจัด</Modal.Title>
+                <Modal.Title><img src={PayImg} alt="logo"></img><b> รายการเบิกจ่ายให้:</b> {row.uc_name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
-                        <label className="col-4"><b>ชื่อ: </b>บริษัท เอสเอสเอส กำจัด</label>
-                        <label className="col-4"><b>อีเมล์: </b>hr.ssssss@gmail.com</label>
-                        <label className="col-4"><b>เบอร์โทรศัพท์: </b>094901503x</label>
-                        <label className="col-4"><b>เลขบัญชี: </b>2144579875451x</label>
-                        <label className="col-8"><b>เจ้าของบัญชี: </b>ภราดร บุญร่วม</label>
-                        <label className="col-4"><b>ธนาคาร: </b>กรุงไทย</label>
-                        <label className="col-8"><b>สาขา: </b>มหาวิทยาลัยแห่งเทคโนโลยีสุรนารี</label>
-                        <label className="col-4"><b>ยอดเงินเบิกออก: </b>100 บาท</label>
+                        <label className="col-4"><b>เลขจดทะเบียน: </b>{row.uc_register}</label>
+                        <label className="col-8"><b>ชื่อบริษัท: </b>{row.uc_name}</label>
+                        <label className="col-4"><b>เลขบัญชี: </b>{row.uc_bank_no}</label>
+                        <label className="col-8"><b>เจ้าของบัญชี: </b>{row.uc_bank_name}</label>
+                        <label className="col-4"><b>ธนาคาร: </b>{row.uc_bank}</label>
+                        <label className="col-8"><b>สาขา: </b>{row.uc_branch_bank}</label>
+                        <label className="col-4"><b>ยอดเงินเบิกออก: </b>{row.ucrt_money} บาท</label>
                         <label className="col-4">
                             <b>สถานะ: </b>
-                            <select name="listvalue">
-                                <option value={0}>รอตรวจสอบ</option>
-                                <option value={1}>ผ่านการตรวจสอบ</option>
-                                <option value={2}>ไม่ผ่านการตรวจสอบ</option>
-                                <option value={3}>เบิกจ่ายสำเร็จ</option>
-                            </select>
+                            <CheckSelects status={row.ucrt_status}/>
                         </label>
                         <label className="col-4"><b>ต้องการใบกำกับภาษี: </b>ใช่</label>   
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="btn btn-success" onClick={handleClose}>
-                    <i class="fas fa-check-circle"></i> เปลี่ยนสถานะ
+                <Button variant="btn btn-success" onClick={() => changestatus()}>
+                    <i className="fas fa-check-circle"></i> เปลี่ยนสถานะ
                 </Button>
                 </Modal.Footer>
+                 </>
+                ))}
             </Modal>
 
-            <Modal show={show1} onHide={handleClose1} animation={false} size="lg">
+            {/* <Modal show={show1} onHide={handleClose1} animation={false} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title><img src={CoinWalletImg} alt="logo"></img><b>รายการรับจาก: </b>ภราดร บุญร่วม</Modal.Title>
                 </Modal.Header>
@@ -158,10 +283,10 @@ function AdminDashboardReceiptAndDisbursement(){
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="btn btn-danger" onClick={handleClose1}>
-                        <i class="fas fa-times-circle"></i> ปิด
+                        <i className="fas fa-times-circle"></i> ปิด
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </>
     )
 }

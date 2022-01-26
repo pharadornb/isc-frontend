@@ -5,6 +5,8 @@
 import AdminDashboardCheckAccountEstablishmentTable from './AdminDashboardCheckAccountEstablishmentTable';
 import AdminDashboardCheckOpenSkillTable from './AdminDashboardCheckOpenSkillTable';
 import AdminDashboardReceiptAndDisbursement from './AdminDashboardReceiptAndDisbursement';
+import ServiceRecipientsTable from './ServiceRecipientsTable';
+import ReceiptsCompanyTable from './ReceiptsCompanyTable';
 
 
 
@@ -23,6 +25,10 @@ function Tables(){
                     <AdminDashboardCheckOpenSkillTable/>
                     {/*------table3-------*/}
                     <AdminDashboardReceiptAndDisbursement/>
+                    {/*------table4-------*/}
+                    <ServiceRecipientsTable />
+                    {/*------table5-------*/}
+                    <ReceiptsCompanyTable />
                 </div>
             </div>
         </>

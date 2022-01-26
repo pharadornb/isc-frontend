@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios"
-import Button from "@mui/material/Button"
 import UserDashboard from "../../src/component/UserDashboard"
-import AdminDashboard from "../../src/component/AdminDashboard"
-import CompanyDashboard from "../../src/component/CompanyDashboard"
-
 import AdminDashboardContent from "../../src/component/AdminDashboard/AdminDashboardContent"
 import CompanyDashboardContent from "../component/CompanyDashboard/CompanyDashboardContent"
 import UserDashboardContent from "../component/UserDashboard/UserDashboardContent"
-
 import '../css/Dashboard.css';
+import Sidebar from '../component/configComponent/SidebarChild'
 
 export default function Dashboard() {
 
     const [role, setRole] = useState('');
+
     useEffect(() => {
         axios.post('auth/check', {
             headers: {
@@ -26,49 +23,30 @@ export default function Dashboard() {
         })
     }, []);
 
-    const handleClick = () => {
-        sessionStorage.clear()
-        window.location = '/'
-    }
-
     return (
-        <>
+        <Sidebar>
             {role === 'user' &&
                 <>
                     <div>
-                        <UserDashboard />
-                        <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
+                        <UserDashboard/>
                     </div>
                     <div>
-                        <UserDashboardContent />
+                        <UserDashboardContent/>
                     </div>
                 </>
             }
             {role === 'company' &&
                 <>
-                    <div>
-                        <CompanyDashboard />
-                        <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
-                    </div>
-                    <div>
-                        <CompanyDashboardContent/>
-                    </div>
-
+                    <CompanyDashboardContent/>
                 </>
             }
             {role === 'admin' &&
-                <>
-                    <div class="box_Dashboard">
-                        <div class="b_left">
-                            <AdminDashboard />
-                            <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
-                        </div>
-                        <div class="b_right"> 
-                            <AdminDashboardContent />
-                        </div>
+                <div className="box_Dashboard">
+                    <div className="b_right">
+                        <AdminDashboardContent/>
                     </div>
-                </>
+                </div>
             }
-        </>
+        </Sidebar>
     )
 }

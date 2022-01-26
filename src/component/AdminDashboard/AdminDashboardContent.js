@@ -20,7 +20,7 @@ export default function AdminDashboardContent (){
     return(
         <section>    
             <article>
-                <div class="top_bg"></div>
+                <div className="top_bg" />
                 <div class="mid_bg">
                     <div class="box_img_content">
                         <img class="img_design" src={logo} alt="Logo" width={"100%"} height={230} />

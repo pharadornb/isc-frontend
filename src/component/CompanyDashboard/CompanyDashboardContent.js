@@ -22,14 +22,14 @@ export default function CompanyDashboardContent(){
 
     return(
         <>
-            <div className="boxC-01">
-                <img src={TimeIcon} alt="Trulli"></img>
-                <label className="txt1-1"><p>22:22:3</p></label>
-                <img src={AddIcon} alt="Trulli"></img>
-                <img src={BugIcon} alt="Trulli"></img>
-                <label className="txt1-1"><p>200</p></label>
-                <img src={AddIcon} alt="Trulli"></img>
-            </div>
+            {/*<div className="boxC-01">*/}
+            {/*    <img src={TimeIcon} alt="Trulli"></img>*/}
+            {/*    <label className="txt1-1"><p>22:22:3</p></label>*/}
+            {/*    <img src={AddIcon} alt="Trulli"></img>*/}
+            {/*    <img src={BugIcon} alt="Trulli"></img>*/}
+            {/*    <label className="txt1-1"><p>200</p></label>*/}
+            {/*    <img src={AddIcon} alt="Trulli"></img>*/}
+            {/*</div>*/}
             <div className="boxC-02">
                 <div className="boxC-02-00">
                     <img src={bgShow} className="boxC-02-01" alt="Trulli"></img>

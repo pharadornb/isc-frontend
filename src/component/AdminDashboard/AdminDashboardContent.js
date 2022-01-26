@@ -14,23 +14,11 @@ export default function AdminDashboardContent (){
        {value: '555', label: 'coco'},
        {value: '555', label: 'coco2'},
     ]
-
-   
     
     return(
         <section>    
             <article>
-<<<<<<< HEAD
                 <div className="top_bg" />
-                <div class="mid_bg">
-                    <div class="box_img_content">
-                        <img class="img_design" src={logo} alt="Logo" width={"100%"} height={230} />
-                        <div class="boxTxt">
-                            <p class="txt1">สวัสดีตอนเช้า</p>
-                            <p class="txt2">ผู้ดูแลระบบ iSC01</p>
-                            <p class="txt3">iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</p>
-=======
-                <div className="top_bg"></div>
                 <div className="mid_bg">
                     <div className="box_img_content">
                         <img className="img_design" src={logo} alt="Logo" width={"100%"} height={230} />
@@ -38,7 +26,6 @@ export default function AdminDashboardContent (){
                             <p className="txt1">สวัสดีตอนเช้า</p>
                             <p className="txt2">ผู้ดูแลระบบ iSC01</p>
                             <p className="txt3">iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</p>
->>>>>>> 6270ec60f78b1dd80784c084571f819c62bc7d40
                         </div>
                     </div>
                     <div className="row box_row2">

@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useCallback} from "react";
 import SideNav, {NavItem, NavIcon, NavText} from "@trendmicro/react-sidenav";
 import Avatar from '@mui/material/Avatar';
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import imgProfile from "../../img/isc-logo.png";
 import imgProfileShort from "../../img/isc-logo-2.png";
 import './SidebarStyle.css'
+import {useNavigate} from 'react-router-dom';
 
 export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name, profile}) {
 
@@ -12,6 +13,10 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
         sessionStorage.clear()
         window.location = '/'
     }
+
+    const navigate = useNavigate();
+    const handleOnClick = useCallback(() => navigate('/resume_user', {replace: true}), [navigate]);
+    const dashboardOnClick = useCallback(() => navigate('/dashboard', {replace: true}), [navigate]);
 
     return (
         <>
@@ -33,35 +38,63 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                     <NavItem eventKey="profile"
                              style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}>
                         {sideNavExpanded &&
-                            <Avatar alt="iT" src={`data:image/jpeg;base64,${profile}`} sx={{width: 90, height: 90}}/>
+                            <>
+                                <Avatar alt="iT" src={`data:image/jpeg;base64,${profile}`}
+                                        sx={{width: 90, height: 90}}/>
+                            </>
                         }
                         {!sideNavExpanded &&
-                            <NavIcon>
-                                <img src={imgProfileShort} alt="" style={{width: '30px'}}/>
+                            <NavIcon style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}>
+                                <Avatar alt="iT" src={`data:image/jpeg;base64,${profile}`}
+                                        sx={{width: 50, height: 50}}/>
                             </NavIcon>
                         }
                     </NavItem>
                     {sideNavExpanded &&
-                        <NavItem eventKey="dashboard" className={'mt-5'}>
+                        <NavItem eventKey="profile"
+                                 style={{pointerEvents: 'none', textAlign: 'center'}} className={'mt-5'}>
+                            <h6 style={{fontSize: '18px'}}><b>{name}</b></h6>
+                            {role === 'admin' &&
+                                <h6 style={{fontSize: '14px'}}>ผู้ดูแลระบบ</h6>
+                            }
+                            {role === 'user' &&
+                                <h6 style={{fontSize: '14px'}}>ผู้รับบริการ</h6>
+                            }
+                            {role === 'company' &&
+                                <h6 style={{fontSize: '14px'}}>บริษัท</h6>
+                            }
+
+                        </NavItem>
+                    }
+                    {sideNavExpanded &&
+                        <NavItem eventKey="dashboard" className={'mt-3'} onClick={dashboardOnClick}>
                             <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{fontSize: "1.75em"}}/>
+                                <i className="fas fa-th-large" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
-                            <NavText>Home</NavText>
+                            <NavText>หน้าหลัก</NavText>
                         </NavItem>
                     }
                     {!sideNavExpanded &&
-                        <NavItem eventKey="dashboard" className={'mt-2'}>
+                        <NavItem eventKey="dashboard" className={'mt-3'} onClick={dashboardOnClick}>
                             <NavIcon>
-                                <i className="fa fa-fw fa-home" style={{fontSize: "1.75em"}}/>
+                                <i className="fas fa-th-large" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
-                            <NavText>Home</NavText>
+                            <NavText>หน้าหลัก</NavText>
+                        </NavItem>
+                    }
+                    {role === 'user' &&
+                        <NavItem eventKey="resume" onClick={handleOnClick}>
+                            <NavIcon>
+                                <i className="fas fa-file-alt" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>Resume</NavText>
                         </NavItem>
                     }
                     <NavItem eventKey="logout" onClick={() => logout()}>
                         <NavIcon>
                             <i className="fas fa-sign-out-alt" style={{fontSize: "1.75em"}}/>
                         </NavIcon>
-                        <NavText>Logout</NavText>
+                        <NavText>ออกจากระบบ</NavText>
                     </NavItem>
                 </SideNav.Nav>
             </SideNav>

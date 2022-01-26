@@ -9,7 +9,7 @@ import Sidebar from '../component/configComponent/SidebarChild'
 
 export default function Dashboard() {
 
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('')
 
     useEffect(() => {
         axios.post('auth/check', {
@@ -24,29 +24,29 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <Sidebar>
-            {role === 'user' &&
-                <>
-                    <div>
-                        <UserDashboard/>
+            <Sidebar>
+                {role === 'user' &&
+                    <>
+                        <div>
+                            <UserDashboard/>
+                        </div>
+                        <div>
+                            <UserDashboardContent/>
+                        </div>
+                    </>
+                }
+                {role === 'company' &&
+                    <>
+                        <CompanyDashboardContent/>
+                    </>
+                }
+                {role === 'admin' &&
+                    <div className="box_Dashboard">
+                        <div className="b_right">
+                            <AdminDashboardContent/>
+                        </div>
                     </div>
-                    <div>
-                        <UserDashboardContent/>
-                    </div>
-                </>
-            }
-            {role === 'company' &&
-                <>
-                    <CompanyDashboardContent/>
-                </>
-            }
-            {role === 'admin' &&
-                <div className="box_Dashboard">
-                    <div className="b_right">
-                        <AdminDashboardContent/>
-                    </div>
-                </div>
-            }
-        </Sidebar>
+                }
+            </Sidebar>
     )
 }

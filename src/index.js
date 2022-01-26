@@ -39,8 +39,8 @@ ReactDOM.render(
                 <Route path="/dashboard" element={<Dashboard/>}></Route>
                 <Route path="/reset/:userEmail" element={<ResetPage/>}></Route>
                 <Route path="/verify/:userEmail" element={<VerifyPage/>}></Route>
-                <Route path="/resume/user" element={<UserResume/>}></Route>
-                <Route path="/resume/user/:userEmail" element={<UserResume/>}></Route>
+                <Route path="/resume_user" element={<UserResume/>}></Route>
+                <Route path="/resume_user/:userEmail" element={<UserResume/>}></Route>
                 <Route path="/resume/company" element={<CompanyResume/>}></Route>
                 <Route path="/resume/company/:userEmail" element={<CompanyResume/>}></Route>
             </Routes>

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios"
-import UserDashboard from "../../src/component/UserDashboard"
 import AdminDashboardContent from "../../src/component/AdminDashboard/AdminDashboardContent"
 import CompanyDashboardContent from "../component/CompanyDashboard/CompanyDashboardContent"
 import UserDashboardContent from "../component/UserDashboard/UserDashboardContent"
@@ -24,29 +23,24 @@ export default function Dashboard() {
     }, []);
 
     return (
-            <Sidebar>
-                {role === 'user' &&
-                    <>
-                        <div>
-                            <UserDashboard/>
-                        </div>
-                        <div>
-                            <UserDashboardContent/>
-                        </div>
-                    </>
-                }
-                {role === 'company' &&
-                    <>
-                        <CompanyDashboardContent/>
-                    </>
-                }
-                {role === 'admin' &&
-                    <div className="box_Dashboard">
-                        <div className="b_right">
-                            <AdminDashboardContent/>
-                        </div>
+        <Sidebar mark={'dashboard'}>
+            {role === 'user' &&
+                <>
+                    <UserDashboardContent/>
+                </>
+            }
+            {role === 'company' &&
+                <>
+                    <CompanyDashboardContent/>
+                </>
+            }
+            {role === 'admin' &&
+                <div className="box_Dashboard">
+                    <div className="b_right">
+                        <AdminDashboardContent/>
                     </div>
-                }
-            </Sidebar>
+                </div>
+            }
+        </Sidebar>
     )
 }

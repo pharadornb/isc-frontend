@@ -16,6 +16,7 @@ import ResetPage from "./pages/secretPage/ResetPage";
 import VerifyPage from "./pages/secretPage/VerifyPage";
 import CompanyResume from "./pages/resumePage/CompanyResume";
 import UserResume from "./pages/resumePage/UserResume";
+import SkillPage from "./pages/skillPage/SkillPage";
 
 axios.defaults.baseURL = process.env.REACT_APP_SECRET_NAME
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`
@@ -32,17 +33,18 @@ ReactDOM.render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
             <Routes>
-                <Route path="/test" element={<App/>}></Route>
-                <Route path="/" element={<HomePage/>}></Route>
-                <Route path="/login" element={<Login/>}></Route>
-                <Route path="/register" element={<Register/>}></Route>
-                <Route path="/dashboard" element={<Dashboard/>}></Route>
-                <Route path="/reset/:userEmail" element={<ResetPage/>}></Route>
-                <Route path="/verify/:userEmail" element={<VerifyPage/>}></Route>
-                <Route path="/resume_user" element={<UserResume/>}></Route>
-                <Route path="/resume_user/:userEmail" element={<UserResume/>}></Route>
-                <Route path="/resume/company" element={<CompanyResume/>}></Route>
-                <Route path="/resume/company/:userEmail" element={<CompanyResume/>}></Route>
+                <Route path="/test" element={<App/>} />
+                <Route path="/" element={<HomePage/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/register" element={<Register/>} />
+                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/reset/:userEmail" element={<ResetPage/>} />
+                <Route path="/verify/:userEmail" element={<VerifyPage/>} />
+                <Route path="/resume_user" element={<UserResume/>} />
+                <Route path="/resume_user/:userEmail" element={<UserResume/>} />
+                <Route path="/resume/company" element={<CompanyResume/>} />
+                <Route path="/resume/company/:userEmail" element={<CompanyResume/>} />
+                <Route path="/skill" element={<SkillPage/>} />
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

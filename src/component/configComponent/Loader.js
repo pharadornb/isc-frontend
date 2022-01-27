@@ -2,6 +2,7 @@ import React from "react";
 import LoadingOverlay from 'react-loading-overlay';
 import PuffLoader from "react-spinners/PuffLoader";
 import PropTypes from 'prop-types';
+import "./LoaderStyle.css"
 
 LoadingOverlay.propTypes = {
     active: PropTypes.bool.isRequired,

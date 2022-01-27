@@ -12,24 +12,26 @@
 }
 
 .boxC-02-00 {
-    padding: static;
+    position: relative;
 }
 
 .boxC-02-01-00 {
     position: absolute;
     text-align: left;
-    top: 240px;
+    top: 65px;
     left: 100px;
     color: #FFFFFF;
 }
 
 .boxC-02-01-txt1, .boxC-02-01-txt2, .boxC-02-01-txt3 {
     text-shadow: 1px 0 20px hsl(216, 98%, 43%);
+    margin-top: 10px;
 }
 
 .boxC-02-01-txt1 {
     font-size: 24px;
     font-weight: 900;
+    
 }
 
 .boxC-02-01-txt2 {

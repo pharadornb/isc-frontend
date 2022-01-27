@@ -1,0 +1,116 @@
+.bg-resume {
+    background-image: linear-gradient(rgb(63, 50, 173), rgb(218, 40, 173));
+    width: 100%;
+    height: 100%;
+}
+
+.div-1 {
+    height: 50px;
+    background-color: aquamarine;
+}
+
+.div-2 {
+    padding: 10px;
+}
+
+.div2-1 {
+    background-color: #c4c4c45d;
+    width: 620px;
+    height: 1000px;
+    border-radius: 10px;
+    margin: auto;
+    padding: 10px;
+}
+
+.div2-2 {
+    background-color: #ffffff;
+    width: 620px;
+    height: 1000px;
+    border-radius: 10px;
+    margin: auto;
+    padding: 30px;
+}
+
+.div21-1 {
+    padding: 10px;
+    margin: auto;
+}
+
+.msl {
+    background-color: #ffffff59;
+    width: 100%;
+    margin-left: 1px;
+    margin-right: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+.sl {
+    padding: 10px;
+}
+
+.la {
+    background-color: #ffffff59;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    padding: 10px 0px 10px 0px;
+    border-radius: 5px;
+}
+
+.w {
+    color: #ffffff;
+}
+
+.b {
+    font-weight: bold;
+}
+
+.gray {
+    color: rgb(102, 102, 102);
+}
+
+.center {
+    text-align: center;
+}
+
+.bgs {
+    background-color: rgb(90, 90, 90);
+    padding: 10px 10px 10px 50px;
+    width: 350px;
+    font-weight: bold;
+    color: #ffffff;
+    border-radius: 5px;
+    position: absolute;
+    top: -20px;
+}
+
+.line {
+    background-color: rgb(90, 90, 90);
+    width: 100%;
+    height: 2px;
+    margin-top: 25px;
+}
+
+.div22-1 {
+    position: relative;
+}
+
+.div22-11 {
+    margin-top: 50px;
+}
+
+.ml {
+    margin-left: 10px;
+}
+
+.width-50 {
+    width: 50px;
+}
+
+.div211-2 {
+    text-align: center;
+    padding: 40px;
+}

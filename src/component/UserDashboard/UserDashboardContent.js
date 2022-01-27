@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from 'moment';
 
 import '../../css/UserDashboard.css';
 
@@ -48,6 +49,21 @@ export default function UserDashboardContent(){
     useEffect(() => {
         UpdateCount();
       },[]);
+
+      const Hello = () => {
+        const hh = moment().format('hh');
+
+       if(parseInt(hh) >= 0 && parseInt(hh) <= 12) {
+            return "สวัสดีตอนเช้า";
+       }else if(parseInt(hh) > 13 && parseInt(hh) <= 18){
+            return "สวัสดีตอนบ่าย";
+       }else if(parseInt(hh) > 18 && parseInt(hh) <= 23){
+            return "สวัสดีตอนเย็น";
+       }else{
+            return "สวัสดี Error!!!";
+       }
+        // console.log(parseInt(hh));
+    };
     
 
     return (
@@ -69,7 +85,7 @@ export default function UserDashboardContent(){
                 <div className="col-md-9 mergeTxt">
                     <img className="img_design" src={logo} alt="Logo" />
                     <div className="box-txt-top">
-                        <p className="seHi"><b>สวัสดีตอนเช้า</b></p>
+                        <p className="seHi"><b><Hello /></b></p>
                         <p className="nameUser"><b>คุณ ภราดร บุญร่วม</b></p>
                         <p className="commentTxt"><b>iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</b></p>
                     </div>
@@ -81,7 +97,7 @@ export default function UserDashboardContent(){
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-4 ko">
                     <div className="box-design">
                         <img className="img-think-icon" src={ThinkIcon} alt="Logo" />
                         <label className="txt-to-icon">คลังสะสมทักษะ</label>
@@ -91,7 +107,7 @@ export default function UserDashboardContent(){
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4 ">
+                <div className="col-md-4 ko">
                     <div className="box-design">
                         <img className="img-think-icon" src={Moneys} alt="Logo" />
                         <label className="txt-to-icon">กระเป๋าเงิน</label>
@@ -101,7 +117,7 @@ export default function UserDashboardContent(){
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-4 ko">
                     <div className="box-design">
                         <img className="img-think-icon" src={ListIcon2} alt="Logo" />
                         <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>

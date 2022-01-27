@@ -8,6 +8,7 @@ import TimeIcon2 from '../../img/Time2.png';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CompanySelectionCriteria from './CompanySelectionCriteria';
 import ServiceResult from './CompanyServiceResult';
+import moment from 'moment';
 
 export default function CompanyDashboardContent(){
 
@@ -38,10 +39,26 @@ export default function CompanyDashboardContent(){
         }
     }
 
+    const Hello = () => {
+        const hh = moment().format('hh');
+
+       if(parseInt(hh) >= 0 && parseInt(hh) <= 12) {
+            return "สวัสดีตอนเช้า";
+       }else if(parseInt(hh) > 13 && parseInt(hh) <= 18){
+            return "สวัสดีตอนบ่าย";
+       }else if(parseInt(hh) > 18 && parseInt(hh) <= 23){
+            return "สวัสดีตอนเย็น";
+       }else{
+            return "สวัสดี Error!!!";
+       }
+        // console.log(parseInt(hh));
+    };
+
     useEffect(() => {
         UpdateCount();
       },[]);
     
+
 
     return(
         <>
@@ -49,7 +66,7 @@ export default function CompanyDashboardContent(){
                 <div className="boxC-02-00">
                     <img src={bgShow} className="boxC-02-01" alt="Trulli"></img>
                     <div className="boxC-02-01-00">
-                        <label className="boxC-02-01-txt1">สวัสดีตอนเช้า</label><br></br>
+                        <label className="boxC-02-01-txt1"><Hello /></label><br></br>
                         <label className="boxC-02-01-txt2">บริษัท ไอเอสซี จำกัด</label><br></br>
                         <label className="boxC-02-01-txt3">iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที</label>
                     </div>

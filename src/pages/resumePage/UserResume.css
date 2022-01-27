@@ -6,7 +6,7 @@
 
 .div-1 {
     height: 50px;
-    background-color: aquamarine;
+    background-color: rgba(127, 255, 212, 0.226);
 }
 
 .div-2 {
@@ -84,7 +84,7 @@
     color: #ffffff;
     border-radius: 5px;
     position: absolute;
-    top: -20px;
+    top: -23px;
 }
 
 .line {
@@ -106,7 +106,7 @@
     margin-left: 10px;
 }
 
-.width-50 {
+.wid50 {
     width: 50px;
 }
 

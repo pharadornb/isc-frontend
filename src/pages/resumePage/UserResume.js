@@ -144,7 +144,7 @@ export default function UserResume() {
                             </div>
                             <div className='row div22-1 sl'>
                                 {/* คำขวัญ */}
-                                <div className='col-12 w center'>{dataNUser.user_slogan}</div>
+                                <h4 className='col-12 w center'>{dataNUser.user_slogan}</h4>
                             </div>
                             <div className='row div22-2 la'>
                                 {/* วันเกิด */}
@@ -186,7 +186,7 @@ export default function UserResume() {
                                 </div>
                             </div>
                             <div className='row div22-2 la'>
-                                <div className='col-12 w b'>Social</div>
+                                <h4 className='col-12 w b'>Social</h4>
                                 <div className='row'>
                                     {/* facebook */}
                                     <a className='col-6' id='1' href={dataNUser.us_com_facebook}>
@@ -200,7 +200,7 @@ export default function UserResume() {
                                     </a>
                                     {/* github */}
                                     <a className='col-6' href={dataNUser.us_com_github}>
-                                        <i className="fab fa-github w"></i>
+                                        <i className="fab fa-github w "></i>
                                         <label className='w ml'>github</label>
                                     </a>
                                     {/* linkedin */}
@@ -211,7 +211,7 @@ export default function UserResume() {
                                 </div>
                             </div>
                             <div className='row la'>
-                                <div className='col-12 w'><b>Education</b></div>
+                                <h4 className='col-12 w'><b>Education</b></h4>
                                 <div className='col-12'>
                                     {/* map data study */}
                                     <label className='w'><b>Bachelor of Engineering in Information Technology</b></label>
@@ -224,7 +224,7 @@ export default function UserResume() {
                         <div className='col-md-6 div2-2'>
                             {/* box right */}
                             <div className='div22-1'>
-                                <label className='bgs'>EXPERIENCE</label>
+                                <h4 className='bgs'>EXPERIENCE</h4>
                                 <div className='line' />
                             </div>
                             <div className='div22-11'>
@@ -236,7 +236,7 @@ export default function UserResume() {
                                     design, test, and iterate.</label>
                             </div>
                             <div className='div22-1 div22-11'>
-                                <label className='bgs'>SKILLS COLLECT</label>
+                                <h4 className='bgs'>SKILLS COLLECT</h4>
                                 <div className='line' />
                             </div>
                         </div>

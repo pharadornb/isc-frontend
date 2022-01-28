@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from 'moment';
+import 'moment/locale/th'  
 
 import '../../css/UserDashboard.css';
 
@@ -51,18 +52,22 @@ export default function UserDashboardContent(){
       },[]);
 
       const Hello = () => {
-        const hh = moment().format('hh');
 
-       if(parseInt(hh) >= 0 && parseInt(hh) <= 12) {
+        const a = moment().format('a');
+        const h = moment().format('h');
+        console.log(h);
+        if(a === "ก่อนเที่ยง") {
             return "สวัสดีตอนเช้า";
-       }else if(parseInt(hh) > 13 && parseInt(hh) <= 18){
-            return "สวัสดีตอนบ่าย";
-       }else if(parseInt(hh) > 18 && parseInt(hh) <= 23){
-            return "สวัสดีตอนเย็น";
-       }else{
-            return "สวัสดี Error!!!";
-       }
-        // console.log(parseInt(hh));
+        }else if(a === "หลังเที่ยง"){
+            if(h >0 && h<=6)
+                return "สวัสดีตอนบ่าย";
+            else if(h>6 && h<=12 )
+                return "สวัสดีตอนเย็น";
+            else
+                return "สวัสดี Error!!!";
+        }else{
+                return "สวัสดี Error!!!";
+        }
     };
     
 

@@ -8,6 +8,8 @@ import axios from 'axios';
 import { Avatar } from '@mui/material';
 import moment from 'moment';
 
+import Logo from '../../img/logo2.PNG'
+
 export default function UserResume() {
     const {userEmail} = useParams()
 
@@ -119,10 +121,21 @@ export default function UserResume() {
         <Sidebar>
             {!userEmail &&
                 <div className='bg-resume'>
-                    <p>UserResume</p>
+                    {/* <p>UserResume</p> */}
                     <div className='div-1'>
-
+                        <div className='d11'>
+                            <button className='btns'><i className="fas fa-file-pdf"></i> ดาวน์โหลด</button>
+                            <button className='btns'><i className="fas fa-pencil-alt"></i> แก้ไข resume</button>
+                        </div>
+                        <div className='d12'>
+                            <label className='w b mg'>Created by :</label>
+                            <img alt='logo2' className='sl' src={Logo} />
+                            <label className='b w mg'>Serial key :</label>
+                            <label className='w lbd12 mg'>{dataNUser.user_key}</label>
+                        </div>
+                        <a href='https://isc-service.azurewebsites.net/user_resume' className='w lin'>https://isc-service.azurewebsites.net/user_resume</a>
                     </div>
+                    <div className='goo'></div>
                     <div className='row div-2'>
                         <div className='col-md-6 div2-1'>
                             {/* box left */}
@@ -142,9 +155,9 @@ export default function UserResume() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='row div22-1 sl'>
+                            <div className='row div22-1 '>
                                 {/* คำขวัญ */}
-                                <h4 className='col-12 w center'>{dataNUser.user_slogan}</h4>
+                                <h4 className='col-12 w center slogan'>{dataNUser.user_slogan}</h4>
                             </div>
                             <div className='row div22-2 la'>
                                 {/* วันเกิด */}

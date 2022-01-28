@@ -5,8 +5,9 @@
 }
 
 .div-1 {
-    height: 50px;
-    background-color: rgba(127, 255, 212, 0.226);
+    height: 70px;
+    position: relative;
+    /* background-color: rgba(127, 255, 212, 0.226); */
 }
 
 .div-2 {
@@ -19,6 +20,7 @@
     height: 1000px;
     border-radius: 10px;
     margin: auto;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
@@ -29,6 +31,7 @@
     border-radius: 10px;
     margin: auto;
     padding: 30px;
+    margin-bottom: 10px;
 }
 
 .div21-1 {
@@ -48,6 +51,7 @@
 
 .sl {
     padding: 10px;
+
 }
 
 .la {
@@ -113,4 +117,57 @@
 .div211-2 {
     text-align: center;
     padding: 40px;
+}
+
+.d11 {
+    float: left;
+    width: 60%;
+    text-align: right;
+}
+
+.btns {
+    border: 1px rgb(255, 255, 255) solid;
+    margin: 12px 0px 0px 5px;
+    border-radius: 3px;
+    background-color:#2E2E48;
+    color: #ffffff;
+}
+
+.d12 {
+    float: left;
+    width: 40%;
+    text-align: right;
+}
+
+.lbd12 {
+    padding: 0px 60px 0px 60px ;
+    background-color:#C4C4C4;
+    border-radius: 5px;
+}
+
+.d12 {
+    padding-top: 7px;
+}
+
+.mg {
+    margin-right: 10px;
+}
+
+.lin {
+    float: right;
+    font-size: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.sl {
+    height: 40px;
+}
+
+.fl {
+    float: right;
+}
+
+.goo {
+    clear: both;
 }

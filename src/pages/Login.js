@@ -72,6 +72,7 @@ export default function Login() {
 
     return (
         <Loader show={showLoading}>
+            <a href="https://facebook.com/">Bom</a>
             {/* <SidebarChild> */}
                 <div className="col-lg-6 col-md-6 form-container">
                     <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">

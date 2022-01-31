@@ -6,7 +6,6 @@ export default function SkillPage() {
     return (
         <>
             <Sidebar mark={'createSkill'}>
-                {/*<p>Hello Skill</p>*/}
                 <HeadSkill />
             </Sidebar>
         </>

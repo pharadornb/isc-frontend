@@ -1,12 +1,20 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import BodySkill from "./BodySkill";
+import axios from "axios";
 
 export default class HeadSkill extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             base64Data: null,
+            persons: [],
+            skillType: 0,
+            levelSkill: 0,
+            skillName: '',
+            skillDetail: '',
+            skillTime: 0,
+            SkillPrice: 0,
         }
     }
 
@@ -26,6 +34,17 @@ export default class HeadSkill extends React.Component {
             base64Data: btoa(binaryString),
         });
     };
+
+    componentDidMount() {
+        axios.post('skill/skill_types', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            const persons = res.data;
+            this.setState({persons});
+        })
+    }
 
     render() {
         const {base64Data} = this.state;
@@ -61,45 +80,92 @@ export default class HeadSkill extends React.Component {
                                     <input type="file" className="custom-file-input" name="image" id="file"
                                            accept=".jpg, .jpeg, .png"
                                            onChange={(e) => this.onChange(e)} style={{display: "none"}}/>
+                                    <div>
                                         เพิ่มสัญลักษณ์ทักษะ
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-7">
                             <div className="col-md-12 mt-4">
                                 <input type="email" className="form-control" placeholder="ชื่อทักษะ"
-                                       onChange={(e) => this.setState({email: e.target.value})}/>
+                                       onChange={(e) => this.setState({skillName: e.target.value})}/>
                             </div>
                             <div className="col-md-12 mt-4">
-                                <textarea className="form-control" placeholder="รายละเอียดทักษะ" rows="3"/>
+                                <textarea className="form-control" placeholder="รายละเอียดทักษะ" rows="3"
+                                          onChange={(e) => this.setState({skillDetail: e.target.value})}/>
                             </div>
                             <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-5 mt-4">
-                                        <input type="text" className="form-control" placeholder="ประเภททักษะ"
-                                               onChange={(e) => this.setState({password: e.target.value})}/>
-                                    </div>
-                                    <div className="col-md-7 mt-4">
-                                        <input type="text" className="form-control" placeholder="รายละเอียดประเภททักษะ"
-                                               onChange={(e) => this.setState({password: e.target.value})}/>
-                                    </div>
-                                </div>
+                                {
+                                    this.state.skillType === 0
+                                        ? <div className="row">
+                                            <div className="col-md-12 mt-4">
+                                                <select className="form-select"
+                                                        onChange={(e) => this.setState({skillType: e.target.value})}
+                                                        defaultValue="">
+                                                    <option disabled>เลือกประเภททักษะ...</option>
+                                                    {
+                                                        this.state.persons
+                                                            .map(data =>
+                                                                <option
+                                                                    value={data.skill_type_id}
+                                                                    key={data.skill_type_id}>{data.skill_type_name}</option>
+                                                            )
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        : <div className="row">
+                                            <div className="col-md-5 mt-4">
+                                                <select className="form-select"
+                                                        onChange={(e) => this.setState({skillType: e.target.value})}
+                                                        defaultValue="">
+                                                    <option disabled>เลือกประเภททักษะ...</option>
+                                                    {
+                                                        this.state.persons
+                                                            .map(data =>
+                                                                <option
+                                                                    value={data.skill_type_id}
+                                                                    key={data.skill_type_id}>{data.skill_type_name}</option>
+                                                            )
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div className="col-md-7 mt-4">
+                                                {this.state.persons
+                                                    .map(data =>
+                                                        Number(this.state.skillType) === Number(data.skill_type_id)
+                                                        && <textarea className="form-control" rows="2"
+                                                                     value={data.skill_type_detail} key={data.skill_type_id}
+                                                                     readOnly/>
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+                                }
                             </div>
                             <div className="col-md-12">
                                 <div className="row">
                                     <div className="col-md-4 mt-4">
-                                        <input type="text" className="form-control" placeholder="ระยะเวลารับบริการ"
-                                               onChange={(e) => this.setState({password: e.target.value})}/>
+                                        <input type="number" className="form-control" placeholder="ระยะเวลา(นาที)"
+                                               onChange={(e) => this.setState({skillTime: e.target.value})}/>
                                     </div>
                                     <div className="col-md-4 mt-4">
-                                        <input type="number" className="form-control" placeholder="ระดับความยาก"
-                                               onChange={(e) => this.setState({password: e.target.value})} min="1"
-                                               max="5"/>
+                                        <select className="form-select"
+                                                onChange={(e) => this.setState({levelSkill: e.target.value})}
+                                                defaultValue="">
+                                            <option disabled>เลือกระดับความยาก...</option>
+                                            <option value="1">ง่าย</option>
+                                            <option value="2">ค่อนข้างง่าย</option>
+                                            <option value="3">ปานกลาง</option>
+                                            <option value="4">ค่อนข้างยาก</option>
+                                            <option value="5">ยาก</option>
+                                        </select>
                                     </div>
                                     <div className=" col-md-4 mt-4">
                                         <input type="number" min="1" step="any" className=" form-control"
-                                               placeholder="ราคา"
-                                               onChange={(e) => this.setState({password: e.target.value})}/>
+                                               placeholder="ราคา(บาท)"
+                                               onChange={(e) => this.setState({skillPrice: e.target.value})}/>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +176,11 @@ export default class HeadSkill extends React.Component {
                      style={{backgroundColor: '#FFFAFB', borderRadius: '20px'}}>
                     <div className="row">
                         <div className="col-md-12">
-                            <BodySkill/>
+                            <BodySkill profile={base64Data} skillType={this.state.skillType}
+                                       levelSkill={this.state.levelSkill}
+                                       skillName={this.state.skillName} skillDetail={this.state.skillDetail}
+                                       skillTime={this.state.skillTime}
+                                       SkillPrice={this.state.SkillPrice}/>
                         </div>
                     </div>
                 </div>

@@ -2,29 +2,34 @@ import React, {useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import ChoiceSkill from "./ChoiceSkill";
 
-const BodySkill = () => {
+const BodySkill = (props) => {
 
     const [exam, setExam] = useState([
-        {headExam: "", examType: "objective", examDetail: "", examIndicator: ""}
+        {skill_exam_head: "", skill_exam_option: "objective", skill_exam_detail: "", skill_exam_objective: ""}
     ]);
 
     const handleChange = (index, event) => {
         const values = [...exam];
-        if (event.target.name === "headExam") {
-            values[index].headExam = event.target.value;
-        } else if (event.target.name === "examType") {
-            values[index].examType = event.target.value;
-        } else if (event.target.name === "examDetail") {
-            values[index].examDetail = event.target.value;
-        } else if (event.target.name === "examIndicator") {
-            values[index].examIndicator = event.target.value;
+        if (event.target.name === "skill_exam_head") {
+            values[index].skill_exam_head = event.target.value;
+        } else if (event.target.name === "skill_exam_option") {
+            values[index].skill_exam_option = event.target.value;
+        } else if (event.target.name === "skill_exam_detail") {
+            values[index].skill_exam_detail = event.target.value;
+        } else if (event.target.name === "skill_exam_objective") {
+            values[index].skill_exam_objective = event.target.value;
         }
         setExam(values);
     };
 
     const handleAddFields = () => {
         const values = [...exam];
-        values.push({headExam: "", examType: "objective", examDetail: "", examIndicator: ""});
+        values.push({
+            skill_exam_head: "",
+            skill_exam_option: "objective",
+            skill_exam_detail: "",
+            skill_exam_objective: ""
+        });
         setExam(values);
     };
 
@@ -34,71 +39,82 @@ const BodySkill = () => {
         setExam(values);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        localStorage.clear();
+    }
+
     return (
-        <Form>
+        <>
             {exam.map((data, i) => {
                 return (
-                    <Row className="mt-3 p-3" key={i}>
+                    <Row className="mt-2 p-3" key={i}>
                         <Col md={8} className={'mt-4'}>
                             <Form.Group controlId="formBasicRoom">
-                                <Form.Control type="text" placeholder="ตั้งโจทย์" name="headExam"
-                                              value={data.headExam}
+                                <Form.Control type="text" placeholder="ตั้งโจทย์" name="skill_exam_head"
+                                              value={data.skill_exam_head}
                                               onChange={(event) => handleChange(i, event)}/>
                             </Form.Group>
                         </Col>
                         <Col md={4} className={'mt-4'}>
                             <Form.Group controlId="formRoomType">
-                                <Form.Select as="select" name="examType"
-                                             value={data.examType}
+                                <Form.Select as="select" name="skill_exam_option"
+                                             value={data.skill_exam_option}
                                              onChange={(event) => handleChange(i, event)}>
                                     <option value="objective">เลือกตอบ - ปรนัย</option>
                                     <option value="subjective">พิมพ์ตอบ*(ไม่นำมาคิดเปอร์เซ็นต์) - อัตนัย</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
-                        {data.examType !== 'objective' &&
+                        {data.skill_exam_option !== 'objective' &&
                             <Col md={6} className={'mt-4'}>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                                      placeholder={'รายละเอียดของโจทย์'} name="examDetail"
-                                      value={data.examDetail}
+                                      placeholder={'รายละเอียดของโจทย์'} name="skill_exam_detail"
+                                      value={data.skill_exam_detail}
                                       onChange={(event) => handleChange(i, event)}/>
                             </Col>
                         }
-                        {data.examType !== 'objective' &&
+                        {data.skill_exam_option !== 'objective' &&
                             <Col md={6} className={'mt-4'}>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                                      placeholder={'ตัวชี้วัดโจทย์'} name="examIndicator"
-                                      value={data.examIndicator}
+                                      placeholder={'ตัวชี้วัดโจทย์'} name="skill_exam_objective"
+                                      value={data.skill_exam_objective}
                                       onChange={(event) => handleChange(i, event)}/>
                             </Col>
                         }
-                        {data.examType === 'objective' &&
+                        {data.skill_exam_option === 'objective' &&
                             <Col md={12} className={'mt-4'}>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                                      placeholder={'ตัวชี้วัดโจทย์'} name="examIndicator"
-                                      value={data.examIndicator}
+                                      placeholder={'ตัวชี้วัดโจทย์'} name="skill_exam_objective"
+                                      value={data.skill_exam_objective}
                                       onChange={(event) => handleChange(i, event)}/>
                             </Col>
                         }
-                        {data.examType === 'objective' &&
-                            <Col md={12} className={'mt-4'} align={'left'}>
-                                <ChoiceSkill count={exam.length} count_stack={i}/>
-                            </Col>
-                        }
+                        <Col md={12} className={'mt-4'} align={'left'}>
+                            <ChoiceSkill count={exam.length} count_stack={i} exam_val={exam} profile={props.profile}
+                                         skillType={props.skillType}
+                                         levelSkill={props.levelSkill}
+                                         skillName={props.skillName} skillDetail={props.skillDetail}
+                                         skillTime={props.skillTime}
+                                         SkillPrice={props.SkillPrice} skillExamOption={data.skill_exam_option}/>
+                        </Col>
                     </Row>
                 );
             })}
             <Row>
-                <Col className="pt-3 d-flex justify-content-between">
+                <Col className="pt-2 d-flex justify-content-between">
                     <Button variant="warning" onClick={handleAddFields}>
                         <i className="fas fa-plus-circle"/> เพิ่มโจทย์
+                    </Button>
+                    <Button variant="success" onClick={handleSubmit}>
+                        <i className="fas fa-cloud-upload-alt"/> บันทึกโจทย์และทักษะ
                     </Button>
                     <Button variant="danger" onClick={handleRemoveFields}>
                         <i className="fas fa-minus-circle"/> ลบโจทย์
                     </Button>
                 </Col>
             </Row>
-        </Form>
+        </>
     );
 };
 

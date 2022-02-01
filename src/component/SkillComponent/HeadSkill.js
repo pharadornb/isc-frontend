@@ -103,7 +103,7 @@ export default class HeadSkill extends React.Component {
                                                 <select className="form-select"
                                                         onChange={(e) => this.setState({skillType: e.target.value})}
                                                         defaultValue="">
-                                                    <option disabled>เลือกประเภททักษะ...</option>
+                                                    <option>เลือกประเภททักษะ...</option>
                                                     {
                                                         this.state.persons
                                                             .map(data =>

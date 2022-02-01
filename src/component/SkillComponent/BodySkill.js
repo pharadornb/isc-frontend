@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import ChoiceSkill from "./ChoiceSkill";
+// import axios from "axios";
+// import Swal from "sweetalert2";
 
 const BodySkill = (props) => {
 
@@ -41,7 +43,52 @@ const BodySkill = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        localStorage.clear();
+
+        const params = JSON.stringify({
+            skill_type_id: props.skillType,
+            skill_name: props.skillName,
+            skill_detail: props.skillDetail,
+            skill_time: props.skillTime,
+            skill_hard: props.levelSkill,
+            skill_credit: props.SkillPrice,
+            skill_logo: props.profile,
+            exam: exam
+        });
+
+        console.log(params)
+
+        for (let i = 0; i < exam.length; i++) {
+            let ch = localStorage.getItem(i)
+            console.log(JSON.parse({"choice": ch}))
+            // localStorage.setItem(props.count_stack, JSON.stringify(choice));
+        }
+
+        // axios.post('skill/add', params, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // }).then(
+        //     res => {
+        //         if (res.status === 200) {
+        //             Swal.fire(
+        //                 'บันทึกสำเร็จ',
+        //                 'บันทึกข้อมูลการสร้างทักษะสำเร็จ',
+        //                 'success'
+        //             ).then(function () {
+        //                 window.location = '/skill'
+        //                 localStorage.clear();
+        //             });
+        //         } else if (res.status === 404) {
+        //             Swal.fire(
+        //                 'บันทึกไม่สำเร็จ',
+        //                 'บันทึกข้อมูลการสร้างทักษะไม่สำเร็จ',
+        //                 'error'
+        //             ).then();
+        //         }
+        //     }
+        // ).catch(err =>
+        //     console.log(err)
+        // )
     }
 
     return (
@@ -90,14 +137,12 @@ const BodySkill = (props) => {
                                       onChange={(event) => handleChange(i, event)}/>
                             </Col>
                         }
-                        <Col md={12} className={'mt-4'} align={'left'}>
-                            <ChoiceSkill count={exam.length} count_stack={i} exam_val={exam} profile={props.profile}
-                                         skillType={props.skillType}
-                                         levelSkill={props.levelSkill}
-                                         skillName={props.skillName} skillDetail={props.skillDetail}
-                                         skillTime={props.skillTime}
-                                         SkillPrice={props.SkillPrice} skillExamOption={data.skill_exam_option}/>
-                        </Col>
+                        {data.skill_exam_option === 'objective' &&
+                            <Col md={12} className={'mt-4'} align={'left'}>
+                                <ChoiceSkill count_stack={i} exam_val={exam}
+                                             skillExamOption={data.skill_exam_option}/>
+                            </Col>
+                        }
                     </Row>
                 );
             })}

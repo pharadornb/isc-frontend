@@ -18,6 +18,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
     const handleOnClick = useCallback(() => navigate('/resume_user', {replace: true}), [navigate]);
     const dashboardOnClick = useCallback(() => navigate('/dashboard', {replace: true}), [navigate]);
     const skillOnClick = useCallback(() => navigate('/skill', {replace: true}), [navigate]);
+    const createSkillOnClick = useCallback(() => navigate('/create_skill', {replace: true}), [navigate]);
 
     return (
         <>
@@ -147,24 +148,32 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                     }
 
                     {/*company role*/}
+                    {/*{role === 'company' &&*/}
+                    {/*    <NavItem eventKey="searchUser">*/}
+                    {/*        <NavIcon>*/}
+                    {/*            <i className="fas fa-search" style={{fontSize: "1.75em"}}/>*/}
+                    {/*        </NavIcon>*/}
+                    {/*        <NavText>ค้นหาผู้รับบริการ</NavText>*/}
+                    {/*    </NavItem>*/}
+                    {/*}*/}
+                    {/*{role === 'company' &&*/}
+                    {/*    <NavItem eventKey="checkResume">*/}
+                    {/*        <NavIcon>*/}
+                    {/*            <i className="fas fa-user-check" style={{fontSize: "1.75em"}}/>*/}
+                    {/*        </NavIcon>*/}
+                    {/*        <NavText>ตรวจสอบ Resume</NavText>*/}
+                    {/*    </NavItem>*/}
+                    {/*}*/}
                     {role === 'company' &&
-                        <NavItem eventKey="searchUser">
+                        <NavItem eventKey="skill" onClick={skillOnClick}>
                             <NavIcon>
-                                <i className="fas fa-search" style={{fontSize: "1.75em"}}/>
+                                <i className="fas fa-table" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
-                            <NavText>ค้นหาผู้รับบริการ</NavText>
+                            <NavText>คลังเก็บทักษะ</NavText>
                         </NavItem>
                     }
                     {role === 'company' &&
-                        <NavItem eventKey="checkResume">
-                            <NavIcon>
-                                <i className="fas fa-user-check" style={{fontSize: "1.75em"}}/>
-                            </NavIcon>
-                            <NavText>ตรวจสอบ Resume</NavText>
-                        </NavItem>
-                    }
-                    {role === 'company' &&
-                        <NavItem eventKey="createSkill" onClick={skillOnClick}>
+                        <NavItem eventKey="createSkill" onClick={createSkillOnClick}>
                             <NavIcon>
                                 <i className="fas fa-plus-square" style={{fontSize: "1.75em"}}/>
                             </NavIcon>

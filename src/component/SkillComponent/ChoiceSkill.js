@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const ChoiceSkill = (props) => {
 
@@ -34,28 +35,34 @@ const ChoiceSkill = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(choice)
-        // const params = JSON.stringify({
-        //     skill_type_id: props.skillType,
-        //     skill_name: props.skillName,
-        //     skill_detail: props.skillDetail,
-        //     skill_time: props.skillTime,
-        //     skill_hard: props.levelSkill,
-        //     skill_credit: props.SkillPrice,
-        //     skill_logo: props.profile,
-        //     exam: props.exam_val
-        // });
+        let check = 0;
 
-        // console.log(params)
-        // choice.length
-
-        // console.log(choice.length)
-
-        for (let i = 1; i < choice.length; i--) {
-            // console.log(i)
-            // localStorage.setItem(props.count_stack + ' ' + i, JSON.stringify(choice));
+        for (let i = 0; i < choice.length; i++) {
+            if (i >= 0) {
+                if (choice[i].sec_name !== "") {
+                    if (choice[i].sec_isanswer === "yes") {
+                        check = 1;
+                    }
+                }
+            }
         }
 
+        if (check === 1) {
+            for (let i = 0; i < props.exam_val.length; i++) {
+                localStorage.setItem(props.count_stack, JSON.stringify(choice));
+            }
+            Swal.fire(
+                'สำเร็จ',
+                'บันทึกข้อมูลตัวเลือกสำเร็จ',
+                'success'
+            ).then();
+        } else {
+            Swal.fire(
+                'กรุณาเลือกเฉลย',
+                'เลือกเฉลยอย่างน้อย 1 ตัวเลือก',
+                'info'
+            ).then();
+        }
     };
 
     return (
@@ -71,7 +78,6 @@ const ChoiceSkill = (props) => {
                             </div>
                         </Col>
                         <Col md={9} className={'mt-4'}>
-                            <span>{props.count_stack} {i} {choice.length}</span>
                             <Form.Group controlId="formBasicRoom">
                                 <Form.Control type="text" placeholder="ตัวเลือก" name="sec_name"
                                               value={data.sec_name}

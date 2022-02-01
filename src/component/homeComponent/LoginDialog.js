@@ -3,16 +3,19 @@ import Button from "@mui/material/Button"
 import axios from "axios"
 import Swal from "sweetalert2"
 import {Link} from "react-router-dom"
+import Loader from '../configComponent/Loader'
 
 export default function LoginDialog() {
 
     const [user_email, setEmail] = useState('');
     const [user_password, setPassword] = useState('');
     const [swap, setSwap] = useState('login');
+    const [showLoading, setShowLoading] = useState(false);
 
     const handleSubmitSendEmail = async e => {
         e.preventDefault();
 
+        setShowLoading(true)
         const params = JSON.stringify({
             service_id: 'service_ib76tes',
             template_id: 'template_zetwqgi',
@@ -33,6 +36,7 @@ export default function LoginDialog() {
                     'โปรดตรวจสอบข้อมูลที่อีเมล์ของคุณ เพื่อทำการเปลี่ยนรหัสใหม่',
                     'success'
                 ).then(function () {
+                    setShowLoading(false)
                     window.location = '/'
                 });
             }
@@ -80,7 +84,7 @@ export default function LoginDialog() {
     return (
         <>
             {swap === 'login' &&
-                <>
+                <Loader show={showLoading}>
                     <form noValidate onSubmit={handleSubmit}>
                         <div className="col-md-12 mt-4">
                             <input type="email" className={'form-control'} placeholder={'Email'}
@@ -112,7 +116,7 @@ export default function LoginDialog() {
                         <p style={{fontSize: '14px'}}>ยังไม่มีบัญชีใช่ไหม? <Link style={{textDecoration: 'none'}}
                                                                                  to={'/register'}>ลงทะเบียน</Link></p>
                     </div>
-                </>
+                </Loader>
             }
             {swap === 'forgetPassword' &&
                 <>

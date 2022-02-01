@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
-import PuffLoader from "react-spinners/PuffLoader";
-import LoadingOverlay from 'react-loading-overlay';
-
 const thai = require('thai-data')
 
 export default function ThaiAddress(props) {
-
-    const [showLoading, setShowLoading] = useState(false)
 
     const [zipCode, setZipCode] = useState('')
     const [subDistrict, setSubDistrict] = useState(Array)
@@ -133,7 +128,6 @@ export default function ThaiAddress(props) {
             }
         });
 
-        setShowLoading(true)
         axios.post('auth/register', params, {
             headers: {
                 'Content-Type': 'application/json',
@@ -146,7 +140,6 @@ export default function ThaiAddress(props) {
                     }
                 }).then(res => {
                     if (res.status === 200) {
-                        setShowLoading(false)
                         Swal.fire(
                             'ลงทะเบียนผู้ใช้สำเร็จ',
                             'ยืนยันตัวตนที่อีเมล์ของคุณ',
@@ -181,8 +174,6 @@ export default function ThaiAddress(props) {
     }
 
     return (
-        <LoadingOverlay className="loader" active={showLoading}
-                        spinner={<PuffLoader color={'#4A90E2'}/>}>
             <div className="row">
                 <div className="col-md-12 mt-4">
                     <input type="text" className="form-control" placeholder="ที่อยู่ปัจจุบัน"
@@ -271,6 +262,5 @@ export default function ThaiAddress(props) {
                     </button>
                 </div>
             </div>
-        </LoadingOverlay>
     );
 }

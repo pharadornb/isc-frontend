@@ -22,9 +22,8 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
 
     return (
         <>
-            <SideNav onToggle={() => {
-                setSideNavExpanded(!sideNavExpanded);
-            }} expanded={sideNavExpanded} style={{backgroundColor: '#2E2E48'}}>
+            <SideNav onToggle={() => { setSideNavExpanded(!sideNavExpanded);}}
+                     expanded={sideNavExpanded} style={{background: '#2E2E48', position: 'fixed'}}>
                 <SideNav.Toggle/>
                 <SideNav.Nav defaultSelected={mark}>
 
@@ -182,6 +181,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                     }
 
                     {/*all role*/}
+                    <hr style={{borderTop: '0.5px solid white'}}/>
                     <NavItem eventKey="reset" onClick={() => logout()}>
                         <NavIcon>
                             <i className="fas fa-key" style={{fontSize: "1.75em"}}/>

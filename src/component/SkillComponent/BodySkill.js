@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import ChoiceSkill from "./ChoiceSkill";
-// import axios from "axios";
-// import Swal from "sweetalert2";
+import Loader from "../configComponent/Loader";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BodySkill = (props) => {
 
     const [exam, setExam] = useState([
         {skill_exam_head: "", skill_exam_option: "objective", skill_exam_detail: "", skill_exam_objective: ""}
     ]);
+    const [showLoading, setShowLoading] = useState(false)
 
     const handleChange = (index, event) => {
         const values = [...exam];
@@ -44,6 +46,7 @@ const BodySkill = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setShowLoading(true)
         const params = JSON.stringify({
             skill_type_id: props.skillType,
             skill_name: props.skillName,
@@ -55,44 +58,69 @@ const BodySkill = (props) => {
             exam: exam
         });
 
-        console.log(params)
+        axios.post('skill/add', params, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(
+            res => {
+                if (res.status === 200) {
+                    let i;
+                    for (i = 0; i < exam.length; i++) {
+                        if (exam[i].skill_exam_option === 'objective') {
+                            let val = localStorage.getItem(i)
+                            console.log()
 
-        for (let i = 0; i < exam.length; i++) {
-            let ch = localStorage.getItem(i)
-            console.log(JSON.parse({"choice": ch}))
-            // localStorage.setItem(props.count_stack, JSON.stringify(choice));
-        }
+                            const params_choice = JSON.stringify({
+                                "skill_exam_head": exam[i].skill_exam_head,
+                                "skill_exam_option": exam[i].skill_exam_option,
+                                "choice": JSON.parse(val)
+                            });
 
-        // axios.post('skill/add', params, {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // }).then(
-        //     res => {
-        //         if (res.status === 200) {
-        //             Swal.fire(
-        //                 'บันทึกสำเร็จ',
-        //                 'บันทึกข้อมูลการสร้างทักษะสำเร็จ',
-        //                 'success'
-        //             ).then(function () {
-        //                 window.location = '/skill'
-        //                 localStorage.clear();
-        //             });
-        //         } else if (res.status === 404) {
-        //             Swal.fire(
-        //                 'บันทึกไม่สำเร็จ',
-        //                 'บันทึกข้อมูลการสร้างทักษะไม่สำเร็จ',
-        //                 'error'
-        //             ).then();
-        //         }
-        //     }
-        // ).catch(err =>
-        //     console.log(err)
-        // )
+                            axios.post('skill/choice_add', params_choice, {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                }
+                            }).then(
+                                res => {
+                                    if (res.status === 200) {
+                                        Swal.fire(
+                                            'บันทึกสำเร็จ',
+                                            'บันทึกข้อมูลการสร้างทักษะสำเร็จ',
+                                            'success'
+                                        ).then(function () {
+                                            setShowLoading(false)
+                                            localStorage.clear();
+                                            window.location = '/skill'
+                                        });
+                                    } else if (res.status === 404 || res.status === 404) {
+                                        Swal.fire(
+                                            'บันทึกไม่สำเร็จ',
+                                            'บันทึกข้อมูลการสร้างทักษะไม่สำเร็จ',
+                                            'error'
+                                        ).then();
+                                    }
+                                }
+                            ).catch(err =>
+                                console.log(err)
+                            )
+                        }
+                    }
+                } else if (res.status === 404 || res.status === 401) {
+                    Swal.fire(
+                        'บันทึกไม่สำเร็จ',
+                        'บันทึกข้อมูลการสร้างทักษะไม่สำเร็จ',
+                        'error'
+                    ).then();
+                }
+            }
+        ).catch(err =>
+            console.log(err)
+        )
     }
 
     return (
-        <>
+        <Loader show={showLoading}>
             {exam.map((data, i) => {
                 return (
                     <Row className="mt-2 p-3" key={i}>
@@ -159,7 +187,7 @@ const BodySkill = (props) => {
                     </Button>
                 </Col>
             </Row>
-        </>
+        </Loader>
     );
 };
 

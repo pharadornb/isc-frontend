@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import BodySkill from "./BodySkill";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default class HeadSkill extends React.Component {
     constructor(props) {
@@ -30,9 +31,17 @@ export default class HeadSkill extends React.Component {
 
     _handleReaderLoaded = (e) => {
         let binaryString = e.target.result;
-        this.setState({
-            base64Data: btoa(binaryString),
-        });
+        if (btoa(binaryString).length * (3 / 4) - 2 <= 50000) {
+            this.setState({
+                base64Data: btoa(binaryString),
+            });
+        } else {
+            Swal.fire(
+                'ไม่อนุญาตภาพ',
+                'อนุญาตขนาดภาพไม่เกิน 50 Kb',
+                'error'
+            );
+        }
     };
 
     componentDidMount() {
@@ -81,7 +90,7 @@ export default class HeadSkill extends React.Component {
                                            accept=".jpg, .jpeg, .png"
                                            onChange={(e) => this.onChange(e)} style={{display: "none"}}/>
                                     <div>
-                                        เพิ่มสัญลักษณ์ทักษะ
+                                        <i className="fas fa-caret-up"/> เพิ่มสัญลักษณ์ทักษะ, 50 kb
                                     </div>
                                 </div>
                             </div>

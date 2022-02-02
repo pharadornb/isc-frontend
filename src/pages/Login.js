@@ -4,7 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import {Link} from "react-router-dom";
 import Loader from "../component/configComponent/Loader";
-import SidebarChild from "../component/configComponent/SidebarChild";
+// import SidebarChild from "../component/configComponent/SidebarChild";
 
 export default function Login() {
 
@@ -48,7 +48,7 @@ export default function Login() {
         )
     }
 
-    const handleSubmit2 = async e => {
+    const handleSubmit2 = async () => {
         setShowLoading(true)
         axios.get('https://jsonplaceholder.typicode.com/posts', {
             headers: {
@@ -72,7 +72,8 @@ export default function Login() {
 
     return (
         <Loader show={showLoading}>
-            <SidebarChild>
+            <a href="https://facebook.com/">Bom</a>
+            {/* <SidebarChild> */}
                 <div className="col-lg-6 col-md-6 form-container">
                     <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
                         <div className="mb-3">
@@ -117,7 +118,7 @@ export default function Login() {
                         </div>
                     </div>
                 </div>
-            </SidebarChild>
+            {/* </SidebarChild> */}
         </Loader>
     );
 }

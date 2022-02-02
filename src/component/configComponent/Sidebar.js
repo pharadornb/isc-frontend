@@ -5,9 +5,9 @@ import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import imgProfile from "../../img/isc-logo.png";
 import imgProfileShort from "../../img/isc-logo-2.png";
 import './SidebarStyle.css'
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 
-export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name, profile}) {
+export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name, profile, mark}) {
 
     const logout = () => {
         sessionStorage.clear()
@@ -17,14 +17,17 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
     const navigate = useNavigate();
     const handleOnClick = useCallback(() => navigate('/resume_user', {replace: true}), [navigate]);
     const dashboardOnClick = useCallback(() => navigate('/dashboard', {replace: true}), [navigate]);
+    const skillOnClick = useCallback(() => navigate('/skill', {replace: true}), [navigate]);
+    const createSkillOnClick = useCallback(() => navigate('/create_skill', {replace: true}), [navigate]);
 
     return (
         <>
-            <SideNav onToggle={() => {
-                setSideNavExpanded(!sideNavExpanded);
-            }} expanded={sideNavExpanded} style={{backgroundColor: '#2E2E48', color: '#FFFFF'}}>
+            <SideNav onToggle={() => { setSideNavExpanded(!sideNavExpanded);}}
+                     expanded={sideNavExpanded} style={{background: '#2E2E48', position: 'fixed'}}>
                 <SideNav.Toggle/>
-                <SideNav.Nav defaultSelected="home">
+                <SideNav.Nav defaultSelected={mark}>
+
+                    {/*all role*/}
                     <NavItem eventKey="logo" className={'mb-3'} style={{pointerEvents: 'none', textAlign: 'center'}}>
                         {sideNavExpanded &&
                             <img src={imgProfile} alt="" style={{width: '120px'}}/>
@@ -39,7 +42,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                              style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}>
                         {sideNavExpanded &&
                             <>
-                                <Avatar alt="iT" src={`data:image/jpeg;base64,${profile}`}
+                                <Avatar alt={name} src={`data:image/jpeg;base64,${profile}`}
                                         sx={{width: 90, height: 90}}/>
                             </>
                         }
@@ -82,14 +85,109 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                             <NavText>หน้าหลัก</NavText>
                         </NavItem>
                     }
+
+                    {/*user role*/}
                     {role === 'user' &&
-                        <NavItem eventKey="resume" onClick={handleOnClick}>
+                        <>
+                            <NavItem eventKey="home">
+                                <NavIcon>
+                                    <i className="fas fa-layer-group" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>คลังทักษะ</NavText>
+                            </NavItem>
+                            <NavItem eventKey="resume" onClick={handleOnClick}>
+                                <NavIcon>
+                                    <i className="fas fa-file-alt" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>Resume</NavText>
+                            </NavItem>
+                            <NavItem eventKey="company">
+                                <NavIcon>
+                                    <i className="fas fa-building" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>ข้อมูลบริษัท</NavText>
+                            </NavItem>
+                        </>
+                    }
+
+                    {/*admin role*/}
+                    {role === 'admin' &&
+                        <>
+                            <NavItem eventKey="account">
+                                <NavIcon>
+                                    <i className="far fa-user-circle" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>จัดการบัญชี</NavText>
+                            </NavItem>
+                            <NavItem eventKey="skill">
+                                <NavIcon>
+                                    <i className="fas fa-bullseye" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>จัดการทักษะ</NavText>
+                            </NavItem>
+                            <NavItem eventKey="company_pay">
+                                <NavIcon>
+                                    <i className="fas fa-comment-dollar" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>เบิกจ่ายให้บริษัท</NavText>
+                            </NavItem>
+                            <NavItem eventKey="user_money">
+                                <NavIcon>
+                                    <i className="fas fa-hand-holding-usd" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>รายรับจากผู้ใช้</NavText>
+                            </NavItem>
+                            <NavItem eventKey="company_money">
+                                <NavIcon>
+                                    <i className="fas fa-hand-holding-usd" style={{fontSize: "1.75em"}}/>
+                                </NavIcon>
+                                <NavText>รายรับจากบริษัท</NavText>
+                            </NavItem>
+                        </>
+                    }
+
+                    {/*company role*/}
+                    {/*{role === 'company' &&*/}
+                    {/*    <NavItem eventKey="searchUser">*/}
+                    {/*        <NavIcon>*/}
+                    {/*            <i className="fas fa-search" style={{fontSize: "1.75em"}}/>*/}
+                    {/*        </NavIcon>*/}
+                    {/*        <NavText>ค้นหาผู้รับบริการ</NavText>*/}
+                    {/*    </NavItem>*/}
+                    {/*}*/}
+                    {/*{role === 'company' &&*/}
+                    {/*    <NavItem eventKey="checkResume">*/}
+                    {/*        <NavIcon>*/}
+                    {/*            <i className="fas fa-user-check" style={{fontSize: "1.75em"}}/>*/}
+                    {/*        </NavIcon>*/}
+                    {/*        <NavText>ตรวจสอบ Resume</NavText>*/}
+                    {/*    </NavItem>*/}
+                    {/*}*/}
+                    {role === 'company' &&
+                        <NavItem eventKey="skill" onClick={skillOnClick}>
                             <NavIcon>
-                                <i className="fas fa-file-alt" style={{fontSize: "1.75em"}}/>
+                                <i className="fas fa-table" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
-                            <NavText>Resume</NavText>
+                            <NavText>คลังเก็บทักษะ</NavText>
                         </NavItem>
                     }
+                    {role === 'company' &&
+                        <NavItem eventKey="createSkill" onClick={createSkillOnClick}>
+                            <NavIcon>
+                                <i className="fas fa-plus-square" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>สร้างทักษะ</NavText>
+                        </NavItem>
+                    }
+
+                    {/*all role*/}
+                    <hr style={{borderTop: '0.5px solid white'}}/>
+                    <NavItem eventKey="reset" onClick={() => logout()}>
+                        <NavIcon>
+                            <i className="fas fa-key" style={{fontSize: "1.75em"}}/>
+                        </NavIcon>
+                        <NavText>เปลี่ยนรหัสผ่าน</NavText>
+                    </NavItem>
                     <NavItem eventKey="logout" onClick={() => logout()}>
                         <NavIcon>
                             <i className="fas fa-sign-out-alt" style={{fontSize: "1.75em"}}/>

@@ -26,7 +26,6 @@ export default function SidebarChild(props) {
                 'Content-Type': 'application/json',
             }
         }).then(res => {
-            console.log(res.data)
             setProfileWallet(res.data[0].user_wallet)
             setProfileRole(res.data[0].user_role)
             setProfile(res.data[0].user_profile)
@@ -51,7 +50,7 @@ export default function SidebarChild(props) {
     return (
             <Loader show={showLoading}>
                 <Sidebar setSideNavExpanded={setSideNavExpanded} sideNavExpanded={sideNavExpanded} role={role}
-                         name={name} profile={profile}/>
+                         name={name} profile={profile} mark={props.mark}/>
                 <div style={contentStyle}>
                     {role !== 'admin' &&
                         <div align={'right'} style={{marginRight: '10px', marginBottom: '5px'}}>

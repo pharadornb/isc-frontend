@@ -9,7 +9,6 @@ export default function CompanyViewSkill() {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
-    const [sorting, setSorting] = useState({field: "", order: ""});
 
     const ITEMS_PER_PAGE = 25;
 
@@ -45,63 +44,51 @@ export default function CompanyViewSkill() {
 
         setTotalItems(computedComments.length);
 
-        if (sorting.field) {
-            const reversed = sorting.order === "asc" ? 1 : -1;
-            computedComments = computedComments.sort(
-                (a, b) =>
-                    reversed * a[sorting.field].localeCompare(b[sorting.field])
-            );
-        }
-
         return computedComments.slice(
             (currentPage - 1) * ITEMS_PER_PAGE,
             (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
         );
-    }, [comments, currentPage, search, sorting]);
+    }, [comments, currentPage, search]);
 
     return (
-        <>
-            <div className="row w-100">
-                <div className="col mb-3 col-12 text-center">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <PaginationTable
-                                total={totalItems}
-                                itemsPerPage={ITEMS_PER_PAGE}
-                                currentPage={currentPage}
-                                onPageChange={page => setCurrentPage(page)}
-                            />
-                        </div>
-                        <div className="col-md-6 d-flex flex-row-reverse">
-                            <SearchTable
-                                onSearch={value => {
-                                    setSearch(value);
-                                    setCurrentPage(1);
-                                }}
-                            />
-                        </div>
+        <div className="row" style={{width: '95%'}}>
+            <div className="col mb-3 col-12">
+                <div className="row">
+                    <div className="col-md-6">
+                        <h2>คลังเก็บทักษะที่สร้าง</h2>
                     </div>
-
-                    <table className="table table-striped">
-                        <HeaderTable
-                            headers={headers}
-                            onSorting={(field, order) =>
-                                setSorting({field, order})
-                            }
+                    <div className="col-md-6 d-flex flex-row-reverse">
+                        <SearchTable onSearch={value => {
+                            setSearch(value);
+                            setCurrentPage(1);
+                        }}
                         />
-                        <tbody>
-                        {commentsData.map(comment => (
-                            <tr key={comment.id}>
-                                <th scope="row">{comment.id}</th>
-                                <td>{comment.name}</td>
-                                <td>{comment.email}</td>
-                                <td>{comment.body}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
+
+                <table className="table table-striped">
+                    <HeaderTable headers={headers}/>
+                    <tbody>
+                    {commentsData.map(comment => (
+                        <tr key={comment.id}>
+                            <th scope="row">{comment.id}</th>
+                            <td>{comment.name}</td>
+                            <td>{comment.email}</td>
+                            <td>{comment.body}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                <div align={'center'}>
+                    <PaginationTable
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
+                </div>
+
             </div>
-        </>
+        </div>
     );
 }

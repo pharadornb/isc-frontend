@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
-import UserDashboard from "../../component/UserDashboard";
 import Button from "@mui/material/Button";
+import Sidebar from "../../component/configComponent/SidebarChild";
 
 export default function CompanyResume() {
     const {userEmail} = useParams()
@@ -12,21 +12,22 @@ export default function CompanyResume() {
     }
 
     return (
-        <>
+        <Sidebar mark={'company_resume'}>
             {!userEmail &&
                 <>
-                    <UserDashboard/>
-                    <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
-                    <p>CompanyResume</p>
+                    <p>555</p>
+                    {/*<UserDashboard/>*/}
+                    {/*<Button variant="contained" onClick={() => handleClick()}>Logout</Button>*/}
+                    {/*<p>CompanyResume : {userEmail}</p>*/}
                 </>
             }
             {userEmail &&
                 <>
-                    <UserDashboard/>
+                    {/*<UserDashboard/>*/}
                     <Button variant="contained" onClick={() => handleClick()}>Logout</Button>
                     <p>CompanyResume : {userEmail}</p>
                 </>
             }
-        </>
+        </Sidebar>
     )
 }

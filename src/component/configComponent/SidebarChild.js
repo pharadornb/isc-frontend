@@ -20,18 +20,31 @@ export default function SidebarChild(props) {
     }
 
     useEffect(() => {
+
         setShowLoading(true)
-        axios.post('profile', {
+
+        axios.post('profile/information', {
             headers: {
                 'Content-Type': 'application/json',
             }
         }).then(res => {
             setProfileWallet(res.data[0].user_wallet)
             setProfileRole(res.data[0].user_role)
-            setProfile(res.data[0].user_profile)
             setName(res.data[0].name)
+        }).catch(() => {
+            sessionStorage.clear()
+            window.location = '/'
+        })
+
+        axios.post('profile', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            setProfile(res.data[0].user_profile)
             setShowLoading(false)
         }).catch(() => {
+            sessionStorage.clear()
             window.location = '/'
         })
 

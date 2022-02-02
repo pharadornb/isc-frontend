@@ -17,7 +17,6 @@
 .div2-1 {
     background-color: #c4c4c45d;
     width: 620px;
-    height: 1000px;
     border-radius: 10px;
     margin: auto;
     margin-bottom: 10px;
@@ -27,10 +26,10 @@
 .div2-2 {
     background-color: #ffffff;
     width: 620px;
-    height: 1000px;
     border-radius: 10px;
-    margin: auto;
     padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 10px;
 }
 
@@ -104,6 +103,7 @@
 
 .div22-11 {
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .ml {
@@ -170,4 +170,17 @@
 
 .goo {
     clear: both;
+}
+
+
+.dialogS {
+    width: 1400px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.txtRight {
+    text-align: right;
 }

@@ -5,8 +5,8 @@ import moment from 'moment';
 import '../../css/UserDashboard.css';
 
 // import ListIcon from "../../img/list-icon.PNG"
-import MoneyIcon from "../../img/money.PNG"
-import PustIcon from "../../img/pust-icon.PNG"
+// import MoneyIcon from "../../img/money.PNG"
+// import PustIcon from "../../img/pust-icon.PNG"
 import logo from '../../img/Thailand-company-registration.jpg';
 import ThinkIcon from '../../img/think-icon.PNG';
 import Moneys from '../../img/money2.PNG';
@@ -72,18 +72,18 @@ export default function UserDashboardContent(){
 
     return (
         <>
-        <div className="row1">
-            <div className="colume-right1">
-                <img src={MoneyIcon} className="img1" alt="Trulli"></img>
-                <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>
-                <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
-            </div>
-            {/* <div className="colume-right2">
-                <img src={ListIcon} className="img1" alt="Trulli"></img>
-                <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>
-                <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>
-            </div> */}
-        </div>
+        {/*<div className="row1">*/}
+        {/*    <div className="colume-right1">*/}
+        {/*        <img src={MoneyIcon} className="img1" alt="Trulli"></img>*/}
+        {/*        <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>*/}
+        {/*        <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>*/}
+        {/*    </div>*/}
+        {/*    /!* <div className="colume-right2">*/}
+        {/*        <img src={ListIcon} className="img1" alt="Trulli"></img>*/}
+        {/*        <label className="colume-right1-1">{datacount3.map((row)=>(row.your_wallet))}</label>*/}
+        {/*        <a href="##"><img src={PustIcon} className="img-pust" alt="Trulli"></img></a>*/}
+        {/*    </div> *!/*/}
+        {/*</div>*/}
         <div className="row2">
             <div className="row row2-2">
                 <div className="col-md-9 mergeTxt">

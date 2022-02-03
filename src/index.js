@@ -19,6 +19,7 @@ import UserResume from "./pages/resumePage/UserResume";
 import SkillPage from "./pages/skillPage/SkillPage";
 import SkillDashboardPage from "./pages/skillPage/SkillDashboard";
 import ResumeCheck from "./pages/resumePage/ResumeCheck";
+import SkillStore from "./pages/skillPage/SkillStore";
 
 axios.defaults.baseURL = process.env.REACT_APP_SECRET_NAME
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`
@@ -49,6 +50,7 @@ ReactDOM.render(
                 <Route path="/skill" element={<SkillDashboardPage/>} />
                 <Route path="/create_skill" element={<SkillPage/>} />
                 <Route path="/check_resume" element={<ResumeCheck/>} />
+                <Route path="/skill_store" element={<SkillStore/>} />
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

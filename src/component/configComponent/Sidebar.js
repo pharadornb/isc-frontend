@@ -21,7 +21,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
     const createSkillOnClick = useCallback(() => navigate('/create_skill', {replace: true}), [navigate]);
     const resumeCheckOnClick = useCallback(() => navigate('/check_resume', {replace: true}), [navigate]);
     const resumeOnClick = useCallback(() => navigate('/resume_company', {replace: true}), [navigate]);
-    const companySearchUserOnClick = useCallback(() => navigate('/company_search', {replace: true}), [navigate]);
+    const skillStoreOnClick = useCallback(() => navigate('/skill_store', {replace: true}), [navigate]);
 
     return (
         <>
@@ -91,19 +91,23 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
 
                     {/*user role*/}
                     {role === 'user' &&
+                        <NavItem eventKey="resume" onClick={handleOnClick}>
+                            <NavIcon>
+                                <i className="far fa-id-card" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>เรซูเม่ผู้รับบริการ</NavText>
+                        </NavItem>
+                    }
+                    {role === 'user' &&
+                        <NavItem eventKey="skillStore" onClick={skillStoreOnClick}>
+                            <NavIcon>
+                                <i className="fas fa-layer-group" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>คลังทักษะ</NavText>
+                        </NavItem>
+                    }
+                    {role === 'user' &&
                         <>
-                            <NavItem eventKey="home">
-                                <NavIcon>
-                                    <i className="fas fa-layer-group" style={{fontSize: "1.75em"}}/>
-                                </NavIcon>
-                                <NavText>คลังทักษะ</NavText>
-                            </NavItem>
-                            <NavItem eventKey="resume" onClick={handleOnClick}>
-                                <NavIcon>
-                                    <i className="fas fa-file-alt" style={{fontSize: "1.75em"}}/>
-                                </NavIcon>
-                                <NavText>Resume</NavText>
-                            </NavItem>
                             <NavItem eventKey="company">
                                 <NavIcon>
                                     <i className="fas fa-building" style={{fontSize: "1.75em"}}/>
@@ -166,14 +170,14 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                             <NavText>ตรวจสอบเรซูเม่</NavText>
                         </NavItem>
                     }
-                    {role === 'company' &&
-                        <NavItem eventKey="searchUser" onClick={companySearchUserOnClick}>
-                            <NavIcon>
-                                <i className="fas fa-search" style={{fontSize: "1.75em"}}/>
-                            </NavIcon>
-                            <NavText>ค้นหาผู้รับบริการ</NavText>
-                        </NavItem>
-                    }
+                    {/*{role === 'company' &&*/}
+                    {/*    <NavItem eventKey="searchUser" onClick={companySearchUserOnClick}>*/}
+                    {/*        <NavIcon>*/}
+                    {/*            <i className="fas fa-search" style={{fontSize: "1.75em"}}/>*/}
+                    {/*        </NavIcon>*/}
+                    {/*        <NavText>ค้นหาผู้รับบริการ</NavText>*/}
+                    {/*    </NavItem>*/}
+                    {/*}*/}
                     {role === 'company' &&
                         <NavItem eventKey="skill" onClick={skillOnClick}>
                             <NavIcon>

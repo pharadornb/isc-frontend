@@ -15,7 +15,7 @@ export default function CompanyResume() {
         <Sidebar mark={'company_resume'}>
             {!userEmail &&
                 <>
-                    <p>555</p>
+                    <p>Company resume page</p>
                     {/*<UserDashboard/>*/}
                     {/*<Button variant="contained" onClick={() => handleClick()}>Logout</Button>*/}
                     {/*<p>CompanyResume : {userEmail}</p>*/}

@@ -37,7 +37,6 @@ export default function CompanyViewSkill() {
                     'Content-Type': 'application/json',
                 }
             }).then(res => {
-                // console.log(res.data)
                 setComments(res.data);
                 setShowLoading(false)
             }).catch(err =>

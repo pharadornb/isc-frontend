@@ -7,7 +7,7 @@ import PaginationTable from "./PaginationTable";
 import Loader from "../configComponent/Loader";
 import Swal from "sweetalert2";
 
-export default function SkillStoreTable() {
+export default function SkillUserTable() {
 
     const [comments, setComments] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
@@ -15,47 +15,22 @@ export default function SkillStoreTable() {
     const [search, setSearch] = useState("");
     const [showLoading, setShowLoading] = useState(false)
 
-    const ITEMS_PER_PAGE = 7;
+    const ITEMS_PER_PAGE = 5;
 
     const handleClickOpen = (index) => {
         Swal.fire({
             title: 'ยืนยัน',
-            html:   "<b>ชื่อทักษะ : </b>" + skillStoreData[index].skill_name +
-                    "&nbsp;&nbsp;<b>โดย : </b>" + skillStoreData[index].uc_name +
-                    "<br/><b>เวลาทดสอบ : </b>" + skillStoreData[index].skill_time + "<b> นาที</b>" +
-                    "&nbsp;&nbsp;<b>ราคา : </b>" + skillStoreData[index].skill_credit + "<b> บาท</b>" +
-                    "<br/><b>รายละเอียด : </b>" + skillStoreData[index].skill_detail,
+            html: "<b>ชื่อทักษะ : </b>" + skillStoreData[index].skill_name +
+                "&nbsp;&nbsp;<b>โดย : </b>" + skillStoreData[index].uc_name +
+                "<br/><b>เวลาทดสอบ : </b>" + skillStoreData[index].skill_time + "<b> นาที</b>",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Enroll'
+            confirmButtonText: 'Start'
         }).then((result) => {
             if (result.isConfirmed) {
-
-                setShowLoading(true)
-                const params = JSON.stringify({
-                    skill_id : skillStoreData[index].skill_id
-                })
-
-                axios.post('skill/enrollSkill', params, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                }).then(() => {
-                    setShowLoading(false)
-                    Swal.fire(
-                        'ลงทะเบียนทักษะ ' + skillStoreData[index].skill_name + ' สำเร็จ',
-                        'เพิ่มข้อมูลลงคลังทักษะของคุณเรียบร้อยแล้ว',
-                        'success'
-                    ).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.reload()
-                        }
-                    })
-                }).catch(err =>
-                    console.log(err)
-                )
+                window.location.href = "/skill_exam/" + skillStoreData[index].skill_id;
             }
         })
     };
@@ -63,12 +38,11 @@ export default function SkillStoreTable() {
     const headers = [
         {name: "สัญลักษณ์", field: "skill_logo", sortable: false},
         {name: "ชื่อทักษะ", field: "skill_name", sortable: false},
-        {name: "โดย", field: "uc_name_profile", sortable: false},
-        {name: "กลุ่มทักษะ", field: "skill_type_name", sortable: false},
+        {name: "โดย", field: "uc_name", sortable: false},
         {name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false},
-        {name: "ระดับทักษะ", field: "skill_hard", sortable: false},
-        {name: "ราคา(บาท)", field: "skill_credit", sortable: false},
-        {name: "เพิ่มลงคลังทักษะ", field: "", sortable: false}
+        {name: "ระดับทักษะ", field: "skill_credit", sortable: false},
+        {name: "คะแนนเฉลี่ย", field: "skill_credit", sortable: false},
+        {name: "รับบริการ", field: "", sortable: false}
     ];
 
     useEffect(() => {
@@ -76,7 +50,7 @@ export default function SkillStoreTable() {
 
             setShowLoading(true)
 
-            axios.post('skill/viewSkill', {
+            axios.post('skill/yourSkill', {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -96,8 +70,7 @@ export default function SkillStoreTable() {
 
         if (search) {
             computedComments = computedComments.filter(
-                comment => comment.skill_name.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.skill_type_name.toLowerCase().includes(search.toLowerCase())
+                comment => comment.skill_name.toLowerCase().includes(search.toLowerCase())
             );
         }
 
@@ -111,11 +84,11 @@ export default function SkillStoreTable() {
 
     return (
         <Loader show={showLoading}>
-            <div className="container">
+            <div className="container mt-5">
                 <div className="row">
                     <div className="col-md-4" align={'left'}>
                         <p style={{fontSize: '24px'}}><i className="fab fa-slack"
-                                                         style={{fontSize: '1em'}}/><b> เลือกทักษะ</b></p>
+                                                         style={{fontSize: '1em'}}/><b> คลังทักษะของคุณ</b></p>
                     </div>
                     <div className="col-md-8 d-flex flex-row-reverse">
                         <SearchTable onSearch={value => {
@@ -130,13 +103,12 @@ export default function SkillStoreTable() {
                     <HeaderTable headers={headers}/>
                     <tbody>
                     {skillStoreData.map((comment, index) => (
-                        <tr key={comment.skill_id}>
+                        <tr key={comment.user_skill_id}>
                             <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
                                 alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
                                 sx={{width: 50, height: 50}}/></td>
                             <td>{comment.skill_name}</td>
                             <td>{comment.uc_name}</td>
-                            <td>{comment.skill_type_name}</td>
                             <td>{comment.skill_time}</td>
                             <td>
                                 {comment.skill_hard === 1 &&
@@ -155,12 +127,25 @@ export default function SkillStoreTable() {
                                     <p>ยาก</p>
                                 }
                             </td>
-                            <td>{comment.skill_credit}</td>
                             <td>
-                                <button type="button" className="btn btn-success"
-                                        onClick={() => handleClickOpen(index)}><i
-                                    className="far fa-check-square"/> เพิ่ม
-                                </button>
+                                {comment.user_skill_point === 0 ?
+                                    <p>ยังไม่ได้รับคะแนน</p>
+                                    :
+                                    <p>{comment.user_skill_point}</p>
+                                }
+                            </td>
+                            <td>
+                                {comment.user_skill_point === 0 ?
+                                    <button type="button" className="btn btn-primary"
+                                            onClick={() => handleClickOpen(index)}><i
+                                        className="far fa-check-square"/> ใหม่
+                                    </button>
+                                    :
+                                    <button type="button" className="btn btn-success"
+                                            onClick={() => handleClickOpen(index)}><i
+                                        className="far fa-check-square"/> อีกครั้ง
+                                    </button>
+                                }
                             </td>
                         </tr>
                     ))}

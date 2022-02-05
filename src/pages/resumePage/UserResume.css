@@ -179,8 +179,45 @@
 
 .mb10 {
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .txtRight {
     text-align: right;
 }
+
+.txtname {
+    text-align: center;
+    font-weight: 900;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    overflow: hidden;
+    width: 70px;
+    margin-right: 5px;
+}
+
+.Sizeimg {
+    margin-bottom: 24px;
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 600px;}
+
+.styleboxskill {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 40px;
+}
+
+.txttitle {
+    font-size: 24px;
+}
+
+.ns {
+    background-color: #2E2E48;
+    width: 1000px;
+    height: 4px;
+}
+

@@ -20,11 +20,11 @@ export default function SkillStoreTable() {
     const handleClickOpen = (index) => {
         Swal.fire({
             title: 'ยืนยัน',
-            html:   "<b>ชื่อทักษะ : </b>" + skillStoreData[index].skill_name +
-                    "&nbsp;&nbsp;<b>โดย : </b>" + skillStoreData[index].uc_name +
-                    "<br/><b>เวลาทดสอบ : </b>" + skillStoreData[index].skill_time + "<b> นาที</b>" +
-                    "&nbsp;&nbsp;<b>ราคา : </b>" + skillStoreData[index].skill_credit + "<b> บาท</b>" +
-                    "<br/><b>รายละเอียด : </b>" + skillStoreData[index].skill_detail,
+            html: "<b>ชื่อทักษะ : </b>" + skillStoreData[index].skill_name +
+                "&nbsp;&nbsp;<b>โดย : </b>" + skillStoreData[index].uc_name +
+                "<br/><b>เวลาทดสอบ : </b>" + skillStoreData[index].skill_time + "<b> นาที</b>" +
+                "&nbsp;&nbsp;<b>ราคา : </b>" + skillStoreData[index].skill_credit + "<b> บาท</b>" +
+                "<br/><b>รายละเอียด : </b>" + skillStoreData[index].skill_detail,
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -35,7 +35,7 @@ export default function SkillStoreTable() {
 
                 setShowLoading(true)
                 const params = JSON.stringify({
-                    skill_id : skillStoreData[index].skill_id
+                    skill_id: skillStoreData[index].skill_id
                 })
 
                 axios.post('skill/enrollSkill', params, {
@@ -53,9 +53,10 @@ export default function SkillStoreTable() {
                             window.location.reload()
                         }
                     })
-                }).catch(err =>
+                }).catch(err => {
                     console.log(err)
-                )
+                    setShowLoading(false)
+                })
             }
         })
     };

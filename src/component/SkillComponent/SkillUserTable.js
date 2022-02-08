@@ -30,7 +30,7 @@ export default function SkillUserTable() {
             confirmButtonText: 'Start'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/skill_exam/" + skillStoreData[index].skill_id;
+                window.location.href = "/skill/exam/" + skillStoreData[index].skill_id;
             }
         })
     };
@@ -57,9 +57,10 @@ export default function SkillUserTable() {
             }).then(res => {
                 setComments(res.data);
                 setShowLoading(false)
-            }).catch(err =>
+            }).catch(err => {
+                setShowLoading(false)
                 console.log(err)
-            )
+            })
         };
 
         getData();
@@ -102,61 +103,71 @@ export default function SkillUserTable() {
                 <table className="table table-striped">
                     <HeaderTable headers={headers}/>
                     <tbody>
-                    {skillStoreData.map((comment, index) => (
-                        <tr key={comment.user_skill_id}>
-                            <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
-                                alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
-                                sx={{width: 50, height: 50}}/></td>
-                            <td>{comment.skill_name}</td>
-                            <td>{comment.uc_name}</td>
-                            <td>{comment.skill_time}</td>
-                            <td>
-                                {comment.skill_hard === 1 &&
-                                    <p>ค่อนข้างง่าย</p>
-                                }
-                                {comment.skill_hard === 2 &&
-                                    <p>ง่าย</p>
-                                }
-                                {comment.skill_hard === 3 &&
-                                    <p>ปานกลาง</p>
-                                }
-                                {comment.skill_hard === 4 &&
-                                    <p>ค่อนข้างยาก</p>
-                                }
-                                {comment.skill_hard === 5 &&
-                                    <p>ยาก</p>
-                                }
-                            </td>
-                            <td>
-                                {comment.user_skill_point === 0 ?
-                                    <p>ยังไม่ได้รับคะแนน</p>
-                                    :
-                                    <p>{comment.user_skill_point}</p>
-                                }
-                            </td>
-                            <td>
-                                {comment.user_skill_point === 0 ?
-                                    <button type="button" className="btn btn-primary"
-                                            onClick={() => handleClickOpen(index)}><i
-                                        className="far fa-check-square"/> ใหม่
-                                    </button>
-                                    :
-                                    <button type="button" className="btn btn-success"
-                                            onClick={() => handleClickOpen(index)}><i
-                                        className="far fa-check-square"/> อีกครั้ง
-                                    </button>
-                                }
+                    {skillStoreData.length > 0 ? (
+                        skillStoreData.map((comment, index) => (
+                            <tr key={index}>
+                                <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
+                                    alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
+                                    sx={{width: 50, height: 50}}/></td>
+                                <td>{comment.skill_name}</td>
+                                <td>{comment.uc_name}</td>
+                                <td>{comment.skill_time}</td>
+                                <td>
+                                    {comment.skill_hard === 1 &&
+                                        <p>ค่อนข้างง่าย</p>
+                                    }
+                                    {comment.skill_hard === 2 &&
+                                        <p>ง่าย</p>
+                                    }
+                                    {comment.skill_hard === 3 &&
+                                        <p>ปานกลาง</p>
+                                    }
+                                    {comment.skill_hard === 4 &&
+                                        <p>ค่อนข้างยาก</p>
+                                    }
+                                    {comment.skill_hard === 5 &&
+                                        <p>ยาก</p>
+                                    }
+                                </td>
+                                <td>
+                                    {comment.user_skill_point === 0 ?
+                                        <p>ยังไม่ได้รับคะแนน</p>
+                                        :
+                                        <p>{comment.user_skill_point}</p>
+                                    }
+                                </td>
+                                <td>
+                                    {comment.user_skill_point === 0 ?
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={() => handleClickOpen(index)}><i
+                                            className="far fa-check-square"/> ใหม่
+                                        </button>
+                                        :
+                                        <button type="button" className="btn btn-success"
+                                                onClick={() => handleClickOpen(index)}><i
+                                            className="far fa-check-square"/> อีกครั้ง
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={headers.length}>
+                                <p className="text-center">ไม่มีข้อมูล</p>
                             </td>
                         </tr>
-                    ))}
+                    )}
                     </tbody>
                 </table>
-                <PaginationTable
-                    total={totalItems}
-                    itemsPerPage={ITEMS_PER_PAGE}
-                    currentPage={currentPage}
-                    onPageChange={page => setCurrentPage(page)}
-                />
+                {skillStoreData.length > ITEMS_PER_PAGE &&
+                    <PaginationTable
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
+                }
             </div>
         </Loader>
     )

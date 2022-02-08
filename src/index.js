@@ -52,7 +52,7 @@ ReactDOM.render(
                 <Route path="/create_skill" element={<SkillPage/>} />
                 <Route path="/check_resume" element={<ResumeCheck/>} />
                 <Route path="/skill_store" element={<SkillStore/>} />
-                <Route path="/skill_exam/:skillId" element={<SkillExam/>} />
+                <Route path="/skill/exam/:skillId" element={<SkillExam/>} />
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

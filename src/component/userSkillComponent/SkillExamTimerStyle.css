@@ -1,0 +1,42 @@
+/*.time {*/
+/*    font-size: 30px;*/
+/*    width: 100px;*/
+/*}*/
+
+/*.timer {*/
+/*    display: flex;*/
+/*    align-items: stretch;*/
+/*    flex-direction: row-reverse;*/
+/*    !*justify-content: space-around;*!*/
+/*    text-align: center;*/
+/*    padding-top: 40px;*/
+/*}*/
+
+.timer-wrapper {
+    display: flex;
+    justify-content: right;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.value-red {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+

@@ -5,6 +5,7 @@ import HeaderTable from "./HeaderTable";
 import Avatar from "@mui/material/Avatar";
 import PaginationTable from "./PaginationTable";
 import Loader from "../configComponent/Loader";
+import Swal from "sweetalert2";
 
 export default function SkillStoreTable() {
 
@@ -14,7 +15,51 @@ export default function SkillStoreTable() {
     const [search, setSearch] = useState("");
     const [showLoading, setShowLoading] = useState(false)
 
-    const ITEMS_PER_PAGE = 10;
+    const ITEMS_PER_PAGE = 7;
+
+    const handleClickOpen = (index) => {
+        Swal.fire({
+            title: 'ยืนยัน',
+            html: "<b>ชื่อทักษะ : </b>" + skillStoreData[index].skill_name +
+                "&nbsp;&nbsp;<b>โดย : </b>" + skillStoreData[index].uc_name +
+                "<br/><b>เวลาทดสอบ : </b>" + skillStoreData[index].skill_time + "<b> นาที</b>" +
+                "&nbsp;&nbsp;<b>ราคา : </b>" + skillStoreData[index].skill_credit + "<b> บาท</b>" +
+                "<br/><b>รายละเอียด : </b>" + skillStoreData[index].skill_detail,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Enroll'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                setShowLoading(true)
+                const params = JSON.stringify({
+                    skill_id: skillStoreData[index].skill_id
+                })
+
+                axios.post('skill/enrollSkill', params, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then(() => {
+                    setShowLoading(false)
+                    Swal.fire(
+                        'ลงทะเบียนทักษะ ' + skillStoreData[index].skill_name + ' สำเร็จ',
+                        'เพิ่มข้อมูลลงคลังทักษะของคุณเรียบร้อยแล้ว',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.reload()
+                        }
+                    })
+                }).catch(err => {
+                    console.log(err)
+                    setShowLoading(false)
+                })
+            }
+        })
+    };
 
     const headers = [
         {name: "สัญลักษณ์", field: "skill_logo", sortable: false},
@@ -24,7 +69,7 @@ export default function SkillStoreTable() {
         {name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false},
         {name: "ระดับทักษะ", field: "skill_hard", sortable: false},
         {name: "ราคา(บาท)", field: "skill_credit", sortable: false},
-        {name: "รับบริการ", field: "", sortable: false}
+        {name: "เพิ่มลงคลังทักษะ", field: "", sortable: false}
     ];
 
     useEffect(() => {
@@ -37,7 +82,6 @@ export default function SkillStoreTable() {
                     'Content-Type': 'application/json',
                 }
             }).then(res => {
-                // console.log(res.data)
                 setComments(res.data);
                 setShowLoading(false)
             }).catch(err =>
@@ -71,8 +115,8 @@ export default function SkillStoreTable() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-4" align={'left'}>
-                        <p style={{fontSize: '24px'}}><i className="fas fa-table"
-                                                         style={{fontSize: '1em'}}/><b> คลังทักษะ</b></p>
+                        <p style={{fontSize: '24px'}}><i className="fab fa-slack"
+                                                         style={{fontSize: '1em'}}/><b> เลือกทักษะ</b></p>
                     </div>
                     <div className="col-md-8 d-flex flex-row-reverse">
                         <SearchTable onSearch={value => {
@@ -86,7 +130,7 @@ export default function SkillStoreTable() {
                 <table className="table table-striped">
                     <HeaderTable headers={headers}/>
                     <tbody>
-                    {skillStoreData.map(comment => (
+                    {skillStoreData.map((comment, index) => (
                         <tr key={comment.skill_id}>
                             <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
                                 alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
@@ -114,7 +158,10 @@ export default function SkillStoreTable() {
                             </td>
                             <td>{comment.skill_credit}</td>
                             <td>
-                                <button type="button" className="btn btn-success"><i className="far fa-check-square"/> รับ</button>
+                                <button type="button" className="btn btn-success"
+                                        onClick={() => handleClickOpen(index)}><i
+                                    className="far fa-check-square"/> เพิ่ม
+                                </button>
                             </td>
                         </tr>
                     ))}

@@ -69,7 +69,6 @@ const BodySkill = (props) => {
                     for (i = 0; i < exam.length; i++) {
                         if (exam[i].skill_exam_option === 'objective') {
                             let val = localStorage.getItem(i)
-                            console.log()
 
                             const params_choice = JSON.stringify({
                                 "skill_exam_head": exam[i].skill_exam_head,

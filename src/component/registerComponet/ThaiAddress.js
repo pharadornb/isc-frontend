@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "../configComponent/Loader";
+
 const thai = require('thai-data')
 
 export default function ThaiAddress(props) {
@@ -23,7 +25,7 @@ export default function ThaiAddress(props) {
     const [us_com_address, setUsComAddress] = useState('')
     const [us_com_subdistrict, setUsComSubdistrict] = useState('')
     const [us_com_postcode, setUsComPostcode] = useState('')
-
+    const [showLoading, setShowLoading] = useState(false)
 
     //Current address
     const onSetZipCode = (e) => {
@@ -79,6 +81,7 @@ export default function ThaiAddress(props) {
 
     const handleClick = () => {
 
+        setShowLoading(true)
         const user_email = props.user_email
         const user_password = props.user_password
         const user_role = props.user_role
@@ -140,6 +143,7 @@ export default function ThaiAddress(props) {
                     }
                 }).then(res => {
                     if (res.status === 200) {
+                        setShowLoading(false)
                         Swal.fire(
                             'ลงทะเบียนผู้ใช้สำเร็จ',
                             'ยืนยันตัวตนที่อีเมล์ของคุณ',
@@ -174,6 +178,7 @@ export default function ThaiAddress(props) {
     }
 
     return (
+        <Loader show={showLoading}>
             <div className="row">
                 <div className="col-md-12 mt-4">
                     <input type="text" className="form-control" placeholder="ที่อยู่ปัจจุบัน"
@@ -262,5 +267,6 @@ export default function ThaiAddress(props) {
                     </button>
                 </div>
             </div>
+        </Loader>
     );
 }

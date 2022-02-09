@@ -106,15 +106,15 @@ export default class RegisterUser extends React.Component {
                                                onChange={(e) => this.setState({tel: e.target.value})}/>
                                     </div>
                                     <div className="col-md-6 mt-4">
-                                        <input type="email" className="form-control" placeholder="GitHub"
+                                        <input type="text" className="form-control" placeholder="GitHub"
                                                onChange={(e) => this.setState({github: e.target.value})}/>
                                     </div>
                                     <div className="col-md-6 mt-4">
-                                        <input type="email" className="form-control" placeholder="LinkedIn"
+                                        <input type="text" className="form-control" placeholder="LinkedIn"
                                                onChange={(e) => this.setState({linkedin: e.target.value})}/>
                                     </div>
                                     <div className="col-md-6 mt-4">
-                                        <input type="email" className="form-control" placeholder="Facebook"
+                                        <input type="text" className="form-control" placeholder="Facebook"
                                                onChange={(e) => this.setState({facebook: e.target.value})}/>
                                     </div>
                                     <div className="col-md-6 mt-4">

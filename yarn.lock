@@ -9085,6 +9085,7 @@ react-circular-progressbar@^2.0.4:
   resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"
   integrity sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww==
 
+<<<<<<< HEAD
 react-datepicker@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-4.6.0.tgz#10fc7c5b9c72df5c3e29712d559cb3fe73fd9f62"
@@ -9096,6 +9097,12 @@ react-datepicker@^4.6.0:
     prop-types "^15.7.2"
     react-onclickoutside "^6.12.0"
     react-popper "^2.2.5"
+=======
+react-countdown-circle-timer@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/react-countdown-circle-timer/-/react-countdown-circle-timer-3.0.8.tgz#18992440c2cc39be3bfe08a6802ae522b9852a77"
+  integrity sha512-4aPcgQyInHcmrZ/8j5lPhV+wTp1e/Kqy6YcGex3sFxMjugNTVkTT9TlM+HQqYna786ZCbu9eiUU/QIjYME0VxA==
+>>>>>>> 7e667dd9977f4c843d09278cab68a3c2641e5b35
 
 react-dev-utils@^12.0.0:
   version "12.0.0"

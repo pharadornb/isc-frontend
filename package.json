@@ -26,13 +26,8 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.1",
     "react-circular-progressbar": "^2.0.4",
-<<<<<<< HEAD
-    "react-datepicker": "^4.6.0",
-=======
     "react-countdown-circle-timer": "^3.0.8",
->>>>>>> 7e667dd9977f4c843d09278cab68a3c2641e5b35
     "react-dom": "^17.0.2",
-    "react-elastic-carousel": "^0.11.5",
     "react-loading-screen": "^0.0.17",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",

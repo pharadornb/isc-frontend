@@ -223,7 +223,7 @@
 }
 
 .Progressbox {
-    position: relative;
+  position: relative;
   width: 100px;
   height: 100px;
   margin-bottom: 40px;
@@ -244,14 +244,12 @@
 
 .divBoxAvata {
   position: relative;
- 
 }
 
 .editImage {
   position: absolute;
   top: 0;
   left: 180px;
-
 }
 
 .idesing {
@@ -259,16 +257,20 @@
 }
 
 .P_showSkilk {
-    position: absolute;
-    top: 0;
-    left: 100px;
+  position: absolute;
+  top: 0;
+  left: 100px;
 }
 
-.actionImage{
-    cursor: pointer;
+.actionImage {
+  cursor: pointer;
 }
 
 .alpha-image {
   opacity: 0.4;
   filter: alpha(opacity=40);
+}
+
+.box-center {
+  text-align: center;
 }

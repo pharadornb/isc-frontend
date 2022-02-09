@@ -219,6 +219,23 @@ export default function UserResume() {
     return massage.toString();
   };
 
+  const AvatarImage = (props) => {
+    const profile = props.user_profile;
+    var user_profile = "";
+
+    if(profile){
+      user_profile = "data:image/jpeg;base64," + profile;
+    }
+    return(
+      <>
+      <Avatar
+        alt={props.us_firstname}
+        src={user_profile}
+        sx={{ width: 200, height: 200 }}
+      /></>
+    )
+  }
+
   return (
     <Sidebar>
       {!userEmail && (
@@ -250,6 +267,7 @@ export default function UserResume() {
             </a>
           </div>
           <div className="goo"></div>
+          <div className="container">
           <div className="row div-2">
             <div className="col-md-6 div2-1">
               {/* box left */}
@@ -257,14 +275,7 @@ export default function UserResume() {
                 <div className="col-md-5 div211-1">
                   {/* image user */}
                   {loading === false && <CircularProgress /> }
-                  {loading === true && 
-                  <>
-                    <Avatar
-                      alt="iT"
-                      src={`data:image/jpeg;base64,${dataNUser.user_profile}`}
-                      sx={{ width: 200, height: 200 }}
-                    />
-                  </> }
+                  {loading === true && <AvatarImage us_firstname={dataNUser.us_firstname} user_profile={dataNUser.user_profile}  />}
                   
                 </div>
                 <div className="col-md-7 div211-2 ">
@@ -458,7 +469,7 @@ export default function UserResume() {
                                     />
                                   </div>
                                 </CustomContentProgressbar>
-                                <div>
+                                <div className="box-center">
                                   <span className="txtname">
                                     {row2.skill_name}
                                   </span>
@@ -481,6 +492,7 @@ export default function UserResume() {
                 ))}
               </div>
             </div>
+          </div>
           </div>
         </div>
       )}

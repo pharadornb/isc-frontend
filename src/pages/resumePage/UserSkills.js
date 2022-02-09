@@ -127,7 +127,7 @@ export default function UserSkill() {
                               />
                             </div>
                           </CustomContentProgressbar>
-                          <div>
+                          <div className="box-center">
                             <span className="txtname">{rows2.skill_name}</span>
                             <img
                               src={`data:image/jpeg;base64,${rows2.user_profile}`}
@@ -169,7 +169,7 @@ export default function UserSkill() {
                               />
                             </div>
                           </CustomContentProgressbar>
-                          <div>
+                          <div className="box-center">
                             <span className="txtname">{rows2.skill_name}</span>
                             <img
                               src={`data:image/jpeg;base64,${rows2.user_profile}`}

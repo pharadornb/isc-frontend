@@ -176,6 +176,27 @@ export default function Personal(props) {
     }
   };
 
+  const OldYears = () => {
+    const dateDob = moment(dataNUser.user_dob).format('YYYY');
+    const datenow = new Date().getFullYear();
+    var dob = parseInt(datenow) - parseInt(dateDob);
+
+    return(
+      <TextField
+                id="outlined-basic"
+                label="อายุ"
+                value={dob}
+                style={{ width: 80 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">ปี</InputAdornment>
+                  ),
+                }}
+                disabled
+              />
+    )
+  }
+
   return (
     <>
       {loading === false && <CircularProgress />}
@@ -225,18 +246,7 @@ export default function Personal(props) {
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                id="outlined-basic"
-                label="อายุ"
-                value={55}
-                style={{ width: 80 }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">ปี</InputAdornment>
-                  ),
-                }}
-                disabled
-              />
+              <OldYears />
             </Grid>
           </Grid>
           <Grid container spacing={2} sx={{ p: 2 }}>
@@ -249,6 +259,7 @@ export default function Personal(props) {
                 name="user_email"
                 onChange={handleChange}
                 focused
+                disabled
               />
             </Grid>
             <Grid item xs={4}>

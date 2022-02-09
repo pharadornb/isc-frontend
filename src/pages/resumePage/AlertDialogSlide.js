@@ -78,6 +78,23 @@ export default function AlertDialogSlide(props) {
     setIsFilePicked(true);
   };
 
+  const AvatarImage = (props) => {
+    const profile = props.user_profile;
+    var user_profile = "";
+
+    if(profile){
+      user_profile = "data:image/jpeg;base64," + profile;
+    }
+    
+    return(
+      <Avatar
+        alt={props.us_firstname}
+        sx={{ width: 200, height: 200, margin: "auto" }}
+        src={user_profile}
+      />
+    )
+  }
+
   return (
     <>
       <button className="btns" onClick={handleClickOpen}>
@@ -104,11 +121,7 @@ export default function AlertDialogSlide(props) {
                 <ListItem align="center">
                   <div className="divBoxAvata ">
                     <label htmlFor="upload" className="actionImage">
-                      <Avatar
-                        alt={dataNUser.us_firstname}
-                        sx={{ width: 200, height: 200, margin: "auto" }}
-                        src={`data:image/jpeg;base64,${dataNUser.user_profile}`}
-                      />
+                      <AvatarImage user_profile={dataNUser.user_profile} us_firstname={dataNUser.us_firstname} />
                     </label>
 
                     <div className="editImage">

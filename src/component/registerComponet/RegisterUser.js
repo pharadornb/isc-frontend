@@ -2,6 +2,8 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import ThaiAddress from "./ThaiAddress";
 
+const emailValidator = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
 export default class RegisterUser extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +21,7 @@ export default class RegisterUser extends React.Component {
             facebook: '',
             youtube: ''
         }
+        localStorage.removeItem('userRegisterEmail');
     }
 
     onChange = (e) => {
@@ -37,6 +40,19 @@ export default class RegisterUser extends React.Component {
             base64Data: btoa(binaryString),
         });
     };
+
+    checkEmailValid() {
+        let val = '';
+        if (localStorage.getItem('userRegisterEmail') === '') {
+            val = 'false1';
+        } else {
+            if (!emailValidator.test(localStorage.getItem('userRegisterEmail')) === false) {
+                val = 'false2';
+            }
+        }
+        return val;
+    }
+
 
     render() {
         const {base64Data} = this.state;
@@ -67,8 +83,25 @@ export default class RegisterUser extends React.Component {
                                                onChange={(e) => this.onChange(e)}/>
                                     </div>
                                     <div className="col-md-12 mt-4">
-                                        <input type="email" className="form-control" placeholder="อีเมล์ผู้รับบริการ"
-                                               onChange={(e) => this.setState({email: e.target.value})}/>
+                                        <input type="email" className='form-control' placeholder="อีเมล์ผู้รับบริการ"
+                                               onChange={(e) => this.setState({email: e.target.value},
+                                                   localStorage.setItem('userRegisterEmail', e.target.value))}
+                                               size={250}/>
+                                        {
+                                            this.checkEmailValid() === 'false1' && (
+                                                <div className="alert alert-danger" role="alert">
+                                                    กรุณากรอกอีเมล์
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            this.checkEmailValid() === 'false2' && (
+                                                <div className="alert alert-success" role="alert">
+                                                    อีเมล์สามารถใช้ได้
+                                                </div>
+                                            )
+                                        }
+
                                     </div>
                                     <div className="col-md-12 mt-4">
                                         <input type="password" className="form-control" placeholder="ตั้งรหัสผ่าน"

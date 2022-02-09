@@ -8,9 +8,11 @@ import axios from "axios";
 import { Avatar } from "@mui/material";
 import moment from "moment";
 import "moment/locale/en-au";
+// import Carousel from "nice-react-carousel";
 
 import CustomContentProgressbar from "./CustomContentProgressbar";
 import AlertDialogSlide from "./AlertDialogSlide";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Logo from "../../img/logo2.PNG";
 
@@ -25,6 +27,13 @@ export default function UserResume() {
   const [dataNUser, setDataNUser] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
+  const [skilltypes, setSkillTypes] = useState([]);
+  const [userSkill, setUserSkill] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading4, setLoading4] = useState(false);
 
   const UserDatas = () => {
     try {
@@ -43,9 +52,7 @@ export default function UserResume() {
     } catch (err) {
       console.log(err);
     }
-  };
 
-  const Education = () => {
     try {
       axios
         .post("resume/user_education", {
@@ -57,14 +64,13 @@ export default function UserResume() {
           if (res.status === 200) {
             // console.log(res.data);
             setEducation(res.data);
+            setLoading(true);
           }
         });
     } catch (err) {
       console.log(err);
     }
-  };
 
-  const Experience = () => {
     try {
       axios
         .post("resume/user_experince", {
@@ -76,6 +82,43 @@ export default function UserResume() {
           if (res.status === 200) {
             // console.log(res.data);
             setExperience(res.data);
+            setLoading2(true);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      axios
+        .post("skill/skill_types", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log(res.data);
+            setSkillTypes(res.data);
+            setLoading3(true);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      axios
+        .post("skill/userSkill", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log(res.data);
+            setUserSkill(res.data);
+            setLoading4(true);
           }
         });
     } catch (err) {
@@ -85,8 +128,6 @@ export default function UserResume() {
 
   useEffect(() => {
     UserDatas();
-    Education();
-    Experience();
   }, []);
 
   const SetDateTime = (props) => {
@@ -175,15 +216,8 @@ export default function UserResume() {
       " - " +
       sumy +
       " year ";
-
-    // while (condition) {
-
-    // }
-
     return massage.toString();
   };
-
-
 
   return (
     <Sidebar>
@@ -195,7 +229,12 @@ export default function UserResume() {
               <button className="btns">
                 <i className="fas fa-file-pdf"></i> ดาวน์โหลด
               </button>
-              <AlertDialogSlide />
+              <AlertDialogSlide
+                education={education}
+                experience={experience}
+                userSkill={userSkill}
+                skilltypes={skilltypes}
+              />
             </div>
             <div className="d12">
               <label className="w b mg">Created by :</label>
@@ -217,11 +256,16 @@ export default function UserResume() {
               <div className="row div21-1">
                 <div className="col-md-5 div211-1">
                   {/* image user */}
-                  <Avatar
-                    alt="iT"
-                    src={`data:image/jpeg;base64,${dataNUser.user_profile}`}
-                    sx={{ width: 200, height: 200 }}
-                  />
+                  {loading === false && <CircularProgress /> }
+                  {loading === true && 
+                  <>
+                    <Avatar
+                      alt="iT"
+                      src={`data:image/jpeg;base64,${dataNUser.user_profile}`}
+                      sx={{ width: 200, height: 200 }}
+                    />
+                  </> }
+                  
                 </div>
                 <div className="col-md-7 div211-2 ">
                   <div className="row div2112-1 w">
@@ -269,7 +313,7 @@ export default function UserResume() {
                 </div>
                 <div className="col-11 w">
                   <b>ที่อยู่ปัจจุบัน : </b>
-                  <label>{dataNUser.us_com_address}&nbsp;</label>
+                  <label>{dataNUser.user_address}&nbsp;</label>
                   <label>ตำบล {dataNUser.user_subdistrict}&nbsp;</label>
                   <label>อำเภอ {dataNUser.user_district}&nbsp;</label>
                   <label>จังหวัด {dataNUser.user_province}&nbsp;&nbsp;</label>
@@ -338,9 +382,10 @@ export default function UserResume() {
                 <h4 className="col-12 w">
                   <b>Education</b>
                 </h4>
+
                 {education.map((row) => (
                   <div className="col-12" key={row.usl_id}>
-                    <p />
+                    {/* <p /> */}
                     {/* map data study */}
                     <label className="w">
                       <b>{row.usl_name}</b>
@@ -360,6 +405,15 @@ export default function UserResume() {
                 <h4 className="bgs">EXPERIENCE</h4>
                 <div className="line" />
               </div>
+              <div>
+                {loading2 === false && (
+                  <>
+                    <br />
+                    <br />
+                    <CircularProgress />
+                  </>
+                )}
+              </div>
               {experience.map((row) => (
                 <div className="div22-11" key={row.use_id}>
                   <p className="b">
@@ -378,24 +432,53 @@ export default function UserResume() {
                 <h4 className="bgs">SKILLS COLLECT</h4>
                 <div className="line" />
               </div>
-              <div>
-                <p className="b">Prototype and design</p>
-                <div
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                  }}
-                >
-                  <CustomContentProgressbar percentage={92.52}>
-                    <div>
-                      <img
-                        height={50}
-                        alt="logo"
-                        src="https://seeklogo.com/images/J/javascript-logo-8892AEFCAC-seeklogo.com.png"
-                      />
+              <div>{loading3 === false && <CircularProgress />}</div>
+              <div className="row ">
+                {skilltypes.map((row1) => (
+                  <div key={row1.skill_type_id} className="col-12">
+                    <label className="b txttitle">{row1.skill_type_name}</label>
+                    <br></br>
+                    <br></br>
+                    {loading4 === false && <CircularProgress />}
+                    <div className="row">
+                      {userSkill.map(
+                        (row2) =>
+                          row1.skill_type_name === row2.skill_type_name &&
+                          row2.user_skill_ishide === "no" && (
+                            <div className="col-3" key={row2.user_skill_id}>
+                              <div className="styleboxskill">
+                                <CustomContentProgressbar
+                                  percentage={row2.user_skill_point}
+                                >
+                                  <div>
+                                    <img
+                                      className="Sizeimg"
+                                      alt={row2.skill_name}
+                                      src={`data:image/jpeg;base64,${row2.skill_logo}`}
+                                    />
+                                  </div>
+                                </CustomContentProgressbar>
+                                <div>
+                                  <span className="txtname">
+                                    {row2.skill_name}
+                                  </span>
+                                  <img
+                                    src={`data:image/jpeg;base64,${row2.user_profile}`}
+                                    alt={row2.skill_name}
+                                    style={{
+                                      width: "20px",
+                                      height: "20px",
+                                      overflow: "hidden",
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          )
+                      )}
                     </div>
-                  </CustomContentProgressbar>
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

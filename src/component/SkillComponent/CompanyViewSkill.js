@@ -47,7 +47,7 @@ export default function CompanyViewSkill() {
 
         getData();
     }, []);
-
+    
     const commentsData = useMemo(() => {
         let computedComments = comments;
 

@@ -1,186 +1,274 @@
 .bg-resume {
-    background-image: linear-gradient(rgb(63, 50, 173), rgb(218, 40, 173));
-    width: 100%;
-    height: 100%;
+  background-image: linear-gradient(rgb(63, 50, 173), rgb(218, 40, 173));
+  width: 100%;
+  height: 100%;
 }
 
 .div-1 {
-    height: 70px;
-    position: relative;
-    /* background-color: rgba(127, 255, 212, 0.226); */
+  height: 70px;
+  position: relative;
+  /* background-color: rgba(127, 255, 212, 0.226); */
 }
 
 .div-2 {
-    padding: 10px;
+  padding: 10px;
 }
 
 .div2-1 {
-    background-color: #c4c4c45d;
-    width: 620px;
-    border-radius: 10px;
-    margin: auto;
-    margin-bottom: 10px;
-    padding: 10px;
+  background-color: #c4c4c45d;
+  width: 620px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .div2-2 {
-    background-color: #ffffff;
-    width: 620px;
-    border-radius: 10px;
-    padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+  background-color: #ffffff;
+  width: 620px;
+  border-radius: 10px;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
 
 .div21-1 {
-    padding: 10px;
-    margin: auto;
+  padding: 10px;
+  margin: auto;
 }
 
 .msl {
-    background-color: #ffffff59;
-    width: 100%;
-    margin-left: 1px;
-    margin-right: 1px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
+  background-color: #ffffff59;
+  width: 100%;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
 }
 
 .sl {
-    padding: 10px;
-
+  padding: 10px;
 }
 
 .la {
-    background-color: #ffffff59;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 0px;
-    padding: 10px 0px 10px 0px;
-    border-radius: 5px;
+  background-color: #ffffff59;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 0px;
+  padding: 10px 0px 10px 0px;
+  border-radius: 5px;
 }
 
 .w {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .b {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .gray {
-    color: rgb(102, 102, 102);
+  color: rgb(102, 102, 102);
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .bgs {
-    background-color: rgb(90, 90, 90);
-    padding: 10px 10px 10px 50px;
-    width: 350px;
-    font-weight: bold;
-    color: #ffffff;
-    border-radius: 5px;
-    position: absolute;
-    top: -23px;
+  background-color: rgb(90, 90, 90);
+  padding: 10px 10px 10px 50px;
+  width: 350px;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 5px;
+  position: absolute;
+  top: -23px;
 }
 
 .line {
-    background-color: rgb(90, 90, 90);
-    width: 100%;
-    height: 2px;
-    margin-top: 25px;
+  background-color: rgb(90, 90, 90);
+  width: 100%;
+  height: 2px;
+  margin-top: 25px;
 }
 
 .div22-1 {
-    position: relative;
+  position: relative;
 }
 
 .div22-11 {
-    margin-top: 50px;
-    margin-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .ml {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .wid50 {
-    width: 50px;
+  width: 50px;
 }
 
 .div211-2 {
-    text-align: center;
-    padding: 40px;
+  text-align: center;
+  padding: 40px;
 }
 
 .d11 {
-    float: left;
-    width: 60%;
-    text-align: right;
+  float: left;
+  width: 60%;
+  text-align: right;
 }
 
 .btns {
-    border: 1px rgb(255, 255, 255) solid;
-    margin: 12px 0px 0px 5px;
-    border-radius: 3px;
-    background-color:#2E2E48;
-    color: #ffffff;
+  border: 1px rgb(255, 255, 255) solid;
+  margin: 12px 0px 0px 5px;
+  border-radius: 3px;
+  background-color: #2e2e48;
+  color: #ffffff;
 }
 
 .d12 {
-    float: left;
-    width: 40%;
-    text-align: right;
+  float: left;
+  width: 40%;
+  text-align: right;
 }
 
 .lbd12 {
-    padding: 0px 60px 0px 60px ;
-    background-color:#C4C4C4;
-    border-radius: 5px;
+  padding: 0px 60px 0px 60px;
+  background-color: #c4c4c4;
+  border-radius: 5px;
 }
 
 .d12 {
-    padding-top: 7px;
+  padding-top: 7px;
 }
 
 .mg {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .lin {
-    float: right;
-    font-size: 10px;
-    margin-right: 10px;
-    text-decoration: none;
+  float: right;
+  font-size: 10px;
+  margin-right: 10px;
+  text-decoration: none;
 }
 
 .sl {
-    height: 40px;
+  height: 40px;
 }
 
 .fl {
-    float: right;
+  float: right;
 }
 
 .goo {
-    clear: both;
+  clear: both;
 }
 
-
 .dialogS {
-    width: 1400px;
+  width: 1400px;
 }
 
 .mb10 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .txtRight {
-    text-align: right;
+  text-align: right;
+}
+
+.txtname {
+  text-align: center;
+  font-weight: 900;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  overflow: hidden;
+  width: 70px;
+  margin-right: 5px;
+}
+
+.Sizeimg {
+  margin-bottom: 24px;
+  object-fit: cover;
+  width: 90px;
+  height: 90px;
+  border-radius: 600px;
+  margin-top: 22px;
+}
+
+.styleboxskill {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 40px;
+}
+
+.txttitle {
+  font-size: 24px;
+}
+
+.ns {
+  background-color: #2e2e48;
+  width: 1000px;
+  height: 4px;
+}
+
+.Progressbox {
+    position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.Sizeimg1 {
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+  border-radius: 600px;
+}
+
+#upload {
+  display: none;
+}
+
+.divBoxAvata {
+  position: relative;
+ 
+}
+
+.editImage {
+  position: absolute;
+  top: 0;
+  left: 180px;
+
+}
+
+.idesing {
+  color: Dodgerblue;
+}
+
+.P_showSkilk {
+    position: absolute;
+    top: 0;
+    left: 100px;
+}
+
+.actionImage{
+    cursor: pointer;
+}
+
+.alpha-image {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
 }

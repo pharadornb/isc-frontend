@@ -13,7 +13,7 @@ export default function HomePage() {
         <>
             <Navbar />
             <Carousel />
-            <div className="container">
+            <div className="container" align={'center'}>
                 <div className="row">
                     <div className="col-md-4 mt-3">
                         <Card sx={{ maxWidth: 300 }}>

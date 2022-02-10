@@ -29,8 +29,8 @@ export default function SkillExamHeader(props) {
                             <div className="container mt-auto mb-auto">
                                 <div className="row">
                                     <div className="col-md-8" style={{textAlign: 'left'}}>
-                                        <b>รายละเอียด : </b><u>ข้อเลือกตอบ</u>จะมีการคิดคะแนน เต็ม 100% เฉลี่ยรายข้อ
-                                        &nbsp;<u>ข้อตอบแบบช่องว่าง</u>จะมีการถูกพิจารณาร่วมกับบริษัทที่เห็นข้อมูลโดยไม่ทำการนำมาคิดคะแนน
+                                        <b>รายละเอียด : </b><u>ข้อเลือกตอบ</u>คิดคะแนนเฉลี่ย 100%
+                                        &nbsp;<u>ข้อตอบพิมพ์</u>พิจารณาร่วมกับบริษัทไม่นำมาคิดคะแนน
                                     </div>
                                     <div className="col-md-2">
                                         <b>&nbsp;&nbsp;โดย: </b>{props.skillUser}

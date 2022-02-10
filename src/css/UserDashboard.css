@@ -29,7 +29,6 @@
 .row2 {
     background-color: #D7D1D1;
     width: 100%;
-    margin: 0;
     padding: 20px;
 }
 
@@ -54,12 +53,13 @@
 
 /*--------------------------------*/
 .box-design {
-    width: 420px;
-    height: auto;
+    height: 300px;
     background-color: #FFFFFF;
-    padding: 60px;
+    padding: 40px;
     border-radius: 20px;
     padding-bottom: 140px;
+    /* border: 1px solid; */
+    margin: 20px;
 }
 
 .ko {
@@ -96,15 +96,14 @@
 
 /*box-skills-library*/
 .cs {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    
+    margin: 20px;
 }
 
 .box-skills-library, .box-latest-establishment {
     width: 100%;
     height: 600px;
     min-width: 600px;
-    margin: auto;
     border-radius: 20px;
     padding: 15px;
     clear: both;
@@ -126,7 +125,6 @@
     background-color: #F7F7F8;
     border-radius: 20px;
     text-align: center;
-    float: left;
 }
 
 
@@ -170,7 +168,7 @@ tr {
 
 .box-txt-top {
     position: absolute;
-    top: 230px;
+    top: 150px;
     margin-left: 80px;
 }
 
@@ -189,4 +187,8 @@ tr {
 
 .commentTxt {
     font-size: 24px;
+}
+
+.paddin20{
+    padding: 20px;
 }

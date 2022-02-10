@@ -77,7 +77,7 @@ export default function CompanyDashboardContent(){
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4 ld">
+                    <div className="col-sm-12 col-md-6 col-lg-4 ld">
                         <div className="inBoxC">
                             <div className="inBoxC1">
                                 <img src={CommunicationSkillIcon} className="inBoxC101" alt="Trulli"></img>
@@ -89,7 +89,7 @@ export default function CompanyDashboardContent(){
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 ld">
+                    <div className="col-sm-12 col-md-6 col-lg-4  ld">
                         <div className="inBoxC">
                             <div className="inBoxC1">
                                 <img src={MorningIcon} className="inBoxC101" alt="Trulli"></img>
@@ -101,7 +101,7 @@ export default function CompanyDashboardContent(){
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 ld">
+                    <div className="col-sm-12 col-md-6 col-lg-4  ld">
                         <div className="inBoxC">
                             <div className="inBoxC1">
                                 <img src={TimeIcon2} className="inBoxC101" alt="Trulli"></img>
@@ -116,7 +116,7 @@ export default function CompanyDashboardContent(){
                 </div>
                 <div className="boxC-03">
                     <div className="row">
-                        <div className="col-md-5">
+                        <div className="col-sm-12 col-md-5">
                             <p className="boxC03_htxt">ผ่านเกณฑ์คัดเลือก</p>
                             <div className="boxC03_inbox">
                                 <div className="row">
@@ -124,7 +124,7 @@ export default function CompanyDashboardContent(){
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-7">
+                        <div className="col-sm-12 col-md-7">
                             <p className="boxC03_htxt">ผลการรับบริการ</p>
                             <div className="rw">
                                 <ServiceResult/>

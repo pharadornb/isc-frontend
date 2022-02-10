@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import UserDashboard from "../../component/UserDashboard";
-import Button from "@mui/material/Button";
-import Sidebar from "../../component/configComponent/SidebarChild";
-import "./UserResume.css";
+// import { useParams } from "react-router-dom";
+// import UserDashboard from "../../component/UserDashboard";
+// import Button from "@mui/material/Button";
+// import Sidebar from "../../component/configComponent/SidebarChild";
+// import "./UserResume.css";
 import axios from "axios";
 import { Avatar } from "@mui/material";
 import moment from "moment";
@@ -13,234 +13,233 @@ import "moment/locale/en-au";
 import CustomContentProgressbar from "./CustomContentProgressbar";
 import AlertDialogSlide from "./AlertDialogSlide";
 import CircularProgress from "@mui/material/CircularProgress";
-import UserResumeReport from "./UserResumeReport";
+
 import Logo from "../../img/logo2.PNG";
 
-export default function UserResume() {
-  const { userEmail } = useParams();
+export default function UserResumeReport(props) {
 
-  const handleClick = () => {
-    sessionStorage.clear();
-    window.location = "/";
-  };
+    const [dataNUser, setDataNUser] = useState([]);
+    const [education, setEducation] = useState([]);
+    const [experience, setExperience] = useState([]);
+    const [skilltypes, setSkillTypes] = useState([]);
+    const [userSkill, setUserSkill] = useState([]);
+  
+    const [loading, setLoading] = useState(false);
+    const [loading1, setLoading1] = useState(false);
+    const [loading2, setLoading2] = useState(false);
+    const [loading3, setLoading3] = useState(false);
+    const [loading4, setLoading4] = useState(false);
+  
+    
+  
+    useEffect(() => {
+      const UserDatas = () => {
 
-  const [dataNUser, setDataNUser] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [experience, setExperience] = useState([]);
-  const [skilltypes, setSkillTypes] = useState([]);
-  const [userSkill, setUserSkill] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-  const [loading1, setLoading1] = useState(false);
-  const [loading2, setLoading2] = useState(false);
-  const [loading3, setLoading3] = useState(false);
-  const [loading4, setLoading4] = useState(false);
-
-  const UserDatas = () => {
-    try {
-      axios
-        .post("resume/user_profile", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data[0]);
-            setDataNUser(res.data[0]);
-            setLoading(true);
-          }
+        const params = JSON.stringify({ 
+          serialKey: props.userEmail
         });
-    } catch (err) {
-      console.log(err);
+  
+        try {
+          axios
+            .post("resume/user_profile", params, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data[0]);
+                setDataNUser(res.data[0]);
+                setLoading(true);
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
+    
+        try {
+          axios
+            .post("resume/user_education",params, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                // console.log(res.data);
+                setEducation(res.data);
+                setLoading1(true);
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
+    
+        try {
+          axios
+            .post("resume/user_experince",params, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                // console.log(res.data);
+                setExperience(res.data);
+                setLoading2(true);
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
+    
+        try {
+          axios
+            .post("skill/skill_types", {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                // console.log(res.data);
+                setSkillTypes(res.data);
+                setLoading3(true);
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
+    
+        try {
+          axios
+            .post("skill/userSkill",params, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                // console.log(res.data);
+                setUserSkill(res.data);
+                setLoading4(true);
+              }
+            });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      UserDatas();
+    }, [props.userEmail]);
+  
+    const SetDateTime = (props) => {
+      // console.log(props.dates);
+      const yearnow = new Date().getFullYear();
+      const byear = moment(props.dates).format("YYYY");
+      const yy = yearnow - byear;
+      const dd = moment(props.dates).format("DD");
+      const mmmm = moment(props.dates).format("MMMM");
+      const yyyy = moment(props.dates).format("YYYY");
+      var yyy = parseInt(yyyy) + 543;
+      var mm = "";
+      switch (mmmm) {
+        case "January":
+          mm = "มกราคม";
+          // code block
+          break;
+        case "February":
+          mm = "กุมภาพันธ์";
+          // code block
+          break;
+        case "March":
+          mm = "มีนาคม";
+          // code block
+          break;
+        case "April":
+          mm = "เมษายน";
+          // code block
+          break;
+        case "May":
+          mm = "พฤษภาคม";
+          // code block
+          break;
+        case "June":
+          mm = "มิถุนายน";
+          // code block
+          break;
+        case "July":
+          mm = "กรกฎาคม";
+          // code block
+          break;
+        case "August ":
+          mm = "สิงหาคม";
+          // code block
+          break;
+        case "September":
+          mm = "กันยายน";
+          // code block
+          break;
+        case "October":
+          mm = "ตุลาคม";
+          // code block
+          break;
+        case "November":
+          mm = "พฤศจิกายน";
+          // code block
+          break;
+        case "December":
+          mm = "ธันวาคม";
+          // code block
+          break;
+        default:
+        // code block
+      }
+  
+      const birthday =
+        "เกิดวันที่ " + dd + " " + mm + " " + yyy + ", อายุ " + yy + " ปี";
+      //console.log(birthday.toString());
+      return birthday.toString();
+    };
+  
+    const DateStartEnd = (props) => {
+      const mmmm1 = moment(props.start).format("MMMM");
+      const yyyy1 = moment(props.start).format("YYYY");
+      const mmmm2 = moment(props.end).format("MMMM");
+      const yyyy2 = moment(props.end).format("YYYY");
+      var sumy = parseInt(yyyy2) - parseInt(yyyy1);
+      var massage =
+        mmmm1 +
+        " " +
+        yyyy1 +
+        " - " +
+        mmmm2 +
+        " " +
+        yyyy2 +
+        " - " +
+        sumy +
+        " year ";
+      return massage.toString();
+    };
+  
+    const AvatarImage = (props) => {
+      const profile = props.user_profile;
+      var user_profile = "";
+  
+      if(profile){
+        user_profile = "data:image/jpeg;base64," + profile;
+      }
+      return(
+        <>
+        <Avatar
+          alt={props.us_firstname}
+          src={user_profile}
+          sx={{ width: 200, height: 200 }}
+        /></>
+      )
     }
 
-    try {
-      axios
-        .post("resume/user_education", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data);
-            setEducation(res.data);
-            setLoading1(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
-      axios
-        .post("resume/user_experince", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data);
-            setExperience(res.data);
-            setLoading2(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
-      axios
-        .post("skill/skill_types", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data);
-            setSkillTypes(res.data);
-            setLoading3(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
-      axios
-        .post("skill/userSkill", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            // console.log(res.data);
-            setUserSkill(res.data);
-            setLoading4(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    UserDatas();
-  }, []);
-
-  const SetDateTime = (props) => {
-    // console.log(props.dates);
-    const yearnow = new Date().getFullYear();
-    const byear = moment(props.dates).format("YYYY");
-    const yy = yearnow - byear;
-    const dd = moment(props.dates).format("DD");
-    const mmmm = moment(props.dates).format("MMMM");
-    const yyyy = moment(props.dates).format("YYYY");
-    var yyy = parseInt(yyyy) + 543;
-    var mm = "";
-    switch (mmmm) {
-      case "January":
-        mm = "มกราคม";
-        // code block
-        break;
-      case "February":
-        mm = "กุมภาพันธ์";
-        // code block
-        break;
-      case "March":
-        mm = "มีนาคม";
-        // code block
-        break;
-      case "April":
-        mm = "เมษายน";
-        // code block
-        break;
-      case "May":
-        mm = "พฤษภาคม";
-        // code block
-        break;
-      case "June":
-        mm = "มิถุนายน";
-        // code block
-        break;
-      case "July":
-        mm = "กรกฎาคม";
-        // code block
-        break;
-      case "August ":
-        mm = "สิงหาคม";
-        // code block
-        break;
-      case "September":
-        mm = "กันยายน";
-        // code block
-        break;
-      case "October":
-        mm = "ตุลาคม";
-        // code block
-        break;
-      case "November":
-        mm = "พฤศจิกายน";
-        // code block
-        break;
-      case "December":
-        mm = "ธันวาคม";
-        // code block
-        break;
-      default:
-      // code block
-    }
-
-    const birthday =
-      "เกิดวันที่ " + dd + " " + mm + " " + yyy + ", อายุ " + yy + " ปี";
-    //console.log(birthday.toString());
-    return birthday.toString();
-  };
-
-  const DateStartEnd = (props) => {
-    const mmmm1 = moment(props.start).format("MMMM");
-    const yyyy1 = moment(props.start).format("YYYY");
-    const mmmm2 = moment(props.end).format("MMMM");
-    const yyyy2 = moment(props.end).format("YYYY");
-    var sumy = parseInt(yyyy2) - parseInt(yyyy1);
-    var massage =
-      mmmm1 +
-      " " +
-      yyyy1 +
-      " - " +
-      mmmm2 +
-      " " +
-      yyyy2 +
-      " - " +
-      sumy +
-      " year ";
-    return massage.toString();
-  };
-
-  const AvatarImage = (props) => {
-    const profile = props.user_profile;
-    var user_profile = "";
-
-    if(profile){
-      user_profile = "data:image/jpeg;base64," + profile;
-    }
     return(
-      <>
-      <Avatar
-        alt={props.us_firstname}
-        src={user_profile}
-        sx={{ width: 200, height: 200 }}
-      /></>
-    )
-  }
-
-  return (
-    <Sidebar>
-      {!userEmail && (
         <div className="bg-resume">
           {/* <p>UserResume</p> */}
           <div className="div-1">
@@ -503,17 +502,5 @@ export default function UserResume() {
           </div>
           </div>
         </div>
-      )}
-      {userEmail && (
-        <>
-          <UserDashboard />
-          <Button variant="contained" onClick={() => handleClick()}>
-            Logout
-          </Button>
-          <p>UserResume : {userEmail}</p>
-          <UserResumeReport userEmail={userEmail} />
-        </>
-      )}
-    </Sidebar>
-  );
+    )
 }

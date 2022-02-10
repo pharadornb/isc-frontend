@@ -1,6 +1,9 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
 import ThaiAddress from "./ThaiAddress";
+import Swal from "sweetalert2";
+
+const emailValidator = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export default class RegisterUser extends React.Component {
     constructor(props) {
@@ -19,6 +22,12 @@ export default class RegisterUser extends React.Component {
             facebook: '',
             youtube: ''
         }
+        localStorage.removeItem('userRegisterEmail');
+        localStorage.removeItem('userRegisterProfile');
+        localStorage.removeItem('userRegisterPassword');
+        localStorage.removeItem('userRegisterRePassword');
+        localStorage.removeItem('validEmail');
+        localStorage.removeItem('validPassword');
     }
 
     onChange = (e) => {
@@ -33,10 +42,56 @@ export default class RegisterUser extends React.Component {
 
     _handleReaderLoaded = (e) => {
         let binaryString = e.target.result;
-        this.setState({
-            base64Data: btoa(binaryString),
-        });
+        if (btoa(binaryString).length * (3 / 4) - 2 <= 50000) {
+            this.setState({
+                base64Data: btoa(binaryString),
+            });
+            localStorage.setItem('userRegisterProfile', btoa(binaryString));
+        } else {
+            Swal.fire(
+                'ไม่อนุญาตภาพ',
+                'อนุญาตขนาดภาพไม่เกิน 50 Kb',
+                'error'
+            );
+        }
     };
+
+    checkEmailValid() {
+        let val = '';
+        localStorage.removeItem('validEmail');
+        if (localStorage.getItem('userRegisterEmail') === '') {
+            val = 'false1';
+        } else {
+            if (!emailValidator.test(localStorage.getItem('userRegisterEmail')) === false) {
+                val = 'false2';
+                localStorage.setItem('validEmail', true)
+            }
+        }
+        return val;
+    }
+
+    checkPasswordValid() {
+        let val = '';
+        if (localStorage.getItem('userRegisterPassword') === '') {
+            val = 'false1';
+        }
+        return val;
+    }
+
+    checkRepasswordValid() {
+        localStorage.removeItem('validPassword');
+        let val = '';
+        if (localStorage.getItem('userRegisterRePassword') !== localStorage.getItem('userRegisterPassword')) {
+            val = 'false2';
+        } else {
+            if (localStorage.getItem('userRegisterPassword') !== '' && localStorage.getItem('userRegisterPassword') !== null) {
+                val = 'false3';
+                localStorage.setItem('validPassword', true)
+            }
+        }
+        return val;
+    }
+
 
     render() {
         const {base64Data} = this.state;
@@ -50,33 +105,81 @@ export default class RegisterUser extends React.Component {
                             <div className="col-md-8">
                                 <div className="row">
                                     <div className="col-md-12 mt-4">
-                                        {base64Data != null && (
+                                        {base64Data !== null ? (
                                             <Avatar
-                                                alt="profile-images"
-                                                src={`data:image;base64,${base64Data}`}
-                                                sx={{width: 130, height: 130}}
+                                                src={`data:image/png;base64,${base64Data}`}
+                                                className="avatar-register" sx={{width: 150, height: 150}}
                                             />
-                                        )}
-                                        {base64Data === null && (
-                                            <Avatar alt="profile-images"
-                                                    src="https://pharadorn.lnw.mn/isc-project/isc-logo-2.png"
-                                                    sx={{width: 130, height: 130}}/>
+                                        ) : (
+                                            localStorage.getItem('userRegisterProfile') !== '' && (
+                                                <label htmlFor="file">
+                                                    <Avatar alt="ITSC-Profile"
+                                                            src={`data:image;base64,${localStorage.getItem('userRegisterProfile')}`}
+                                                            sx={{width: 130, height: 130}}/>
+                                                </label>
+
+                                            )
                                         )}
                                         <input type="file" className="custom-file-input" name="image" id="file"
                                                accept=".jpg, .jpeg, .png"
-                                               onChange={(e) => this.onChange(e)}/>
+                                               onChange={(e) => this.onChange(e)} style={{display: "none"}}/>
+                                        <div>
+                                            <i className="fas fa-caret-up"/> เพิ่มรูปโฟรไฟล์, 50 kb
+                                        </div>
                                     </div>
                                     <div className="col-md-12 mt-4">
-                                        <input type="email" className="form-control" placeholder="อีเมล์ผู้รับบริการ"
-                                               onChange={(e) => this.setState({email: e.target.value})}/>
+                                        <input type="email" className='form-control' placeholder="อีเมล์ผู้รับบริการ"
+                                               onChange={(e) => this.setState({email: e.target.value},
+                                                   localStorage.setItem('userRegisterEmail', e.target.value))}
+                                               size={250}
+                                               value={localStorage.getItem('userRegisterEmail') ? localStorage.getItem('userRegisterEmail') : ''}/>
+                                        {
+                                            this.checkEmailValid() === 'false1' && (
+                                                <div className="alert alert-danger" role="alert">
+                                                    กรุณากรอกอีเมล์
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            this.checkEmailValid() === 'false2' && (
+                                                <div className="alert alert-success" role="alert">
+                                                    อีเมล์สามารถใช้ได้
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                     <div className="col-md-12 mt-4">
                                         <input type="password" className="form-control" placeholder="ตั้งรหัสผ่าน"
-                                               onChange={(e) => this.setState({password: e.target.value})}/>
+                                               onChange={(e) => this.setState(
+                                                   localStorage.setItem('userRegisterRePassword', e.target.value))}/>
                                     </div>
+                                    {
+                                        this.checkPasswordValid() === 'false1' && (
+                                            <div className="alert alert-danger" role="alert">
+                                                กรุณากรอกรหัสผ่าน
+                                            </div>
+                                        )
+                                    }
                                     <div className="col-md-12 mt-4">
-                                        <input type="password" className="form-control" placeholder="ยืนยันรหัสผ่าน"/>
+                                        <input type="password" className="form-control" placeholder="ยืนยันรหัสผ่าน"
+                                               onChange={(e) => this.setState({password: e.target.value},
+                                                   localStorage.setItem('userRegisterPassword', e.target.value))}
+                                               value={localStorage.getItem('userRegisterPassword') ? localStorage.getItem('userRegisterPassword') : ''}/>
                                     </div>
+                                    {
+                                        this.checkRepasswordValid() === 'false2' && (
+                                            <div className="alert alert-danger" role="alert">
+                                                กรุณากรอกรหัสผ่านให้ตรงกัน
+                                            </div>
+                                        )
+                                    }
+                                    {
+                                        this.checkRepasswordValid() === 'false3' && (
+                                            <div className="alert alert-success" role="alert">
+                                                รหัสผ่านตรงกัน
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                             <div className="col-md-2"/>

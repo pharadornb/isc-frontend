@@ -11,10 +11,10 @@ import "moment/locale/en-au";
 // import Carousel from "nice-react-carousel";
 
 import CustomContentProgressbar from "./CustomContentProgressbar";
-import AlertDialogSlide from "./AlertDialogSlide";
+// import AlertDialogSlide from "./AlertDialogSlide";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import Logo from "../../img/logo2.PNG";
+// import Logo from "../../img/logo2.PNG";
 
 export default function UserResumeReport(props) {
 
@@ -242,32 +242,34 @@ export default function UserResumeReport(props) {
     return(
         <div className="bg-resume">
           {/* <p>UserResume</p> */}
-          <div className="div-1">
-            <div className="d11">
-              <button className="btns">
-                <i className="fas fa-file-pdf"></i> ดาวน์โหลด
-              </button>
-              <AlertDialogSlide
-                education={education}
-                experience={experience}
-                userSkill={userSkill}
-                skilltypes={skilltypes}
-              />
-            </div>
-            <div className="d12">
-              <label className="w b mg">Created by :</label>
-              <img alt="logo2" className="sl" src={Logo} />
-              <label className="b w mg">Serial key :</label>
-              <label className="w lbd12 mg">{dataNUser.user_key}</label>
-            </div>
-            <a
-              href="https://isc-service.azurewebsites.net/user_resume"
-              className="w lin"
-            >
-              https://isc-service.azurewebsites.net/user_resume
-            </a>
-          </div>
-          <div className="goo"></div>
+          {/*<div className="div-1">*/}
+            {/*<label className="w b mg">Created by :</label>*/}
+            {/*<img alt="logo2" className="sl" src={Logo} />*/}
+            {/*<div className="d11">*/}
+
+              {/*<button className="btns">*/}
+              {/*  <i className="fas fa-file-pdf"></i> ดาวน์โหลด*/}
+              {/*</button>*/}
+              {/*<AlertDialogSlide*/}
+              {/*  education={education}*/}
+              {/*  experience={experience}*/}
+              {/*  userSkill={userSkill}*/}
+              {/*  skilltypes={skilltypes}*/}
+              {/*/>*/}
+            {/*</div>*/}
+            {/*<div className="d12" >*/}
+
+              {/*<label className="b w mg">Serial key :</label>*/}
+              {/*<label className="w lbd12 mg">{dataNUser.user_key}</label>*/}
+            {/*</div>*/}
+            {/*<a*/}
+            {/*  href="https://isc-service.azurewebsites.net/user_resume"*/}
+            {/*  className="w lin"*/}
+            {/*>*/}
+            {/*  https://isc-service.azurewebsites.net/user_resume*/}
+            {/*</a>*/}
+          {/*</div>*/}
+          <div className="goo" />
           <div className="container">
           <div className="row div-2">
             <div className="col-md-6 div2-1">
@@ -299,7 +301,7 @@ export default function UserResumeReport(props) {
               <div className="row div22-2 la">
                 {/* วันเกิด */}
                 <div className="col-1">
-                  <i className="fas fa-birthday-cake w"></i>
+                  <i className="fas fa-birthday-cake w" />
                 </div>
                 <div className="col-11 w">
                   <SetDateTime dates={dataNUser.user_dob} />
@@ -307,21 +309,21 @@ export default function UserResumeReport(props) {
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-envelope w"></i>
+                  <i className="fas fa-envelope w" />
                 </div>
                 {/* อีเมล */}
                 <div className="col-11 w">{dataNUser.user_email}</div>
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-phone-alt w"></i>
+                  <i className="fas fa-phone-alt w" />
                 </div>
                 {/* เบอร์โทร */}
                 <div className="col-11 w">{dataNUser.user_tel}</div>
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-map-marker-alt w"></i>
+                  <i className="fas fa-map-marker-alt w" />
                 </div>
                 <div className="col-11 w">
                   <b>ที่อยู่ปัจจุบัน : </b>
@@ -334,7 +336,7 @@ export default function UserResumeReport(props) {
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-map-marker-alt w"></i>
+                  <i className="fas fa-map-marker-alt w" />
                 </div>
                 <div className="col-11 w">
                   <b>ภูมิลำเนา : </b>
@@ -356,7 +358,7 @@ export default function UserResumeReport(props) {
                       "https://www.facebook.com/" + dataNUser.us_com_facebook
                     }
                   >
-                    <i className="fab fa-facebook w"></i>
+                    <i className="fab fa-facebook w" />
                     <label className="w ml">{dataNUser.us_com_facebook}</label>
                   </a>
                   {/* youtube */}
@@ -367,7 +369,7 @@ export default function UserResumeReport(props) {
                       dataNUser.us_com_youtube
                     }
                   >
-                    <i className="fab fa-youtube w"></i>
+                    <i className="fab fa-youtube w" />
                     <label className="w ml">{dataNUser.us_com_youtube}</label>
                   </a>
                   {/* github */}
@@ -375,7 +377,7 @@ export default function UserResumeReport(props) {
                     className="col-6"
                     href={"https://github.com/" + dataNUser.us_com_github}
                   >
-                    <i className="fab fa-github w "></i>
+                    <i className="fab fa-github w " />
                     <label className="w ml">{dataNUser.us_com_github}</label>
                   </a>
                   {/* linkedin */}
@@ -385,7 +387,7 @@ export default function UserResumeReport(props) {
                       "https://www.linkedin.com/in/" + dataNUser.us_com_linkedin
                     }
                   >
-                    <i className="fab fa-linkedin w"></i>
+                    <i className="fab fa-linkedin w" />
                     <label className="w ml">{dataNUser.us_com_linkedin}</label>
                   </a>
                 </div>
@@ -455,8 +457,8 @@ export default function UserResumeReport(props) {
                 {skilltypes.map((row1) => (
                   <div key={row1.skill_type_id} className="col-12">
                     <label className="b txttitle">{row1.skill_type_name}</label>
-                    <br></br>
-                    <br></br>
+                    <br/>
+                    <br/>
                     {loading4 === false && <CircularProgress />}
                     <div className="row">
                       {userSkill.map(

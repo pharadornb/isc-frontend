@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import UserDashboard from "../../component/UserDashboard";
-import Button from "@mui/material/Button";
+// import UserDashboard from "../../component/UserDashboard";
+// import Button from "@mui/material/Button";
 import Sidebar from "../../component/configComponent/SidebarChild";
 import "./UserResume.css";
 import axios from "axios";
@@ -19,10 +19,10 @@ import Logo from "../../img/logo2.PNG";
 export default function UserResume() {
   const { userEmail } = useParams();
 
-  const handleClick = () => {
-    sessionStorage.clear();
-    window.location = "/";
-  };
+  // const handleClick = () => {
+  //   sessionStorage.clear();
+  //   window.location = "/";
+  // };
 
   const [dataNUser, setDataNUser] = useState([]);
   const [education, setEducation] = useState([]);
@@ -246,7 +246,7 @@ export default function UserResume() {
           <div className="div-1">
             <div className="d11">
               <button className="btns">
-                <i className="fas fa-file-pdf"></i> ดาวน์โหลด
+                <i className="fas fa-file-pdf" /> ดาวน์โหลด
               </button>
               <AlertDialogSlide
                 education={education}
@@ -268,7 +268,7 @@ export default function UserResume() {
               https://isc-service.azurewebsites.net/user_resume
             </a>
           </div>
-          <div className="goo"></div>
+          <div className="goo" />
           <div className="container">
           <div className="row div-2">
             <div className="col-md-6 div2-1">
@@ -300,7 +300,7 @@ export default function UserResume() {
               <div className="row div22-2 la">
                 {/* วันเกิด */}
                 <div className="col-1">
-                  <i className="fas fa-birthday-cake w"></i>
+                  <i className="fas fa-birthday-cake w" />
                 </div>
                 <div className="col-11 w">
                   <SetDateTime dates={dataNUser.user_dob} />
@@ -308,21 +308,21 @@ export default function UserResume() {
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-envelope w"></i>
+                  <i className="fas fa-envelope w" />
                 </div>
                 {/* อีเมล */}
                 <div className="col-11 w">{dataNUser.user_email}</div>
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-phone-alt w"></i>
+                  <i className="fas fa-phone-alt w" />
                 </div>
                 {/* เบอร์โทร */}
                 <div className="col-11 w">{dataNUser.user_tel}</div>
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-map-marker-alt w"></i>
+                  <i className="fas fa-map-marker-alt w" />
                 </div>
                 <div className="col-11 w">
                   <b>ที่อยู่ปัจจุบัน : </b>
@@ -335,7 +335,7 @@ export default function UserResume() {
               </div>
               <div className="row div22-2 la">
                 <div className="col-1">
-                  <i className="fas fa-map-marker-alt w"></i>
+                  <i className="fas fa-map-marker-alt w" />
                 </div>
                 <div className="col-11 w">
                   <b>ภูมิลำเนา : </b>
@@ -357,7 +357,7 @@ export default function UserResume() {
                       "https://www.facebook.com/" + dataNUser.us_com_facebook
                     }
                   >
-                    <i className="fab fa-facebook w"></i>
+                    <i className="fab fa-facebook w" />
                     <label className="w ml">{dataNUser.us_com_facebook}</label>
                   </a>
                   {/* youtube */}
@@ -368,7 +368,7 @@ export default function UserResume() {
                       dataNUser.us_com_youtube
                     }
                   >
-                    <i className="fab fa-youtube w"></i>
+                    <i className="fab fa-youtube w" />
                     <label className="w ml">{dataNUser.us_com_youtube}</label>
                   </a>
                   {/* github */}
@@ -376,7 +376,7 @@ export default function UserResume() {
                     className="col-6"
                     href={"https://github.com/" + dataNUser.us_com_github}
                   >
-                    <i className="fab fa-github w "></i>
+                    <i className="fab fa-github w " />
                     <label className="w ml">{dataNUser.us_com_github}</label>
                   </a>
                   {/* linkedin */}
@@ -386,7 +386,7 @@ export default function UserResume() {
                       "https://www.linkedin.com/in/" + dataNUser.us_com_linkedin
                     }
                   >
-                    <i className="fab fa-linkedin w"></i>
+                    <i className="fab fa-linkedin w" />
                     <label className="w ml">{dataNUser.us_com_linkedin}</label>
                   </a>
                 </div>
@@ -456,8 +456,8 @@ export default function UserResume() {
                 {skilltypes.map((row1) => (
                   <div key={row1.skill_type_id} className="col-12">
                     <label className="b txttitle">{row1.skill_type_name}</label>
-                    <br></br>
-                    <br></br>
+                    <br/>
+                    <br/>
                     {loading4 === false && <CircularProgress />}
                     <div className="row">
                       {userSkill.map(
@@ -506,11 +506,11 @@ export default function UserResume() {
       )}
       {userEmail && (
         <>
-          <UserDashboard />
-          <Button variant="contained" onClick={() => handleClick()}>
-            Logout
-          </Button>
-          <p>UserResume : {userEmail}</p>
+          {/*<UserDashboard />*/}
+          {/*<Button variant="contained" onClick={() => handleClick()}>*/}
+          {/*  Logout*/}
+          {/*</Button>*/}
+          {/*<p>UserResume : {userEmail}</p>*/}
           <UserResumeReport userEmail={userEmail} />
         </>
       )}

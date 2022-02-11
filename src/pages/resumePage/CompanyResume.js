@@ -141,7 +141,7 @@ export default function CompanyResume() {
 
   const handleChange = (e) => {
     const values = [...companyProfileGeneral];
-    const { value, name } = e.target;
+    const { name } = e.target;
     if (name === "uc_name") {
       setCompanyProfileGeneral(values.uc_name);
     }
@@ -341,7 +341,7 @@ export default function CompanyResume() {
                   <EditIcon /> <b>แก้ไขข้อมูลบริษัท</b>
                 </label>
               </div>
-              <div className="magintop20"></div>
+              <div className="magintop20" />
               <FormControl onSubmit={() => handleSubmit}>
                 <div className="container">
                   <div className="row">
@@ -383,8 +383,8 @@ export default function CompanyResume() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-4 maginBottom20"></div>
-                    <div className="col-md-8 maginBottom20"></div>
+                    <div className="col-md-4 maginBottom20" />
+                    <div className="col-md-8 maginBottom20" />
                     <div className="col-md-12 col-lg-4 maginBottom20 sdd">
                       <div className="row bg-while marginleft20 ">
                         <div className="col-lg-12 maginBottom20">

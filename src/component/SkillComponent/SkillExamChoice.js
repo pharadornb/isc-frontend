@@ -33,11 +33,7 @@ export default function SkillExamChoice(props) {
 
     const handleChange = (e) => {
         setGender(e.target.value)
-        const params = JSON.stringify({
-            exam_id: props.examId,
-            choice_id: Number(e.target.value)
-        });
-        localStorage.setItem('choice', params);
+        localStorage.setItem(props.examId, Number(e.target.value));
     }
 
     return (

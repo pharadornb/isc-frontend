@@ -36,6 +36,10 @@ export default function SkillExamChoice(props) {
         localStorage.setItem(props.examId, Number(e.target.value));
     }
 
+    const handleSubjective = (e) =>{
+        localStorage.setItem(props.examId, e.target.value);
+    }
+
     return (
         <tbody>
         <tr>
@@ -66,7 +70,7 @@ export default function SkillExamChoice(props) {
                 <tr>
                     <td style={{textAlign: 'left'}}>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                              placeholder="กรุณากรอกคำตอบ"/>
+                              placeholder="กรุณากรอกคำตอบ" onChange={handleSubjective} >{localStorage.getItem(props.examId)}</textarea>
                     </td>
                 </tr>
             </>

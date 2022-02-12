@@ -191,7 +191,7 @@ export default function Experience(props) {
       resume_experince_add,
     });
 
-    console.log(params);
+    // console.log(params);
     
       axios
       .post("resume/updateUserExperince", params, {
@@ -201,7 +201,7 @@ export default function Experience(props) {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log("บันทึกเสร็จสิ้น");
+          // console.log("บันทึกเสร็จสิ้น");
         }
       })
       .catch((err) => console.log(err));

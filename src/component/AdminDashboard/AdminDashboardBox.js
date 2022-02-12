@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../../css/AdminDashboard/AdminDashboardBox.css';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+// import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BusinessIcon from '@mui/icons-material/Business';
 import MessageIcon from '@mui/icons-material/Message';
@@ -11,7 +11,7 @@ function AdminDashboardBox(){
     const [countUser, setCountUser] = useState([]);
     const [countCo, setCountCo] = useState([]);
     const [countSkill, setCountSkill] = useState([]);
-    const [countStatement, setCountStatement] = useState([]);
+    // const [countStatement, setCountStatement] = useState([]);
 
     const onListCount = async () => {
         try{
@@ -27,7 +27,7 @@ function AdminDashboardBox(){
               setCountUser(res.data.user);
               setCountCo(res.data.company);
               setCountSkill(res.data.skill);
-              setCountStatement(res.data.statement);
+            //   setCountStatement(res.data.statement);
             }
           });
           }catch (err){
@@ -81,7 +81,7 @@ function AdminDashboardBox(){
             </div>
         </div>
         
-        <div className="col-md-3">
+        {/* <div className="col-md-3">
             <div className='box b4'>
                 <div className="inbox_left">
                     <label className="textbox_style1"><b>ยอดรายรับบริการ</b></label>
@@ -92,9 +92,7 @@ function AdminDashboardBox(){
                     <AccountBalanceWalletIcon style={{fontSize: 60}} />
                 </div>
             </div>    
-        </div>
-
-
+        </div> */}
         </>
     )
 }

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-
 import "../../css/UserDashboard.css";
-
-// import ListIcon from "../../img/list-icon.PNG"
-// import MoneyIcon from "../../img/money.PNG"
-// import PustIcon from "../../img/pust-icon.PNG"
 import logo from "../../img/Thailand-company-registration.jpg";
 import ThinkIcon from "../../img/think-icon.PNG";
 import Moneys from "../../img/money2.PNG";
@@ -32,7 +27,7 @@ export default function UserDashboardContent() {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res.data.skill_all[0]);
+            // console.log(res.data.skill_all[0]);
             setDatacount1(res.data.skill_all[0]);
             setDatacount2(res.data.your_skill_sum[0]);
             setDatacount3(res.data.your_wallet_sum[0]);

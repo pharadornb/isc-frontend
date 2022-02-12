@@ -19,9 +19,12 @@ export default function AlertDialogSlide(prop) {
   const [companySkillRequire, setCompanySkillRequire] = useState([]);
   const companyPositionRequire= React.useState(prop.companyPositionRequire);
 
-    console.log(companySkillRequire);
+    // console.log(companySkillRequire);
 
-    const PositionRequire = () => {
+    
+
+    useEffect(() => {
+      const PositionRequire = () => {
         try {
             const params = JSON.stringify({
                 ucre_id: companyPositionRequire[0].ucre_id
@@ -45,9 +48,9 @@ export default function AlertDialogSlide(prop) {
         }
     }
 
-    useEffect(() => {
         PositionRequire();
-    })
+
+    },[companyPositionRequire]);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -68,30 +68,6 @@ export default function Personal(props) {
     const profiles = selectedFile.split(",");
     // console.log(profiles[1]);
 
-    // const params = JSON.stringify({
-    //   user_email: dataNUser.user_email,
-    //   user_profile: profiles[1],
-    //   user_tel: dataNUser.user_tel,
-    //   user_dob: dataNUser.user_dob,
-    //   user_address: dataNUser.user_address,
-    //   user_subdistrict: dataNUser.user_subdistrict,
-    //   user_district: dataNUser.user_district,
-    //   user_province: dataNUser.user_province,
-    //   user_postcode: dataNUser.user_postcode,
-    //   user_slogan: dataNUser.user_slogan,
-    //   us_firstname: dataNUser.us_firstname,
-    //   us_lastname: dataNUser.us_lastname,
-    //   us_com_address: dataNUser.us_com_address,
-    //   us_com_subdistrict: dataNUser.us_com_subdistrict,
-    //   us_com_district: dataNUser.us_com_district,
-    //   us_com_province: dataNUser.us_com_province,
-    //   us_com_postcode: dataNUser.us_com_postcode,
-    //   us_com_github: dataNUser.us_com_github,
-    //   us_com_linkedin: dataNUser.us_com_linkedin,
-    //   us_com_facebook: dataNUser.us_com_facebook,
-    //   us_com_youtube: dataNUser.us_com_youtube
-    // });
-
     // console.log(params);
 
     if (isFilePicked[0] === true) {
@@ -127,12 +103,12 @@ export default function Personal(props) {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(dataNUser);
+            // console.log(dataNUser);
             UserProfiles();
           }
         })
         .catch((err) => console.log(err));
-      console.log("Push image");
+      // console.log("Push image");
     } else {
       const params = JSON.stringify({
         user_email: dataNUser.user_email,
@@ -166,13 +142,13 @@ export default function Personal(props) {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(dataNUser);
+            // console.log(dataNUser);
             UserProfiles();
           }
         })
         .catch((err) => console.log(err));
 
-      console.log("No image");
+      // console.log("No image");
     }
   };
 

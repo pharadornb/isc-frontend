@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from "axios";
 import { useState } from "react";
@@ -14,28 +14,37 @@ export default function ProgressbarSkills(props){
     // console.log(checkIndex);
     // console.log(props.index + " " + props.ucre_id);
 
-    try {
-        const params = JSON.stringify({
-            ucre_id: props.ucre_id
-        });
+   
 
-        axios
-        .post("resume/companySkillRequire",params, {
-            headers: {
-            "Content-Type": "application/json",
-            },
-        })
-        .then((res) => {
-            if (res.status === 200) {
-                // console.log(res.data);
-                setCompanySkillRequire(res.data);
-                setLoading3(true);
+    useEffect(() => {
+        const dateSelect = () => {
+            try {
+                const params = JSON.stringify({
+                    ucre_id: props.ucre_id
+                });
+        
+                axios
+                .post("resume/companySkillRequire",params, {
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        // console.log(res.data);
+                        setCompanySkillRequire(res.data);
+                        setLoading3(true);
+                    }
+                });
+            } catch (err) {
+                console.log(err);
             }
-        });
-    } catch (err) {
-        console.log(err);
-    }
-    
+        };
+
+        dateSelect();
+    },[props.ucre_id]);
+
+
 
     const ImageLogo = (props) => {
         var user_profile = "";

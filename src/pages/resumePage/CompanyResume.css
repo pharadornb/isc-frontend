@@ -230,8 +230,8 @@
   }
 
   .maginLeftRight-center {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
   .bg-edit {
@@ -273,4 +273,17 @@
 
   .sdd {
     padding: 20px;
+  }
+
+  .selectStype {
+    height: 55px;
+  }
+
+  .title-Position-require {
+    background-color: #2e2e48;
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
   }

@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import UserDashboard from "../../component/UserDashboard";
-// import Button from "@mui/material/Button";
-// import Sidebar from "../../component/configComponent/SidebarChild";
-// import "./UserResume.css";
 import axios from "axios";
 import { Avatar } from "@mui/material";
 import moment from "moment";
 import "moment/locale/en-au";
-// import Carousel from "nice-react-carousel";
 
 import CustomContentProgressbar from "./CustomContentProgressbar";
 import AlertDialogSlide from "./AlertDialogSlide";
@@ -48,7 +42,7 @@ export default function UserResumeReport(props) {
             })
             .then((res) => {
               if (res.status === 200) {
-                console.log(res.data[0]);
+                // console.log(res.data[0]);
                 setDataNUser(res.data[0]);
                 setLoading(true);
               }

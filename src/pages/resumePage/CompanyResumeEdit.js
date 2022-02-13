@@ -4,7 +4,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import axios from "axios";
 import Swal from "sweetalert2";
-import moment from "moment";
+// import moment from "moment";
 import {
   Avatar,
   //   Input,
@@ -57,10 +57,50 @@ export default function CompanyResumeEdit() {
     autoSuggestion(zipCode, subDistrict);
   };
 
+  const PositionRequire = () => {
+    // Select API PositionRequire
+    try {
+      axios
+        .post("resume/companyPositionRequire", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(res.data);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+    // End funtion PositionRequire
+  }
+
+  const SkillRequire = () => {
+    // Select API SkillRequire
+    try {
+      axios
+        .post("resume/companySkillRequire", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(res.data);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+    // End funtion SkillRequire
+  }
+
   useEffect(() => {
-    // Select API
+    
     const SelectCompanyData = () => {
-      // ProfileGeneral --------------
+      // Select API ProfileGeneral --------------
       try {
         axios
           .post("resume/companyProfileGeneral", {
@@ -90,6 +130,9 @@ export default function CompanyResumeEdit() {
       // End funtion SelectCompanyData --------------------------------------------------------
     };
 
+    // Select Function
+    //SkillRequire();
+    PositionRequire();
     SelectCompanyData();
   }, []);
 
@@ -432,9 +475,90 @@ export default function CompanyResumeEdit() {
           </div>
           <div className="container">
               <div className="row">
-                <div className="col-lg-12">
-                  <label className="title-Position-require">Position require</label>
-                  <div className="line"></div>
+                <div className="col-lg-12 ">
+                  <div className="p-relative">
+                    <label className="title-Position-require p-absolute">Position require</label>
+                    <div className="line "></div>
+                  </div>
+                </div>
+                <div className="col-12"><br/><br/></div>
+              </div>
+              <div className="row">
+                <div className="col-12 bg-while">
+                  {/* In-Box-Position */}
+                  <div className="row">
+                    <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>ตำเเหน่งงาน : </label>
+                    <TextField
+                      className="col-md-6 col-lg-3"
+                      id="outlined-basic"
+                      label="Position"
+                      name="da"
+                      variant="outlined"
+                      margin="normal"
+                      // value={province}
+                      // onChange={(newValue) => handleChangeNew(newValue)}
+                    />
+                    <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>เงินประจำเดือน :</label>
+                    <TextField
+                      className="col-md-6 col-lg-3"
+                      id="outlined-basic"
+                      label="Salary"
+                      name="da"
+                      margin="normal"
+                      variant="outlined"
+                      // value={province}
+                      // onChange={(newValue) => handleChangeNew(newValue)}
+                    />
+                    <div className="col-12"><br/></div>
+                    <label className="col-12"><b>รายละเอียดงาน</b></label>
+                    <TextField
+                      id="outlined-multiline-flexible"
+                      label="Job Detail"
+                      className="col-12"
+                      fullWidth
+                      multiline
+                      // name="uc_detail"
+                      maxRows={4}
+                      margin="normal"
+                      // value={ProfileGeneral[0].uc_detail}
+                      onChange={(newValue) => handleChangeNew(newValue)}
+                    />
+                    <div className="col-12"><br/></div>
+                    <div className="col-12 "  > {/*Skill Require */}
+                      <div className="row borderBox overflow-auto" align={"center"}>
+                        <label className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative">
+                          <Avatar
+                              alt={'ddd'}
+                              className="avatarL"
+                              src={`data:image/jpeg;base64,`}
+                              sx={{ width: 20, height: 20 }}
+                            />
+                          <Avatar
+                            alt={'ddd'}
+                            // className="maginLeftRight-center"
+                            src={`data:image/jpeg;base64,`}
+                            sx={{ width: 50, height: 50 }}
+                          />
+                          <p>5555</p>
+                        </label>
+                        <label className="col-sm-5 col-md-3 col-lg-1 boxSkilsRequire p-relative">
+                          <Avatar
+                              alt={'ddd'}
+                              className="avatarL"
+                              src={`data:image/jpeg;base64,`}
+                              sx={{ width: 20, height: 20 }}
+                            />
+                          <Avatar
+                            alt={'ddd'}
+                            // className="maginLeftRight-center"
+                            src={`data:image/jpeg;base64,`}
+                            sx={{ width: 50, height: 50 }}
+                          />
+                          <p>5555</p>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
           </div>

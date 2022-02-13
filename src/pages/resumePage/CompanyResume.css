@@ -279,6 +279,8 @@
     height: 55px;
   }
 
+  /* -------------Position---------------- */
+
   .title-Position-require {
     background-color: #2e2e48;
     color: #ffffff;
@@ -286,4 +288,48 @@
     padding-bottom: 10px;
     padding-left: 40px;
     padding-right: 40px;
+    border-radius: 5px;
+    
   }
+
+  .p-relative {
+    position: relative;
+  }
+
+  .p-absolute {
+    position: absolute;
+    top: -20px;
+  }
+
+  .txtBoxRequire {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 900;
+  }
+
+  .borderBox {
+    border: 1px #b9b9b9 solid;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .boxSkilsRequire {
+    border: 1px #b1b1b1 solid;
+    width: 100px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 5px;
+  }
+
+  .avatarL {
+    position: absolute;
+    left: 30px;
+  }
+
+  .m5 {
+    margin: 5px;
+  }
+  

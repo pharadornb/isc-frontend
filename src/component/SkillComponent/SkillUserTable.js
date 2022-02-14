@@ -41,7 +41,7 @@ export default function SkillUserTable() {
         {name: "โดย", field: "uc_name", sortable: false},
         {name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false},
         {name: "ระดับทักษะ", field: "skill_credit", sortable: false},
-        {name: "คะแนนเฉลี่ย", field: "skill_credit", sortable: false},
+        {name: "คะแนนเฉลี่ย(%)", field: "skill_credit", sortable: false},
         {name: "รับบริการ", field: "", sortable: false}
     ];
 
@@ -49,6 +49,7 @@ export default function SkillUserTable() {
         const getData = () => {
 
             setShowLoading(true)
+            localStorage.clear();
 
             axios.post('skill/yourSkill', {
                 headers: {
@@ -130,23 +131,22 @@ export default function SkillUserTable() {
                                     }
                                 </td>
                                 <td>
-                                    {comment.user_skill_point === 0 ?
+                                    {comment.user_skill_update === null ?
                                         <p>ยังไม่ได้รับคะแนน</p>
                                         :
                                         <p>{comment.user_skill_point}</p>
                                     }
                                 </td>
                                 <td>
-                                    {comment.user_skill_point === 0 ?
+                                    {comment.user_skill_update === null ?
                                         <button type="button" className="btn btn-primary"
                                                 onClick={() => handleClickOpen(index)}><i
                                             className="far fa-check-square"/> ใหม่
                                         </button>
                                         :
-                                        <button type="button" className="btn btn-success"
-                                                onClick={() => handleClickOpen(index)}><i
-                                            className="far fa-check-square"/> อีกครั้ง
-                                        </button>
+                                        <p>
+                                            -
+                                        </p>
                                     }
                                 </td>
                             </tr>

@@ -3,8 +3,9 @@ import {CountdownCircleTimer} from "react-countdown-circle-timer";
 import "./SkillExamTimerStyle.css";
 
 const renderTime = ({remainingTime}) => {
+
     if (remainingTime === 0) {
-        return <div className="timer">Too lale...</div>;
+        window.location.href = "/skill/exam/save";
     }
 
     localStorage.setItem('time', Math.round(remainingTime / 60));
@@ -13,10 +14,13 @@ const renderTime = ({remainingTime}) => {
         <div className="timer">
             <div className="text">เวลาคงเหลือ</div>
             {
-                remainingTime / 60 <= 5 ?
-                    <div className="value-red">{Math.round(remainingTime / 60)}</div>
+                localStorage.getItem('time') === 0 ?
+                    <p>5555555555</p>
                     :
-                    <div className="value">{Math.round(remainingTime / 60)}</div>
+                    remainingTime / 60 <= 3 ?
+                        <div className="value-red">{Math.round(remainingTime / 60)}</div>
+                        :
+                        <div className="value">{Math.round(remainingTime / 60)}</div>
 
             }
             <div className="text">นาที</div>

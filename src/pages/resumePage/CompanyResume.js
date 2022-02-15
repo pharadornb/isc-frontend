@@ -12,27 +12,15 @@ import {
   LocationOn,
 } from "@mui/icons-material";
 import {
-  Avatar,
-//   Input,
-  TextField,
-//   MenuItem,
-//   InputLabel,
-//   Select,
-  FormControl,
+  Avatar
 } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
 import CircularProgress from "@mui/material/CircularProgress";
 import AlertDialogSlide from "./CompanyDialogSlide";
 import EditIcon from "@mui/icons-material/Edit";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-
-// import Loading from '../../component/Loading';
 import ProgressbarSkills from "./CompanyProgressbarSkills";
-
-// const thai = require("thai-data");
+import CompanyResumeEdit from "./CompanyResumeEdit";
 
 export default function CompanyResume() {
   const { userEmail } = useParams();
@@ -40,8 +28,6 @@ export default function CompanyResume() {
   const [companyProfileGeneral, setCompanyProfileGeneral] = useState([]);
   const [companyPositionRequire, setCompanyPositionRequire] = useState([]);
   const [page, setPage] = useState("genaral");
-
-  const [dates, setDates] = React.useState(companyProfileGeneral.user_slogan);
 
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
@@ -64,16 +50,19 @@ export default function CompanyResume() {
         .then((res) => {
           if (res.status === 200) {
             //   console.log(res.data[0]);
-            setCompanyProfileGeneral(res.data[0]);
-            setLoading1(true);
+            setCompanyProfileGeneral(res.data[0])
+            setLoading1(true)
           }
         });
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
 
-    //   companyPositionRequire--------------------------
+    // End funtion SelectCompanyData --------------------------------------------------------
+  };
 
+  const DataPositionRequire = () => {
+    //   companyPositionRequire--------------------------
     try {
       axios
         .post("resume/companyPositionRequire", {
@@ -84,20 +73,19 @@ export default function CompanyResume() {
         .then((res) => {
           if (res.status === 200) {
             //   console.log(res.data);
-            setCompanyPositionRequire(res.data);
-            setLoading2(true);
+            setCompanyPositionRequire(res.data)
+            setLoading2(true)
           }
         });
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-
-    // End funtion SelectCompanyData --------------------------------------------------------
-  };
+  }
 
   useEffect(() => {
-    SelectCompanyData();
-  }, []);
+    SelectCompanyData()
+    DataPositionRequire()
+  },[])
 
   const ImageLogoCompany = (props) => {
     var user_profile = "";
@@ -133,19 +121,7 @@ export default function CompanyResume() {
     setPage("edit");
   };
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log('55555');
-      setPage("genaral");
-  };
-
-  const handleChange = (e) => {
-    const values = [...companyProfileGeneral];
-    const { name } = e.target;
-    if (name === "uc_name") {
-      setCompanyProfileGeneral(values.uc_name);
-    }
-  };
+  
 
 
 
@@ -164,7 +140,7 @@ export default function CompanyResume() {
               {/* Part 1 */}
               <div className="box-edit">
                 <button className="Cbtns" onClick={handleEdit}>
-                  <ModeEdit className="edit-pen" /> แก้ไข้
+                  <ModeEdit className="edit-pen" /> แก้ไข
                 </button>
               </div>
               <div className="left-48" />
@@ -295,7 +271,7 @@ export default function CompanyResume() {
                 </div>
 
                 <div className="row magin-top80-bottom40-paddig20">
-                    {loading2 === false && <CircularProgress disableShrink />}
+                  {loading2 === false && <CircularProgress disableShrink />}
                   {companyPositionRequire.map((row, index) => (
                     <div className="col-sm-12 col-md-12 bg-while" key={index}>
                       <div className="container ">
@@ -335,186 +311,14 @@ export default function CompanyResume() {
             </div>
           )}
           {page === "edit" && (
-            <div className="bg-edit">
+             <div className="bg-edit">
               <div>
                 <label className="co-edit">
-                  <EditIcon /> <b>แก้ไขข้อมูลบริษัท</b>
+                    <EditIcon /> <b>แก้ไขข้อมูลบริษัท</b>
                 </label>
               </div>
-              <div className="magintop20" />
-              <FormControl onSubmit={() => handleSubmit}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-4 ">
-                      <Avatar
-                        alt="Remy Sharp"
-                        className="maginLeftRight-center"
-                        // src="/static/images/avatar/1.jpg"
-                        sx={{ width: 200, height: 200 }}
-                      />
-                    </div>
-                    <div className="col-sm-12 col-md-8">
-                      <div className="row bg-while sdd">
-                        <div className="col-sm-12 col-md-12">
-                          <TextField
-                            id="outlined-basic"
-                            label="Outlined"
-                            fullWidth
-                            value={companyProfileGeneral.uc_name}
-                            className="inputbox magintop20"
-                            pattern={"[A-Za-z]{3}"}
-                            maxLength={11}
-                            variant="outlined"
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-sm-12 col-md-12">
-                          <TextField
-                            id="outlined-multiline-flexible"
-                            label="Slogan"
-                            className="inputbox1 magintop20"
-                            fullWidth
-                            multiline
-                            maxRows={4}
-                            margin="normal"
-                            value={companyProfileGeneral.user_slogan}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4 maginBottom20" />
-                    <div className="col-md-8 maginBottom20" />
-                    <div className="col-md-12 col-lg-4 maginBottom20 sdd">
-                      <div className="row bg-while marginleft20 ">
-                        <div className="col-lg-12 maginBottom20">
-                          <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DesktopDatePicker
-                              label="Date Dob"
-                              value={dates}
-                              onChange={(newValue) => {
-                                setDates(newValue);
-                              }}
-                              renderInput={(params) => (
-                                <TextField fullWidth {...params} />
-                              )}
-                            />
-                          </LocalizationProvider>
-                        </div>
-                        <div className="col-12  maginBottom20">
-                          <TextField
-                            id="outlined-basic"
-                            label="Email"
-                            fullWidth
-                            variant="outlined"
-                            value={companyProfileGeneral.user_email}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-12 maginBottom20">
-                          <TextField
-                            id="outlined-basic"
-                            label="Tel"
-                            fullWidth
-                            variant="outlined"
-                            value={companyProfileGeneral.user_tel}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-12 maginBottom20">
-                          <TextField
-                            id="outlined-basic"
-                            label="Fax"
-                            fullWidth
-                            variant="outlined"
-                            value={companyProfileGeneral.uc_fax}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-12 maginBottom20">
-                          <TextField
-                            id="outlined-basic"
-                            label="Website"
-                            fullWidth
-                            variant="outlined"
-                            value={companyProfileGeneral.uc_website}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-12 col-lg-8 sdd maginBottom20">
-                      <div className="row bg-while sdd">
-                        <div className="col-12 sdd">
-                          <TextField
-                            id="outlined-multiline-flexible"
-                            label="Detail"
-                            className="inputbox1"
-                            fullWidth
-                            multiline
-                            maxRows={4}
-                            margin="normal"
-                            value={companyProfileGeneral.uc_detail}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-4 sdd">
-                            <TextField
-                                id="outlined-basic"
-                                label="Address"
-                                fullWidth
-                                variant="outlined"
-                                value={companyProfileGeneral.user_address}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="col-3 sdd">
-                          <TextField
-                            id="outlined-basic"
-                            label="Postcode"
-                            fullWidth
-                            variant="outlined"
-                            value={companyProfileGeneral.user_postcode}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-4 sdd">
-                            <TextField
-                                id="outlined-basic"
-                                label="Province"
-                                fullWidth
-                                variant="outlined"
-                                value={companyProfileGeneral.user_province}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="col-4 sdd">
-                            <TextField
-                                id="outlined-basic"
-                                label="District"
-                                fullWidth
-                                variant="outlined"
-                                value={companyProfileGeneral.user_district}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="col-4 sdd">
-                            {companyProfileGeneral.user_adduser_subdistrictress}
-                            <TextField
-                                id="outlined-basic"
-                                label="Subdistrictress"
-                                fullWidth
-                                variant="outlined"
-                                value={companyProfileGeneral.user_adduser_subdistrictress}
-                                onChange={handleChange}
-                            />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <input type="submit" onClick={handleSubmit} />
-              </FormControl>
+              <div className="magintop20"></div>
+              <CompanyResumeEdit />
             </div>
           )}
         </>

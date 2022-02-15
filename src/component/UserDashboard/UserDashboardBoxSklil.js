@@ -36,9 +36,10 @@ export default function CompanyDashboardBoxSklil() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          {datas.map((data, index) => (
-              <div className="col-4 box-skills" key={index}>
+        <div className="row" align={'center'}>
+        {datas.map((data, index) => (
+          <div className="col-sm-12 col-md-6 col-lg-4 "  key={index}>
+            <label className="box-skills">
                 <img
                   src={data.img}
                   className="box-skills-in-img"
@@ -54,7 +55,8 @@ export default function CompanyDashboardBoxSklil() {
                   {data.persen}
                 </p>
                 <button className="box-skills-in-btn">รายละเอียด</button>
-              </div>
+              </label>
+          </div>    
           ))}
         </div>
       </div>

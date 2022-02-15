@@ -15,14 +15,14 @@ export default function CompanySelectionCriteria() {
     return(
         <>
         {listBox.map((cols) => (
-            <div className="col-6 boxC03_inbox_box" key={cols.criteria}>
+            <label className="col-md-12 col-lg-6 boxC03_inbox_box" key={cols.criteria}>
                 <div className="boxC03_inbox_box1">
                     <img className="boxC03_inbox_box1_img" src={Popular} alt="Trulli"></img>
                     <p><b>{cols.user}</b></p>
                     <label><b>ผ่านเกณฑ์: </b>{cols.criteria}</label>
                     <a href='##' className="btn btn-success btn-style">รายละเอียด</a>
                 </div>
-            </div>
+            </label>
         ))}
         </>
     )

@@ -13,7 +13,7 @@ export default function ResumeDialog() {
             confirmButtonText: 'Check',
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
-                console.log(login);
+                // console.log(login);
             //     return fetch(`//api.github.com/users/${login}`)
             //         .then(response => {
             //             if (!response.ok) {

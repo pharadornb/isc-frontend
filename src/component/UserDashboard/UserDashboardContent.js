@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-
 import "../../css/UserDashboard.css";
-
-// import ListIcon from "../../img/list-icon.PNG"
-// import MoneyIcon from "../../img/money.PNG"
-// import PustIcon from "../../img/pust-icon.PNG"
 import logo from "../../img/Thailand-company-registration.jpg";
 import ThinkIcon from "../../img/think-icon.PNG";
 import Moneys from "../../img/money2.PNG";
@@ -32,7 +27,7 @@ export default function UserDashboardContent() {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res.data.skill_all[0]);
+            // console.log(res.data.skill_all[0]);
             setDatacount1(res.data.skill_all[0]);
             setDatacount2(res.data.your_skill_sum[0]);
             setDatacount3(res.data.your_wallet_sum[0]);
@@ -67,7 +62,7 @@ export default function UserDashboardContent() {
     <div className="row2">
       <div className="container ">
         <div className="row row2-2">
-          <div className="col-sm-12 col-md-9 mergeTxt">
+          <div className="col-md-12 col-lg-9 mergeTxt">
             <img className="img_design" src={logo} alt="Logo" />
             <div className="box-txt-top">
               <p className="seHi">
@@ -83,7 +78,7 @@ export default function UserDashboardContent() {
               </p>
             </div>
           </div>
-          <div className="col-sm-12 col-lg-3">
+          <div className="col-md-12 col-lg-3">
             <div className="side-view">{/* Slider */}</div>
           </div>
         </div>
@@ -129,7 +124,7 @@ export default function UserDashboardContent() {
             </div>
           </div>
         </div>
-        <div className="row cs">
+        <div className="row">
           <div className="col-md-12 col-lg-6">
             <h2>คลังทักษะล่าสุด</h2>
             <div className="box-skills-library">
@@ -138,11 +133,12 @@ export default function UserDashboardContent() {
               {/*-----------------*/}
             </div>
           </div>
+
           <div className="col-md-12 col-lg-6">
             <h2>สถานประกอบการล่าสุด</h2>
-            <div className="box-latest-establishment">
+            <div className="box-latest-establishment overflow-auto">
               {/*----- Table -----*/}
-              <table className="table-establishment">
+              <table className="table-establishment ">
                 <thead>
                   <tr>
                     <th>สถานประกอบการ</th>

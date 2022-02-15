@@ -135,7 +135,7 @@ export default function ReceiptsCompanyTable() {
           />
         </div>
       </div>
-      <div className="row tb">
+      <div className="row tb overflow-auto">
         <table className="" aria-label="simple table">
           <thead>
             <tr>

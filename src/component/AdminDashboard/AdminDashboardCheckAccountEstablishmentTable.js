@@ -223,7 +223,7 @@ function AdminDashboardCheckAccountEstablishmentTable() {
           />
         </div>
       </div>
-      <div className="row tb">
+      <div className="row tb overflow-auto">
         <table className={classes.table} aria-label="simple table">
           <thead>
             <tr>

@@ -37,6 +37,10 @@ export default function UserResume() {
   const [loading4, setLoading4] = useState(false);
 
   const UserDatas = () => {
+    setLoading(false);
+    setLoading2(false);
+    setLoading3(false);
+    setLoading4(false);
     try {
       axios
         .post("resume/user_profile", {
@@ -275,10 +279,9 @@ export default function UserResume() {
               {/* box left */}
               <div className="row div21-1">
                 <div className="col-md-5 div211-1">
-                  {/* image user */}
-                  {loading === false && <CircularProgress /> }
-                  {loading === true && <AvatarImage us_firstname={dataNUser.us_firstname} user_profile={dataNUser.user_profile}  />}
-                  
+                {/* image user */}
+                {loading === false && <CircularProgress /> }
+                {loading === true && <AvatarImage us_firstname={dataNUser.us_firstname} user_profile={dataNUser.user_profile}  />}
                 </div>
                 <div className="col-md-7 div211-2 ">
                   <div className="row div2112-1 w">
@@ -395,13 +398,13 @@ export default function UserResume() {
                 <h4 className="col-12 w">
                   <b>Education</b>
                 </h4>
-                {loading1 === false && (
+                {education.length !== 0 ? (loading1 === false && 
                   <>
                     <br />
                     <br />
                     <CircularProgress />
                   </>
-                )}
+                ) : <p>ไม่มีข้อมูล</p> }
                 {education.map((row) => (
                   <div className="col-12" key={row.usl_id}>
                     {/* <p /> */}
@@ -425,13 +428,13 @@ export default function UserResume() {
                 <div className="line" />
               </div>
               <div>
-                {loading2 === false && (
+                {experience.length !== 0 ? (loading2 === false && (
                   <>
                     <br />
                     <br />
                     <CircularProgress />
                   </>
-                )}
+                )) : <p>ไม่มีข้อมูล</p> }
               </div>
               {experience.map((row) => (
                 <div className="div22-11" key={row.use_id}>

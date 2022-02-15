@@ -6,6 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import Slide from "@mui/material/Slide";
 import axios from "axios";
+import moment from "moment";
 import {
   List,
   ListItem,
@@ -14,7 +15,12 @@ import {
   ListItemText,
   Avatar,
   Grid,
+  TextField,
+  InputAdornment,
+  // DialogActions,
+  CircularProgress,
 } from "@mui/material";
+
 import {
   AccountCircle,
   MenuBook,
@@ -22,10 +28,11 @@ import {
   FactCheck,
 } from "@mui/icons-material";
 
+
+
 import BoxsStudy from "./BoxsStudy";
 import Experience from "./Experience";
 import UserSkill from "./UserSkills";
-import Personal from "./Personal";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,8 +46,9 @@ export default function AlertDialogSlide(props) {
 
   const [dataNUser, setDataNUser] = useState([]);
 
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState([]);
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -62,6 +70,7 @@ export default function AlertDialogSlide(props) {
           if (res.status === 200) {
             // console.log(res.data[0]);
             setDataNUser(res.data[0]);
+            setLoading(true);
           }
         });
     } catch (err) {
@@ -73,9 +82,29 @@ export default function AlertDialogSlide(props) {
     Userprofile();
   }, []);
 
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        setSelectedFile(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
   const editImageHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
+    convertBase64(event.target.files[0]);
+    
+
+    // setSelectedFile(profiles[1]);
+
     setIsFilePicked(true);
+
+    // console.log(selectedFile);
+    return selectedFile;
   };
 
   const AvatarImage = (props) => {
@@ -92,6 +121,131 @@ export default function AlertDialogSlide(props) {
         sx={{ width: 200, height: 200, margin: "auto" }}
         src={user_profile}
       />
+    )
+  }
+
+  
+
+  
+
+  const handleChange = (valueNew) => {
+    const { name, value } = valueNew.target;
+
+    setDataNUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // console.log(dataNUser);
+  };
+
+  //Save API--------------------------
+  const handleSave = () => {
+    // const profiles = selectedFile.split(",");
+    // console.log(profiles[1]);
+
+    // console.log(params);
+
+    // if (isFilePicked[0] === true) {
+    //   const params = JSON.stringify({
+    //     user_email: dataNUser.user_email,
+    //     user_profile: profiles[1],
+    //     user_tel: dataNUser.user_tel,
+    //     user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
+    //     user_address: dataNUser.user_address,
+    //     user_subdistrict: dataNUser.user_subdistrict,
+    //     user_district: dataNUser.user_district,
+    //     user_province: dataNUser.user_province,
+    //     user_postcode: dataNUser.user_postcode,
+    //     user_slogan: dataNUser.user_slogan,
+    //     us_firstname: dataNUser.us_firstname,
+    //     us_lastname: dataNUser.us_lastname,
+    //     us_com_address: dataNUser.us_com_address,
+    //     us_com_subdistrict: dataNUser.us_com_subdistrict,
+    //     us_com_district: dataNUser.us_com_district,
+    //     us_com_province: dataNUser.us_com_province,
+    //     us_com_postcode: dataNUser.us_com_postcode,
+    //     us_com_github: dataNUser.us_com_github,
+    //     us_com_linkedin: dataNUser.us_com_linkedin,
+    //     us_com_facebook: dataNUser.us_com_facebook,
+    //     us_com_youtube: dataNUser.us_com_youtube,
+    //   });
+
+    //   axios
+    //     .post("/resume/updateUserGeneral", params, {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     })
+    //     .then((res) => {
+    //       if (res.status === 200) {
+    //         // console.log(dataNUser);
+    //         Userprofile();
+    //       }
+    //     })
+    //     .catch((err) => console.log(err));
+    //   // console.log("Push image");
+    // } else {
+    //   const params = JSON.stringify({
+    //     user_email: dataNUser.user_email,
+    //     user_tel: dataNUser.user_tel,
+    //     user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
+    //     user_profile: dataNUser.user_profile,
+    //     user_address: dataNUser.user_address,
+    //     user_subdistrict: dataNUser.user_subdistrict,
+    //     user_district: dataNUser.user_district,
+    //     user_province: dataNUser.user_province,
+    //     user_postcode: dataNUser.user_postcode,
+    //     user_slogan: dataNUser.user_slogan,
+    //     us_firstname: dataNUser.us_firstname,
+    //     us_lastname: dataNUser.us_lastname,
+    //     us_com_address: dataNUser.us_com_address,
+    //     us_com_subdistrict: dataNUser.us_com_subdistrict,
+    //     us_com_district: dataNUser.us_com_district,
+    //     us_com_province: dataNUser.us_com_province,
+    //     us_com_postcode: dataNUser.us_com_postcode,
+    //     us_com_github: dataNUser.us_com_github,
+    //     us_com_linkedin: dataNUser.us_com_linkedin,
+    //     us_com_facebook: dataNUser.us_com_facebook,
+    //     us_com_youtube: dataNUser.us_com_youtube,
+    //   });
+
+    //   axios
+    //     .post("/resume/updateUserGeneral", params, {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     })
+    //     .then((res) => {
+    //       if (res.status === 200) {
+    //         // console.log(dataNUser);
+    //         Userprofile();
+    //       }
+    //     })
+    //     .catch((err) => console.log(err));
+
+      // console.log("No image");
+    // }
+  };
+
+  const OldYears = () => {
+    const dateDob = moment(dataNUser.user_dob).format('YYYY');
+    const datenow = new Date().getFullYear();
+    var dob = parseInt(datenow) - parseInt(dateDob);
+
+    return(
+      <TextField
+                id="outlined-basic"
+                label="อายุ"
+                value={dob}
+                style={{ width: 80 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">ปี</InputAdornment>
+                  ),
+                }}
+                disabled
+              />
     )
   }
 
@@ -121,15 +275,13 @@ export default function AlertDialogSlide(props) {
                 <ListItem align="center">
                   <div className="divBoxAvata ">
                     <label htmlFor="upload" className="actionImage">
-                      <AvatarImage user_profile={dataNUser.user_profile} us_firstname={dataNUser.us_firstname} />
+                      {selectedFile.length !== 0 ? <Avatar alt={dataNUser.us_firstname} sx={{ width: 200, height: 200, margin: "auto" }} src={selectedFile}  /> : <AvatarImage user_profile={dataNUser.user_profile} us_firstname={dataNUser.us_firstname} /> }
+                      <div className="editImage">
+                        <span className="idesing">
+                          <i className="fas fa-pen-square"></i>
+                        </span>
+                      </div>
                     </label>
-
-                    <div className="editImage">
-                      <span className="idesing">
-                        <i className="fas fa-pen-square"></i>
-                      </span>
-                    </div>
-
                     <input
                       type={"file"}
                       name="file"
@@ -259,11 +411,260 @@ export default function AlertDialogSlide(props) {
             </Grid>
             <Grid item xs={8}>
               {swap === "personal" && (
-                <Personal
-                  dataNUser={dataNUser}
-                  selectedFile={selectedFile}
-                  isFilePicked={isFilePicked}
-                />
+                <>
+                {loading === false && <CircularProgress />}
+                {loading === true && 
+                  <>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          label="ชื่อ"
+                          name="us_firstname"
+                          value={dataNUser.us_firstname}
+                          onChange={handleChange}
+                          required
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="นามสกุล"
+                          name="us_lastname"
+                          value={dataNUser.us_lastname}
+                          onChange={handleChange}
+                          required
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="วันเกิด"
+                          type={"date"}
+                          name="user_dob"
+                          value={moment(dataNUser.user_dob).format("YYYY-MM-DD")}
+                          onChange={(e) =>
+                            setDataNUser({
+                              ...dataNUser,
+                              user_dob: e.target.value,
+                            })
+                          }
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <OldYears />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={8}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="อีเมล์"
+                          value={dataNUser.user_email}
+                          name="user_email"
+                          onChange={handleChange}
+                          focused
+                          disabled
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="โทร"
+                          value={dataNUser.user_tel}
+                          name="user_tel"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={12}>
+                        <TextField
+                          id="outlined-basic"
+                          fullWidth
+                          label="คติประจำใจ"
+                          name="user_slogan"
+                          value={dataNUser.user_slogan}
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={8}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="ที่อยู่ปัจจุบัน"
+                          value={dataNUser.user_address}
+                          name="user_address"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="จังหวัด"
+                          value={dataNUser.user_province}
+                          name="user_province"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="อำเภอ"
+                          value={dataNUser.user_district}
+                          name="user_district"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="ตำบล"
+                          value={dataNUser.user_subdistrict}
+                          name="user_subdistrict"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="รหัสไปรษณีย์"
+                          value={dataNUser.user_postcode}
+                          name="user_postcode"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={8}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="ภูมิลำเนา"
+                          value={dataNUser.us_com_address}
+                          name="us_com_address"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="จังหวัด"
+                          value={dataNUser.us_com_province}
+                          name="us_com_province"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="อำเภอ"
+                          value={dataNUser.us_com_district}
+                          name="us_com_district"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="ตำบล"
+                          value={dataNUser.us_com_subdistrict}
+                          name="us_com_subdistrict"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          id="outlined-basic"
+                          label="รหัสไปรษณีย์"
+                          value={dataNUser.us_com_postcode}
+                          name="us_com_postcode"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="Facebook"
+                          value={dataNUser.us_com_facebook}
+                          name="us_com_facebook"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="YouTube"
+                          value={dataNUser.us_com_youtube}
+                          name="us_com_youtube"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} sx={{ p: 2 }}>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="GitHub"
+                          value={dataNUser.us_com_github}
+                          name="us_com_github"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          fullWidth
+                          id="outlined-basic"
+                          label="LinkedIn"
+                          value={dataNUser.us_com_linkedin}
+                          name="us_com_linkedin"
+                          onChange={handleChange}
+                          focused
+                        />
+                      </Grid>
+                    </Grid>
+                    <DialogActions>
+                      <button onClick={handleSave} className="btn btn-success">
+                        <i className="fas fa-save"></i> บันทึก
+                      </button>
+                    </DialogActions>
+                  </>
+                }
+                </>
               )}
               {swap === "study" && <BoxsStudy education={props.education} />}
               {swap === "experience" && (

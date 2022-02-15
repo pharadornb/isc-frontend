@@ -243,7 +243,7 @@ export default function UserResume() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar mark={'userResume'}>
       {!userEmail && (
         <div className="bg-resume">
           {/* <p>UserResume</p> */}

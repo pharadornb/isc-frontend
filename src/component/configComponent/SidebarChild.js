@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
-import Wallet from "../../img/Wallet.png";
+// import Wallet from "../../img/Wallet.png";
 import axios from "axios";
 import Loader from "../../component/configComponent/Loader";
 
 export default function SidebarChild(props) {
 
     const [sideNavExpanded, setSideNavExpanded] = useState(true)
-    const [wallet, setProfileWallet] = useState('')
+    // const [wallet, setProfileWallet] = useState('')
     const [role, setProfileRole] = useState('')
     const [profile, setProfile] = useState('')
     const [name, setName] = useState('')
@@ -28,7 +28,7 @@ export default function SidebarChild(props) {
                 'Content-Type': 'application/json',
             }
         }).then(res => {
-            setProfileWallet(res.data[0].user_wallet)
+            // setProfileWallet(res.data[0].user_wallet)
             setProfileRole(res.data[0].user_role)
             setName(res.data[0].name)
         }).catch(() => {
@@ -65,13 +65,13 @@ export default function SidebarChild(props) {
                 <Sidebar setSideNavExpanded={setSideNavExpanded} sideNavExpanded={sideNavExpanded} role={role}
                          name={name} profile={profile} mark={props.mark}/>
                 <div style={contentStyle}>
-                    {role !== 'admin' &&
-                        <div align={'right'} style={{marginRight: '10px', marginBottom: '5px'}}>
-                            <img src={Wallet} alt="wallet"/>
-                            <label className="txt1-1"><h5><b>{wallet}</b>&nbsp;</h5></label>
-                            <i className="fas fa-plus-circle" style={{fontSize: "1em"}}/>
+                    {/*{role !== 'admin' &&*/}
+                        <div align={'right'} style={{marginRight: '10px', marginBottom: '5px', paddingTop: '20px'}}>
+                            {/*<img src={Wallet} alt="wallet"/>*/}
+                            {/*<label className="txt1-1"><h5><b>{wallet}</b>&nbsp;</h5></label>*/}
+                            {/*<i className="fas fa-plus-circle" style={{fontSize: "1em"}}/>*/}
                         </div>
-                    }
+                    {/*}*/}
                     {props.children}
                 </div>
             </Loader>

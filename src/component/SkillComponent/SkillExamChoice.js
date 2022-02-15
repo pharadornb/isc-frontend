@@ -4,11 +4,13 @@ import axios from "axios";
 export default function SkillExamChoice(props) {
 
     const [choiceData, setChoice] = useState(false)
-    const [gender, setGender] = useState();
+    const [gender, setGender] = useState(localStorage.getItem(props.examId));
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const getData = () => {
 
+            setLoading(true)
             const paramsChoice = JSON.stringify({
                 skill_exam_id: props.examId,
             });
@@ -21,6 +23,7 @@ export default function SkillExamChoice(props) {
                 }).then(resChoice => {
                     if (resChoice.status === 200) {
                         setChoice(resChoice.data)
+                        setLoading(false)
                     }
                 }).catch(err =>
                     console.log(err)
@@ -33,33 +36,42 @@ export default function SkillExamChoice(props) {
 
     const handleChange = (e) => {
         setGender(e.target.value)
-        const params = JSON.stringify({
-            exam_id: props.examId,
-            choice_id: Number(e.target.value)
-        });
-        localStorage.setItem('choice', params);
+        localStorage.setItem(props.examId, Number(e.target.value));
+    }
+
+    const handleSubjective = (e) => {
+        localStorage.setItem(props.examId, e.target.value);
     }
 
     return (
         <tbody>
         <tr>
             <td style={{textAlign: 'left', fontSize: '20px', fontWeight: 'bold'}}>&nbsp;{props.examHead}</td>
+
         </tr>
         {props.examOption === 'objective'
             ?
-            <tr>
-                {choiceData.length > 0 &&
-                    <td style={{textAlign: 'left', fontSize: '18px'}}>
-                        {choiceData.map(data => (
-                            <p key={data.sec_id}>
-                                <input className="form-check-input" type="radio" value={data.sec_id}
-                                       checked={Number(gender) === data.sec_id}
-                                       onChange={handleChange}/> {data.sec_name}
-                            </p>
-                        ))}
+            loading === true
+                ?
+                <tr>
+                    <td style={{textAlign: 'left'}}>
+                        <div className="spinner-grow text-info"/>
                     </td>
-                }
-            </tr>
+                </tr>
+                :
+                <tr>
+                    {choiceData.length > 0 &&
+                        <td style={{textAlign: 'left', fontSize: '18px'}}>
+                            {choiceData.map(data => (
+                                <p key={data.sec_id}>
+                                    <input className="form-check-input" type="radio" value={data.sec_id}
+                                           checked={Number(gender) === data.sec_id}
+                                           onChange={handleChange}/> {data.sec_name}
+                                </p>
+                            ))}
+                        </td>
+                    }
+                </tr>
             :
             <>
                 <tr>
@@ -70,7 +82,8 @@ export default function SkillExamChoice(props) {
                 <tr>
                     <td style={{textAlign: 'left'}}>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
-                              placeholder="กรุณากรอกคำตอบ"/>
+                              placeholder="กรุณากรอกคำตอบ"
+                              onChange={handleSubjective} defaultValue={localStorage.getItem(props.examId)}/>
                     </td>
                 </tr>
             </>

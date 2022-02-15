@@ -60,7 +60,7 @@ export default class HeadSkill extends React.Component {
 
         return (
             <>
-                <div className="container pb-4 pt-2" align={'center'}
+                <div className="container pb-4" align={'center'}
                      style={{backgroundColor: '#FFFAFA', borderRadius: '20px'}}>
                     <div className="row">
                         <div className="col-md-12" style={{fontSize: '30px'}}>
@@ -171,10 +171,13 @@ export default class HeadSkill extends React.Component {
                                             <option value="5">ยาก</option>
                                         </select>
                                     </div>
-                                    <div className=" col-md-4 mt-4">
+                                    <div className=" col-md-1 mt-4">
+                                        ราคา :
+                                    </div>
+                                    <div className=" col-md-3 mt-4">
                                         <input type="number" min="1" step="any" className=" form-control"
-                                               placeholder="ราคา(บาท)"
-                                               onChange={(e) => this.setState({skillPrice: e.target.value})}/>
+                                               placeholder="ราคา(บาท)" value={0}
+                                               onChange={(e) => this.setState({skillPrice: e.target.value})} readOnly={true}/>
                                     </div>
                                 </div>
                             </div>

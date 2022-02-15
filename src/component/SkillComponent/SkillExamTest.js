@@ -40,6 +40,8 @@ export default function SkillExamTest() {
             )
         };
 
+        localStorage.setItem('skillId', skillId);
+
         getData();
     }, [skillId]);
 
@@ -66,8 +68,7 @@ export default function SkillExamTest() {
                                                  skillProfile={data.user_profile} skillUser={data.uc_name}
                                                  skillHard={data.skill_hard} skillTime={
                                     localStorage.getItem('time') ? localStorage.getItem('time') : data.skill_time
-                                }
-                                                 skillSum={comments.length}/>
+                                } skillSum={comments.length}/>
                             </td>
                         ))}
                     </tr>

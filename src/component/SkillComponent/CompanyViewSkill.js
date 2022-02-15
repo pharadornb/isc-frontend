@@ -39,9 +39,10 @@ export default function CompanyViewSkill() {
             }).then(res => {
                 setComments(res.data);
                 setShowLoading(false)
-            }).catch(err =>
+            }).catch(err => {
                 console.log(err)
-            )
+                setShowLoading(false)
+            })
         };
 
         getData();
@@ -67,7 +68,7 @@ export default function CompanyViewSkill() {
 
     return (
         <Loader show={showLoading}>
-            <div className="container">
+            <div className="container mt-3">
                 <div className="row">
                     <div className="col-md-4" align={'left'}>
                         <p style={{fontSize: '24px'}}><i className="fas fa-table"
@@ -85,6 +86,14 @@ export default function CompanyViewSkill() {
                 <table className="table table-striped">
                     <HeaderTable headers={headers}/>
                     <tbody>
+                    {
+                        comments.length === 0 &&
+                        <tr>
+                            <td colSpan={headers.length}>
+                                <p className="text-center">ไม่มีข้อมูล</p>
+                            </td>
+                        </tr>
+                    }
                     {commentsData.map(comment => (
                         <tr key={comment.skill_id}>
                             <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar

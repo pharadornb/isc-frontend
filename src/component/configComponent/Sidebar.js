@@ -27,7 +27,9 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
 
     return (
         <>
-            <SideNav onToggle={() => { setSideNavExpanded(!sideNavExpanded);}}
+            <SideNav onToggle={() => {
+                setSideNavExpanded(!sideNavExpanded);
+            }}
                      expanded={sideNavExpanded} style={{background: '#2E2E48', position: 'fixed'}}>
                 <SideNav.Toggle/>
                 <SideNav.Nav defaultSelected={mark}>
@@ -53,7 +55,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                         }
                         {!sideNavExpanded &&
                             <NavIcon style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}>
-                                <Avatar alt={name}  src={`data:image/jpeg;base64,${profile}`}
+                                <Avatar alt={name} src={`data:image/jpeg;base64,${profile}`}
                                         sx={{width: 50, height: 50}}/>
                             </NavIcon>
                         }
@@ -94,11 +96,11 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
 
                     {/* user role open */}
                     {role === 'user' &&
-                        <NavItem eventKey="resume" onClick={handleOnClick}>
+                        <NavItem eventKey="userResume" onClick={handleOnClick}>
                             <NavIcon>
-                                <i className="far fa-id-card" style={{fontSize: "1.75em"}}/>
+                                <i className="fa-solid fa-id-badge" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
-                            <NavText>เรซูเม่ผู้รับบริการ</NavText>
+                            <NavText>เรซูเม่ของฉัน</NavText>
                         </NavItem>
                     }
                     {role === 'user' &&
@@ -110,14 +112,12 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                         </NavItem>
                     }
                     {role === 'user' &&
-                        <>
-                            <NavItem eventKey="company">
-                                <NavIcon>
-                                    <i className="fas fa-building" style={{fontSize: "1.75em"}}/>
-                                </NavIcon>
-                                <NavText>ข้อมูลบริษัท</NavText>
-                            </NavItem>
-                        </>
+                        <NavItem eventKey="companySearch" onClick={skillStoreOnClick}>
+                            <NavIcon>
+                                <i className="fas fa-building" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>ข้อมูลบริษัท</NavText>
+                        </NavItem>
                     }
                     {/* user role close */}
 
@@ -125,7 +125,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                     {role === 'admin' &&
                         <NavItem eventKey="adminSkill" onClick={manageSkillOnClick}>
                             <NavIcon>
-                                <i className="fa-solid fa-list-check" style={{fontSize: "1.75em"}} />
+                                <i className="fa-solid fa-list-check" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
                             <NavText>ทักษะบริษัท</NavText>
                         </NavItem>

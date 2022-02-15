@@ -24,6 +24,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
     const skillStoreOnClick = useCallback(() => navigate('/skill_store', {replace: true}), [navigate]);
     const manageSkillOnClick = useCallback(() => navigate('/admin/skill', {replace: true}), [navigate]);
     const settingOnClick = useCallback(() => navigate('/setting', {replace: true}), [navigate]);
+    const companySearchOnClick = useCallback(() => navigate('/company/search', {replace: true}), [navigate]);
 
     return (
         <>
@@ -112,7 +113,7 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                         </NavItem>
                     }
                     {role === 'user' &&
-                        <NavItem eventKey="companySearch" onClick={skillStoreOnClick}>
+                        <NavItem eventKey="companySearch" onClick={companySearchOnClick}>
                             <NavIcon>
                                 <i className="fas fa-building" style={{fontSize: "1.75em"}}/>
                             </NavIcon>

@@ -67,7 +67,7 @@ export default function CompanyDashboardContent(){
 
     return(
         <>
-            <div className="boxC-02">
+            <div className="container boxC-02">
                 <div className="boxC-02-00">
                     <img src={bgShow} className="boxC-02-01" alt="Trulli"></img>
                     <div className="boxC-02-01-00">
@@ -116,15 +116,16 @@ export default function CompanyDashboardContent(){
                 </div>
                 <div className="boxC-03">
                     <div className="row">
-                        <div className="col-sm-12 col-md-5">
+                        <div className="col-md-12 col-lg-5">
                             <p className="boxC03_htxt">ผ่านเกณฑ์คัดเลือก</p>
                             <div className="boxC03_inbox">
                                 <div className="row">
                                     <CompanySelectionCriteria/>
                                 </div>
                             </div>
+                            <br/>
                         </div>
-                        <div className="col-sm-12 col-md-7">
+                        <div className="col-md-12 col-lg-7">
                             <p className="boxC03_htxt">ผลการรับบริการ</p>
                             <div className="rw">
                                 <ServiceResult/>

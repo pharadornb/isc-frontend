@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PaginationTable from "../../component/SkillComponent/PaginationTable";
+import SearchTable from "../../component/SkillComponent/SearchTable";
+import HeaderTable from "../../component/SkillComponent/HeaderTable";
+import { Table } from "react-bootstrap";
+
 // import moment from "moment";
 import {
   Avatar,
@@ -19,16 +24,27 @@ const thai = require("thai-data");
 
 export default function CompanyResumeEdit() {
   const [ProfileGeneral, setProfileGeneral] = useState([]);
+  const [position_Require, setPositionRequire] = useState([]);
+  const [comments, setComments] = useState([]);
+
+  const [dataSkills, setDataSkills] = useState([]);
+
   const [dates, setDates] = useState('');
   const [loading1, setLoading1] = useState(false);
+
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [showLoading, setShowLoading] = useState(false)
+  const ITEMS_PER_PAGE = 5;
+
 
   const [zipCode, setZipCode] = useState("");
   const [subDistrict, setSubDistrict] = useState(Array);
   const [subDistrictSelect, setSubDistrictSelect] = useState("");
   const [district, setDistrict] = useState("");
   const [province, setProvince] = useState("");
-  const [isDisabledSubDistrictSelect, setIsDisabledSubDistrictSelect] =
-    useState(true);
+  const [isDisabledSubDistrictSelect, setIsDisabledSubDistrictSelect] = useState(true);
   const [image, setImage] = useState('');
   
 
@@ -68,7 +84,8 @@ export default function CompanyResumeEdit() {
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res.data);
+            // console.log(res.data);
+            setPositionRequire(res.data);
           }
         });
     } catch (err) {
@@ -77,25 +94,110 @@ export default function CompanyResumeEdit() {
     // End funtion PositionRequire
   }
 
-  const SkillRequire = () => {
+  const SkillRequire = (props) => {
     // Select API SkillRequire
+    const params = JSON.stringify({
+      ucre_id: props.ucre_id,
+    });
+
     try {
-      axios
-        .post("resume/companySkillRequire", {
+     axios
+        .post("resume/companySkillRequire",params, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res.data);
+            // console.log(res.data.length);
+
+          //  for(let i=0;i<res.data.length;i++){
+          //   var rows1 = {
+          //     ucre_id: props.ucre_id,
+          //     ucrs_id: res.data[i].ucrs_id,
+          //     skill_logo: res.data[i].skill_logo,
+          //     skill_name: res.data[i].skill_name,
+          //     uc_name: res.data[i].uc_name,
+          //     ucrs_point: res.data[i].ucrs_point,
+          //     user_profile: res.data[i].user_profile
+          //   }
+            // console.log(rows1);
+  
+            // setDataSkills([...dataSkills, res.data]);
+          //  }
+            
+            
+            // console.log(dataSkills);
           }
         });
     } catch (err) {
       console.log(err);
     }
     // End funtion SkillRequire
+
+    return(
+      <>
+      {/* {props.ucre_id} */}
+        <label className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative">
+          <Avatar
+              alt={'ddd'}
+              className="avatarL"
+              src={`data:image/jpeg;base64,`}
+              sx={{ width: 20, height: 20 }}
+            />
+          <Avatar
+            alt={'ddd'}
+            // className="maginLeftRight-center"
+            src={`data:image/jpeg;base64,`}
+            sx={{ width: 50, height: 50 }}
+          />
+          <p>5555</p>
+        </label>
+      </>
+    )
   }
+
+  const headers = [
+    {name: "สัญลักษณ์", field: "skill_logo", sortable: false},
+    {name: "ชื่อทักษะ", field: "skill_name", sortable: false},
+    {name: "โดย", field: "uc_name_profile", sortable: false},
+    {name: "กลุ่มทักษะ", field: "skill_type_name", sortable: false},
+    {name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false},
+    {name: "ระดับทักษะ", field: "skill_hard", sortable: false},
+    {name: "ราคา(บาท)", field: "skill_credit", sortable: false},
+    {name: "เพิ่มลงคลังทักษะ", field: "", sortable: false}
+];
+
+const skillStoreData = useMemo(() => {
+  let computedComments = comments;
+
+  if (search) {
+      computedComments = computedComments.filter(
+          comment => comment.skill_name.toLowerCase().includes(search.toLowerCase()) ||
+              comment.skill_type_name.toLowerCase().includes(search.toLowerCase())
+      );
+  }
+
+  setTotalItems(computedComments.length);
+
+  return computedComments.slice(
+      (currentPage - 1) * ITEMS_PER_PAGE,
+      (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+  );
+}, [comments, currentPage, search]);
+
+const ViewSkills = () => {
+  axios.post('skill/viewSkill', {
+    headers: {
+        'Content-Type': 'application/json',
+    }
+}).then(res => {
+    setComments(res.data);
+    setShowLoading(false)
+}).catch(err =>
+    console.log(err)
+)
+}
 
   useEffect(() => {
     
@@ -110,7 +212,7 @@ export default function CompanyResumeEdit() {
           })
           .then((res) => {
             if (res.status === 200) {
-              console.log(res.data);
+              //console.log(res.data);
               setProfileGeneral(res.data);
 
               setZipCode(res.data[0].user_postcode);
@@ -131,9 +233,10 @@ export default function CompanyResumeEdit() {
     };
 
     // Select Function
-    //SkillRequire();
+
     PositionRequire();
     SelectCompanyData();
+    ViewSkills();
   }, []);
 
   const handleChangeNew = (newValue) => {
@@ -200,21 +303,13 @@ export default function CompanyResumeEdit() {
         let image = reader.readAsBinaryString(file);
         console.log(reader);
         return image;
-        // values[0].user_profile = profiles[1];
-       
-        // console.log(file.name);
-        
-        // console.log(values[0].user_profile);
-        // setProfileGeneral(values);
       }else{
         console.log("false size " + file.size);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Please upload a file smaller than 50 KB!',
-          // footer: '<a href="">Why do I have this issue?</a>'
         })
-        // window.alert("Please upload a file smaller than 50 KB");
       }
     }else{
       console.log("false type " + file.type);
@@ -222,11 +317,19 @@ export default function CompanyResumeEdit() {
         icon: 'error',
         title: 'Oops...',
         text: 'File does not support. You must use .png or .jpg!',
-        // footer: '<a href="">Why do I have this issue?</a>'
       })
-      // window.alert("File does not support. You must use .png or .jpg ");
     }
    
+  }
+
+  const onDeleteReport = (index) =>{
+    console.log(index);
+
+    const rowIndex = [...position_Require];
+
+    rowIndex.splice(index, 1);
+
+    setPositionRequire(rowIndex);
   }
 
   const handleSubmit = (e) => {
@@ -256,12 +359,12 @@ export default function CompanyResumeEdit() {
               <div className="col-md-12 col-lg-8">
                 <div className="row bg-while sdd">
                   <div className="col-lg-12">
-                  
+                 
                     <TextField
                       id="outlined-basic"
                       label="Company Name"
                       fullWidth
-                      disabled = {ProfileGeneral[0].uc_name.length === 100 ? false : true}
+                      disabled = {ProfileGeneral[0].uc_name.length === 100 ? true : false}
                       name="uc_name"
                       value={ProfileGeneral[0].uc_name}
                       className="inputbox magintop20"
@@ -483,10 +586,17 @@ export default function CompanyResumeEdit() {
                 </div>
                 <div className="col-12"><br/><br/></div>
               </div>
+
               <div className="row">
-                <div className="col-12 bg-while">
+                {position_Require.map((rows, index) => (
+                <div className="col-12 bg-while" key={index}>
                   {/* In-Box-Position */}
                   <div className="row">
+                    <div className="col-12" style={{textAlign: "right"}}>
+                      <span style={{color: "red"}} >
+                        <i className="fas fa-minus-circle" onClick={()=>onDeleteReport(index)} />
+                      </span>
+                    </div>
                     <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>ตำเเหน่งงาน : </label>
                     <TextField
                       className="col-md-6 col-lg-3"
@@ -495,7 +605,7 @@ export default function CompanyResumeEdit() {
                       name="da"
                       variant="outlined"
                       margin="normal"
-                      // value={province}
+                      value={rows.ucre_occupation}
                       // onChange={(newValue) => handleChangeNew(newValue)}
                     />
                     <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>เงินประจำเดือน :</label>
@@ -506,7 +616,7 @@ export default function CompanyResumeEdit() {
                       name="da"
                       margin="normal"
                       variant="outlined"
-                      // value={province}
+                      value={rows.ucre_salary}
                       // onChange={(newValue) => handleChangeNew(newValue)}
                     />
                     <div className="col-12"><br/></div>
@@ -520,51 +630,101 @@ export default function CompanyResumeEdit() {
                       // name="uc_detail"
                       maxRows={4}
                       margin="normal"
-                      // value={ProfileGeneral[0].uc_detail}
-                      onChange={(newValue) => handleChangeNew(newValue)}
+                      value={rows.ucre_detail}
+                      // onChange={(newValue) => handleChangeNew(newValue)}
                     />
                     <div className="col-12"><br/></div>
                     <div className="col-12 "  > {/*Skill Require */}
+                      
                       <div className="row borderBox overflow-auto" align={"center"}>
-                        <label className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative">
-                          <Avatar
-                              alt={'ddd'}
-                              className="avatarL"
-                              src={`data:image/jpeg;base64,`}
-                              sx={{ width: 20, height: 20 }}
-                            />
-                          <Avatar
-                            alt={'ddd'}
-                            // className="maginLeftRight-center"
-                            src={`data:image/jpeg;base64,`}
-                            sx={{ width: 50, height: 50 }}
-                          />
-                          <p>5555</p>
-                        </label>
-                        <label className="col-sm-5 col-md-3 col-lg-1 boxSkilsRequire p-relative">
-                          <Avatar
-                              alt={'ddd'}
-                              className="avatarL"
-                              src={`data:image/jpeg;base64,`}
-                              sx={{ width: 20, height: 20 }}
-                            />
-                          <Avatar
-                            alt={'ddd'}
-                            // className="maginLeftRight-center"
-                            src={`data:image/jpeg;base64,`}
-                            sx={{ width: 50, height: 50 }}
-                          />
-                          <p>5555</p>
-                        </label>
+                        <SkillRequire ucre_id={rows.ucre_id} />
                       </div>
                     </div>
                   </div>
+                  <div className="row">
+
+                    <div className="col-12">
+                      <br/>
+                        <div className="row">
+                        <div className="col-md-4" align={'left'}>
+                            <p style={{fontSize: '24px'}}><i className="fab fa-slack"
+                                                            style={{fontSize: '1em'}}/><b> เลือกทักษะ</b></p>
+                        </div>
+                        <div className="col-md-8 d-flex flex-row-reverse">
+                            <SearchTable onSearch={value => {
+                                setSearch(value);
+                                setCurrentPage(1);
+                            }}
+                            />
+                        </div>
+                    </div>
+                    <div className="col-12 overflow-auto">
+                      <Table className="table table-striped">
+                          <HeaderTable headers={headers}/>
+                          <tbody>
+                          {skillStoreData.map((comment, index) => (
+                              <tr key={comment.skill_id}>
+                                  <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
+                                      alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
+                                      sx={{width: 50, height: 50}}/></td>
+                                  <td>{comment.skill_name}</td>
+                                  <td>{comment.uc_name}</td>
+                                  <td>{comment.skill_type_name}</td>
+                                  <td>{comment.skill_time}</td>
+                                  <td>
+                                      {comment.skill_hard === 1 &&
+                                          <p>ค่อนข้างง่าย</p>
+                                      }
+                                      {comment.skill_hard === 2 &&
+                                          <p>ง่าย</p>
+                                      }
+                                      {comment.skill_hard === 3 &&
+                                          <p>ปานกลาง</p>
+                                      }
+                                      {comment.skill_hard === 4 &&
+                                          <p>ค่อนข้างยาก</p>
+                                      }
+                                      {comment.skill_hard === 5 &&
+                                          <p>ยาก</p>
+                                      }
+                                  </td>
+                                  <td>{comment.skill_credit}</td>
+                                  <td>
+                                      <button type="button" className="btn btn-success"
+                                        // onClick={() => handleClickOpen(index)}
+                                      >
+                                        <i className="far fa-check-square"/> เพิ่ม
+                                      </button>
+                                  </td>
+                              </tr>
+                          ))}
+                          </tbody>
+                      </Table>
+                    </div>
+                    <PaginationTable
+                        total={totalItems}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        currentPage={currentPage}
+                        onPageChange={page => setCurrentPage(page)}
+                    />
+                    </div>
+                  </div>
                 </div>
+                ))}
+              </div>
+              <div className="row">
+                <div className="col-12" style={{textAlign: "right"}}>
+                  <span style={{color: "green"}}>
+                    <i className="fas fa-plus-circle"/>
+                  </span>
+                </div>
+               
+                <div className="col-12"><br/></div>
               </div>
           </div>
         </>
       )}
-      <input type="submit" onClick={handleSubmit} />
+      <input type="submit" value={'Save'} className="btn btn-success" onClick={handleSubmit} />
     </FormControl>
   );
 }

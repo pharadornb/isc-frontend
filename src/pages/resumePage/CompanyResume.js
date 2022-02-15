@@ -85,7 +85,6 @@ export default function CompanyResume() {
   useEffect(() => {
     SelectCompanyData()
     DataPositionRequire()
-    console.log('556654');
   },[])
 
   const ImageLogoCompany = (props) => {

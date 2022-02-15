@@ -42,7 +42,7 @@ function AdminDashboardBox(){
     return(
         <>
  
-        <div className="col-md-3">
+        <div className="col-md-12 col-lg-4">
             <div className='box b1'>
                 <div className="inbox_left">
                     <label className="textbox_style1"><b>ยอดผู้รับบริการ</b></label>
@@ -55,7 +55,7 @@ function AdminDashboardBox(){
             </div>
         </div>
 
-        <div className="col-md-3">
+        <div className="col-md-12 col-lg-4">
             <div className='box b2'>
                 <div className="inbox_left">
                     <label className="textbox_style1"><b>ยอดสถานประกอบการ</b></label>
@@ -68,7 +68,7 @@ function AdminDashboardBox(){
             </div>
         </div>
         
-        <div className="col-md-3">
+        <div className="col-md-12 col-lg-4">
             <div className='box b3'>
                 <div className="inbox_left">
                     <label className="textbox_style1"><b>ยอดคลังทักษะ</b></label>

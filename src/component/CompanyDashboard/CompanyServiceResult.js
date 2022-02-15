@@ -32,16 +32,17 @@ export default function CompanyServiceResult() {
     <>
         <div className="row">
             <div className="col-8"> </div>
-            <div className="col-4">
+            <div className="col-md-12 col-lg-4">
                 <SearchBar
                     value={searched}
                     onChange={(searchVal) => requestSearch(searchVal)}
                     onCancelSearch={() => cancelSearch()}
                 />
+                <br/>
             </div>
         </div>
-        <div className="row">
-            <table className="tables">
+        <div className="row overflow-auto">
+            <table className="col-lg-12 tables">
                 <thead>
                     <tr>
                         <th>วันที่เข้ารับบริการ</th>

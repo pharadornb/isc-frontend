@@ -26,7 +26,7 @@ section::after {
 }
 
 .box_img_content {
-  position: static;
+  position: relative;
 }
 
 .img_design{
@@ -62,6 +62,37 @@ section::after {
   font-size: 20px;
   text-shadow: 0px 0px 8px #FF0000;
 }
+
+@media screen and (max-width: 600px) {
+  .boxTxt {
+    padding-right: 100px;
+    position: absolute;
+    margin-top: -300px;
+  }
+
+  .txt1, .txt2, .txt3 {
+    font-weight: 900;
+    margin-left: 50px;
+    margin-left: 50px;
+    color: #FFFFFF;
+  }
+  
+  .txt1 {
+    font-size: 24px;
+  }
+  
+  .txt2 {
+    margin-left: 50px;
+    font-size: 40px;
+    text-shadow: 0px 0px 8px #FF0000;
+  }
+  
+  .txt3 {
+    font-size: 20px;
+    text-shadow: 0px 0px 8px #FF0000;
+  }
+}
+
 
 .box_select{
   float: right;

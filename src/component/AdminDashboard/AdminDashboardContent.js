@@ -54,8 +54,8 @@ export default function AdminDashboardContent() {
             </div>
           </div>
           <div className="row box_row2">
-            <div className="col-md-8"></div>
-            <div className="col-md-4">
+            <div className="col-lg-8"></div>
+            <div className="col-lg-4">
               <Select options={options} />
             </div>
           </div>

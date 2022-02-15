@@ -62,7 +62,7 @@ export default function UserDashboardContent() {
     <div className="row2">
       <div className="container ">
         <div className="row row2-2">
-          <div className="col-sm-12 col-md-9 mergeTxt">
+          <div className="col-md-12 col-lg-9 mergeTxt">
             <img className="img_design" src={logo} alt="Logo" />
             <div className="box-txt-top">
               <p className="seHi">
@@ -78,7 +78,7 @@ export default function UserDashboardContent() {
               </p>
             </div>
           </div>
-          <div className="col-sm-12 col-lg-3">
+          <div className="col-md-12 col-lg-3">
             <div className="side-view">{/* Slider */}</div>
           </div>
         </div>
@@ -124,7 +124,7 @@ export default function UserDashboardContent() {
             </div>
           </div>
         </div>
-        <div className="row cs">
+        <div className="row">
           <div className="col-md-12 col-lg-6">
             <h2>คลังทักษะล่าสุด</h2>
             <div className="box-skills-library">
@@ -133,11 +133,12 @@ export default function UserDashboardContent() {
               {/*-----------------*/}
             </div>
           </div>
+
           <div className="col-md-12 col-lg-6">
             <h2>สถานประกอบการล่าสุด</h2>
-            <div className="box-latest-establishment">
+            <div className="box-latest-establishment overflow-auto">
               {/*----- Table -----*/}
-              <table className="table-establishment">
+              <table className="table-establishment ">
                 <thead>
                   <tr>
                     <th>สถานประกอบการ</th>

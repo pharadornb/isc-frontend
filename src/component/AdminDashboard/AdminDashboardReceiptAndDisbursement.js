@@ -235,7 +235,7 @@ function AdminDashboardReceiptAndDisbursement() {
           />
         </div>
       </div>
-      <div className="row tb">
+      <div className="row tb overflow-auto">
         <table className={clases.table} aria-label="simple table">
           <thead>
             <tr>

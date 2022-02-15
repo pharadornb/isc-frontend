@@ -94,7 +94,7 @@ function AdminDashboardCheckOpenSkilltable() {
 
   return (
     <>
-      <div className="row tb">
+      <div className="row tb ">
         <label className="col-md-8">
           <b className="bm">ตรวจสอบการเปิดทักษะ</b>
         </label>
@@ -106,7 +106,7 @@ function AdminDashboardCheckOpenSkilltable() {
           />
         </div>
       </div>
-      <div className="row tb">
+      <div className="row tb overflow-auto">
         <table className={classes.table} aria-label="simple table">
           <thead>
             <tr>

@@ -464,7 +464,7 @@ export default function UserResume() {
                         (row2) =>
                           row1.skill_type_name === row2.skill_type_name &&
                           row2.user_skill_ishide === "no" && (
-                            <div className="col-3" key={row2.user_skill_id}>
+                            <div className="col-md-4 col-lg-3" key={row2.user_skill_id}>
                               <div className="styleboxskill">
                                 <CustomContentProgressbar
                                   percentage={row2.user_skill_point}

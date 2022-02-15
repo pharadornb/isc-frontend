@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import PaginationTable from "./PaginationTable";
 import Loader from "../configComponent/Loader";
 import Swal from "sweetalert2";
+import Table from "react-bootstrap/table";
 
 export default function SkillStoreTable() {
 
@@ -127,12 +128,12 @@ export default function SkillStoreTable() {
                     </div>
                 </div>
 
-                <table className="table table-striped">
+                <Table className="table table-striped mt-2" responsive>
                     <HeaderTable headers={headers}/>
                     <tbody>
                     {skillStoreData.map((comment, index) => (
                         <tr key={comment.skill_id}>
-                            <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
+                            <td><Avatar
                                 alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
                                 sx={{width: 50, height: 50}}/></td>
                             <td>{comment.skill_name}</td>
@@ -166,7 +167,7 @@ export default function SkillStoreTable() {
                         </tr>
                     ))}
                     </tbody>
-                </table>
+                </Table>
                 <PaginationTable
                     total={totalItems}
                     itemsPerPage={ITEMS_PER_PAGE}

@@ -67,17 +67,26 @@ export default function LoginDialog() {
                 ).then(function () {
                     window.location = '/dashboard'
                 });
-            }else if (res.status === 404) {
-                Swal.fire(
-                    'เข้าสู่ระบบไม่สำเร็จ',
-                    'โปรดยืนยันตัวตนที่อีเมล์ของคุณ',
-                    'error'
-                ).then(function () {
-                    window.location = '/'
-                });
             }
-        }).catch(err =>
-            console.log(err)
+        }).catch(err => {
+                if (err.response.status === 404) {
+                    Swal.fire(
+                        'เข้าสู่ระบบไม่สำเร็จ',
+                        'โปรดยืนยันตัวตนที่อีเมล์ของคุณ',
+                        'error'
+                    ).then(function () {
+                        window.location = '/'
+                    });
+                } else if (err.response.status === 401) {
+                    Swal.fire(
+                        'เข้าสู่ระบบไม่สำเร็จ',
+                        'อีเมล์ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+                        'error'
+                    ).then(function () {
+                        window.location = '/'
+                    });
+                }
+            }
         )
     }
 

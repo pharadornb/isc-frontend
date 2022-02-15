@@ -24,6 +24,7 @@ export default function Login() {
                 'Content-Type': 'application/json',
             }
         }).then(res => {
+
             if (res.status === 200) {
                 sessionStorage.setItem('token', res.data.token)
                 Swal.fire(
@@ -34,10 +35,21 @@ export default function Login() {
                     window.location = '/dashboard'
                 });
             }
+
             if (res.status === 404) {
                 Swal.fire(
                     'เข้าสู่ระบบไม่สำเร็จ',
                     'อีเมล์ผู้ใช้นี้ยังไม่ได้ทำการยืนยันตัวตน',
+                    'error'
+                ).then(function () {
+                    window.location = '/'
+                });
+            }
+
+            if (res.status === 401) {
+                Swal.fire(
+                    'เข้าสู่ระบบไม่สำเร็จ',
+                    'อีเมล์ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
                     'error'
                 ).then(function () {
                     window.location = '/'

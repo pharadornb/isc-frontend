@@ -37,7 +37,9 @@ export default function Company() {
                 marginTop: "20px"
             }} ref={myRef}>
                 <div className="card-title mt-2" style={{color: "white", textAlign: "center"}}>
-                    <h3><b>พาร์ทเนอร์บริษัทเรา</b></h3>
+                    <h3><b>" มาใช้ระบบด้วยกันน่ะ จะได้เห็นถึงความสามารถอันไม่มีขีดจำกัดและพรมแดน "</b></h3>
+                    <button type={'submit'} className={'btn btn-primary mt-2'}>เข้าสู่ระบบ</button>&nbsp;&nbsp;
+                    <button type={'submit'} className={'btn btn-success mt-2'}>สมัครสมาชิก</button>
                 </div>
             </div>
         </Fragment>

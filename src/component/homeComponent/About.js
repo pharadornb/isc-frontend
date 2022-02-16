@@ -24,10 +24,10 @@ export default function About() {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h6" component="div">
-                                    <b>Online platform service</b>
+                                    <b>คลังสะสมทักษะใหม่</b>
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic magnam neque obcaecati perspiciatis, reiciendis tenetur.
+                                    คลังสะสมทักษะที่ทักษะตรงตามความต้องการของบริษัทอย่างแท้จริง ความใหม่และการอัพเดตตลอดของคลังสะสมทักษะไอที
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -43,12 +43,11 @@ export default function About() {
                                 alt="green iguana"
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
+                                <Typography gutterBottom variant="h6" component="div">
+                                    <b>เรซูเม่ตามความสามารถ</b>
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    ใช้งานระบบสามารถแสดงผลหรือเลือกได้ตามต้องการ ว่าต้องการนำเสนอทักษะใดๆบ้างกับบริษัท สามารถบันทึกส่งกับบริษัทได้
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -64,12 +63,11 @@ export default function About() {
                                 alt="green iguana"
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Lizard55555555
+                                <Typography gutterBottom variant="h6" component="div">
+                                    <b>หางานกับบริษัทพันธมิตร</b>
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    บริษัทสร้างทักษะขึ้นมาเพื่อทำการทดสอบก่อนเข้ารับงาน ตรงตามความต้องการและจุดประสงค์ที่แท้จริงได้พนักงานที่มีคุณภาพ
                                 </Typography>
                             </CardContent>
                         </CardActionArea>

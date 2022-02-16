@@ -29,7 +29,7 @@ export default function CompanyResumeEdit() {
 
   // const [dataSkills, setDataSkills] = useState([]);
 
-  const [dates, setDates] = useState('');
+  const [dates, setDates] = useState("");
   const [loading1, setLoading1] = useState(false);
 
   const [totalItems, setTotalItems] = useState(0);
@@ -38,15 +38,14 @@ export default function CompanyResumeEdit() {
   // const [showLoading, setShowLoading] = useState(false)
   const ITEMS_PER_PAGE = 5;
 
-
   const [zipCode, setZipCode] = useState("");
   const [subDistrict, setSubDistrict] = useState(Array);
   const [subDistrictSelect, setSubDistrictSelect] = useState("");
   const [district, setDistrict] = useState("");
   const [province, setProvince] = useState("");
-  const [isDisabledSubDistrictSelect, setIsDisabledSubDistrictSelect] = useState(true);
-  const [image, setImage] = useState('');
-  
+  const [isDisabledSubDistrictSelect, setIsDisabledSubDistrictSelect] =
+    useState(true);
+  const [image, setImage] = useState("");
 
   const onSetZipCode = (e) => {
     setSubDistrictSelect("");
@@ -92,7 +91,7 @@ export default function CompanyResumeEdit() {
       console.log(err);
     }
     // End funtion PositionRequire
-  }
+  };
 
   const SkillRequire = (props) => {
     // Select API SkillRequire
@@ -101,8 +100,8 @@ export default function CompanyResumeEdit() {
     });
 
     try {
-     axios
-        .post("resume/companySkillRequire",params, {
+      axios
+        .post("resume/companySkillRequire", params, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -110,23 +109,19 @@ export default function CompanyResumeEdit() {
         .then((res) => {
           if (res.status === 200) {
             // console.log(res.data.length);
-
-          //  for(let i=0;i<res.data.length;i++){
-          //   var rows1 = {
-          //     ucre_id: props.ucre_id,
-          //     ucrs_id: res.data[i].ucrs_id,
-          //     skill_logo: res.data[i].skill_logo,
-          //     skill_name: res.data[i].skill_name,
-          //     uc_name: res.data[i].uc_name,
-          //     ucrs_point: res.data[i].ucrs_point,
-          //     user_profile: res.data[i].user_profile
-          //   }
+            //  for(let i=0;i<res.data.length;i++){
+            //   var rows1 = {
+            //     ucre_id: props.ucre_id,
+            //     ucrs_id: res.data[i].ucrs_id,
+            //     skill_logo: res.data[i].skill_logo,
+            //     skill_name: res.data[i].skill_name,
+            //     uc_name: res.data[i].uc_name,
+            //     ucrs_point: res.data[i].ucrs_point,
+            //     user_profile: res.data[i].user_profile
+            //   }
             // console.log(rows1);
-  
             // setDataSkills([...dataSkills, res.data]);
-          //  }
-            
-            
+            //  }
             // console.log(dataSkills);
           }
         });
@@ -135,18 +130,18 @@ export default function CompanyResumeEdit() {
     }
     // End funtion SkillRequire
 
-    return(
+    return (
       <>
-      {/* {props.ucre_id} */}
+        {/* {props.ucre_id} */}
         <label className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative">
           <Avatar
-              alt={'ddd'}
-              className="avatarL"
-              src={`data:image/jpeg;base64,`}
-              sx={{ width: 20, height: 20 }}
-            />
+            alt={"ddd"}
+            className="avatarL"
+            src={`data:image/jpeg;base64,`}
+            sx={{ width: 20, height: 20 }}
+          />
           <Avatar
-            alt={'ddd'}
+            alt={"ddd"}
             // className="maginLeftRight-center"
             src={`data:image/jpeg;base64,`}
             sx={{ width: 50, height: 50 }}
@@ -154,53 +149,54 @@ export default function CompanyResumeEdit() {
           <p>5555</p>
         </label>
       </>
-    )
-  }
+    );
+  };
 
   const headers = [
-    {name: "สัญลักษณ์", field: "skill_logo", sortable: false},
-    {name: "ชื่อทักษะ", field: "skill_name", sortable: false},
-    {name: "โดย", field: "uc_name_profile", sortable: false},
-    {name: "กลุ่มทักษะ", field: "skill_type_name", sortable: false},
-    {name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false},
-    {name: "ระดับทักษะ", field: "skill_hard", sortable: false},
-    {name: "ราคา(บาท)", field: "skill_credit", sortable: false},
-    {name: "เพิ่มลงคลังทักษะ", field: "", sortable: false}
-];
+    { name: "สัญลักษณ์", field: "skill_logo", sortable: false },
+    { name: "ชื่อทักษะ", field: "skill_name", sortable: false },
+    { name: "โดย", field: "uc_name_profile", sortable: false },
+    { name: "กลุ่มทักษะ", field: "skill_type_name", sortable: false },
+    { name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false },
+    { name: "ระดับทักษะ", field: "skill_hard", sortable: false },
+    { name: "ราคา(บาท)", field: "skill_credit", sortable: false },
+    { name: "เพิ่มลงคลังทักษะ", field: "", sortable: false },
+  ];
 
-const skillStoreData = useMemo(() => {
-  let computedComments = comments;
+  const skillStoreData = useMemo(() => {
+    let computedComments = comments;
 
-  if (search) {
+    if (search) {
       computedComments = computedComments.filter(
-          comment => comment.skill_name.toLowerCase().includes(search.toLowerCase()) ||
-              comment.skill_type_name.toLowerCase().includes(search.toLowerCase())
+        (comment) =>
+          comment.skill_name.toLowerCase().includes(search.toLowerCase()) ||
+          comment.skill_type_name.toLowerCase().includes(search.toLowerCase())
       );
-  }
+    }
 
-  setTotalItems(computedComments.length);
+    setTotalItems(computedComments.length);
 
-  return computedComments.slice(
+    return computedComments.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
       (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-  );
-}, [comments, currentPage, search]);
+    );
+  }, [comments, currentPage, search]);
 
-const ViewSkills = () => {
-  axios.post('skill/viewSkill', {
-    headers: {
-        'Content-Type': 'application/json',
-    }
-}).then(res => {
-    setComments(res.data);
-    // setShowLoading(false)
-}).catch(err =>
-    console.log(err)
-)
-}
+  const ViewSkills = () => {
+    axios
+      .post("skill/viewSkill", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setComments(res.data);
+        // setShowLoading(false)
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    
     const SelectCompanyData = () => {
       // Select API ProfileGeneral --------------
       try {
@@ -271,58 +267,56 @@ const ViewSkills = () => {
     setProfileGeneral(values);
   };
 
-  
-
   const SetImageLog = (props) => (
-      <Avatar
-        alt={ProfileGeneral[0].uc_name}
-        className="maginLeftRight-center"
-        src={`data:image/jpeg;base64,${props.user_profile}`}
-        sx={{ width: 200, height: 200 }}
-      />
+    <Avatar
+      alt={ProfileGeneral[0].uc_name}
+      className="maginLeftRight-center"
+      src={`data:image/jpeg;base64,${props.user_profile}`}
+      sx={{ width: 200, height: 200 }}
+    />
   );
-
-  
 
   async function readImage(e, func) {
     const file = e.target.files[0];
 
-    if(file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png' ){
+    if (
+      file.type === "image/jpeg" ||
+      file.type === "image/jpg" ||
+      file.type === "image/png"
+    ) {
       console.log("true type " + file.type);
-      if(file.size < 50000){
+      if (file.size < 50000) {
         console.log("true size " + file.size);
         const reader = new FileReader();
         // console.log(file);
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           let binaryData = e.target.result;
           let base64String = window.btoa(binaryData);
           func(base64String);
-          
         };
-    
+
         let image = reader.readAsBinaryString(file);
         console.log(reader);
         return image;
-      }else{
+      } else {
         console.log("false size " + file.size);
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please upload a file smaller than 50 KB!',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Please upload a file smaller than 50 KB!",
+        });
       }
-    }else{
+    } else {
       console.log("false type " + file.type);
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'File does not support. You must use .png or .jpg!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "File does not support. You must use .png or .jpg!",
+      });
     }
-   
   }
 
-  const onDeleteReport = (index) =>{
+  const onDeleteReport = (index) => {
     console.log(index);
 
     const rowIndex = [...position_Require];
@@ -330,7 +324,7 @@ const ViewSkills = () => {
     rowIndex.splice(index, 1);
 
     setPositionRequire(rowIndex);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -346,7 +340,13 @@ const ViewSkills = () => {
             <div className="row">
               <div className="col-md-12 col-lg-4 ">
                 <label htmlFor="imagefile">
-                  {image ? <SetImageLog user_profile={image} /> : <SetImageLog user_profile={ProfileGeneral[0].user_profile} />}
+                  {image ? (
+                    <SetImageLog user_profile={image} />
+                  ) : (
+                    <SetImageLog
+                      user_profile={ProfileGeneral[0].user_profile}
+                    />
+                  )}
                   <input
                     type={"file"}
                     id={"imagefile"}
@@ -359,12 +359,13 @@ const ViewSkills = () => {
               <div className="col-md-12 col-lg-8">
                 <div className="row bg-while sdd">
                   <div className="col-lg-12">
-                 
                     <TextField
                       id="outlined-basic"
                       label="Company Name"
                       fullWidth
-                      disabled = {ProfileGeneral[0].uc_name.length === 100 ? true : false}
+                      disabled={
+                        ProfileGeneral[0].uc_name.length === 100 ? true : false
+                      }
                       name="uc_name"
                       value={ProfileGeneral[0].uc_name}
                       className="inputbox magintop20"
@@ -421,7 +422,9 @@ const ViewSkills = () => {
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DesktopDatePicker
                         label="Date Dob"
-                        value={dates !== '' ? dates : ProfileGeneral[0].user_dob}
+                        value={
+                          dates !== "" ? dates : ProfileGeneral[0].user_dob
+                        }
                         onChange={(newValue) => {
                           setDates(newValue);
                         }}
@@ -577,27 +580,40 @@ const ViewSkills = () => {
             </div>
           </div>
           <div className="container">
-              <div className="row">
-                <div className="col-lg-12 ">
-                  <div className="p-relative">
-                    <label className="title-Position-require p-absolute">Position require</label>
-                    <div className="line "></div>
-                  </div>
+            <div className="row">
+              <div className="col-lg-12 ">
+                <div className="p-relative">
+                  <label className="title-Position-require p-absolute">
+                    Position require
+                  </label>
+                  <div className="line "></div>
                 </div>
-                <div className="col-12"><br/><br/></div>
               </div>
+              <div className="col-12">
+                <br />
+                <br />
+              </div>
+            </div>
 
-              <div className="row">
-                {position_Require.map((rows, index) => (
+            <div className="row">
+              {position_Require.map((rows, index) => (
                 <div className="col-12 bg-while" key={index}>
                   {/* In-Box-Position */}
                   <div className="row">
-                    <div className="col-12" style={{textAlign: "right"}}>
-                      <span style={{color: "red"}} >
-                        <i className="fas fa-minus-circle" onClick={()=>onDeleteReport(index)} />
+                    <div className="col-12" style={{ textAlign: "right" }}>
+                      <span style={{ color: "red" }}>
+                        <i
+                          className="fas fa-minus-circle"
+                          onClick={() => onDeleteReport(index)}
+                        />
                       </span>
                     </div>
-                    <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>ตำเเหน่งงาน : </label>
+                    <label
+                      className="col-md-6 col-lg-3 txtBoxRequire"
+                      style={{ textAlign: "right" }}
+                    >
+                      ตำเเหน่งงาน :{" "}
+                    </label>
                     <TextField
                       className="col-md-6 col-lg-3"
                       id="outlined-basic"
@@ -608,7 +624,12 @@ const ViewSkills = () => {
                       value={rows.ucre_occupation}
                       // onChange={(newValue) => handleChangeNew(newValue)}
                     />
-                    <label className="col-md-6 col-lg-3 txtBoxRequire" style={{textAlign: "right"}}>เงินประจำเดือน :</label>
+                    <label
+                      className="col-md-6 col-lg-3 txtBoxRequire"
+                      style={{ textAlign: "right" }}
+                    >
+                      เงินประจำเดือน :
+                    </label>
                     <TextField
                       className="col-md-6 col-lg-3"
                       id="outlined-basic"
@@ -619,8 +640,12 @@ const ViewSkills = () => {
                       value={rows.ucre_salary}
                       // onChange={(newValue) => handleChangeNew(newValue)}
                     />
-                    <div className="col-12"><br/></div>
-                    <label className="col-12"><b>รายละเอียดงาน</b></label>
+                    <div className="col-12">
+                      <br />
+                    </div>
+                    <label className="col-12">
+                      <b>รายละเอียดงาน</b>
+                    </label>
                     <TextField
                       id="outlined-multiline-flexible"
                       label="Job Detail"
@@ -633,98 +658,119 @@ const ViewSkills = () => {
                       value={rows.ucre_detail}
                       // onChange={(newValue) => handleChangeNew(newValue)}
                     />
-                    <div className="col-12"><br/></div>
-                    <div className="col-12 "  > {/*Skill Require */}
-                      
-                      <div className="row borderBox overflow-auto" align={"center"}>
+                    <div className="col-12">
+                      <br />
+                    </div>
+                    <div className="col-12 ">
+                      {" "}
+                      {/*Skill Require */}
+                      <div
+                        className="row borderBox overflow-auto"
+                        align={"center"}
+                      >
                         <SkillRequire ucre_id={rows.ucre_id} />
                       </div>
                     </div>
                   </div>
                   <div className="row">
-
                     <div className="col-12">
-                      <br/>
-                        <div className="row">
-                        <div className="col-md-4" align={'left'}>
-                            <p style={{fontSize: '24px'}}><i className="fab fa-slack"
-                                                            style={{fontSize: '1em'}}/><b> เลือกทักษะ</b></p>
+                      <br />
+                      <div className="row">
+                        <div className="col-md-4" align={"left"}>
+                          <p style={{ fontSize: "24px" }}>
+                            <i
+                              className="fab fa-slack"
+                              style={{ fontSize: "1em" }}
+                            />
+                            <b> เลือกทักษะ</b>
+                          </p>
                         </div>
                         <div className="col-md-8 d-flex flex-row-reverse">
-                            <SearchTable onSearch={value => {
-                                setSearch(value);
-                                setCurrentPage(1);
+                          <SearchTable
+                            onSearch={(value) => {
+                              setSearch(value);
+                              setCurrentPage(1);
                             }}
-                            />
+                          />
                         </div>
-                    </div>
-                    <div className="col-12 overflow-auto">
-                      <Table className="table table-striped">
-                          <HeaderTable headers={headers}/>
+                      </div>
+                      <div className="col-12 overflow-auto">
+                        <Table className="table table-striped">
+                          <HeaderTable headers={headers} />
                           <tbody>
-                          {skillStoreData.map((comment, index) => (
+                            {skillStoreData.map((comment, index) => (
                               <tr key={comment.skill_id}>
-                                  <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
-                                      alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
-                                      sx={{width: 50, height: 50}}/></td>
-                                  <td>{comment.skill_name}</td>
-                                  <td>{comment.uc_name}</td>
-                                  <td>{comment.skill_type_name}</td>
-                                  <td>{comment.skill_time}</td>
-                                  <td>
-                                      {comment.skill_hard === 1 &&
-                                          <p>ค่อนข้างง่าย</p>
-                                      }
-                                      {comment.skill_hard === 2 &&
-                                          <p>ง่าย</p>
-                                      }
-                                      {comment.skill_hard === 3 &&
-                                          <p>ปานกลาง</p>
-                                      }
-                                      {comment.skill_hard === 4 &&
-                                          <p>ค่อนข้างยาก</p>
-                                      }
-                                      {comment.skill_hard === 5 &&
-                                          <p>ยาก</p>
-                                      }
-                                  </td>
-                                  <td>{comment.skill_credit}</td>
-                                  <td>
-                                      <button type="button" className="btn btn-success"
-                                        // onClick={() => handleClickOpen(index)}
-                                      >
-                                        <i className="far fa-check-square"/> เพิ่ม
-                                      </button>
-                                  </td>
+                                <td
+                                  style={{ pointerEvents: "none" }}
+                                  className="margin-auto"
+                                >
+                                  <Avatar
+                                    alt={comment.skill_name}
+                                    src={`data:image/jpeg;base64,${comment.skill_logo}`}
+                                    sx={{ width: 50, height: 50 }}
+                                  />
+                                </td>
+                                <td>{comment.skill_name}</td>
+                                <td>{comment.uc_name}</td>
+                                <td>{comment.skill_type_name}</td>
+                                <td>{comment.skill_time}</td>
+                                <td>
+                                  {comment.skill_hard === 1 && (
+                                    <p>ค่อนข้างง่าย</p>
+                                  )}
+                                  {comment.skill_hard === 2 && <p>ง่าย</p>}
+                                  {comment.skill_hard === 3 && <p>ปานกลาง</p>}
+                                  {comment.skill_hard === 4 && (
+                                    <p>ค่อนข้างยาก</p>
+                                  )}
+                                  {comment.skill_hard === 5 && <p>ยาก</p>}
+                                </td>
+                                <td>{comment.skill_credit}</td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    className="btn btn-success"
+                                    // onClick={() => handleClickOpen(index)}
+                                  >
+                                    <i className="far fa-check-square" /> เพิ่ม
+                                  </button>
+                                </td>
                               </tr>
-                          ))}
+                            ))}
                           </tbody>
-                      </Table>
-                    </div>
-                    <PaginationTable
+                        </Table>
+                      </div>
+                      <PaginationTable
                         total={totalItems}
                         itemsPerPage={ITEMS_PER_PAGE}
                         currentPage={currentPage}
-                        onPageChange={page => setCurrentPage(page)}
-                    />
+                        onPageChange={(page) => setCurrentPage(page)}
+                      />
                     </div>
                   </div>
                 </div>
-                ))}
+              ))}
+            </div>
+            <div className="row">
+              <div className="col-12" style={{ textAlign: "right" }}>
+                <span style={{ color: "green" }}>
+                  <i className="fas fa-plus-circle" />
+                </span>
               </div>
-              <div className="row">
-                <div className="col-12" style={{textAlign: "right"}}>
-                  <span style={{color: "green"}}>
-                    <i className="fas fa-plus-circle"/>
-                  </span>
-                </div>
-               
-                <div className="col-12"><br/></div>
+
+              <div className="col-12">
+                <br />
               </div>
+            </div>
           </div>
         </>
       )}
-      <input type="submit" value={'Save'} className="btn btn-success" onClick={handleSubmit} />
+      <input
+        type="submit"
+        value={"Save"}
+        className="btn btn-success"
+        onClick={handleSubmit}
+      />
     </FormControl>
   );
 }

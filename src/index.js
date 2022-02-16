@@ -43,7 +43,7 @@ ReactDOM.render(
             <Routes>
                 <Route path="/test" element={<App/>} />
                 <Route path="/" element={<HomePage/>} />
-                <Route path="/login" element={<Login/>} />
+                <Route path="/demo" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/reset/:userEmail" element={<ResetPage/>} />

@@ -47,7 +47,7 @@ export default function AlertDialogSlide(props) {
   const [dataNUser, setDataNUser] = useState([]);
 
   const [selectedFile, setSelectedFile] = useState([]);
-  // const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isFilePicked, setIsFilePicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleClickOpen = () => {
@@ -96,15 +96,12 @@ export default function AlertDialogSlide(props) {
   };
 
   const editImageHandler = (event) => {
-    convertBase64(event.target.files[0]);
     
-
+    convertBase64(event.target.files[0]);
     // setSelectedFile(profiles[1]);
-
-    // setIsFilePicked(true);
-
+    setIsFilePicked(true);
     // console.log(selectedFile);
-    return selectedFile;
+    return (selectedFile, isFilePicked);
   };
 
   const AvatarImage = (props) => {
@@ -141,91 +138,101 @@ export default function AlertDialogSlide(props) {
 
   //Save API--------------------------
   const handleSave = () => {
-    // const profiles = selectedFile.split(",");
+    
     // console.log(profiles[1]);
 
     // console.log(params);
 
-    // if (isFilePicked[0] === true) {
-    //   const params = JSON.stringify({
-    //     user_email: dataNUser.user_email,
-    //     user_profile: profiles[1],
-    //     user_tel: dataNUser.user_tel,
-    //     user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
-    //     user_address: dataNUser.user_address,
-    //     user_subdistrict: dataNUser.user_subdistrict,
-    //     user_district: dataNUser.user_district,
-    //     user_province: dataNUser.user_province,
-    //     user_postcode: dataNUser.user_postcode,
-    //     user_slogan: dataNUser.user_slogan,
-    //     us_firstname: dataNUser.us_firstname,
-    //     us_lastname: dataNUser.us_lastname,
-    //     us_com_address: dataNUser.us_com_address,
-    //     us_com_subdistrict: dataNUser.us_com_subdistrict,
-    //     us_com_district: dataNUser.us_com_district,
-    //     us_com_province: dataNUser.us_com_province,
-    //     us_com_postcode: dataNUser.us_com_postcode,
-    //     us_com_github: dataNUser.us_com_github,
-    //     us_com_linkedin: dataNUser.us_com_linkedin,
-    //     us_com_facebook: dataNUser.us_com_facebook,
-    //     us_com_youtube: dataNUser.us_com_youtube,
-    //   });
+    if (isFilePicked === true) {
+      const profiles = selectedFile.split(",");
 
-    //   axios
-    //     .post("/resume/updateUserGeneral", params, {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         // console.log(dataNUser);
-    //         Userprofile();
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    //   // console.log("Push image");
-    // } else {
-    //   const params = JSON.stringify({
-    //     user_email: dataNUser.user_email,
-    //     user_tel: dataNUser.user_tel,
-    //     user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
-    //     user_profile: dataNUser.user_profile,
-    //     user_address: dataNUser.user_address,
-    //     user_subdistrict: dataNUser.user_subdistrict,
-    //     user_district: dataNUser.user_district,
-    //     user_province: dataNUser.user_province,
-    //     user_postcode: dataNUser.user_postcode,
-    //     user_slogan: dataNUser.user_slogan,
-    //     us_firstname: dataNUser.us_firstname,
-    //     us_lastname: dataNUser.us_lastname,
-    //     us_com_address: dataNUser.us_com_address,
-    //     us_com_subdistrict: dataNUser.us_com_subdistrict,
-    //     us_com_district: dataNUser.us_com_district,
-    //     us_com_province: dataNUser.us_com_province,
-    //     us_com_postcode: dataNUser.us_com_postcode,
-    //     us_com_github: dataNUser.us_com_github,
-    //     us_com_linkedin: dataNUser.us_com_linkedin,
-    //     us_com_facebook: dataNUser.us_com_facebook,
-    //     us_com_youtube: dataNUser.us_com_youtube,
-    //   });
+      const params = JSON.stringify({
+        user_email: dataNUser.user_email,
+        user_profile: profiles[1],
+        user_tel: dataNUser.user_tel,
+        user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
+        user_address: dataNUser.user_address,
+        user_subdistrict: dataNUser.user_subdistrict,
+        user_district: dataNUser.user_district,
+        user_province: dataNUser.user_province,
+        user_postcode: dataNUser.user_postcode,
+        user_slogan: dataNUser.user_slogan,
+        us_firstname: dataNUser.us_firstname,
+        us_lastname: dataNUser.us_lastname,
+        us_com_address: dataNUser.us_com_address,
+        us_com_subdistrict: dataNUser.us_com_subdistrict,
+        us_com_district: dataNUser.us_com_district,
+        us_com_province: dataNUser.us_com_province,
+        us_com_postcode: dataNUser.us_com_postcode,
+        us_com_github: dataNUser.us_com_github,
+        us_com_linkedin: dataNUser.us_com_linkedin,
+        us_com_facebook: dataNUser.us_com_facebook,
+        us_com_youtube: dataNUser.us_com_youtube,
+      });
 
-    //   axios
-    //     .post("/resume/updateUserGeneral", params, {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         // console.log(dataNUser);
-    //         Userprofile();
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
 
-      // console.log("No image");
-    // }
+      axios
+        .post("/resume/updateUserGeneral", params, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log(dataNUser);
+            // Userprofile();
+            window.location = './resume_user';
+          }
+        })
+        .catch((err) => console.log(err));
+      // console.log("Push image");
+      // console.log(params);
+    } else {
+      const params = JSON.stringify({
+        user_email: dataNUser.user_email,
+        user_tel: dataNUser.user_tel,
+        user_dob: moment(dataNUser.user_dob).format("YYYY-MM-DD"),
+        user_profile: dataNUser.user_profile,
+        user_address: dataNUser.user_address,
+        user_subdistrict: dataNUser.user_subdistrict,
+        user_district: dataNUser.user_district,
+        user_province: dataNUser.user_province,
+        user_postcode: dataNUser.user_postcode,
+        user_slogan: dataNUser.user_slogan,
+        us_firstname: dataNUser.us_firstname,
+        us_lastname: dataNUser.us_lastname,
+        us_com_address: dataNUser.us_com_address,
+        us_com_subdistrict: dataNUser.us_com_subdistrict,
+        us_com_district: dataNUser.us_com_district,
+        us_com_province: dataNUser.us_com_province,
+        us_com_postcode: dataNUser.us_com_postcode,
+        us_com_github: dataNUser.us_com_github,
+        us_com_linkedin: dataNUser.us_com_linkedin,
+        us_com_facebook: dataNUser.us_com_facebook,
+        us_com_youtube: dataNUser.us_com_youtube,
+      });
+
+      axios
+        .post("/resume/updateUserGeneral", params, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            // console.log("200");
+            // Userprofile();
+            window.location = './resume_user';
+          }
+        })
+        .catch((err) => console.log(err));
+
+      console.log("No image");
+
+      console.log(params);
+    }
+
+    
   };
 
   const OldYears = () => {

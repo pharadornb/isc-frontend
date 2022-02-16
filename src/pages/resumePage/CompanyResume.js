@@ -21,6 +21,7 @@ import AlertDialogSlide from "./CompanyDialogSlide";
 import EditIcon from "@mui/icons-material/Edit";
 import ProgressbarSkills from "./CompanyProgressbarSkills";
 import CompanyResumeEdit from "./CompanyResumeEdit";
+import CompanyResumeReport from "./CompanyResumeReport";
 
 export default function CompanyResume() {
   const { userEmail } = useParams();
@@ -250,7 +251,7 @@ export default function CompanyResume() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6 left-Cbox">
+                  <div className="col-md-12 col-lg-6 left-Cbox">
                     <div className="scol align20">
                       {loading1 === false && <CircularProgress disableShrink />}
                       {companyProfileGeneral.uc_detail}
@@ -330,6 +331,7 @@ export default function CompanyResume() {
             Logout
           </Button>
           <p>CompanyResume : {userEmail}</p>
+          <CompanyResumeReport userEmail={userEmail} />
         </>
       )}
     </Sidebar>

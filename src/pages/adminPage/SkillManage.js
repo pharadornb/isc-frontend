@@ -6,7 +6,7 @@ export default function SkillManage() {
 
     return (
         <Sidebar mark={'adminSkill'}>
-            <div className={'pt-5'}/>
+            <div className={'pt-1'}/>
             <SkillManageComponent />
         </Sidebar>
     )

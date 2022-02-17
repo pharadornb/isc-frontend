@@ -36,9 +36,11 @@ export default function Navbar() {
         <AppBar position="static" style={{background: '#2E2E48'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Typography variant="h6" noWrap component="div"
-                                sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}><img src={iscLogo} alt="isc-logo"
-                                                                                     width={'70%'}/></Typography>
+                    <Link style={{textDecoration: 'none'}} to={'/'}>
+                        <Typography variant="h6" noWrap component="div"
+                                    sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}><img src={iscLogo} alt="isc-logo"
+                                                                                         width={'70%'}/></Typography>
+                    </Link>
                     <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar"
                                     aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
@@ -51,16 +53,6 @@ export default function Navbar() {
                             <Link style={{textDecoration: 'none'}} to={'/'}>
                                 <MenuItem>
                                     <Typography textAlign="center">หน้าหลัก</Typography>
-                                </MenuItem>
-                            </Link>
-                            <Link style={{textDecoration: 'none'}} to={'/'}>
-                                <MenuItem>
-                                    <Typography textAlign="center">เกี่ยวกับระบบ</Typography>
-                                </MenuItem>
-                            </Link>
-                            <Link style={{textDecoration: 'none'}} to={'/'}>
-                                <MenuItem>
-                                    <Typography textAlign="center">แนะนำระบบ</Typography>
                                 </MenuItem>
                             </Link>
                             <Link style={{textDecoration: 'none'}} to={'/register'}>
@@ -80,14 +72,6 @@ export default function Navbar() {
                         <Link style={{textDecoration: 'none'}} to={'/'}>
                             <Button style={{fontSize: "16px"}}
                                     sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>หน้าหลัก</Button>
-                        </Link>
-                        <Link style={{textDecoration: 'none'}} to={'/'}>
-                            <Button style={{fontSize: "16px"}}
-                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>เกี่ยวกับระบบ</Button>
-                        </Link>
-                        <Link style={{textDecoration: 'none'}} to={'/'}>
-                            <Button style={{fontSize: "16px"}}
-                                    sx={{my: 2, ml: 0.5, color: 'white', display: 'block'}}>แนะนำระบบ</Button>
                         </Link>
                         <Link style={{textDecoration: 'none'}} to={'/register'}>
                             <Button style={{fontSize: "16px"}}

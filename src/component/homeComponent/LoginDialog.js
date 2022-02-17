@@ -48,6 +48,7 @@ export default function LoginDialog() {
     const handleSubmit = async e => {
         e.preventDefault();
 
+        setShowLoading(true)
         const params = JSON.stringify({
             user_email,
             user_password
@@ -65,6 +66,7 @@ export default function LoginDialog() {
                     'ยินดีต้อนรับสู่บริการสะสมคลังทักษะไอที',
                     'success'
                 ).then(function () {
+                    setShowLoading(false)
                     window.location = '/dashboard'
                 });
             }
@@ -75,6 +77,7 @@ export default function LoginDialog() {
                         'โปรดยืนยันตัวตนที่อีเมล์ของคุณ',
                         'error'
                     ).then(function () {
+                        setShowLoading(false)
                         window.location = '/'
                     });
                 } else if (err.response.status === 401) {
@@ -83,6 +86,7 @@ export default function LoginDialog() {
                         'อีเมล์ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
                         'error'
                     ).then(function () {
+                        setShowLoading(false)
                         window.location = '/'
                     });
                 }
@@ -100,13 +104,7 @@ export default function LoginDialog() {
                                    onChange={e => setEmail(e.target.value)}/>
                             <input type="password" className={'form-control mt-4'} placeholder={'Password'}
                                    onChange={e => setPassword(e.target.value)}/>
-                            <div className="form-check mt-4">
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                                <label className="form-check-label" htmlFor="flexCheckChecked"
-                                       style={{fontSize: '14px'}}>
-                                    จำฉันในระบบหรือไม่?
-                                </label>
-                            </div>
+                            <div className="mt-2" />
                         </div>
                         <div className="col-md-12 mt-4 d-grid gap-2">
                             <Button className="btn btn-primary" type="submit" variant="contained">เข้าสู่ระบบ</Button>

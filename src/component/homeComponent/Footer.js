@@ -6,7 +6,8 @@ export default function Footer() {
         <>
             <AppBar position="static" style={{background: '#2E2E48', textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>
                 <Container maxWidth="xl">
-                    Copyright © 2022 - All Rights Reserved
+                    Copyright © 2022 - All Rights Reserved <br/>
+                    Information Technology | iTSC Project | SUT
                 </Container>
             </AppBar>
         </>

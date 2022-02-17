@@ -167,19 +167,19 @@ export default function Sidebar({sideNavExpanded, setSideNavExpanded, role, name
                         </NavItem>
                     }
                     {role === 'company' &&
-                        <NavItem eventKey="skill" onClick={skillOnClick}>
-                            <NavIcon>
-                                <i className="fas fa-table" style={{fontSize: "1.75em"}}/>
-                            </NavIcon>
-                            <NavText>คลังเก็บทักษะ</NavText>
-                        </NavItem>
-                    }
-                    {role === 'company' &&
                         <NavItem eventKey="createSkill" onClick={createSkillOnClick}>
                             <NavIcon>
                                 <i className="fas fa-plus-square" style={{fontSize: "1.75em"}}/>
                             </NavIcon>
                             <NavText>สร้างทักษะ</NavText>
+                        </NavItem>
+                    }
+                    {role === 'company' &&
+                        <NavItem eventKey="skill" onClick={skillOnClick}>
+                            <NavIcon>
+                                <i className="fas fa-table" style={{fontSize: "1.75em"}}/>
+                            </NavIcon>
+                            <NavText>คลังเก็บทักษะ</NavText>
                         </NavItem>
                     }
                     {/* company role close */}

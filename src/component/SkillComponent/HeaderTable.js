@@ -12,7 +12,7 @@ const HeaderTable = ({ headers, onSorting }) => {
     };
 
     return (
-        <thead>
+        <thead style={{textAlign: "center"}}>
         <tr>
             {headers.map(({ name, field, sortable }) => (
                 <th key={name} style={{textAlign: "center"}} onClick={() => sortable ? onSortingChange(field) : null}>{name}</th>

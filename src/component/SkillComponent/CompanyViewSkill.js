@@ -6,6 +6,8 @@ import axios from "axios";
 import Loader from "../configComponent/Loader";
 import Avatar from "@mui/material/Avatar";
 import moment from "moment";
+import Swal from "sweetalert2";
+import {Link} from "react-router-dom";
 
 export default function CompanyViewSkill() {
 
@@ -27,27 +29,27 @@ export default function CompanyViewSkill() {
         {name: "จัดการ", field: "", sortable: false}
     ];
 
+    const getData = () => {
+
+        setShowLoading(true)
+
+        axios.post('skill', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            setComments(res.data);
+            setShowLoading(false)
+        }).catch(err => {
+            console.log(err)
+            setShowLoading(false)
+        })
+    };
+
     useEffect(() => {
-        const getData = () => {
-
-            setShowLoading(true)
-
-            axios.post('skill', {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }).then(res => {
-                setComments(res.data);
-                setShowLoading(false)
-            }).catch(err => {
-                console.log(err)
-                setShowLoading(false)
-            })
-        };
-
         getData();
     }, []);
-    
+
     const commentsData = useMemo(() => {
         let computedComments = comments;
 
@@ -65,6 +67,52 @@ export default function CompanyViewSkill() {
             (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
         );
     }, [comments, currentPage, search]);
+
+    const handleSubmit = (id, name, type) => {
+        Swal.fire({
+            title: 'ต้องการลบทักษะนี้หรือไม่?',
+            html: "<b>ชื่อทักษะ: </b>" + name + " <b>กลุ่มทักษะ:</b> " + type,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                setShowLoading(true)
+
+                const params = JSON.stringify({
+                    skill_id: id
+                });
+
+                axios.post('skill/deleteSkill', params, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then(res => {
+                    if (res.status === 200) {
+                        Swal.fire(
+                            'ลบทักษะสำเร็จ',
+                            'ทักษะนี้ถูกลบแล้ว',
+                            'success'
+                        )
+                        setShowLoading(false)
+                        getData();
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    Swal.fire(
+                        'ลบทักษะไม่สำเร็จ!',
+                        'กรุณาลองใหม่อีกครั้ง',
+                        'error'
+                    )
+                    setShowLoading(false)
+                    getData();
+                })
+            }
+        })
+    }
 
     return (
         <Loader show={showLoading}>
@@ -123,9 +171,14 @@ export default function CompanyViewSkill() {
                                 {moment(comment.skill_create).format('L')} {moment(comment.skill_create).format('LT')}
                             </td>
                             <td>
-                                <button type="button" className="btn btn-warning"><i className="fas fa-edit"/></button>
+                                <Link to={`/skill/edit/${comment.skill_id}`}>
+                                    <button type="button" className="btn btn-warning"><i className="fas fa-edit"/>
+                                    </button>
+                                </Link>
                                 &nbsp;&nbsp;
-                                <button type="button" className="btn btn-danger"><i className="fas fa-trash"/></button>
+                                <button type="button" className="btn btn-danger"
+                                        onClick={() => handleSubmit(comment.skill_id, comment.skill_name, comment.skill_type_name)}>
+                                    <i className="fas fa-trash"/></button>
                             </td>
                         </tr>
                     ))}

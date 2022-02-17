@@ -4,18 +4,15 @@ import moment from "moment";
 import "../../css/UserDashboard.css";
 import logo from "../../img/Thailand-company-registration.jpg";
 import ThinkIcon from "../../img/think-icon.PNG";
-import Moneys from "../../img/money2.PNG";
 import ListIcon2 from "../../img/list-icon2.PNG";
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import SkillUserTable from "../../component/SkillComponent/SkillUserTable";
 
-import BoxSklil from "../UserDashboard/UserDashboardBoxSklil";
-import LatestEstablishmentTable from "../UserDashboard/UserDashboardEstablishmentTable";
 
 export default function UserDashboardContent() {
   const [datacount1, setDatacount1] = useState([]);
   const [datacount2, setDatacount2] = useState([]);
-  const [datacount3, setDatacount3] = useState([]);
 
   const UpdateCount = () => {
     try {
@@ -30,7 +27,6 @@ export default function UserDashboardContent() {
             // console.log(res.data.skill_all[0]);
             setDatacount1(res.data.skill_all[0]);
             setDatacount2(res.data.your_skill_sum[0]);
-            setDatacount3(res.data.your_wallet_sum[0]);
           }
         });
       // setLoading(true);
@@ -62,7 +58,7 @@ export default function UserDashboardContent() {
     <div className="row2">
       <div className="container ">
         <div className="row row2-2">
-          <div className="col-md-12 col-lg-9 mergeTxt">
+          <div className="col-lg-12 mergeTxt">
             <img className="img_design" src={logo} alt="Logo" />
             <div className="box-txt-top">
               <p className="seHi">
@@ -78,12 +74,10 @@ export default function UserDashboardContent() {
               </p>
             </div>
           </div>
-          <div className="col-md-12 col-lg-3">
-            <div className="side-view">{/* Slider */}</div>
-          </div>
+         
         </div>
         <div className="row">
-          <div className="col-md-12 col-lg-4 paddin20">
+          <div className="col-md-12 col-lg-6 paddin20">
             <div className="box-design">
               <img className="img-think-icon" src={ThinkIcon} alt="Logo" />
               <label className="txt-to-icon">คลังสะสมทักษะ</label>
@@ -95,21 +89,7 @@ export default function UserDashboardContent() {
               </div>
             </div>
           </div>
-          <div className="col-md-12 col-lg-4 paddin20">
-            <div className="box-design ">
-              <img className="img-think-icon" src={Moneys} alt="Logo" />
-              <label className="txt-to-icon">กระเป๋าเงิน</label>
-              <div className="row2-border">
-                  <p className="row2-txt1" key={datacount3.your_wallet}>
-                    {datacount3.your_wallet}
-                  </p>
-                <a href="##" className="row2-a">
-                  <ArrowForwardIosIcon style={{ fontSize: 50 }} />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-12 col-lg-4 paddin20">
+          <div className="col-md-12 col-lg-6 paddin20">
             <div className="box-design">
               <img className="img-think-icon" src={ListIcon2} alt="Logo" />
               <label className="txt-to-icon">คลังทดสอบคงเหลือ</label>
@@ -124,34 +104,7 @@ export default function UserDashboardContent() {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 col-lg-6">
-            <h2>คลังทักษะล่าสุด</h2>
-            <div className="box-skills-library">
-              {/*------ Box ------*/}
-              <BoxSklil />
-              {/*-----------------*/}
-            </div>
-          </div>
-
-          <div className="col-md-12 col-lg-6">
-            <h2>สถานประกอบการล่าสุด</h2>
-            <div className="box-latest-establishment overflow-auto">
-              {/*----- Table -----*/}
-              <table className="table-establishment ">
-                <thead>
-                  <tr>
-                    <th>สถานประกอบการ</th>
-                    <th>ตำแหน่งงาน</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <LatestEstablishmentTable />
-              </table>
-              {/*-----------------*/}
-            </div>
-          </div>
-        </div>
+        <div className="row"><div className="col-12 bg-while overflow-auto"><SkillUserTable /></div></div>
       </div>
     </div>
   );

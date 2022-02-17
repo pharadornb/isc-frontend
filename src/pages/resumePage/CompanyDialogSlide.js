@@ -113,14 +113,14 @@ const ImageLogoSklil = (props) => {
             <div className='line-boxC'></div>
           </div>
           <div className='magintop20 arlert02'>
-            {companyPositionRequire[0].ucre_salary}
+            {companyPositionRequire.length > 0 ? (companyPositionRequire[0].ucre_salary) : "ไม่มีข้อมูล" }
           </div>
           <div className='box-header-text'>
             <label className='title-box-arlert'>ทักษะที่ต้องการ</label>
             <div className='line-boxC'></div>
           </div>
           <div className='magintop20 arlert02'>
-          {loading3 === false && <CircularProgress disableShrink />}
+            {companySkillRequire.length > 0 ? (loading3 === false && <CircularProgress disableShrink />) : "ไม่มีข้อมูล"}
             {companySkillRequire.map((rows, i) => 
                     (
                         <div className='box-skill-alert' key={i}>

@@ -107,9 +107,12 @@ export default function SkillUserTable() {
                     {skillStoreData.length > 0 ? (
                         skillStoreData.map((comment, index) => (
                             <tr key={index}>
-                                <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}><Avatar
+                                <td style={{pointerEvents: 'none', justifyContent: "center", display: "flex"}}>
+                                    <label>
+                                    <Avatar
                                     alt={comment.skill_name} src={`data:image/jpeg;base64,${comment.skill_logo}`}
-                                    sx={{width: 50, height: 50}}/></td>
+                                    sx={{width: 50, height: 50}}/></label>
+                                </td>
                                 <td>{comment.skill_name}</td>
                                 <td>{comment.uc_name}</td>
                                 <td>{comment.skill_time}</td>

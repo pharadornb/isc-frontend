@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import axios from "axios";
 import { useState } from "react";
 import CustomContentProgressbar from "./CustomContentProgressbar";
 
 export default function ProgressbarSkills(props){
     const [companySkillRequire, setCompanySkillRequire] = useState([]);
-    const [loading3, setLoading3] = useState(false);
+    // const [loading3, setLoading3] = useState(false);
     // var checkIndex= -1;
     // companySkillRequire -------------------------
 
@@ -33,7 +33,7 @@ export default function ProgressbarSkills(props){
                     if (res.status === 200) {
                         // console.log(res.data);
                         setCompanySkillRequire(res.data);
-                        setLoading3(true);
+                        // setLoading3(true);
                     }
                 });
             } catch (err) {
@@ -81,7 +81,6 @@ export default function ProgressbarSkills(props){
     // return(<></>)
     return(
         <>
-            {loading3 === false && <CircularProgress disableShrink />}
             {companySkillRequire.map((rows, i) => 
                 i<3 && (
                     <div className='scale-skills' key={i}>

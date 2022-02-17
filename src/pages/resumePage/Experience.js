@@ -94,7 +94,7 @@ export default function Experience(props) {
   const handleChangeDelete2 = (index) => {
     const values = [...resume_experince_add];
     // console.log(values.length);
-    // if (values.length > 1)
+
     values.splice(index, 1); // splice(index, n, value) n=1 แทนที่ n=0 เพิ่ม value=ใส่่ข้อมูล
     // console.log(values);
 

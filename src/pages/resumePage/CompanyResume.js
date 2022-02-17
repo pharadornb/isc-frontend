@@ -11,9 +11,7 @@ import {
   Call,
   LocationOn,
 } from "@mui/icons-material";
-import {
-  Avatar
-} from "@mui/material";
+import { Avatar } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -31,7 +29,7 @@ export default function CompanyResume() {
   const [page, setPage] = useState("genaral");
 
   const [loading1, setLoading1] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+  // const [loading2, setLoading2] = useState(false);
 
   const handleClick = () => {
     sessionStorage.clear();
@@ -51,12 +49,12 @@ export default function CompanyResume() {
         .then((res) => {
           if (res.status === 200) {
             //   console.log(res.data[0]);
-            setCompanyProfileGeneral(res.data[0])
-            setLoading1(true)
+            setCompanyProfileGeneral(res.data[0]);
+            setLoading1(true);
           }
         });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
 
     // End funtion SelectCompanyData --------------------------------------------------------
@@ -74,19 +72,19 @@ export default function CompanyResume() {
         .then((res) => {
           if (res.status === 200) {
             //   console.log(res.data);
-            setCompanyPositionRequire(res.data)
-            setLoading2(true)
+            setCompanyPositionRequire(res.data);
+            // setLoading2(true);
           }
         });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    SelectCompanyData()
-    DataPositionRequire()
-  },[])
+    SelectCompanyData();
+    DataPositionRequire();
+  }, []);
 
   const ImageLogoCompany = (props) => {
     var user_profile = "";
@@ -121,10 +119,6 @@ export default function CompanyResume() {
   const handleEdit = () => {
     setPage("edit");
   };
-
-  
-
-
 
   return (
     <Sidebar mark={"company_resume"}>
@@ -253,7 +247,6 @@ export default function CompanyResume() {
                   </div>
                   <div className="col-md-12 col-lg-6 left-Cbox">
                     <div className="scol align20">
-                      {loading1 === false && <CircularProgress disableShrink />}
                       {companyProfileGeneral.uc_detail}
                     </div>
                   </div>
@@ -268,14 +261,14 @@ export default function CompanyResume() {
                       <p className="box-title">Position require</p>
                       <div className="lineC" />
                     </div>
+                    <br/><br/>
                   </div>
                 </div>
 
                 <div className="row magin-top80-bottom40-paddig20">
-                  {loading2 === false && <CircularProgress disableShrink />}
-                  {companyPositionRequire.map((row, index) => (
-                    <div className="col-sm-12 col-md-12 bg-while" key={index}>
-                      <div className="container ">
+                  {
+                    companyPositionRequire.map((row, index) => (
+                      <div className="col-sm-12 col-md-12 bg-while" key={index}>
                         <div className="row ">
                           <div className="col-sm-12 col-md-6">
                             <div className="textTitle">
@@ -305,17 +298,17 @@ export default function CompanyResume() {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  }
                 </div>
               </div>
             </div>
           )}
           {page === "edit" && (
-             <div className="bg-edit">
+            <div className="bg-edit">
               <div>
                 <label className="co-edit">
-                    <EditIcon /> <b>แก้ไขข้อมูลบริษัท</b>
+                  <EditIcon /> <b>แก้ไขข้อมูลบริษัท</b>
                 </label>
               </div>
               <div className="magintop20"></div>

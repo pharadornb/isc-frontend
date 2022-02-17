@@ -11,6 +11,9 @@ export default function CompanySearch() {
   const [searchPositionCompany, setSearchPositionCompany] = useState([]);
   const [searchProfileCompany, setSearchProfileCompany] = useState([]);
 
+  const [loading1, setLoading1] = useState(true);
+  const [loading2, setLoading2] = useState(true);
+
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -85,6 +88,7 @@ export default function CompanySearch() {
       .then((res) => {
         console.log(res.data);
         setSearchProfileCompany(res.data);
+        setLoading1(false);
       })
       .catch((err) => console.log(err));
   };
@@ -99,6 +103,7 @@ export default function CompanySearch() {
       .then((res) => {
         console.log(res.data);
         setSearchPositionCompany(res.data);
+        setLoading2(false);
       })
       .catch((err) => console.log(err));
   };
@@ -107,6 +112,15 @@ export default function CompanySearch() {
     SearchProfileCompany();
     SearchPositionCompany();
   }, []);
+
+  
+  const handleGoResume1 = (uc_id) => {
+    window.location = "/resume/company/"+uc_id;
+  }
+
+  const handleGoResume2 = (uc_id) => {
+    window.location = "/resume/company/"+uc_id;
+  }
 
   return (
     <Sidebar mark={"companySearch"}>
@@ -135,7 +149,8 @@ export default function CompanySearch() {
                 <th style={{ textAlign: "center" }}>{headers[4].name}</th>
               </thead>
               <tbody>
-                {PositionCompany.map((comment, index) => (
+                {loading2 === true ? <tr><td colspan="5">ไม่มีข้อมูล</td></tr> : 
+                  PositionCompany.map((comment, index) => (
                   <tr key={index}>
                     <td>{index+1}</td>
                     <td>
@@ -152,7 +167,7 @@ export default function CompanySearch() {
                       <button
                         type="button"
                         className="btn btn-outline-info"
-                        // onClick={() => handleClickOpen(index)}
+                        onClick={() => handleGoResume1(comment.uc_id)}
                       >
                         <i className="fas fa-info-circle" /> รายละเอียด
                       </button>
@@ -172,6 +187,7 @@ export default function CompanySearch() {
           <div className="col-lg-4"></div>
           <div className="col-md-12 col-lg-8 d-flex flex-row-reverse">
             <SearchTable
+              
               onSearch={(value) => {
                 setSearch2(value);
                 setCurrentPage2(1);
@@ -192,7 +208,8 @@ export default function CompanySearch() {
                 <th style={{ textAlign: "center" }}>{headers2[4].name}</th>
               </thead>
               <tbody>
-                {ProfileCompany.map((comment, index) => (
+              {loading1 === true ? <tr><td colspan="5">ไม่มีข้อมูล</td></tr> : 
+                ProfileCompany.map((comment, index) => (
                   <tr key={index}>
                     <td>{index+1}</td>
                     <td>
@@ -211,7 +228,7 @@ export default function CompanySearch() {
                       <button
                         type="button"
                         className="btn btn-outline-info"
-                        // onClick={() => handleClickOpen(index)}
+                        onClick={() => handleGoResume2(comment.uc_id)}
                       >
                         <i className="fas fa-info-circle" /> รายละเอียด
                       </button>

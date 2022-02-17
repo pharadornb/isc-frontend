@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import axios from "axios";
 import Swal from "sweetalert2";
-import PaginationTable from "../../component/SkillComponent/PaginationTable";
-import SearchTable from "../../component/SkillComponent/SearchTable";
-import HeaderTable from "../../component/SkillComponent/HeaderTable";
-import { Table } from "react-bootstrap";
+
+import SkillRequire from "./SkillRequire";
 
 // import moment from "moment";
 import {
@@ -20,25 +18,20 @@ import {
   FormControl,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import moment from "moment";
+
 const thai = require("thai-data");
 
 export default function CompanyResumeEdit() {
   const [ProfileGeneral, setProfileGeneral] = useState([]);
   const [position_Require, setPositionRequire] = useState([]);
-  const [comments, setComments] = useState([]);
 
-  // const [dataSkills, setDataSkills] = useState([]);
+  const [positionRequireNew, setPositionRequireNew] = useState([]);
 
   const [dates, setDates] = useState("");
   const [loading1, setLoading1] = useState(false);
 
-  const [totalItems, setTotalItems] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
-  // const [showLoading, setShowLoading] = useState(false)
-  const ITEMS_PER_PAGE = 5;
-
-  const [zipCode, setZipCode] = useState("");
+  const [zipCode, setZipCode] = useState(0);
   const [subDistrict, setSubDistrict] = useState(Array);
   const [subDistrictSelect, setSubDistrictSelect] = useState("");
   const [district, setDistrict] = useState("");
@@ -47,10 +40,14 @@ export default function CompanyResumeEdit() {
     useState(true);
   const [image, setImage] = useState("");
 
+  const [open, setOpen] = useState(false);
+
+
   const onSetZipCode = (e) => {
     setSubDistrictSelect("");
     setDistrict("");
     setProvince("");
+    
     if (/^\d{0,5}$/.test(e)) {
       setZipCode(e);
       if (thai.autoSuggestion(e).subDistrict) {
@@ -93,107 +90,24 @@ export default function CompanyResumeEdit() {
     // End funtion PositionRequire
   };
 
-  const SkillRequire = (props) => {
-    // Select API SkillRequire
-    const params = JSON.stringify({
-      ucre_id: props.ucre_id,
-    });
-
+  const SelectCompanyData2 = () => {
+    // Select API ProfileGeneral --------------
     try {
       axios
-        .post("resume/companySkillRequire", params, {
+        .post("resume/companyProfileGeneral", {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then((res) => {
           if (res.status === 200) {
-            // console.log(res.data.length);
-            //  for(let i=0;i<res.data.length;i++){
-            //   var rows1 = {
-            //     ucre_id: props.ucre_id,
-            //     ucrs_id: res.data[i].ucrs_id,
-            //     skill_logo: res.data[i].skill_logo,
-            //     skill_name: res.data[i].skill_name,
-            //     uc_name: res.data[i].uc_name,
-            //     ucrs_point: res.data[i].ucrs_point,
-            //     user_profile: res.data[i].user_profile
-            //   }
-            // console.log(rows1);
-            // setDataSkills([...dataSkills, res.data]);
-            //  }
-            // console.log(dataSkills);
+            console.log(res.data);
+            setProfileGeneral(res.data);
           }
         });
     } catch (err) {
       console.log(err);
     }
-    // End funtion SkillRequire
-
-    return (
-      <>
-        {/* {props.ucre_id} */}
-        <label className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative">
-          <Avatar
-            alt={"ddd"}
-            className="avatarL"
-            src={`data:image/jpeg;base64,`}
-            sx={{ width: 20, height: 20 }}
-          />
-          <Avatar
-            alt={"ddd"}
-            // className="maginLeftRight-center"
-            src={`data:image/jpeg;base64,`}
-            sx={{ width: 50, height: 50 }}
-          />
-          <p>5555</p>
-        </label>
-      </>
-    );
-  };
-
-  const headers = [
-    { name: "สัญลักษณ์", field: "skill_logo", sortable: false },
-    { name: "ชื่อทักษะ", field: "skill_name", sortable: false },
-    { name: "โดย", field: "uc_name_profile", sortable: false },
-    { name: "กลุ่มทักษะ", field: "skill_type_name", sortable: false },
-    { name: "เวลาทดสอบ(นาที)", field: "skill_time", sortable: false },
-    { name: "ระดับทักษะ", field: "skill_hard", sortable: false },
-    { name: "ราคา(บาท)", field: "skill_credit", sortable: false },
-    { name: "เพิ่มลงคลังทักษะ", field: "", sortable: false },
-  ];
-
-  const skillStoreData = useMemo(() => {
-    let computedComments = comments;
-
-    if (search) {
-      computedComments = computedComments.filter(
-        (comment) =>
-          comment.skill_name.toLowerCase().includes(search.toLowerCase()) ||
-          comment.skill_type_name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    setTotalItems(computedComments.length);
-
-    return computedComments.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-    );
-  }, [comments, currentPage, search]);
-
-  const ViewSkills = () => {
-    axios
-      .post("skill/viewSkill", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setComments(res.data);
-        // setShowLoading(false)
-      })
-      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -208,9 +122,10 @@ export default function CompanyResumeEdit() {
           })
           .then((res) => {
             if (res.status === 200) {
-              //console.log(res.data);
+              console.log(res.data);
               setProfileGeneral(res.data);
 
+              setDates(res.data[0].user_dob);
               setZipCode(res.data[0].user_postcode);
               onSetZipCode(res.data[0].user_postcode);
               setSubDistrictSelect(res.data[0].user_subdistrict);
@@ -232,14 +147,13 @@ export default function CompanyResumeEdit() {
 
     PositionRequire();
     SelectCompanyData();
-    ViewSkills();
   }, []);
 
   const handleChangeNew = (newValue) => {
     var values = [...ProfileGeneral];
     var { name, value } = newValue.target;
 
-    // console.log(value+" "+name);
+    console.log(value + " " + name);
     if (name === "uc_name") {
       values[0].uc_name = value;
     } else if (name === "user_slogan") {
@@ -254,15 +168,10 @@ export default function CompanyResumeEdit() {
       values[0].uc_detail = value;
     } else if (name === "user_address") {
       values[0].user_address = value;
-    } else if (name === "user_postcode") {
-      values[0].user_postcode = value;
-    } else if (name === "user_district") {
-      values[0].user_district = value;
-    } else if (name === "user_subdistrict") {
-      values[0].user_subdistrict = value;
     } else if (name === "uc_type") {
       values[0].uc_type = value;
     }
+    setOpen(true);
 
     setProfileGeneral(values);
   };
@@ -297,6 +206,7 @@ export default function CompanyResumeEdit() {
 
         let image = reader.readAsBinaryString(file);
         console.log(reader);
+        setOpen(true);
         return image;
       } else {
         console.log("false size " + file.size);
@@ -316,461 +226,487 @@ export default function CompanyResumeEdit() {
     }
   }
 
-  const onDeleteReport = (index) => {
-    console.log(index);
+  const onAddData = () => {
+    // const add = [...positionRequireNew];
 
-    const rowIndex = [...position_Require];
+    const addData = {
+      ucre_id: "",
+      ucre_detail: "",
+      ucre_occupation: "",
+      ucre_salary: 0
+    };
 
-    rowIndex.splice(index, 1);
+    const newAddContacts = [...positionRequireNew, addData];
 
-    setPositionRequire(rowIndex);
+    setPositionRequireNew(newAddContacts);
+
+    // positionRequireNew.push(addData);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // setPage("genaral");
-    window.location = "/resume_company";
+  // -------------------------------------------------------------------------------
+
+  const onDeleteReport = (index, check) => {
+    console.log(index + " " + check);
+
+    if(check === 'old'){
+      console.log(position_Require);
+
+      const params = JSON.stringify({
+        position: [
+          {
+            ucre_occupation: position_Require[index].ucre_occupation,
+            ucre_detail: position_Require[index].ucre_detail,
+            ucre_salary: position_Require[index].ucre_salary,
+            ucre_isdelete: "yes",
+            ucre_id: position_Require[index].ucre_id
+          },
+        ],
+      });
+  
+      console.log(params);
+  
+      axios
+        .post("resume/updateDeletePosition", params, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            const val = [...position_Require];
+            val.splice(index, 1);
+            setPositionRequire(val);
+            console.log("Delete Position!!!!");
+          }
+        })
+        .catch((err) => console.log(err));
+    }else if(check === 'new'){
+      console.log(positionRequireNew);
+      const val = [...positionRequireNew];
+
+      val.splice(index, 1);
+      setPositionRequireNew(val);
+    }
+
+    // window.location = "/resume_company"
   };
+
+  // -------------------------------------------------------------------------------
+
+  const handleSubmit = () => {
+    // console.log(ProfileGeneral[0]);
+
+    const params = JSON.stringify({
+      user_tel: ProfileGeneral[0].user_tel,
+      user_dob: moment(dates).format("YYYY-MM-DD"),
+      user_address: ProfileGeneral[0].user_address,
+      user_subdistrict: subDistrictSelect,
+      user_district: district,
+      user_province: province,
+      user_postcode: zipCode,
+      user_slogan: ProfileGeneral[0].user_slogan,
+      uc_name: ProfileGeneral[0].uc_name,
+      uc_register: ProfileGeneral[0].uc_register,
+      uc_fax: ProfileGeneral[0].uc_fax,
+      uc_detail: ProfileGeneral[0].uc_detail,
+      uc_website: ProfileGeneral[0].uc_website,
+      user_profile: image !== "" ? image : ProfileGeneral[0].user_profile
+    });
+
+    console.log(JSON.parse(params));
+
+    try {
+      axios
+        .post("resume/UpdateCompanyResume", params, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            SelectCompanyData2();
+            console.log("Data Update");
+            Swal.fire(
+              'บันทึกโปรไฟล์เรียบร้อย',
+              'ขอบคุณที่ใช้บริการ',
+              'success'
+            )
+            setOpen(false);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    // window.location = "/resume_company";
+  };
+
+  const onBack = () => {
+    window.location='/resume_company';
+  }  
   return (
-    <FormControl onSubmit={() => handleSubmit}>
-      {loading1 === false && <CircularProgress />}
-      {loading1 === true && (
-        <>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12 col-lg-4 ">
-                <label htmlFor="imagefile">
-                  {image ? (
-                    <SetImageLog user_profile={image} />
-                  ) : (
-                    <SetImageLog
-                      user_profile={ProfileGeneral[0].user_profile}
-                    />
-                  )}
-                  <input
-                    type={"file"}
-                    id={"imagefile"}
-                    accept=".jpg, .jpeg, .png"
-                    hidden
-                    onChange={(event) => readImage(event, setImage)}
+    <FormControl>
+      {loading1 === false ? (
+        <CircularProgress />
+      ) : (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 col-lg-4 ">
+              <label htmlFor="imagefile">
+                {image ? (
+                  <SetImageLog user_profile={image} />
+                ) : (
+                  <SetImageLog user_profile={ProfileGeneral[0].user_profile} />
+                )}
+                <input
+                  type={"file"}
+                  id={"imagefile"}
+                  accept=".jpg, .jpeg, .png"
+                  hidden
+                  onChange={(event) => readImage(event, setImage)}
+                />
+              </label>
+            </div>
+            <div className="col-md-12 col-lg-8">
+              <div className="row bg-while sdd">
+                <div className="col-lg-12">
+                  <TextField
+                    id="outlined-basic"
+                    label="Company Name"
+                    fullWidth
+                    disabled={
+                      ProfileGeneral[0].uc_name.length === 100 ? true : false
+                    }
+                    name="uc_name"
+                    value={ProfileGeneral[0].uc_name}
+                    className="inputbox magintop20"
+                    variant="outlined"
+                    onChange={(newValue) => handleChangeNew(newValue)}
                   />
-                </label>
-              </div>
-              <div className="col-md-12 col-lg-8">
-                <div className="row bg-while sdd">
-                  <div className="col-lg-12">
-                    <TextField
-                      id="outlined-basic"
-                      label="Company Name"
-                      fullWidth
-                      disabled={
-                        ProfileGeneral[0].uc_name.length === 100 ? true : false
-                      }
-                      name="uc_name"
-                      value={ProfileGeneral[0].uc_name}
-                      className="inputbox magintop20"
-                      variant="outlined"
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12">
-                    <TextField
-                      id="outlined-multiline-flexible"
-                      label="Slogan"
-                      className="inputbox1 magintop20"
-                      fullWidth
-                      multiline
-                      maxRows={4}
-                      name="user_slogan"
-                      margin="normal"
-                      value={ProfileGeneral[0].user_slogan}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
+                </div>
+                <div className="col-lg-12">
+                  <TextField
+                    id="outlined-multiline-flexible"
+                    label="Slogan"
+                    className="inputbox1 magintop20"
+                    fullWidth
+                    multiline
+                    maxRows={4}
+                    name="user_slogan"
+                    margin="normal"
+                    value={ProfileGeneral[0].user_slogan}
+                    onChange={(newValue) => handleChangeNew(newValue)}
+                  />
                 </div>
               </div>
-              <div className="col-lg-4 maginBottom20"></div>
-              <div className="col-lg-8 maginBottom20"></div>
-              <div className="col-md-12 col-lg-4 maginBottom20 sdd">
-                <div className="row bg-while marginleft20 ">
-                  <div className="col-lg-12  maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Register ID"
-                      fullWidth
-                      name="uc_register"
-                      variant="outlined"
-                      disabled
-                      value={ProfileGeneral[0].uc_register}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12  maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Job Type"
-                      fullWidth
-                      name="uc_type"
-                      variant="outlined"
-                      value={ProfileGeneral[0].uc_type}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12 maginBottom20">
-                    {/* {ProfileGeneral[0].user_dob}
+            </div>
+            <div className="col-lg-4 maginBottom20"></div>
+            <div className="col-lg-12 maginBottom20 bg-while">
+              <div className="row">
+                <div className="col-md-12 col-lg-4 maginBottom20 sdd">
+                  <div className="row  marginleft20 ">
+                    <div className="col-lg-12  maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Register ID"
+                        fullWidth
+                        name="uc_register"
+                        variant="outlined"
+                        disabled
+                        value={ProfileGeneral[0].uc_register}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                    <div className="col-lg-12  maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Job Type"
+                        fullWidth
+                        name="uc_type"
+                        variant="outlined"
+                        value={ProfileGeneral[0].uc_type}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                    <div className="col-lg-12 maginBottom20">
+                      {/* {ProfileGeneral[0].user_dob}
                     {moment(ProfileGeneral[0].user_dob).format('YYYY-MM-DD')} */}
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DesktopDatePicker
-                        label="Date Dob"
-                        value={
-                          dates !== "" ? dates : ProfileGeneral[0].user_dob
-                        }
-                        onChange={(newValue) => {
-                          setDates(newValue);
-                        }}
-                        renderInput={(params) => (
-                          <TextField fullWidth {...params} />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </div>
-                  <div className="col-lg-12  maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Email"
-                      fullWidth
-                      name="user_email"
-                      variant="outlined"
-                      disabled
-                      value={ProfileGeneral[0].user_email}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12 maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Tel"
-                      fullWidth
-                      name="user_tel"
-                      variant="outlined"
-                      value={ProfileGeneral[0].user_tel}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12 maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Fax"
-                      fullWidth
-                      name="uc_fax"
-                      variant="outlined"
-                      value={ProfileGeneral[0].uc_fax}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12 maginBottom20">
-                    <TextField
-                      id="outlined-basic"
-                      label="Website"
-                      fullWidth
-                      name="uc_website"
-                      variant="outlined"
-                      value={ProfileGeneral[0].uc_website}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-12 col-lg-8 sdd maginBottom20">
-                <div className="row bg-while sdd">
-                  <div className="col-lg-12 sdd">
-                    <TextField
-                      id="outlined-multiline-flexible"
-                      label="Detail"
-                      className="inputbox1"
-                      fullWidth
-                      multiline
-                      name="uc_detail"
-                      maxRows={4}
-                      margin="normal"
-                      value={ProfileGeneral[0].uc_detail}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-lg-12 sdd">
-                    <TextField
-                      id="outlined-basic"
-                      label="Address"
-                      fullWidth
-                      name="user_address"
-                      variant="outlined"
-                      value={ProfileGeneral[0].user_address}
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-3 sdd">
-                    <TextField
-                      id="outlined-basic"
-                      label="Postcode"
-                      fullWidth
-                      name="user_postcode"
-                      variant="outlined"
-                      value={zipCode}
-                      onChange={(e) => {
-                        onSetZipCode(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-4 sdd">
-                    <select
-                      onChange={(e) => {
-                        onSetDistrict(e.target.value);
-                      }}
-                      value={subDistrictSelect}
-                      disabled={zipCode.length === 5 ? false : true}
-                      className={`col-md-12 col-lg-4 form-select ${
-                        !isDisabledSubDistrictSelect
-                          ? "text-gray-700"
-                          : "bg-gray-200 text-gray-500"
-                      } selectStype `}
-                      id="subDistrict"
-                    >
-                      <option
-                        value=""
-                        disabled={!isDisabledSubDistrictSelect ? true : false}
-                      >
-                        subDistrictSelect
-                      </option>
-                      {!isDisabledSubDistrictSelect &&
-                        subDistrict.map((item, index) => (
-                          <option key={index}>{item}</option>
-                        ))}
-                    </select>
-                    {!isDisabledSubDistrictSelect && (
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
-                    )}
-                  </div>
-                  <div className="col-md-12 col-lg-4 sdd">
-                    <TextField
-                      id="outlined-basic"
-                      label="District"
-                      fullWidth
-                      variant="outlined"
-                      name="user_district"
-                      focused
-                      value={district}
-                      disabled
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                  <div className="col-md-12 col-lg-4 sdd">
-                    <TextField
-                      id="outlined-basic"
-                      label="Subdistrictress"
-                      fullWidth
-                      name="user_subdistrict"
-                      variant="outlined"
-                      value={province}
-                      disabled
-                      onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12 ">
-                <div className="p-relative">
-                  <label className="title-Position-require p-absolute">
-                    Position require
-                  </label>
-                  <div className="line "></div>
-                </div>
-              </div>
-              <div className="col-12">
-                <br />
-                <br />
-              </div>
-            </div>
-
-            <div className="row">
-              {position_Require.map((rows, index) => (
-                <div className="col-12 bg-while" key={index}>
-                  {/* In-Box-Position */}
-                  <div className="row">
-                    <div className="col-12" style={{ textAlign: "right" }}>
-                      <span style={{ color: "red" }}>
-                        <i
-                          className="fas fa-minus-circle"
-                          onClick={() => onDeleteReport(index)}
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DesktopDatePicker
+                          label="Date Dob"
+                          value={
+                            dates !== "" ? dates : ProfileGeneral[0].user_dob
+                          }
+                          onChange={(newValue) => {
+                            setDates(newValue);
+                          }}
+                          renderInput={(params) => (
+                            <TextField fullWidth {...params} />
+                          )}
                         />
-                      </span>
+                      </LocalizationProvider>
                     </div>
-                    <label
-                      className="col-md-6 col-lg-3 txtBoxRequire"
-                      style={{ textAlign: "right" }}
-                    >
-                      ตำเเหน่งงาน :{" "}
-                    </label>
-                    <TextField
-                      className="col-md-6 col-lg-3"
-                      id="outlined-basic"
-                      label="Position"
-                      name="da"
-                      variant="outlined"
-                      margin="normal"
-                      value={rows.ucre_occupation}
-                      // onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                    <label
-                      className="col-md-6 col-lg-3 txtBoxRequire"
-                      style={{ textAlign: "right" }}
-                    >
-                      เงินประจำเดือน :
-                    </label>
-                    <TextField
-                      className="col-md-6 col-lg-3"
-                      id="outlined-basic"
-                      label="Salary"
-                      name="da"
-                      margin="normal"
-                      variant="outlined"
-                      value={rows.ucre_salary}
-                      // onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                    <div className="col-12">
-                      <br />
+                    <div className="col-lg-12  maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Email"
+                        fullWidth
+                        name="user_email"
+                        variant="outlined"
+                        disabled
+                        value={ProfileGeneral[0].user_email}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
                     </div>
-                    <label className="col-12">
-                      <b>รายละเอียดงาน</b>
-                    </label>
-                    <TextField
-                      id="outlined-multiline-flexible"
-                      label="Job Detail"
-                      className="col-12"
-                      fullWidth
-                      multiline
-                      // name="uc_detail"
-                      maxRows={4}
-                      margin="normal"
-                      value={rows.ucre_detail}
-                      // onChange={(newValue) => handleChangeNew(newValue)}
-                    />
-                    <div className="col-12">
-                      <br />
+                    <div className="col-lg-12 maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Tel"
+                        fullWidth
+                        name="user_tel"
+                        variant="outlined"
+                        value={ProfileGeneral[0].user_tel}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
                     </div>
-                    <div className="col-12 ">
-                      {" "}
-                      {/*Skill Require */}
-                      <div
-                        className="row borderBox overflow-auto"
-                        align={"center"}
-                      >
-                        <SkillRequire ucre_id={rows.ucre_id} />
-                      </div>
+                    <div className="col-lg-12 maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Fax"
+                        fullWidth
+                        name="uc_fax"
+                        variant="outlined"
+                        value={ProfileGeneral[0].uc_fax}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <br />
-                      <div className="row">
-                        <div className="col-md-4" align={"left"}>
-                          <p style={{ fontSize: "24px" }}>
-                            <i
-                              className="fab fa-slack"
-                              style={{ fontSize: "1em" }}
-                            />
-                            <b> เลือกทักษะ</b>
-                          </p>
-                        </div>
-                        <div className="col-md-8 d-flex flex-row-reverse">
-                          <SearchTable
-                            onSearch={(value) => {
-                              setSearch(value);
-                              setCurrentPage(1);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12 overflow-auto">
-                        <Table className="table table-striped">
-                          <HeaderTable headers={headers} />
-                          <tbody>
-                            {skillStoreData.map((comment, index) => (
-                              <tr key={comment.skill_id}>
-                                <td
-                                  style={{ pointerEvents: "none" }}
-                                  className="margin-auto"
-                                >
-                                  <Avatar
-                                    alt={comment.skill_name}
-                                    src={`data:image/jpeg;base64,${comment.skill_logo}`}
-                                    sx={{ width: 50, height: 50 }}
-                                  />
-                                </td>
-                                <td>{comment.skill_name}</td>
-                                <td>{comment.uc_name}</td>
-                                <td>{comment.skill_type_name}</td>
-                                <td>{comment.skill_time}</td>
-                                <td>
-                                  {comment.skill_hard === 1 && (
-                                    <p>ค่อนข้างง่าย</p>
-                                  )}
-                                  {comment.skill_hard === 2 && <p>ง่าย</p>}
-                                  {comment.skill_hard === 3 && <p>ปานกลาง</p>}
-                                  {comment.skill_hard === 4 && (
-                                    <p>ค่อนข้างยาก</p>
-                                  )}
-                                  {comment.skill_hard === 5 && <p>ยาก</p>}
-                                </td>
-                                <td>{comment.skill_credit}</td>
-                                <td>
-                                  <button
-                                    type="button"
-                                    className="btn btn-success"
-                                    // onClick={() => handleClickOpen(index)}
-                                  >
-                                    <i className="far fa-check-square" /> เพิ่ม
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </Table>
-                      </div>
-                      <PaginationTable
-                        total={totalItems}
-                        itemsPerPage={ITEMS_PER_PAGE}
-                        currentPage={currentPage}
-                        onPageChange={(page) => setCurrentPage(page)}
+                    <div className="col-lg-12 maginBottom20">
+                      <TextField
+                        id="outlined-basic"
+                        label="Website"
+                        fullWidth
+                        name="uc_website"
+                        variant="outlined"
+                        value={ProfileGeneral[0].uc_website}
+                        onChange={(newValue) => handleChangeNew(newValue)}
                       />
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="row">
-              <div className="col-12" style={{ textAlign: "right" }}>
-                <span style={{ color: "green" }}>
-                  <i className="fas fa-plus-circle" />
-                </span>
-              </div>
-
-              <div className="col-12">
-                <br />
+                <div className="col-lg-1"></div>
+                <div className="col-md-12 col-lg-7">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <TextField
+                        id="outlined-multiline-flexible"
+                        label="Detail"
+                        className="inputbox1"
+                        fullWidth
+                        multiline
+                        name="uc_detail"
+                        maxRows={4}
+                        margin="normal"
+                        value={ProfileGeneral[0].uc_detail}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                    <div className="col-lg-12 sdd">
+                      <TextField
+                        id="outlined-basic"
+                        label="Address"
+                        fullWidth
+                        name="user_address"
+                        variant="outlined"
+                        value={ProfileGeneral[0].user_address}
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                    <div className="col-md-12 col-lg-3 sdd">
+                      <TextField
+                        id="outlined-basic"
+                        label="Postcode"
+                        fullWidth
+                        name="user_postcode"
+                        variant="outlined"
+                        value={zipCode}
+                        onChange={(e) => {
+                          onSetZipCode(e.target.value);
+                          setOpen(true);
+                        }}
+                      />
+                    </div>
+                    <div className="col-md-12 col-lg-4 sdd">
+                      <select
+                        onChange={(e) => {
+                          onSetDistrict(e.target.value);
+                          setOpen(true);
+                        }}
+                        value={subDistrictSelect}
+                        // disabled={zipCode.length === 5 ? false : true}
+                        className={`col-md-12 col-lg-4 form-select ${
+                          !isDisabledSubDistrictSelect
+                            ? "text-gray-700"
+                            : "bg-gray-200 text-gray-500"
+                        } selectStype `}
+                        id="subDistrict"
+                      >
+                        <option
+                          value=""
+                          disabled={!isDisabledSubDistrictSelect ? true : false}
+                        >
+                          subDistrictSelect
+                        </option>
+                        {!isDisabledSubDistrictSelect &&
+                          subDistrict.map((item, index) => (
+                            <option key={index}>{item}</option>
+                          ))}
+                      </select>
+                      {!isDisabledSubDistrictSelect && (
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"></div>
+                      )}
+                    </div>
+                    <div className="col-md-12 col-lg-4 sdd">
+                      <TextField
+                        id="outlined-basic"
+                        label="District"
+                        fullWidth
+                        variant="outlined"
+                        name="user_district"
+                        focused
+                        value={district}
+                        disabled
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                    <div className="col-md-12 col-lg-4 sdd">
+                      <TextField
+                        id="outlined-basic"
+                        label="Subdistrictress"
+                        fullWidth
+                        name="user_subdistrict"
+                        variant="outlined"
+                        value={province}
+                        disabled
+                        onChange={(newValue) => handleChangeNew(newValue)}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 txtAlignLeft">
+                  <button
+                    type="submit"
+                    className={open === false ? "btn btn-secondary" : "btn btn-success"}
+                    disabled={open === false ? true : false}
+                    onClick={handleSubmit}
+                  >
+                   <i className="fas fa-save"/> บันทึกโปรไฟล์
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </>
+          <div className="row">
+            <div className="col-lg-12 ">
+              <div className="p-relative">
+                <label className="title-Position-require p-absolute">
+                  Position require
+                </label>
+                <div className="line "></div>
+              </div>
+            </div>
+            <div className="col-12">
+              <br />
+              <br />
+            </div>
+          </div>
+
+          <div className="row">
+            {/*Skill Require */}
+            {position_Require.map((rows, index) => (
+              <div className="col-12 bg-while sdd">
+                {/* In-Box-Position */}
+                <div className="row">
+                  <div className="col-12" style={{ textAlign: "right" }}>
+                    <span style={{ color: "red" }}>
+                      <i
+                        className="fas fa-minus-circle"
+                        onClick={() => onDeleteReport(index, 'old')}
+                      />
+                    </span>
+                  </div>
+                  <SkillRequire
+                    key={index}
+                    index={index}
+                    page={"old"}
+                    position_Require={position_Require}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* New Data */}
+          <div className="row">
+            {/*Skill Require */}
+
+            {position_Require.length === 0
+              ? positionRequireNew.map((rows, index) => (
+                  <div className="col-12 bg-while sdd">
+                    {/* In-Box-Position */}
+                    <div className="row">
+                      <div className="col-12" style={{ textAlign: "right" }}>
+                        <span style={{ color: "red" }}>
+                          <i
+                            className="fas fa-minus-circle"
+                            onClick={() => onDeleteReport(index, 'new')}
+                          />
+                        </span>
+                      </div>
+                      <SkillRequire
+                        key={index}
+                        index={index}
+                        page={"new"}
+                        position_Require={positionRequireNew}
+                      />
+                    </div>
+                  </div>
+                ))
+              : positionRequireNew.map((rows, index) => (
+                  <div className="col-12 bg-while sdd">
+                    {/* In-Box-Position */}
+                    <div className="row">
+                      <div className="col-12" style={{ textAlign: "right" }}>
+                        <span style={{ color: "red" }}>
+                          <i
+                            className="fas fa-minus-circle"
+                            onClick={() => onDeleteReport(index, 'new')}
+                          />
+                        </span>
+                      </div>
+                      <SkillRequire
+                        key={index}
+                        index={index}
+                        page={"new"}
+                        position_Require={positionRequireNew}
+                      />
+                    </div>
+                  </div>
+                ))}
+          </div>
+          <div className="row">
+            <div className="col-6" style={{ textAlign: "left" }}>
+              <button type="button" class="btn btn-secondary" onClick={onBack}>กลับไปหน้า Resume</button>
+            </div>
+            <div className="col-6" style={{ textAlign: "right" }}>
+              <button type="button" class="btn btn-success" onClick={onAddData}>เพิ่มเอกสาร</button>
+            </div>
+
+            <div className="col-12">
+              <br />
+            </div>
+          </div>
+        </div>
       )}
-      <input
-        type="submit"
-        value={"Save"}
-        className="btn btn-success"
-        onClick={handleSubmit}
-      />
     </FormControl>
   );
 }

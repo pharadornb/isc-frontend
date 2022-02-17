@@ -333,3 +333,36 @@
     margin: 5px;
   }
   
+  .m10 {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .txtAlignLeft {
+    text-align: right;
+  }
+
+  .deleteItem {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: rgb(202, 2, 2);
+  }
+
+  .txtShow {
+    font-weight: 900;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    color: rgb(0, 0, 0);
+  }
+
+  .txtShow1 {
+    font-weight: 900;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    color: rgb(255, 15, 15);
+  }

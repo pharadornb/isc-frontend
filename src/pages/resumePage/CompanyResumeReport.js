@@ -12,66 +12,73 @@ import { Avatar } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
 import CircularProgress from "@mui/material/CircularProgress";
-import AlertDialogSlide from "./CompanyDialogSlide";
-import ProgressbarSkills from "./CompanyProgressbarSkills";
+import AlertDialogSlide from "../resumePage/CompanyDialogSlide";
+import ProgressbarSkills from "../resumePage/CompanyProgressbarSkills";
 
 export default function CompanyResumeReport(props) {
-  const { userEmail } = useState(props.userEmail);
+  const [userEmail]  = useState(props.userEmail);
   const [companyProfileGeneral, setCompanyProfileGeneral] = useState([]);
   const [companyPositionRequire, setCompanyPositionRequire] = useState([]);
 
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
 
-  const SelectCompanyData = () => {
-    // companyProfileGeneral --------------
-
-    try {
-      axios
-        .post("resume/companyProfileGeneral", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            //   console.log(res.data[0]);
-            setCompanyProfileGeneral(res.data[0]);
-            setLoading1(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-
-    // End funtion SelectCompanyData --------------------------------------------------------
-  };
-
-  const DataPositionRequire = () => {
-    //   companyPositionRequire--------------------------
-    try {
-      axios
-        .post("resume/companyPositionRequire", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            //   console.log(res.data);
-            setCompanyPositionRequire(res.data);
-            setLoading2(true);
-          }
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const SelectCompanyData = () => {
+      // SelectCompanyData --------------
+      const params = JSON.stringify({
+        uc_id: userEmail
+      });
+      // console.log(params)
+      try {
+        axios
+          .post("resume/companyProfileGeneral", params, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              //   console.log(res.data[0]);
+              setCompanyProfileGeneral(res.data[0]);
+              setLoading1(true);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+
+      // End funtion SelectCompanyData --------------------------------------------------------
+    };
+
+    const DataPositionRequire = () => {
+      //   companyPositionRequire--------------------------
+      const params = JSON.stringify({
+        uc_id: userEmail
+      });
+
+      try {
+        axios
+          .post("resume/companyPositionRequire", params, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              //   console.log(res.data);
+              setCompanyPositionRequire(res.data);
+              setLoading2(true);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     SelectCompanyData();
     DataPositionRequire();
-  }, []);
+  }, [userEmail]);
 
   const ImageLogoCompany = (props) => {
     var user_profile = "";
@@ -105,6 +112,7 @@ export default function CompanyResumeReport(props) {
 
   return (
     <div className="bg-company-resume">
+   
       <div className="container">
         {/* Part 2 */}
         <div className="row">
@@ -213,7 +221,7 @@ export default function CompanyResumeReport(props) {
         </div>
 
         <div className="row magin-top80-bottom40-paddig20">
-          {loading2 === false && <CircularProgress disableShrink />}
+          <div className="col-12">{loading2 === false && <CircularProgress disableShrink />}</div>
           {companyPositionRequire.map((row, index) => (
             <div className="col-sm-12 col-md-12 bg-while" key={index}>
               <div className="container ">

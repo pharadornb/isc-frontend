@@ -25,6 +25,7 @@ import SkillExamTimeout from "./component/userSkillComponent/skillExamTimeout";
 import SkillManage from "./pages/adminPage/SkillManage";
 import ResetPassword from "./pages/configPage/resetPassword";
 import CompanySearch from "./pages/userPage/CompanySearch";
+import UpdateSkillStore from "./pages/skillPage/UpdateSkillStore";
 
 axios.defaults.baseURL = process.env.REACT_APP_SECRET_NAME
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`
@@ -61,6 +62,7 @@ ReactDOM.render(
                 <Route path="/admin/skill" element={<SkillManage/>} />
                 <Route path="/setting" element={<ResetPassword/>} />
                 <Route path="/company/search" element={<CompanySearch/>} />
+                <Route path="/skill/edit/:skillId" element={<UpdateSkillStore/>} />
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,

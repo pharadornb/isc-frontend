@@ -16,7 +16,7 @@ import AlertDialogSlide from "./CompanyDialogSlide";
 import ProgressbarSkills from "./CompanyProgressbarSkills";
 
 export default function CompanyResumeReport(props) {
-  const { userEmail } = useState(props.userEmail);
+  // const { userEmail } = useState(props.userEmail);
   const [companyProfileGeneral, setCompanyProfileGeneral] = useState([]);
   const [companyPositionRequire, setCompanyPositionRequire] = useState([]);
 

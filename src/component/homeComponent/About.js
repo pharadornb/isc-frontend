@@ -8,7 +8,7 @@ import React from "react";
 
 export default function About() {
     return (
-        <div className="container" align={'center'}>
+        <div className="container" align={'center'} id={'about'}>
             <div className="row">
                 <div className="col-md-12 mt-4">
                     <h3><b>เกี่ยวกับระบบ</b></h3>

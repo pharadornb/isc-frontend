@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useEffect, useRef} from "react";
 import fog from "vanta/dist/vanta.fog.min";
+import {Link} from "react-router-dom";
 
 export default function Company() {
 
@@ -38,8 +39,9 @@ export default function Company() {
             }} ref={myRef}>
                 <div className="card-title mt-2" style={{color: "white", textAlign: "center"}}>
                     <h3><b>" มาใช้ระบบด้วยกันน่ะ จะได้เห็นถึงความสามารถอันไม่มีขีดจำกัดและพรมแดน "</b></h3>
-                    <button type={'submit'} className={'btn btn-primary mt-2'}>เข้าสู่ระบบ</button>&nbsp;&nbsp;
-                    <button type={'submit'} className={'btn btn-success mt-2'}>สมัครสมาชิก</button>
+                    <Link style={{textDecoration: 'none'}} to={'/register'}>
+                        <button type={'submit'} className={'btn btn-success mt-2'}>สมัครสมาชิก</button>
+                    </Link>
                 </div>
             </div>
         </Fragment>

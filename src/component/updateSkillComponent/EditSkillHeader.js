@@ -1,10 +1,10 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import BodySkill from "./BodySkill";
+import EditSkillBody from "./EditSkillBody";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default class HeadSkill extends React.Component {
+export default class EditSkillHeader extends React.Component {
     constructor(props) {
         super(props);
         if (props.edit) {
@@ -18,6 +18,8 @@ export default class HeadSkill extends React.Component {
                 skillDetail: '',
                 skillTime: 0,
                 SkillPrice: 0,
+                skillProfile: '',
+                SkillTypeName: '',
             }
         } else {
             this.state = {
@@ -29,6 +31,7 @@ export default class HeadSkill extends React.Component {
                 skillDetail: '',
                 skillTime: 0,
                 SkillPrice: 0,
+                SkillTypeName: '',
             }
         }
     }
@@ -58,8 +61,9 @@ export default class HeadSkill extends React.Component {
         }
     };
 
-    componentDidMount() {
-        axios.post('skill/skill_types', {
+    async componentDidMount() {
+
+        await axios.post('skill/skill_types', {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -67,11 +71,28 @@ export default class HeadSkill extends React.Component {
             const persons = res.data;
             this.setState({persons});
         })
+
+
+        const params = JSON.stringify({
+            skill_id: this.state.skillId,
+        });
+
+        await axios.post('skill/viewSkillById',params, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            this.setState({
+                profile: res.data[0].skill_logo,
+                skillName: res.data[0].skill_name,
+                skillDetail: res.data[0].skill_detail,
+                SkillTypeName: res.data[0].skill_type_name,
+            });
+        })
     }
 
     render() {
-        const {base64Data} = this.state;
-        const {skillId} = this.state;
+        const {base64Data, skillId, profile, skillName, skillDetail, SkillTypeName} = this.state;
 
         return (
             <>
@@ -89,6 +110,7 @@ export default class HeadSkill extends React.Component {
                         <div className="col-md-3">
                             <div className="row">
                                 <div className="col-md-12 mt-4">
+                                    {/*{Profile}*/}
                                     {base64Data != null && (
                                         <label htmlFor="file">
                                             <Avatar
@@ -102,7 +124,7 @@ export default class HeadSkill extends React.Component {
                                     {base64Data === null && (
                                         <label htmlFor="file">
                                             <Avatar alt="profile-images"
-                                                    src="https://pharadorn.lnw.mn/isc-project/isc-logo-2.png"
+                                                    src={`data:image;base64,${profile}`}
                                                     sx={{width: 150, height: 150}}/>
                                         </label>
                                     )}
@@ -118,11 +140,12 @@ export default class HeadSkill extends React.Component {
                         <div className="col-md-7">
                             <div className="col-md-12 mt-4">
                                 <input type="email" className="form-control" placeholder="ชื่อทักษะ"
-                                       onChange={(e) => this.setState({skillName: e.target.value})}/>
+                                       onChange={(e) => this.setState({skillName: e.target.value})} value={skillName}/>
                             </div>
+                            {SkillTypeName}
                             <div className="col-md-12 mt-4">
                                 <textarea className="form-control" placeholder="รายละเอียดทักษะ" rows="3"
-                                          onChange={(e) => this.setState({skillDetail: e.target.value})}/>
+                                          onChange={(e) => this.setState({skillDetail: e.target.value})} value={skillDetail}/>
                             </div>
                             <div className="col-md-12">
                                 {
@@ -209,7 +232,7 @@ export default class HeadSkill extends React.Component {
                      style={{backgroundColor: '#FFFAFB', borderRadius: '20px'}}>
                     <div className="row">
                         <div className="col-md-12">
-                            <BodySkill profile={base64Data} skillType={this.state.skillType}
+                            <EditSkillBody id={this.state.skillId} profile={base64Data} skillType={this.state.skillType}
                                        levelSkill={this.state.levelSkill}
                                        skillName={this.state.skillName} skillDetail={this.state.skillDetail}
                                        skillTime={this.state.skillTime}

@@ -28,8 +28,8 @@ a {
 
 .card {
     height: 350px;
-    width: 200px;
-    min-width: 250px;
+    width: 350px;
+    min-width: 300px;
     border-radius: 16px;
     box-shadow: -1rem 0 3rem #000;
     display: flex;
@@ -82,7 +82,6 @@ a {
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
-    /*background-clip: text;*/
 }
 
 .card-author {
@@ -144,7 +143,6 @@ a {
 .tags a {
     font-style: normal;
     font-weight: 700;
-    /*font-size: 0.5rem;*/
     color: #7a7a8c;
     text-transform: uppercase;
     font-size: 0.66rem;
@@ -160,6 +158,5 @@ a {
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     -webkit-box-decoration-break: clone;
-    /*background-clip: text;*/
     border-color: white;
 }

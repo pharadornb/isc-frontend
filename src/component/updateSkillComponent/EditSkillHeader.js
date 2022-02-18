@@ -20,6 +20,7 @@ export default class EditSkillHeader extends React.Component {
                 SkillPrice: 0,
                 skillProfile: '',
                 SkillTypeName: '',
+                SkillTypeId: 0,
             }
         } else {
             this.state = {
@@ -77,7 +78,7 @@ export default class EditSkillHeader extends React.Component {
             skill_id: this.state.skillId,
         });
 
-        await axios.post('skill/viewSkillById',params, {
+        await axios.post('skill/viewSkillById', params, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -87,12 +88,25 @@ export default class EditSkillHeader extends React.Component {
                 skillName: res.data[0].skill_name,
                 skillDetail: res.data[0].skill_detail,
                 SkillTypeName: res.data[0].skill_type_name,
+                SkillTypeId: res.data[0].skill_type_id,
+                skillTime: res.data[0].skill_time,
+                levelSkill: res.data[0].skill_hard,
             });
         })
     }
 
     render() {
-        const {base64Data, skillId, profile, skillName, skillDetail, SkillTypeName} = this.state;
+        const {
+            base64Data,
+            skillId,
+            profile,
+            skillName,
+            skillDetail,
+            SkillTypeName,
+            skillTime,
+            levelSkill,
+            SkillTypeId
+        } = this.state;
 
         return (
             <>
@@ -142,10 +156,10 @@ export default class EditSkillHeader extends React.Component {
                                 <input type="email" className="form-control" placeholder="ชื่อทักษะ"
                                        onChange={(e) => this.setState({skillName: e.target.value})} value={skillName}/>
                             </div>
-                            {SkillTypeName}
                             <div className="col-md-12 mt-4">
                                 <textarea className="form-control" placeholder="รายละเอียดทักษะ" rows="3"
-                                          onChange={(e) => this.setState({skillDetail: e.target.value})} value={skillDetail}/>
+                                          onChange={(e) => this.setState({skillDetail: e.target.value})}
+                                          value={skillDetail}/>
                             </div>
                             <div className="col-md-12">
                                 {
@@ -154,11 +168,12 @@ export default class EditSkillHeader extends React.Component {
                                             <div className="col-md-12 mt-4">
                                                 <select className="form-select"
                                                         onChange={(e) => this.setState({skillType: e.target.value})}
-                                                        defaultValue="">
-                                                    <option>เลือกประเภททักษะ...</option>
+                                                        defaultValue={SkillTypeName}>
+                                                    <option value={SkillTypeId}>{SkillTypeName}</option>
                                                     {
                                                         this.state.persons
                                                             .map(data =>
+                                                                SkillTypeId !== data.skill_type_id &&
                                                                 <option
                                                                     value={data.skill_type_id}
                                                                     key={data.skill_type_id}>{data.skill_type_name}</option>
@@ -171,8 +186,7 @@ export default class EditSkillHeader extends React.Component {
                                             <div className="col-md-5 mt-4">
                                                 <select className="form-select"
                                                         onChange={(e) => this.setState({skillType: e.target.value})}
-                                                        defaultValue="">
-                                                    <option disabled>เลือกประเภททักษะ...</option>
+                                                        defaultValue={SkillTypeName}>
                                                     {
                                                         this.state.persons
                                                             .map(data =>
@@ -200,18 +214,62 @@ export default class EditSkillHeader extends React.Component {
                                 <div className="row">
                                     <div className="col-md-4 mt-4">
                                         <input type="number" className="form-control" placeholder="ระยะเวลา(นาที)"
-                                               onChange={(e) => this.setState({skillTime: e.target.value})}/>
+                                               onChange={(e) => this.setState({skillTime: e.target.value})}
+                                               value={skillTime}/>
                                     </div>
                                     <div className="col-md-4 mt-4">
                                         <select className="form-select"
-                                                onChange={(e) => this.setState({levelSkill: e.target.value})}
-                                                defaultValue="">
-                                            <option disabled>เลือกระดับความยาก...</option>
-                                            <option value="1">ง่าย</option>
-                                            <option value="2">ค่อนข้างง่าย</option>
-                                            <option value="3">ปานกลาง</option>
-                                            <option value="4">ค่อนข้างยาก</option>
-                                            <option value="5">ยาก</option>
+                                                onChange={(e) => this.setState({levelSkill: e.target.value})}>
+                                            {
+                                                levelSkill === 1 &&
+                                                <>
+                                                    <option value={levelSkill}>ง่าย</option>
+                                                    <option value="2">ค่อนข้างง่าย</option>
+                                                    <option value="3">ปานกลาง</option>
+                                                    <option value="4">ค่อนข้างยาก</option>
+                                                    <option value="5">ยาก</option>
+                                                </>
+                                            }
+                                            {
+                                                levelSkill === 2 &&
+                                                <>
+                                                    <option value={levelSkill}>ค่อนข้างง่าย</option>
+                                                    <option value="1">ง่าย</option>
+                                                    <option value="3">ปานกลาง</option>
+                                                    <option value="4">ค่อนข้างยาก</option>
+                                                    <option value="5">ยาก</option>
+                                                </>
+                                            }
+                                            {
+                                                levelSkill === 3 &&
+                                                <>
+                                                    <option value={levelSkill}>ปานกลาง</option>
+                                                    <option value="1">ง่าย</option>
+                                                    <option value="2">ค่อนข้างง่าย</option>
+                                                    <option value="4">ค่อนข้างยาก</option>
+                                                    <option value="5">ยาก</option>
+                                                </>
+                                            }
+                                            {
+                                                levelSkill === 4 &&
+                                                <>
+                                                    <option value={levelSkill}>ค่อนข้างยาก</option>
+                                                    <option value="1">ง่าย</option>
+                                                    <option value="2">ค่อนข้างง่าย</option>
+                                                    <option value="3">ปานกลาง</option>
+                                                    <option value="5">ยาก</option>
+                                                </>
+                                            }
+                                            {
+                                                levelSkill === 5 &&
+                                                <>
+                                                    <option value={levelSkill}>ยาก</option>
+                                                    <option value="1">ง่าย</option>
+                                                    <option value="2">ค่อนข้างง่าย</option>
+                                                    <option value="3">ปานกลาง</option>
+                                                    <option value="4">ค่อนข้างยาก</option>
+                                                </>
+                                            }
                                         </select>
                                     </div>
                                     <div className=" col-md-1 mt-4">
@@ -232,11 +290,10 @@ export default class EditSkillHeader extends React.Component {
                      style={{backgroundColor: '#FFFAFB', borderRadius: '20px'}}>
                     <div className="row">
                         <div className="col-md-12">
-                            <EditSkillBody id={this.state.skillId} profile={base64Data} skillType={this.state.skillType}
-                                       levelSkill={this.state.levelSkill}
-                                       skillName={this.state.skillName} skillDetail={this.state.skillDetail}
-                                       skillTime={this.state.skillTime}
-                                       SkillPrice={this.state.SkillPrice}/>
+                            <EditSkillBody id={this.state.skillId} profile={ base64Data ? base64Data : this.state.profile}
+                                           skillType={this.state.skillType ? this.state.skillType : this.state.SkillTypeId} levelSkill={this.state.levelSkill}
+                                           skillName={this.state.skillName} skillDetail={this.state.skillDetail}
+                                           skillTime={this.state.skillTime}/>
                         </div>
                     </div>
                 </div>

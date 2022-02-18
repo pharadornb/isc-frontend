@@ -57,6 +57,7 @@ export default function UserResume() {
         });
     } catch (err) {
       console.log(err);
+      setLoading(true);
     }
 
     try {
@@ -75,6 +76,7 @@ export default function UserResume() {
         });
     } catch (err) {
       console.log(err);
+      setLoading1(true);
     }
 
     try {
@@ -93,6 +95,7 @@ export default function UserResume() {
         });
     } catch (err) {
       console.log(err);
+      setLoading2(true);
     }
 
     try {
@@ -111,6 +114,7 @@ export default function UserResume() {
         });
     } catch (err) {
       console.log(err);
+      setLoading3(true);
     }
 
     try {
@@ -129,6 +133,7 @@ export default function UserResume() {
         });
     } catch (err) {
       console.log(err);
+      setLoading4(true);
     }
   };
 

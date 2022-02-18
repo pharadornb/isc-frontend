@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchBar from "material-ui-search-bar";
 import Button from "react-bootstrap/Button";
-import { Modal } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import axios from "axios";
 import moment from "moment";
+import PaginationTable from "../../component/SkillComponent/PaginationTable";
+import SearchTable from "../../component/SkillComponent/SearchTable";
 // import * as ReactBootStrap from 'react-bootstrap';
 
 import LogoIcon from "../../img/Logo1.PNG";
 // import Pagination from "../Pagination";
-
 
 const useStyles = makeStyles({
   table: {
@@ -24,38 +24,71 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
   const [datas, setDatas] = useState([]);
   const [rows1, setRows1] = useState([]);
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState("");
+
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  // const [showLoading, setShowLoading] = useState(false)
+  const ITEMS_PER_PAGE = 5;
+
   // const [loading, setLoading] = useState(false);
-  
+
   // const [currentPage, setCurrentPage] = useState(1);
   // const [postsPerPage, setPostsPerPage] = useState(10);
 
   const handleClose = () => setShow(false);
 
   const onSelectList = async () => {
-    try{
+    try {
       await axios
-      .post("account/company", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(res => {
-        if (res.status === 200) {
-          //console.log(res.data.user);
-          setRows1(res.data.user);
-        }
-      });
+        .post("account/company", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            //console.log(res.data.user);
+            setRows1(res.data.user);
+          }
+        });
       // setLoading(true);
-      }catch (err){
-        console.log(err);
-      }
-  }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     onSelectList();
-  },[]);
+  }, []);
 
+  const companyData = useMemo(() => {
+    let computedComments = rows1;
+
+    if (search) {
+      computedComments = computedComments.filter(
+        (comment) =>
+          comment.uc_name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    setTotalItems(computedComments.length);
+
+    return computedComments.slice(
+      (currentPage - 1) * ITEMS_PER_PAGE,
+      (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+    );
+  }, [rows1, currentPage, search]);
+
+  const header = [
+    { name: "เลขจดทะเบียน" },
+    { name: "สถานะ" },
+    { name: "ชื่อสถานประกอบการ" },
+    { name: "ที่อยู่" },
+    { name: "วันที่เปิดบัญชี" },
+    { name: "จัดการบัญชี" },
+  ];
 
   // const indexOfLastPost = currentPage * postsPerPage;
   // const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -63,63 +96,48 @@ function AdminDashboardCheckAccountEstablishmentTable() {
 
   const handleShow = (user_id) => {
     const params = JSON.stringify({
-        user_id
+      user_id,
     });
 
-    axios.post('account/companyById', params, {
+    axios
+      .post("account/companyById", params, {
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          // console.log(res.data.user)
+          setDatas(res.data.user);
         }
-      }).then(res => {
-          if (res.status === 200) {
-              // console.log(res.data.user)
-              setDatas(res.data.user);
-          }
-      }).catch(err =>
-          console.log(err)
-      )
-        setShow(true);
-        setUserId(user_id);
-    };
+      })
+      .catch((err) => console.log(err));
+    setShow(true);
+    setUserId(user_id);
+  };
 
   const handleClose1 = () => setShow1(false);
   const handleShow1 = (user_id) => {
     const params = JSON.stringify({
-        user_id
+      user_id,
     });
 
-    axios.post('account/companyById', params, {
+    axios
+      .post("account/companyById", params, {
         headers: {
-            'Content-Type': 'application/json',
-        }
-    }).then(res => {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
         if (res.status === 200) {
-            // console.log(res.data.user)
-            setDatas(res.data.user);
+          // console.log(res.data.user)
+          setDatas(res.data.user);
         }
-    }).catch(err =>
-        console.log(err)
-    )
+      })
+      .catch((err) => console.log(err));
     setShow1(true);
-
-};
-
-  const [searched, setSearched] = useState("");
-
-  const requestSearch = (searchedVal) => {
-    /* Search Table 1 */
-    const filteredRows = rows1.filter((row) => {
-      return row.establishment_name
-        .toLowerCase()
-        .includes(searchedVal.toLowerCase());
-    });
-    setRows1(filteredRows);
   };
 
-  const cancelSearch = () => {
-    setSearched("");
-    requestSearch(searched);
-  };
 
   const OnCheckStatus = (props) => {
     const status = props.status;
@@ -177,280 +195,302 @@ function AdminDashboardCheckAccountEstablishmentTable() {
   };
 
   const FormatTDate = (props) => {
-    const datetimes = moment(props.data).format('DD/MM/YYYY HH:mm:ss');;
+    const datetimes = moment(props.data).format("DD/MM/YYYY HH:mm:ss");
     return datetimes;
-  }
+  };
 
   const SetImage = (props) => {
     const setimgname = "data:image/jpeg;base64," + props.photoName;
     return <img alt="Trulli" src={setimgname} className="imgLogoStyle"></img>;
-  }
+  };
 
   const SetAllow = (user_id, status) => {
     const params = JSON.stringify({
       status,
-      user_id
+      user_id,
     });
 
-    axios.post('account/allow_company', params, {
-      headers: {
-          'Content-Type': 'application/json',
-      }
-    }).then(res => {
+    axios
+      .post("account/allow_company", params, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
         if (res.status === 200) {
-            console.log(res)
+          console.log(res);
         }
-    }).catch(err =>
-        console.log(err)
-    )
-    setShow(false)
-  }
-
-
+      })
+      .catch((err) => console.log(err));
+    setShow(false);
+  };
 
   return (
     <>
-      
       <div className="row tb">
         <label className="col-md-8">
-          <b className="bm">ตรวจสอบบัญชีสถานประกอบการ</b>
+          <h3><b className="bm">ตรวจสอบบัญชีสถานประกอบการ</b></h3>
         </label>
         <div className="col-md-4">
-          <SearchBar
-            value={searched}
-            onChange={(searchVal) => requestSearch(searchVal)}
-            onCancelSearch={() => cancelSearch()}
-          />
+        <SearchTable
+            onSearch={(value) => {
+              setSearch(value);
+              setCurrentPage(1);
+            }}/>
         </div>
       </div>
       <div className="row tb overflow-auto">
-        <table className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table">
           <thead>
             <tr>
-              <th align="center" className="th1">
-                <label>
-                  <b>เลขจดทะเบียน</b>
-                </label>
-              </th>
-              <th align="center" className="th2">
-                <label>
-                  <b>สถานะ</b>
-                </label>
-              </th>
-              <th align="center" className="th3">
-                <label>
-                  <b>ชื่อสถานประกอบการ</b>
-                </label>
-              </th>
-              <th align="center" className="th4">
-                <label>
-                  <b>ที่อยู่</b>
-                </label>
-              </th>
-              <th align="center" className="th5">
-                <label>
-                  <b>วันที่เปิดบัญชี</b>
-                </label>
-              </th>
-              <th align="center" className="th6">
-                <label>
-                  <b>จัดการบัญชี</b>
-                </label>
-              </th>
+              {header.map((rows, index) => (
+                <th style={{ textAlign: "center" }} className="th1" key={index}>
+                  <label>
+                    <b>{rows.name}</b>
+                  </label>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-          {rows1.map((row) => (
-            <tr key={row.uc_create}>
-              <td>
-              
-                <label>{row.uc_register}</label>
-              </td>
-              <td align="center">
-                <OnCheckStatus status={row.uc_allow} />
-              </td>
-              <td align="right">
-                <label className="design_td2">
-                  <label>{row.uc_name}</label>
-                </label>
-              </td>
-              <td align="right" className="td4">
-                <label>บ้านเลขที่ {row.user_address} ตำบล {row.user_subdistrict} อำเภอ {row.user_district} จังหวัด {row.user_province} รหัสไปรษณีย์ {row.user_postcode} </label>
-              </td>
-              <td align="right">
-                <label><FormatTDate data={row.uc_create}/></label>
-              </td>
-              <td align="center">
-           
-                <OnCheckAccount value={row.uc_allow} user_id={row.user_id} />
-              </td>
-            </tr>
-          ))}
+            {companyData.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  <label>{row.uc_register}</label>
+                </td>
+                <td align="center">
+                  <OnCheckStatus status={row.uc_allow} />
+                </td>
+                <td align="right">
+                  <label className="design_td2">
+                    <label>{row.uc_name}</label>
+                  </label>
+                </td>
+                <td align="right" className="td4">
+                  <label>
+                    บ้านเลขที่ {row.user_address} ตำบล {row.user_subdistrict}{" "}
+                    อำเภอ {row.user_district} จังหวัด {row.user_province}{" "}
+                    รหัสไปรษณีย์ {row.user_postcode}{" "}
+                  </label>
+                </td>
+                <td align="right">
+                  <label>
+                    <FormatTDate data={row.uc_create} />
+                  </label>
+                </td>
+                <td align="center">
+                  <OnCheckAccount value={row.uc_allow} user_id={row.user_id} />
+                </td>
+              </tr>
+            ))}
           </tbody>
-        </table>
+        </Table>
+        <PaginationTable
+          total={totalItems}
+          itemsPerPage={ITEMS_PER_PAGE}
+          currentPage={currentPage}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
         {/* <Pagination postsPerPage={postsPerPage} totalPosts={rows1.length} /> */}
-
-
-
-
 
         <Modal show={show} onHide={handleClose} size="lg">
           {datas.map((rows) => (
-          <div key={rows.uc_register}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="row">
-              <div className="col-md-6 setImg">
-                <SetImage photoName={rows.user_profile} />
-                
-              </div>
-              <div className="col-md-6">
-                <label>
-                  <b>ชื่อ: </b>บริษัท {rows.uc_name}
-                </label>
-                <br></br>
-                <label>
-                  <b>เลขจดทะเบียน: </b>{rows.uc_register}
-                </label>
-                <br></br>
-                <label>
-                  <b>ประเภทบริการ: </b>{rows.uc_type}
-                </label>
-                <br></br>
-                <label>
-                  <b>อีเมล์: </b>{rows.user_email}
-                </label>
-                <br></br>
-                <label>
-                  <b>เบอร์โทรศัพท์ </b>{rows.user_tel}
-                </label>
-              </div>
+            <div key={rows.uc_register}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="row">
+                  <div className="col-md-6 setImg">
+                    <SetImage photoName={rows.user_profile} />
+                  </div>
+                  <div className="col-md-6">
+                    <label>
+                      <b>ชื่อ: </b>บริษัท {rows.uc_name}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>เลขจดทะเบียน: </b>
+                      {rows.uc_register}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>ประเภทบริการ: </b>
+                      {rows.uc_type}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>อีเมล์: </b>
+                      {rows.user_email}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>เบอร์โทรศัพท์ </b>
+                      {rows.user_tel}
+                    </label>
+                  </div>
+                </div>
+                <div className="row et_box2">
+                  <label className="col-12">
+                    <b>รายละเอียด: </b>
+                    {rows.uc_detail}
+                  </label>
+                  <label className="col-12">
+                    <b>เว็บไซต์: </b>
+                    {rows.uc_website}
+                  </label>
+                  <label className="col-12">
+                    <b>วิสัยทัศน์: </b>
+                    {rows.user_slogan}
+                  </label>
+                  <label className="col-12">
+                    <b>ที่ตั้งบริษัท: </b>บ้านเลขที่ {rows.user_address}{" "}
+                    ตำบล/แขวง {rows.user_subdistrict} อำเภอ/เขต{" "}
+                    {rows.user_district} จังหวัด {rows.user_province}{" "}
+                    รหัสไปรษณีย์ {rows.user_postcode}
+                  </label>
+                  <label className="col-4">
+                    <b>วันก่อตั้ง: </b>
+                    <FormatTDate data={rows.user_dob} />
+                  </label>
+                  <label className="col-3">
+                    <b>เบอร์โทรสาร: </b>
+                    {rows.uc_fax}
+                  </label>
+                  <label className="col-5">
+                    <b>เลขบัญชี: </b>
+                    {rows.uc_bank_no}
+                  </label>
+                  <label className="col-4">
+                    <b>เจ้าของบัญชี: </b>
+                    {rows.uc_bank_name}
+                  </label>
+                  <label className="col-3">
+                    <b>ธนาคาร: </b>
+                    {rows.uc_bank}
+                  </label>
+                  <label className="col-5">
+                    <b>สาขา: </b>
+                    {rows.uc_branch_bank}
+                  </label>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="btn btn-success"
+                  onClick={() => SetAllow(userId, "yes")}
+                >
+                  <i className="fas fa-check-circle"></i> อนุมัติบัญชี
+                </Button>
+                <Button
+                  variant="btn btn-danger"
+                  onClick={() => SetAllow(userId, "no")}
+                >
+                  <i className="fas fa-times-circle"></i> ไม่อนุมัติบัญชี
+                </Button>
+              </Modal.Footer>
             </div>
-            <div className="row et_box2">
-              <label className="col-12">
-                <b>รายละเอียด: </b>{rows.uc_detail}
-              </label>
-              <label className="col-12">
-                <b>เว็บไซต์: </b>{rows.uc_website}
-              </label>
-              <label className="col-12">
-                <b>วิสัยทัศน์: </b>{rows.user_slogan}
-              </label>
-              <label className="col-12">
-                <b>ที่ตั้งบริษัท: </b>บ้านเลขที่ {rows.user_address} ตำบล/แขวง {rows.user_subdistrict} อำเภอ/เขต {rows.user_district} จังหวัด {rows.user_province} รหัสไปรษณีย์ {rows.user_postcode}
-              </label>
-              <label className="col-4">
-                <b>วันก่อตั้ง: </b><FormatTDate data={rows.user_dob}/>
-              </label>
-              <label className="col-3">
-                <b>เบอร์โทรสาร: </b>{rows.uc_fax}
-              </label>
-              <label className="col-5">
-                <b>เลขบัญชี: </b>{rows.uc_bank_no}
-              </label>
-              <label className="col-4">
-                <b>เจ้าของบัญชี: </b>{rows.uc_bank_name}
-              </label>
-              <label className="col-3">
-                <b>ธนาคาร: </b>{rows.uc_bank}
-              </label>
-              <label className="col-5">
-                <b>สาขา: </b>{rows.uc_branch_bank}
-              </label>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="btn btn-success" onClick={() => SetAllow(userId, 'yes')}>
-              <i className="fas fa-check-circle"></i> อนุมัติบัญชี
-            </Button>
-            <Button variant="btn btn-danger" onClick={() => SetAllow(userId, 'no')}>
-              <i className="fas fa-times-circle"></i> ไม่อนุมัติบัญชี
-            </Button>
-          </Modal.Footer>
-           </div>
           ))}
         </Modal>
 
         {/* modal 2*/}
 
         <Modal show={show1} onHide={handleClose1} size="lg">
-        {datas.map((rows) => ( 
-          <div key={rows.uc_register}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="row">
-              <div className="col-md-6 setImg">
-                <img alt="Trulli" src={LogoIcon} className="imgLogoStyle"></img>
-              </div>
-              <div className="col-md-6">
-                <label>
-                  <b>ชื่อ: </b>บริษัท {rows.uc_name}
-                </label>
-                <br></br>
-                <label>
-                  <b>เลขจดทะเบียน: </b>{rows.uc_register}
-                </label>
-                <br></br>
-                <label>
-                  <b>ประเภทบริการ: </b>{rows.uc_type}
-                </label>
-                <br></br>
-                <label>
-                  <b>อีเมล์: </b>{rows.user_email}
-                </label>
-                <br></br>
-                <label>
-                  <b>เบอร์โทรศัพท์ </b>{rows.user_tel}
-                </label>
-              </div>
+          {datas.map((rows) => (
+            <div key={rows.uc_register}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <b>รายละเอียดบัญชีสถานประกอบการ:</b> บริษัท {rows.uc_name}
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="row">
+                  <div className="col-md-6 setImg">
+                    <img
+                      alt="Trulli"
+                      src={LogoIcon}
+                      className="imgLogoStyle"
+                    ></img>
+                  </div>
+                  <div className="col-md-6">
+                    <label>
+                      <b>ชื่อ: </b>บริษัท {rows.uc_name}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>เลขจดทะเบียน: </b>
+                      {rows.uc_register}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>ประเภทบริการ: </b>
+                      {rows.uc_type}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>อีเมล์: </b>
+                      {rows.user_email}
+                    </label>
+                    <br></br>
+                    <label>
+                      <b>เบอร์โทรศัพท์ </b>
+                      {rows.user_tel}
+                    </label>
+                  </div>
+                </div>
+                <div className="row et_box2">
+                  <label className="col-12">
+                    <b>รายละเอียด: </b>
+                    {rows.uc_detail}
+                  </label>
+                  <label className="col-12">
+                    <b>เว็บไซต์: </b>
+                    {rows.uc_website}
+                  </label>
+                  <label className="col-12">
+                    <b>วิสัยทัศน์: </b>
+                    {rows.user_slogan}
+                  </label>
+                  <label className="col-12">
+                    <b>ที่ตั้งบริษัท: </b>บ้านเลขที่ {rows.user_address}{" "}
+                    ตำบล/แขวง {rows.user_subdistrict} อำเภอ/เขต{" "}
+                    {rows.user_district} จังหวัด {rows.user_province}{" "}
+                    รหัสไปรษณีย์ {rows.user_postcode}
+                  </label>
+                  <label className="col-4">
+                    <b>วันก่อตั้ง: </b>
+                    <FormatTDate data={rows.user_dob} />
+                  </label>
+                  <label className="col-3">
+                    <b>เบอร์โทรสาร: </b>
+                    {rows.uc_fax}
+                  </label>
+                  <label className="col-5">
+                    <b>เลขบัญชี: </b>
+                    {rows.uc_bank_no}
+                  </label>
+                  <label className="col-4">
+                    <b>เจ้าของบัญชี: </b>
+                    {rows.uc_bank_name}
+                  </label>
+                  <label className="col-3">
+                    <b>ธนาคาร: </b>
+                    {rows.uc_bank}
+                  </label>
+                  <label className="col-5">
+                    <b>สาขา: </b>
+                    {rows.uc_branch_bank}
+                  </label>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="btn btn-danger" onClick={handleClose1}>
+                  <i className="fas fa-times-circle"></i> ปิด
+                </Button>
+              </Modal.Footer>
             </div>
-            <div className="row et_box2">
-              <label className="col-12">
-                <b>รายละเอียด: </b>{rows.uc_detail}
-              </label>
-              <label className="col-12">
-                <b>เว็บไซต์: </b>{rows.uc_website}
-              </label>
-              <label className="col-12">
-                <b>วิสัยทัศน์: </b>{rows.user_slogan}
-              </label>
-              <label className="col-12">
-                <b>ที่ตั้งบริษัท: </b>บ้านเลขที่ {rows.user_address} ตำบล/แขวง {rows.user_subdistrict} อำเภอ/เขต {rows.user_district} จังหวัด {rows.user_province} รหัสไปรษณีย์ {rows.user_postcode}
-              </label>
-              <label className="col-4">
-                <b>วันก่อตั้ง: </b><FormatTDate data={rows.user_dob}/>
-              </label>
-              <label className="col-3">
-                <b>เบอร์โทรสาร: </b>{rows.uc_fax}
-              </label>
-              <label className="col-5">
-                <b>เลขบัญชี: </b>{rows.uc_bank_no}
-              </label>
-              <label className="col-4">
-                <b>เจ้าของบัญชี: </b>{rows.uc_bank_name}
-              </label>
-              <label className="col-3">
-                <b>ธนาคาร: </b>{rows.uc_bank}
-              </label>
-              <label className="col-5">
-                <b>สาขา: </b>{rows.uc_branch_bank}
-              </label>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="btn btn-danger" onClick={handleClose1}>
-              <i className="fas fa-times-circle"></i> ปิด
-            </Button>
-          </Modal.Footer>
-          </div>
           ))}
         </Modal>
       </div>

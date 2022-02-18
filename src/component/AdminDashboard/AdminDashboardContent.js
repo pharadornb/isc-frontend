@@ -1,5 +1,4 @@
 import React from "react";
-import Select from "react-select";
 import moment from "moment";
 
 import "../../css/AdminDashboard/AdminDashboardContent.css";
@@ -9,10 +8,7 @@ import Box from "./AdminDashboardBox";
 import Tables from "./AdminDashboardTable";
 
 export default function AdminDashboardContent() {
-  const options = [
-    { value: "555", label: "coco" },
-    { value: "555", label: "coco2" },
-  ];
+
 
   const Hello = () => {
     const a = moment().format("a");
@@ -47,16 +43,10 @@ export default function AdminDashboardContent() {
               <p className="txt1">
                 <Hello />
               </p>
-              <p className="txt2">ผู้ดูแลระบบ iSC01</p>
+              <p className="txt2">ผู้ดูแลระบบ</p>
               <p className="txt3">
                 iT SKILL COLLECT บริการสะสมคลังทักษะด้านไอที
               </p>
-            </div>
-          </div>
-          <div className="row box_row2">
-            <div className="col-lg-8"></div>
-            <div className="col-lg-4">
-              <Select options={options} />
             </div>
           </div>
           <div className="row box_row3">

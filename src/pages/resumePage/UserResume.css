@@ -229,6 +229,44 @@
   height: 4px;
 }
 
+.Progressbox2 {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+.Sizeimg2 {
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 600px;
+}
+
+.txtname2 {
+  text-align: center;
+  font-weight: 900;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  overflow: hidden;
+  width: 70px;
+  margin-right: 5px;
+}
+
+.P_showSkilk2 {
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+/* ------------------------------------------ */
+
 .Progressbox {
   position: relative;
   width: 100px;

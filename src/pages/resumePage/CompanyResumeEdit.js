@@ -623,7 +623,7 @@ export default function CompanyResumeEdit() {
           <div className="row">
             {/*Skill Require */}
             {position_Require.map((rows, index) => (
-              <div className="col-12 bg-while sdd">
+              <div className="col-12 bg-while sdd" key={index}>
                 {/* In-Box-Position */}
                 <div className="row">
                   <div className="col-12" style={{ textAlign: "right" }}>
@@ -651,7 +651,7 @@ export default function CompanyResumeEdit() {
 
             {position_Require.length === 0
               ? positionRequireNew.map((rows, index) => (
-                  <div className="col-12 bg-while sdd">
+                  <div className="col-12 bg-while sdd" key={index}>
                     {/* In-Box-Position */}
                     <div className="row">
                       <div className="col-12" style={{ textAlign: "right" }}>
@@ -672,7 +672,7 @@ export default function CompanyResumeEdit() {
                   </div>
                 ))
               : positionRequireNew.map((rows, index) => (
-                  <div className="col-12 bg-while sdd">
+                  <div className="col-12 bg-while sdd" key={index}>
                     {/* In-Box-Position */}
                     <div className="row">
                       <div className="col-12" style={{ textAlign: "right" }}>
@@ -695,10 +695,10 @@ export default function CompanyResumeEdit() {
           </div>
           <div className="row">
             <div className="col-6" style={{ textAlign: "left" }}>
-              <button type="button" class="btn btn-secondary" onClick={onBack}>กลับไปหน้า Resume</button>
+              <button type="button" className="btn btn-secondary" onClick={onBack}>กลับไปหน้า Resume</button>
             </div>
             <div className="col-6" style={{ textAlign: "right" }}>
-              <button type="button" class="btn btn-success" onClick={onAddData}>เพิ่มเอกสาร</button>
+              <button type="button" className="btn btn-success" onClick={onAddData}>เพิ่มเอกสาร</button>
             </div>
 
             <div className="col-12">

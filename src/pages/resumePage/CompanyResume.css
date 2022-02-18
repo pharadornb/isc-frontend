@@ -308,8 +308,8 @@
   }
 
   .borderBox {
-    border: 1px #b9b9b9 solid;
-    border-radius: 5px;
+    /* border: 1px #b9b9b9 solid; */
+    /* border-radius: 5px; */
     padding: 5px;
   }
 
@@ -366,3 +366,46 @@
     left: 5px;
     color: rgb(255, 15, 15);
   }
+
+
+
+  /* -------------Dialog Show Skill Require----------------- */
+
+ .R-txtName {
+   margin-top: 20px;
+ }
+
+ .inImge {
+  object-fit: cover;
+ }
+
+ .design-R {
+   background-color: #2e2e48;
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   color: #ffffff;
+   border-radius: 5px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   position: absolute;
+   top: -30px;
+ }
+  
+ .line-R {
+   border-bottom: 2px #2e2e48 solid;
+   width: 70%;
+   margin-bottom: 40px;
+   margin-top: 40px;
+   
+ }
+
+ .box-title-R {
+   position: relative;
+ }
+
+ .txt-R {
+   margin-left: 20px;
+ }
+  

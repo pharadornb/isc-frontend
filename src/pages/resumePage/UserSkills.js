@@ -28,6 +28,7 @@ export default function UserSkill() {
         });
     } catch (err) {
       console.log(err);
+      setLoading2(true);
     }
 
     try {
@@ -46,6 +47,7 @@ export default function UserSkill() {
         });
     } catch (err) {
       console.log(err);
+      setLoading(true);
     }
   };
 
@@ -115,20 +117,20 @@ export default function UserSkill() {
                   {rows1.skill_type_name === rows2.skill_type_name && (
                     <Grid item xs={3}>
                       {rows2.user_skill_ishide === "no" && (
-                        <div className="col-3 Progressbox ">
+                        <div className="Progressbox2 ">
                           <CustomContentProgressbar
                             percentage={rows2.user_skill_point}
                           >
                             <div>
                               <img
-                                className="Sizeimg1"
+                                className="Sizeimg2"
                                 alt={rows2.skill_name}
                                 src={`data:image/jpeg;base64,${rows2.skill_logo}`}
                               />
                             </div>
                           </CustomContentProgressbar>
                           <div className="box-center">
-                            <span className="txtname">{rows2.skill_name}</span>
+                            <span className="txtname2">{rows2.skill_name}</span>
                             <img
                               src={`data:image/jpeg;base64,${rows2.user_profile}`}
                               alt={rows2.skill_name}
@@ -141,7 +143,7 @@ export default function UserSkill() {
                           </div>
                           <label>
                             <a
-                              className="P_showSkilk"
+                              className="P_showSkilk2"
                               href="##"
                               onClick={(e) => onShowHides(e, j)}
                             >
@@ -157,20 +159,20 @@ export default function UserSkill() {
                       )}
 
                       {rows2.user_skill_ishide === "yes" && (
-                        <div className="col-3 Progressbox alpha-image">
+                        <div className="Progressbox2 alpha-image">
                           <CustomContentProgressbar
                             percentage={rows2.user_skill_point}
                           >
                             <div>
                               <img
-                                className="Sizeimg1"
+                                className="Sizeimg2"
                                 alt={rows2.skill_name}
                                 src={`data:image/jpeg;base64,${rows2.skill_logo}`}
                               />
                             </div>
                           </CustomContentProgressbar>
                           <div className="box-center">
-                            <span className="txtname">{rows2.skill_name}</span>
+                            <span className="txtname2">{rows2.skill_name}</span>
                             <img
                               src={`data:image/jpeg;base64,${rows2.user_profile}`}
                               alt={rows2.skill_name}
@@ -183,7 +185,7 @@ export default function UserSkill() {
                           </div>
                           <label>
                             <a
-                              className="P_showSkilk"
+                              className="P_showSkilk2"
                               href="##"
                               onClick={(e) => onShowHides(e, j)}
                             >

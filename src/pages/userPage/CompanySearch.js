@@ -5,6 +5,7 @@ import PaginationTable from "../../component/SkillComponent/PaginationTable";
 import SearchTable from "../../component/SkillComponent/SearchTable";
 // import HeaderTable from "../../component/SkillComponent/HeaderTable";
 import { Table } from "react-bootstrap";
+import CircularProgress from "@mui/material/CircularProgress";
 // import { Avatar } from "@mui/material";
 
 export default function CompanySearch() {
@@ -149,7 +150,7 @@ export default function CompanySearch() {
                 <th style={{ textAlign: "center" }}>{headers[4].name}</th>
               </thead>
               <tbody>
-                {loading2 === true ? <tr><td colspan="5">ไม่มีข้อมูล</td></tr> : 
+                {loading2 === true ? <tr><td colspan="5"><CircularProgress /></td></tr> : 
                   PositionCompany.map((comment, index) => (
                   <tr key={index}>
                     <td>{index+1}</td>
@@ -208,7 +209,7 @@ export default function CompanySearch() {
                 <th style={{ textAlign: "center" }}>{headers2[4].name}</th>
               </thead>
               <tbody>
-              {loading1 === true ? <tr><td colspan="5">ไม่มีข้อมูล</td></tr> : 
+              {loading1 === true ? <tr><td colspan="5"><CircularProgress /></td></tr> : 
                 ProfileCompany.map((comment, index) => (
                   <tr key={index}>
                     <td>{index+1}</td>

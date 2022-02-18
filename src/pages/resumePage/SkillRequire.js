@@ -4,10 +4,11 @@ import axios from "axios";
 import PaginationTable from "../../component/SkillComponent/PaginationTable";
 import SearchTable from "../../component/SkillComponent/SearchTable";
 import HeaderTable from "../../component/SkillComponent/HeaderTable";
-import { Table } from "react-bootstrap";
+import { Table, Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 import CustomContentProgressbar from "./CustomContentProgressbar";
+// import { textAlign } from "@mui/system";
 
 export default function SkillRequire(props) {
   const [position_Require] = useState(props.position_Require[props.index]); // setPositionRequire
@@ -35,6 +36,10 @@ export default function SkillRequire(props) {
   var [ucre_salary, setSalary] = useState(position_Require.ucre_salary);
 
   const [open, setOpen] = useState(false);
+
+  const [lgShow, setLgShow] = useState(false);
+  const [getskill, setSkill] = useState([]);
+  const [dataSkill, setDataSkill] = useState([]);
 
   // -----------------------------------------------------------------------------------
 
@@ -67,6 +72,43 @@ export default function SkillRequire(props) {
 
   // ---------------------------------------------------------------------
 
+  const Again = () => {
+    setLoading2(true);
+    setLoading1(true);
+    console.log("Delete DataNew");
+    for (let i = 0; i < dataNew.length; i++) {
+      const vals = [...dataNew];
+      console.log(vals);
+
+      vals.splice(0, 1);
+      setDataNew(vals);
+
+      if (position_Require.ucre_id !== "") {
+        const params = JSON.stringify({
+          ucre_id: position_Require.ucre_id,
+        });
+
+        axios
+          .post("resume/companySkillRequire", params, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res2) => {
+            if (res2.status === 200) {
+              setData(res2.data);
+              console.log(res2.data);
+              setLoading2(false);
+              setLoading1(false);
+            }
+          })
+          .catch((err) => console.log(err));
+      } else {
+      }
+    }
+  };
+
+  //-----------------------------------------------------------------------
   const ViewSkills = () => {
     axios
       .post("skill/viewSkill", {
@@ -141,6 +183,9 @@ export default function SkillRequire(props) {
 
   const handleClickOpen = (skill_id, user_profile, skill_logo, skill_name) => {
     setLoading1(true);
+
+    setLgShow(false);
+
     Swal.fire({
       title: "คะแนนที่คุณคาดหวัง",
       input: "number",
@@ -160,6 +205,8 @@ export default function SkillRequire(props) {
           imageUrl: `data:image/jpeg;base64,${user_profile}`,
           imageHeight: 100,
           imageWidth: 100,
+          imageClass: "inImge",
+          animation: false,
         });
 
         dataNew.push({
@@ -171,6 +218,7 @@ export default function SkillRequire(props) {
         });
         // console.log(dataNew);
         setLoading1(false);
+        setLgShow(false);
         setOpen(true);
         // setDataNew(dataNew);
       }
@@ -229,7 +277,33 @@ export default function SkillRequire(props) {
     }
   };
 
-  // ----------------------------------------------/ ---------------------------------------
+  // -------------------------------------------------------------------------------------
+
+  const skillData = (skilldata) => {
+    // console.log(skilldata);
+    setSkill(skilldata);
+
+    const params = JSON.stringify({
+      skill_id: skilldata.skill_id,
+    });
+
+    // console.log(JSON.parse(params));
+
+    axios
+      .post("skill/viewSkillAttritude", params, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data.obj);
+          setDataSkill(res.data.obj);
+          setLgShow(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   // ---------------------------------------------------------------------------------
 
@@ -257,7 +331,6 @@ export default function SkillRequire(props) {
         .then((res) => {
           if (res.status === 200) {
             console.log("Add Position!!!!");
-            
             // addPositionSkill-----------------------
             for (let i = 0; i < dataNew.length; i++) {
               const params2 = JSON.stringify({
@@ -270,6 +343,7 @@ export default function SkillRequire(props) {
                   },
                 ],
               });
+
               // console.log(JSON.parse(params2));
 
               axios
@@ -282,16 +356,13 @@ export default function SkillRequire(props) {
                   if (res.status === 200) {
                     console.log("Add Position Skill !!!!");
                     setOpen(false);
-                    
                   }
                 })
                 .catch((err) => console.log(err));
             }
-            Swal.fire(
-              'บันทึกเรียบร้อย',
-              'ขอบคุณที่ใช้บริการ',
-              'success'
-            )
+            Again();
+
+            Swal.fire("บันทึกเรียบร้อย", "ขอบคุณที่ใช้บริการ", "success");
             //End Select API addPositionSkill
           }
         })
@@ -300,6 +371,7 @@ export default function SkillRequire(props) {
       //End Select API addCompanyPosition
     } else if (props.page === "old") {
       // ------------------------------------------------------------------
+
       const params1 = JSON.stringify({
         position: [
           {
@@ -324,40 +396,40 @@ export default function SkillRequire(props) {
           if (res.status === 200) {
             console.log("Add Position!!!!");
             // addPositionSkill-----------------------
-            for (let i = 0; i < dataNew.length; i++) {
-              const params2 = JSON.stringify({
-                ucre_occupation: ucre_occupation,
-                ucre_detail: ucre_detail,
-                skill: [
-                  {
-                    skill_id: dataNew[i].skill_id,
-                    ucrs_point: parseInt(dataNew[i].ucrs_point),
-                  },
-                ],
-              });
+            if (dataNew.length !== 0) {
+              for (let i = 0; i < dataNew.length; i++) {
+                const params2 = JSON.stringify({
+                  ucre_occupation: ucre_occupation,
+                  ucre_detail: ucre_detail,
+                  skill: [
+                    {
+                      skill_id: dataNew[i].skill_id,
+                      ucrs_point: parseInt(dataNew[i].ucrs_point),
+                    },
+                  ],
+                });
 
-              // console.log(JSON.parse(params2));
+                // console.log(JSON.parse(params2));
 
-              axios
-                .post("resume/addPositionSkill", params2, {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
-                .then((res) => {
-                  if (res.status === 200) {
-                    console.log("Add Position Skill !!!!");
-                    setOpen(false);
-                    
-                  }
-                })
-                .catch((err) => console.log(err));
+                axios
+                  .post("resume/addPositionSkill", params2, {
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  })
+                  .then((res) => {
+                    if (res.status === 200) {
+                      console.log("Add Position Skill !!!!");
+
+                      setOpen(false);
+                    }
+                  })
+                  .catch((err) => console.log(err));
+              }
             }
-            Swal.fire(
-              'บันทึกเรียบร้อย',
-              'ขอบคุณที่ใช้บริการ',
-              'success'
-            )
+
+            Again();
+            Swal.fire("บันทึกเรียบร้อย", "ขอบคุณที่ใช้บริการ", "success");
             //End Select API addPositionSkill
           }
         })
@@ -430,11 +502,10 @@ export default function SkillRequire(props) {
             <br />
           </div>
         </div>
-      
+
         <div className="row borderBox overflow-auto" align={"center"}>
           {/* {props.ucre_id} */}
-          {
-            loading2 === false &&
+          {loading2 === false &&
             data.map((rows, index) => (
               <label
                 className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative"
@@ -465,8 +536,7 @@ export default function SkillRequire(props) {
                 <p style={{ marginTop: 100 }}>{rows.skill_name}</p>
               </label>
             ))}
-          {
-            loading1 === false &&
+          {loading1 === false &&
             dataNew.map((rows, index) => (
               <label
                 className="col-sm-4 col-md-3 col-lg-1 boxSkilsRequire p-relative"
@@ -548,14 +618,9 @@ export default function SkillRequire(props) {
                         <button
                           type="button"
                           className="btn btn-outline-primary"
-                          onClick={() =>
-                            handleClickOpen(
-                              comment.skill_id,
-                              comment.user_profile,
-                              comment.skill_logo,
-                              comment.skill_name
-                            )
-                          }
+                          onClick={() => {
+                            skillData(comment);
+                          }}
                         >
                           <i className="fas fa-plus-circle" /> เพิ่ม
                         </button>
@@ -586,6 +651,108 @@ export default function SkillRequire(props) {
           </div>
         </div>
       </div>
+      <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <div className="container">
+            <div className="row">
+              <div className="col-2">
+                <div style={{ textAlign: "center" }}>
+                  <label>
+                    <Avatar
+                      alt={getskill.skill_name}
+                      className="avatarDialogR"
+                      src={`data:image/jpeg;base64,${getskill.skill_logo}`}
+                      style={{ maxWidth: 60, maxHeight: 60 }}
+                    />
+                  </label>
+                  <div>
+                    <b>{getskill.skill_name}</b>
+                  </div>
+                </div>
+              </div>
+              <div className="col-10">
+                <div>
+                  <h3 className="R-txtName">{getskill.uc_name}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="container">
+            <div className="row">
+              <label className="col-3">
+                <b>ชื่อทักษะ:</b> {getskill.skill_name}
+              </label>
+              <label className="col-5">
+                <b>กลุ่มทักษะ:</b> {getskill.skill_type_name}
+              </label>
+              <label className="col-4">
+                <b>ระดับทักษะ:</b> {getskill.skill_hard === 1 && "ค่อนข้างง่าย"}
+                {getskill.skill_hard === 2 && "ง่าย"}
+                {getskill.skill_hard === 3 && "ปานกลาง"}
+                {getskill.skill_hard === 4 && "ค่อนข้างยาก"}
+                {getskill.skill_hard === 5 && "ยาก"}
+              </label>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <div className="box-title-R">
+                  <label className="design-R">
+                    <b>รายละเอียดทักษะ</b>
+                  </label>
+                  <div className="line-R" />
+                </div>
+
+                <ul>
+                  <li className="txt-R">{getskill.skill_detail}</li>
+                </ul>
+              </div>
+              <div className="col-12">
+                <div className="box-title-R">
+                  <label className="design-R">
+                    <b>ตัวชี้วัดเเบบทดสอบ</b>
+                  </label>
+                  <div className="line-R" />
+                </div>
+              </div>
+              <div className="col-12">
+                <ol>
+                  {dataSkill.map((row, index) => (
+                    <li className="txt-R" key={index}>
+                      {" "}
+                      {row.skill_exam_objective}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setLgShow(false)}>
+            ปิด
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() =>
+              handleClickOpen(
+                getskill.skill_id,
+                getskill.user_profile,
+                getskill.skill_logo,
+                getskill.skill_name
+              )
+            }
+          >
+            เพิ่ม
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

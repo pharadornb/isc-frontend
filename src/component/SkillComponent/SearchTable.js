@@ -11,7 +11,7 @@ const SearchTable = ({ onSearch }) => {
         <input
             type="text"
             className="form-control"
-            style={{ width: "300px" }}
+            style={{ maxWidth: "300px" }}
             placeholder="Search"
             value={search}
             onChange={e => onInputChange(e.target.value)}

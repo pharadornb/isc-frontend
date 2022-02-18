@@ -1,7 +1,9 @@
 import Card from "@mui/material/Card";
 import {CardActionArea} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
-import test from "../../img/triangles-1430105__480.png";
+import about1 from "../../img/about1.png";
+import about2 from "../../img/about2.png";
+import about3 from "../../img/about3.png";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import React from "react";
@@ -19,8 +21,8 @@ export default function About() {
                             <CardMedia
                                 component="img"
                                 height="250"
-                                image={test}
-                                alt="green iguana"
+                                image={about1}
+                                alt="about1"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h6" component="div">
@@ -39,8 +41,8 @@ export default function About() {
                             <CardMedia
                                 component="img"
                                 height="250"
-                                image={test}
-                                alt="green iguana"
+                                image={about2}
+                                alt="about2"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h6" component="div">
@@ -59,8 +61,8 @@ export default function About() {
                             <CardMedia
                                 component="img"
                                 height="250"
-                                image={test}
-                                alt="green iguana"
+                                image={about3}
+                                alt="about3"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h6" component="div">

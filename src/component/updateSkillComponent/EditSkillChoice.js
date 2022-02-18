@@ -1,10 +1,38 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Form, Button, Row, Col} from "react-bootstrap";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const EditSkillChoice = (props) => {
 
     const [choice, setExam] = useState([{sec_name: "", sec_isanswer: "no"}]);
+    const [examView, setExamView] = useState([]);
+
+    useEffect(() => {
+
+        if(props.id){
+            const params = JSON.stringify({
+                skill_exam_id: props.id,
+            });
+
+            axios.post('skill/viewRandomChoice', params, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(
+                res => {
+                    if (res.status === 200) {
+                        setExamView(res.data)
+                    }
+                }
+            ).catch(
+                error => {
+                    console.log(error)
+                }
+            )
+        }
+
+    }, [props.id])
 
     const handleChange = (index, event) => {
         const values = [...choice];
@@ -67,9 +95,39 @@ const EditSkillChoice = (props) => {
 
     return (
         <>
+            {examView.map((data, i) => {
+                return (
+                    props.skillExamOption === 'objective' &&
+                    <Row key={i}>
+                        <Col md={1} className={'mt-4'}>
+                            {/*<div style={{margin: "auto"}}>*/}
+                                {/*<Form.Check inline label="เฉลย" name="sec_isanswer"*/}
+                                {/*            onChange={(event) => handleChange(i, event)}/>*/}
+                            {/*</div>*/}
+                        </Col>
+                        <Col md={9} className={'mt-4'}>
+                            <Form.Group controlId="formBasicRoom">
+                                <Form.Control type="text" name="sec_name"
+                                              value={"ตัวเลือก : " + data.sec_name}
+                                              onChange={(event) => handleChange(i, event)} readOnly={true}/>
+                            </Form.Group>
+                        </Col>
+                        {/*<Col md={2} className={'mt-4'}>*/}
+                        {/*    <Button variant="warning" onClick={handleAddFields}>*/}
+                        {/*        <i className="fas fa-plus-circle"/>*/}
+                        {/*    </Button>&nbsp;&nbsp;&nbsp;*/}
+                        {/*    <Button variant="danger" onClick={handleRemoveFields}>*/}
+                        {/*        <i className="fas fa-minus-circle"/>*/}
+                        {/*    </Button>&nbsp;&nbsp;&nbsp;*/}
+                        {/*</Col>*/}
+                    </Row>
+                );
+            })}
             {choice.map((data, i) => {
                 return (
                     props.skillExamOption === 'objective' &&
+                        props.skillExamOption === 'objective' &&
+                    examView.length === 0 &&
                     <Row key={i}>
                         <Col md={1} className={'mt-4'}>
                             <div style={{margin: "auto"}}>
@@ -79,9 +137,9 @@ const EditSkillChoice = (props) => {
                         </Col>
                         <Col md={9} className={'mt-4'}>
                             <Form.Group controlId="formBasicRoom">
-                                <Form.Control type="text" placeholder="ตัวเลือก" name="sec_name"
+                                <Form.Control type="text" name="sec_name" placeholder="ตัวเลือก"
                                               value={data.sec_name}
-                                              onChange={(event) => handleChange(i, event)}/>
+                                              onChange={(event) => handleChange(i, event)} />
                             </Form.Group>
                         </Col>
                         <Col md={2} className={'mt-4'}>
@@ -95,11 +153,14 @@ const EditSkillChoice = (props) => {
                     </Row>
                 );
             })}
-            <div align={'center'} className={'mt-3'}>
-                <Button variant="primary" onClick={handleSubmit}>
-                    <i className="fas fa-cloud-upload-alt"/> บันทึกตัวเลือก
-                </Button>
-            </div>
+            {
+                examView.length === 0 &&
+                <div align={'center'} className={'mt-3'}>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        <i className="fas fa-cloud-upload-alt"/> บันทึกตัวเลือก
+                    </Button>
+                </div>
+            }
         </>
     );
 };

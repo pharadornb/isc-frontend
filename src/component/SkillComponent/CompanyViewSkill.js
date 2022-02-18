@@ -7,7 +7,7 @@ import Loader from "../configComponent/Loader";
 import Avatar from "@mui/material/Avatar";
 import moment from "moment";
 import Swal from "sweetalert2";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 export default function CompanyViewSkill() {
 
@@ -171,10 +171,10 @@ export default function CompanyViewSkill() {
                                 {moment(comment.skill_create).format('L')} {moment(comment.skill_create).format('LT')}
                             </td>
                             <td>
-                                <Link to={`/skill/edit/${comment.skill_id}`}>
-                                    <button type="button" className="btn btn-warning"><i className="fas fa-edit"/>
-                                    </button>
-                                </Link>
+                                {/*<Link to={`/skill/edit/${comment.skill_id}`}>*/}
+                                {/*    <button type="button" className="btn btn-warning"><i className="fas fa-edit"/>*/}
+                                {/*    </button>*/}
+                                {/*</Link>*/}
                                 &nbsp;&nbsp;
                                 <button type="button" className="btn btn-danger"
                                         onClick={() => handleSubmit(comment.skill_id, comment.skill_name, comment.skill_type_name)}>

@@ -1,34 +1,33 @@
 import React from "react"
-import test from '../../img/triangles-1430105__480.png'
-import SimpleImageSlider from "react-simple-image-slider"
+import banner1 from '../../img/Banner1.jpg'
+import banner2 from '../../img/Banner2.jpg'
+import banner3 from '../../img/Banner3.jpg'
+import banner4 from '../../img/Banner4.jpg'
+import banner5 from '../../img/Banner5.jpg'
+import banner6 from '../../img/Banner6.jpg'
+import SimpleImageSlider from "react-simple-image-slider";
 
 export default function Carousel() {
 
     const images = [
         {
-            url: test,
+            url: banner1,
         },
         {
-            url: "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
+            url: banner2,
         },
         {
-            url: test,
+            url: banner3,
         },
         {
-            url: "https://i.natgeofe.com/n/f7732389-a045-402c-bf39-cb4eda39e786/scotland_travel_4x3.jpg",
+            url: banner4,
         },
         {
-            url: "https://www.tusktravel.com/blog/wp-content/uploads/2020/07/Best-Time-to-Visit-Darjeeling-for-Honeymoon.jpg",
+            url: banner5,
         },
         {
-            url: test,
+            url: banner6,
         },
-        {
-            url: "https://images.ctfassets.net/bth3mlrehms2/6Ypj2Qd3m3jQk6ygmpsNAM/61d2f8cb9f939beed918971b9bc59bcd/Scotland.jpg?w=750&h=422&fl=progressive&q=50&fm=jpg",
-        },
-        {
-            url: "https://www.oyorooms.com/travel-guide/wp-content/uploads/2019/02/summer-7.jpg",
-        }
     ];
 
     return (

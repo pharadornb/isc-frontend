@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Sidebar from "../../component/configComponent/SidebarChild";
 import "./CompanyResume.css";
 import {
@@ -31,10 +31,10 @@ export default function CompanyResume() {
   const [loading1, setLoading1] = useState(false);
   // const [loading2, setLoading2] = useState(false);
 
-  const handleClick = () => {
-    sessionStorage.clear();
-    window.location = "/";
-  };
+  // const handleClick = () => {
+  //   sessionStorage.clear();
+  //   window.location = "/";
+  // };
 
   const SelectCompanyData = () => {
     // companyProfileGeneral --------------
@@ -320,10 +320,6 @@ export default function CompanyResume() {
       {userEmail && (
         <>
           {/*<UserDashboard/>*/}
-          <Button variant="contained" onClick={() => handleClick()}>
-            Logout
-          </Button>
-          <p>CompanyResume : {userEmail}</p>
           <CompanyResumeReport userEmail={userEmail} />
         </>
       )}

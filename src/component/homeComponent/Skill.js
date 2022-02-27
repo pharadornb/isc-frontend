@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./SkillStyle.css";
-import Loader from "../configComponent/Loader";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Skill() {
 
@@ -34,8 +34,8 @@ export default function Skill() {
     }, []);
 
     return (
-        <Loader show={showLoading}>
-            <div id="skill" />
+        <>
+            <div id="skill"/>
             <div className="container" align={'center'}>
                 <div className="row">
                     <div className="col-md-12 mt-5 mb-2">
@@ -43,6 +43,7 @@ export default function Skill() {
                     </div>
                     <div className="col-md-12">
                         <section className="card-list d-flex justify-content-center">
+                            {showLoading === true && <CircularProgress />}
                             {publicSkill.map((data, i) => (
                                 <article
                                     className="card" style={{
@@ -62,6 +63,6 @@ export default function Skill() {
                     </div>
                 </div>
             </div>
-        </Loader>
+        </>
     )
 }
